@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-
+import BlackJack.config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'b)f7q*=*9sh5yz%lj+yl)(i-n)fls(c8y*-2j%-ja%asqp=v(d'
+SECRET_KEY = config.key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
