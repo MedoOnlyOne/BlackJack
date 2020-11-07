@@ -1,1 +1,3 @@
-BlackJack/config.py
+config.py
+BlackJack/__pycache__/*
+users/__pycache__/*
