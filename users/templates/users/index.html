@@ -1,0 +1,12 @@
+{% extends 'users/layout.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block body %}
+    <h1>User data</h1>
+    <ul>
+        <li>Name: {{ request.user.first_name }} {{ request.user.last_name }}</li>
+        <li>Email: {{ request.user.email }}</li>
+        <li>Username: {{request.user.username}}</li>
+    </ul>
+{% endblock %}

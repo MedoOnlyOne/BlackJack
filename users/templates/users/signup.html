@@ -1,0 +1,22 @@
+{% extends 'users/layout.html' %}
+
+{% block title %} Sign Up {% endblock %}
+
+{% block body %}
+    <a href="{% url 'login' %}">Log in</a>
+    {% if message%}
+            <p><strong>{{ message }}</strong></p>
+    {% endif %}
+    <div class="sign-up">
+        <form action="{% url 'signup' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" name="first_name" placeholder="Fist name: ">
+            <input type="text" name="last_name" placeholder="Last name: ">
+            <input type="email" name="email" placeholder="Email: ">
+            <input type="text" name="username" placeholder="Username: ">
+            <input type="password" name="password" placeholder="Password: ">
+            <input type="password" name="confirm_password" placeholder="Confirm password: ">
+            <input type="submit" value="Sign up">
+        </form>
+    </div>
+{% endblock %}
