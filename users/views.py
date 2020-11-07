@@ -6,7 +6,7 @@ from django.core import serializers
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from .models import User
+from .models import User, Product
 # Create your views here.
 
 @login_required(login_url='login/')
