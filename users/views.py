@@ -11,7 +11,17 @@ from .models import User, Product
 
 @login_required(login_url='login/')
 def index(request):
-    return render(request, 'users/index.html')
+    
+    # get user's wishList, cart and parchases
+    wishList = request.user.wishList.all()
+    cart = request.user.cart.all()
+    parchases = request.user.parchases.all()
+
+    return render(request, 'users/index.html', {
+        'wishList': wishList,
+        'cart': cart,
+        'parchases': parchases
+    })
     #return render(request, 'users/index.html',{'user':request.user})
 
 def LogIn(request):

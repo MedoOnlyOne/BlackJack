@@ -5,8 +5,37 @@
 {% block body %}
     <h1>User data</h1>
     <ul>
+        {% if request.user.first_name %}
         <li>Name: {{ request.user.first_name }} {{ request.user.last_name }}</li>
+        {% endif %}
         <li>Email: {{ request.user.email }}</li>
         <li>Username: {{request.user.username}}</li>
     </ul>
+    
+    {% if wishList %}
+    <h1>Wish List</h1>
+    <ul>
+        {% for product in wishList %}
+            <li>Product id: {{product.id}}, Product name: {{product}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if cart %}
+    <h1>Cart</h1>
+    <ul>
+        {% for product in cart %}
+            <li>Product id: {{product.id}}, Product name: {{product}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if parchases %}
+    <h1>Parchases</h1>
+    <ul>
+        {% for product in parchases %}
+            <li>Product id: {{product.id}}, Product name: {{product}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 {% endblock %}
