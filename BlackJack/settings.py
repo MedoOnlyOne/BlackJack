@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = open(os.getcwd()+'/config.txt','r').readline()
+SECRET_KEY = open(os.path.join(BASE_DIR,'config.txt'),'r').readline()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -32,6 +32,7 @@ SESSION_ENGINE='django.contrib.sessions.backends.file'
 
 INSTALLED_APPS = [
     'users',
+    'products',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -126,6 +127,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
 AUTH_USER_MODEL = 'users.User'
 
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False
