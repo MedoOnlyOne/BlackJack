@@ -1,4 +1,5 @@
 config.txt
+.vscode/*
 BlackJack/__pycache__/*
 users/__pycache__/*
 products/__pycache__/*
