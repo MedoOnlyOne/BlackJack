@@ -5,7 +5,6 @@ from .models import Product
 
 # Create your views here.
 def index(request):
-    product = Product.objects.get(name='Test')
     return render(request, 'products/index.html',{
-        'product': product
+        'products': Product.objects.all()
     })
