@@ -5,7 +5,7 @@
 {% block body %}
     <ul>   
         {% for product in products %}
-            <li>{{ product }}</li>
+            <li><a href="{% url 'products:product' product.name %}">{{ product }}</a></li>
         {% endfor %}
     </ul>
     {% if usershops and shop in usershops%}
