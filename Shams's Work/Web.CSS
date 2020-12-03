@@ -1,27 +1,11 @@
 <style>
-    #left { margin-left:15%;}
     
-    #right { display:inline;
-        margin-left:65%;}
+    body { font-family:;
+    padding:0;
+    margin: 0;
+    background-color: #f4f4f4;
+    }
     
-    body {background-image:url('14479.jpg') no-repeat ;
-    margin-top: 20px;
-    width: 90%;
-    length: 70%;}
-    
-    #headerstyle {
-          font-family: cursive;
-          font-weight: bold;
-          font-size:32pt;
-          color:white;
-          text-align: center;
-          color: white;
-          background-color:#232732;
-          width:100%;
-          height:100px;
-          border: 20px;
-          padding:10px;}
-          
     .picture {
          height:600px;
          width: 40%;
@@ -39,5 +23,67 @@
     margin :5px;
     }
     
-    .Container {}
+    .Container {
+        overflow: hidden;
+    }
+    
+    header{
+        background-color: #232732;
+        color: #ffffff;
+        padding-top: 30px;
+        min-height: 70px;
+        border-bottom: #BFB367 7px solid;
+    }
+    
+    header a{
+        text-decoration: none;
+        color: #ffffff;
+        text-transform: uppercase;
+        font-size:15pt;
+    }
+    
+    header ul{
+        margin:0;
+        padding: 0;
+    }
+    
+    header li {
+        display: inline;
+        padding: 0 20px 0 20px;
+    }
+    
+    header #webname {
+          font-weight: bold;
+          font-size:36pt;
+          color:white;
+          float: left;
+          margin-left: 50px;
+      
+          }
+    
+    header #webname h1{ margin:0;}
+    
+    header nav {float:right;
+    margin-right: 20px;}
+    
+    header .official  {
+        color: #BFB367;
+        font-size: 12pt;
+        font-weight: bold;
+    }
+    
+    header .highlightlink a {
+        font-weight: bold;
+        color: #BFB367;
+    }
+    
+    header a:hover {
+        color: white;
+        font-weight: bold;
+    }
+    
+     /* The body of the page  */
+    
+    #showcase {
+          background:url("Beige.jpg") no-repeat ;    }
 </style>
