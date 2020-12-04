@@ -1,0 +1,14 @@
+{% extends 'shop/layout.html' %}
+
+{% block title %} aoos {% endblock %}
+
+{% block body %}
+    <ul>   
+        {% for product in products %}
+            <li><a href="{% url 'products:product' product.name %}">{{ product }}</a></li>
+        {% endfor %}
+    </ul>
+    {% if usershops and shop in usershops%}
+        <a href="{% url 'addproduct' shop.name %}">Add product</a>
+    {% endif %}
+{% endblock %}

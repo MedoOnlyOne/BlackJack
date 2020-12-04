@@ -1,0 +1,12 @@
+{% extends 'shop/layout.html' %}
+
+{% block title %} {{AddProduct}} {% endblock %}
+
+{% block body %}
+    <form action="{% url 'addproduct' shopname %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="productname" placeholder="Product Name: ">
+        <input type="file" name="img" accept="image/*">
+        <input type="submit">
+    </form>
+{% endblock %}

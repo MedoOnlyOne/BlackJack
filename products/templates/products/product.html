@@ -1,0 +1,9 @@
+{% extends 'shop/layout.html' %}
+
+{% block title %} {{product.name}} {% endblock %}
+
+{% block body %}
+    <h2>Product: {{ product.name }}</h2>
+    <h2>Price: {{ product.price }}</h2>
+    <img src="{{ product.image.url }}" alt="{{ product.name }}" style="height: 200px; width: 200px;"> 
+{% endblock %}
