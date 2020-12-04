@@ -85,13 +85,16 @@
      /* The body of the page  */
     
     #showcase {
-          background:url("14563.jpg");
-          min-height: 300px;
+          min-height: 100px;
           text-align: center;
-          color: white;}
+          background-color: #232732;
+          color:white;
+          border-top: #BFB367 7px solid;
+        }
           
-    #showcase h1 {font-size: 36pt;
-    margin-top: 50px;
-    margin-bottom: 10px;
+    #showcase form {
+    padding: 14px 16px;
+    margin-top: 7px;
+    margin-bottom: 20px;
     }      
 </style>
