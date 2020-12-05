@@ -92,9 +92,18 @@
           border-top: #BFB367 7px solid;
         }
           
-    #showcase form {
-    padding: 14px 16px;
-    margin-top: 7px;
-    margin-bottom: 20px;
-    }      
+    #showcase input[type="text"] { width: 300px;  }
+    
+    footer {
+    padding: 20px;
+    margin-top: 50px;
+    color:white;
+    background-color: #232732;
+    text-align: center;
+    height: 30px;
+    border-top: #BFB367 7px solid;
+    }
+    
+    
+
 </style>
