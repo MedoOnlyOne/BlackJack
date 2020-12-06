@@ -4,11 +4,7 @@
 
 {% block body %}
     <h2>Product: {{ product.name }}</h2>
-    {% if user.is_authenticated%}
-    <h2>Price: {{price}} {{user.preferred_currency}}</h2>
-    {%else%}
-    <h2>Price: {{price}} EGP</h2>
-    {% endif %}
+    <h2>Price: {{price}} {{preferred_currency}}</h2>
     <img src="{{ product.image.url }}" alt="{{ product.name }}" style="height: 200px; width: 200px;"> 
     <a href="{% url 'shopdashboard' product.shop.name %}">{{product.shop.name}}</a>
 {% endblock %}

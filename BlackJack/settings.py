@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'users',
     'products',
     'shop',
+    'search',
     'mathfilters',
     'django.contrib.admin',
     'django.contrib.auth',
