@@ -1,0 +1,174 @@
+header a{
+  color:#FFAD3F;
+  text-decoration:none;
+  text-transform: uppercase;
+  font-size:16px;
+}
+header{
+  background:#EEEEEE;
+  color:#FFAD3F;
+  font-weight: bold;
+  padding-top:10px;
+  min-height:50px;
+  padding: 10px;
+  margin-top: 0px;
+
+}
+header li{
+  float:right;
+  display:inline;
+  padding: 0 20px 0 20px;
+  margin-top: 3%;
+}
+#l {
+  width : 100px;
+  height: 100px;
+  padding-top: 0px;
+  display: inline;
+}
+body {
+  padding : 0px;
+  margin: 0px;
+
+}
+.m {
+  float: right;
+  display: inline;
+  margin-top: 5%;
+  margin-right: 15%;
+  border: black 5px solid;
+  border-radius: 5px;
+  padding: 3% 5% 5% 5%;
+}
+#x {
+  display: inline;
+}
+#z {
+  width : 500px;
+  height: 500px;
+  margin-top: 5%;
+  margin-left: 5%;
+  border-radius: 10px;
+}
+h1 {
+  font-weight: bold;
+  display: inline;
+  margin-top: 0;
+  margin-right: 10%;
+}
+h4 {
+  display: inline-block;
+}
+#CO {
+  margin-left: 9%;
+  background-color: #F3A04A;
+}
+input[type="text"] {
+background-color: #F3A04A;
+}
+.cart {
+  display: block;
+  background-color: #F3A04A;
+  margin-bottom: 10%;
+  height: 35px;
+  width: 300px;
+}
+.wl {
+  display: block;
+  background-color: #F3A04A;
+}
+#i {
+  color: red;
+  display: inline;
+}
+.v {
+  display:inline-block;
+  border: black 2px solid;
+  margin: 10px;
+  width: 250px;
+}
+.Related {
+  margin-left: 15%;
+}
+.re {
+  width: 250px;
+  height: 100px;
+}
+h3 {
+  margin-left: 38%;
+}
+h5 {
+  text-align: center;
+  font-weight: bold;
+}
+.art {
+  display: block;
+  background-color: #F3A04A;
+  margin-bottom: 10%;
+  height: 35px;
+  width: 150px;
+  margin-left: 20%;
+}
+.rating {
+    display: inline-block;
+    flex-direction: row-reverse;
+    justify-content: center;
+    width: 150px;
+
+}
+
+.rating>input {
+    display: none
+}
+
+.rating>label {
+    position: relative;
+    width: 1em;
+    font-size: 2vw;
+    color: #FFB774;
+    cursor: pointer
+}
+
+.rating>label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+    opacity: 1 !important
+}
+
+.rating>input:checked~label:before {
+    opacity: 1
+}
+
+.rating:hover>input:checked~label:before {
+    opacity: 0.4
+}
+h2 {
+   display: block;
+   margin-top: 10%;
+   margin-bottom: 0px;
+}
+h6 {
+  font-size: 25px;
+  margin: 0;
+}
+.Dis {
+  display:inline-block;
+  border: black 2px solid;
+}
+.Rev {
+  display:inline-block;
+  border-bottom: black 2px solid;
+    border-left: black 2px solid;
+      border-right: black 2px solid;
+  margin-left: 40%;
+}
+textarea {
+  margin-left: 0%;
+  width: 300px;
+  height: 150px;
+}
