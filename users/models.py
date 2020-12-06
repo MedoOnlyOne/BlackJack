@@ -6,6 +6,7 @@ from shop.models import Shop
 
 class User(AbstractUser):
     # every user will have 3 specified lists (parchases, cart, wishList)
+    preferred_currency=models.CharField(max_length=3,null=False,default='EGP')
     parchases = models.ManyToManyField(Product, blank=True, related_name="Purchases")
     cart = models.ManyToManyField(Product, blank=True, related_name="Cart")
     wishList = models.ManyToManyField(Product, blank=True, related_name="WishList")

@@ -77,7 +77,7 @@ def SignUp(request):
         email = request.POST['email']
         password = request.POST['password']
         confirm_password = request.POST['confirm_password']
-
+        currency = request.POST['Preferred_Currency']
         # Be sure that password matches confirm_password
         if password != confirm_password:
             return render(request, "users/signup.html", {
@@ -86,7 +86,7 @@ def SignUp(request):
 
         # Try to create new user
         try:
-            user = User.objects.create_user(first_name=first, last_name=last, username=username, email=email, password=password)
+            user = User.objects.create_user(first_name=first, last_name=last, username=username, email=email, password=password, preferred_currency=currency)
             user.save()
         except IntegrityError:
             return render(request, "users/signup.html", {

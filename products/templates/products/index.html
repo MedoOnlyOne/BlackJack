@@ -3,6 +3,10 @@
 {% block title %} Product {% endblock %}
 
 {% block body %}
+    <form action="{% url 'products:search' %}" method="GET">
+        <input type="text" name="q" placeholder="Search">
+        <input type="submit" value="Search">
+    </form>
     {% for product in products %}
     <hr>
     <h2>Product: {{ product.name }}</h2>
