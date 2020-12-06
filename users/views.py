@@ -16,11 +16,12 @@ def index(request):
     wishList = request.user.wishList.all()
     cart = request.user.cart.all()
     parchases = request.user.parchases.all()
-
+    shops = request.user.shops.all()
     return render(request, 'users/index.html', {
         'wishList': wishList,
         'cart': cart,
-        'parchases': parchases
+        'parchases': parchases,
+        'shops':shops
     })
     #return render(request, 'users/index.html',{'user':request.user})
 

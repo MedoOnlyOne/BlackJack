@@ -36,9 +36,10 @@ def addproduct(request,shopname):
     else:
         name = request.POST['productname']
         img = request.FILES['img']
-        p = Product(name=name,image=img,price=100,description='aaaa',remaininginstock=1,featured=False)
+        shop = Shop.objects.get(name=shopname)
+        p = Product(name=name,image=img,price=100,description='aaaa',remaininginstock=1,featured=False,shop=shop)
         p.save()
         shop = Shop.objects.get(name=shopname)
         shop.products.add(p)
 
-        return HttpResponseRedirect(reverse('dashboard',args=[shop.name]))
+        return HttpResponseRedirect(reverse('shopdashboard',args=[shop.name]))

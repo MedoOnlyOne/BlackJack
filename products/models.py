@@ -9,5 +9,6 @@ class Product(models.Model):
     remaininginstock = models.PositiveSmallIntegerField(default=1)
     featured = models.BooleanField(default=False)
     image = models.ImageField(null=True,blank=True,upload_to='product_images/')
+    shop = models.ForeignKey('shop.Shop',on_delete=models.CASCADE)
     def __str__(self):
-        return '%s' %self.name
+        return f'{self.name}'
