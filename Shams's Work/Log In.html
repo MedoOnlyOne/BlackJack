@@ -1,113 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Search</title>
+   <head>
+        <title>Log In</title>
         <meta name="viewport" content="width=device-width">
-        <title>Souq.com</title>
+   </head> 
+    
         <style>
+        
         body{
           margin: 0;
           background:url('unknown.png') no-repeat ;
           background-size: 1550px 760px;
         }
-        header {
-          background-color:#;
-          text-decoration:none;
-          margin-bottom:0%;
-          overflow: hidden;
-        }
-        .img {
-          margin-left: 0%;
-          display: inline;
-        }
-        img {
-          width: 100px;
-          height: 100px;
-        }
+      
         h1{
           color:black;
-          align-self: center;
           text-align: center;
-          padding:20px;
           background:white;
           width:300px;
-          margin-left: 4%;
-          margin-bottom: 0%;
-          margin-top: 20%;
-          border :6px solid #fcb113;
-         background-color:#8BC7ED;
         }
+        
         p{
-          font-family: cursive;
           font-weight: bold;
-          font-size:25pt;
-          color:black;
+          font-size:10pt;
+          color:#232732;
           text-align: center;
-          padding:20px;
-          background:white;
-          width:150px;
-          margin-left: 20%;
-          margin-bottom: 0%;
-          margin-top: 10%;
+          margin-top: 5px;
+          margin-bottom:5px;
+        
         }
         #m9 button{
           background:white;
           padding-left: 20px;
           padding-right:20px;
-          color:#05218D;
-          margin:10%;
-          margin-top: 8%;
-
+          color:#232732;
+          margin:8%;
         }
+        
         #m9 input[type="email"]{
           
           width :200px;
           margin-top: 1%;
         }
+        
         #m9 input[type="password"]{
           width :200px;
           margin-top: 8%;
-       
+          margin-bottom:5px;
         }
-      header a{
-          color:#ffffff;
-          text-decoration:none;
-          font-size:16px;
-        }
-      header .current a{
-         color:#7B07B1;
-         font-weight:bold;
-       }
-       li {
-         list-style: none;
-         display: block;
-       }
-       .list {
-         display:inline;
-         float: right;
+      
 
-      }
-
-       header a:hover{
+       h1 a:hover{
          color:#072639;
          font-weight:bold;
+         
        }
-div {
-  margin-right:10%;
-}
-        </style>
-    </head>
+       
+ 
+       
+       #m9 {border: 8px solid #232732; margin-top:260px; margin-left:90px; text-align:center; color:#232732;}
 
+        </style>
+   
 
     <body>
+     
        <h1 id="m9">
-         <div>
-         <p > Log in </p>
+        <div class="container">
+         <h1> Log in </h1>
           <input type="email" placeholder="Enter Email...">
           <input type="password" placeholder="Enter Password...">
           <button type="submit" class="button_1">Login</button>
+         <div style="display:inline;">
+         <p> Haven't signed up yet? </p>
+           <form> </form>
+           <button type="submit" class="button_1"> Sign up now</button>
+         </div>
          </div>
         </h1>
+    
 
       </body>
 </html>
