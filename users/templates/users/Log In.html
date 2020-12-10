@@ -1,0 +1,79 @@
+{% extends 'users/layout.html' %}
+
+{% block title %} Log in {% endblock %}
+
+{% block body %}
+<style>
+body{
+  margin: 0;
+  background:url('../static/users/unknown.png') no-repeat ;
+  background-size: 1550px 760px;
+}
+
+h1{
+  color:black;
+  text-align: center;
+  background:white;
+  width:300px;
+}
+
+p{
+  font-weight: bold;
+  font-size:10pt;
+  color:#232732;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom:5px;
+
+}
+#m9 button{
+  background:white;
+  padding-left: 20px;
+  padding-right:20px;
+  color:#232732;
+  margin:8%;
+}
+
+#m9 input[type="email"]{
+  
+  width :200px;
+  margin-top: 1%;
+}
+
+#m9 input[type="password"]{
+  width :200px;
+  margin-top: 8%;
+  margin-bottom:5px;
+}
+
+
+h1 a:hover{
+  color:#072639;
+  font-weight:bold;
+  
+}
+
+
+
+#m9 {border: 8px solid #232732; margin-top:260px; margin-left:90px; text-align:center; color:#232732;}
+
+</style>
+
+
+<body>
+  <h1 id="m9">
+    <div class="container">
+      <h1> Log in </h1>
+      <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        <input type="username" name="username" placeholder="Enter Username...">
+        <input type="password" name="password" placeholder="Enter Password...">
+        <button type="submit" name="submit" class="button_1">Login</button>
+        <div style="display:inline;">
+        <p> Haven't signed up yet? </p>
+        <button type="submit" class="button_1"> Sign up now</button>
+      </form>
+    </div>
+  </h1>
+</body>
+{% endblock %}

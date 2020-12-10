@@ -27,7 +27,7 @@ def index(request):
 
 def LogIn(request):
     if request.method == "POST":
-
+    
         # Try to sign user in
         username = request.POST["username"]
         password = request.POST["password"]
@@ -38,37 +38,19 @@ def LogIn(request):
             login(request, user)
             return HttpResponseRedirect(reverse("index"))
         else:
-            return render(request, "users/login.html", {
+            return render(request, "users/Log In.html", {
                 "message": "Invalid username and/or password."
             })
     else:
         if request.user.is_authenticated:
             return HttpResponseRedirect(reverse('index'))
-        return render(request, "users/login.html")
-
-    # """if request.method== 'POST':
-    #     username=request.POST['username']
-    #     password=request.POST['password']
-    #     user = authenticate(request, username=username, password=password)
-    #     if user:
-    #         login(request, user)
-    #       #  request.session['user']=serializers.serialize('json',User.objects.all())
-    #         return render(request,'users/index.html',{'username':username,'email':user.email,'first':user.first_name,'last':user.last_name,'user':user})
-    #     else:
-    #         #request.session['user']=None
-    #         return render(request,'users/login.html',{'message':'Incorrect Username or password','user':request.session.get('user',None)})
-    # if request.user.is_authenticated:
-    #    return render(request,'users/index.html',{'username':request.user.username,'email':request.user.email,'first':request.user.first_name,'last':request.user.last_name,'user':request.user}) 
-    # return render(request,'users/login.html',{'user':request.session.get('user',None)})"""
-
-
+        return render(request, "users/Log In.html")
 
 def LogOut(request):
     logout(request)
     return HttpResponseRedirect(reverse("login"))
     #request.session['user']=None
     
-
 def SignUp(request):
     if request.method == "POST":
         first = request.POST['first_name']
