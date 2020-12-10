@@ -17,13 +17,12 @@ def index(request):
     cart = request.user.cart.all()
     parchases = request.user.parchases.all()
     shops = request.user.shops.all()
-    return render(request, 'users/index.html', {
+    return render(request, 'users/Dashboard.html', {
         'wishList': wishList,
         'cart': cart,
         'parchases': parchases,
         'shops':shops
     })
-    #return render(request, 'users/index.html',{'user':request.user})
 
 def LogIn(request):
     if request.method == "POST":

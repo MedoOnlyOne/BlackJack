@@ -70,6 +70,9 @@ h1 a:hover{
         <input type="password" name="password" placeholder="Enter Password...">
         <button type="submit" name="submit" class="button_1">Login</button>
         <div style="display:inline;">
+        {% if message%}
+        <p style="color:red">Incorrect username or password</p>
+        {% endif %}
         <p> Haven't signed up yet? </p>
         <button type="submit" class="button_1"> Sign up now</button>
       </form>
