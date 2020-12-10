@@ -55,18 +55,18 @@ header a{
 
       
   header a:hover {
-      color: white;
-      font-weight: bold;
+    color: white;d
+    font-weight: bold;
   }
 
   #sidemenu {
-  float:left;
-  padding: 40px 70px 50px 30px;
-  background-color:#232732;
-  border-right: 8px  #BFB367 solid;
-  text-align:center;
-  height: 597px;
-  text-decoration:none;
+    float:left;
+    padding: 40px 70px 50px 30px;
+    background-color:#232732;
+    border-right: 8px  #BFB367 solid;
+    text-align:center;
+    height: 597px;
+    text-decoration:none;
   }
 
   #sidemenu nav{text-align:left; }
@@ -86,13 +86,14 @@ header a{
   }
     
   .container-1 {color:#232732;
-  display:flex;
-  flex-direction:column;}
+    display:flex;
+    flex-direction:column;
+  }
 
 
   #upperinfo  {text-align:center;
-  border-bottom: solid 8px #BFB367 ;
-  border-right: solid 8px #BFB367 ;
+    border-bottom: solid 8px #BFB367 ;
+    border-right: solid 8px #BFB367 ;
   }
 
 
@@ -103,16 +104,15 @@ header a{
   font-weight:bold;}
 
   #info form {display:flex;
-  flex-direction:column;
-  text-align:left;
-  padding-left:15px;
-  padding-right:10px;
-  font-size:14pt;
+    flex-direction:column;
+    text-align:left;
+    padding-left:15px;
+    padding-right:10px;
+    font-size:14pt;
   }
 
 
   #info input{
-
     margin-left:20px;
         width :300px;
         margin-top: 20px;
@@ -130,56 +130,57 @@ header a{
     margin-bottom: 5px; 
   }
 
-  #Button {margin-top:40px; margin-left:36em; margin-bottom:50px;
-  width:140px;
-  height:60px;
-  background-color :#232732;
-  color: #BFB367 ;
-  font-weight:bold;
+  #Button {
+    margin-top:40px; margin-left:36em; margin-bottom:50px;
+    width:140px;
+    height:60px;
+    background-color :#232732;
+    color: #BFB367 ;
+    font-weight:bold;
   }
 
   button .hover {padding: 10px 10px 10px 10px;}
 
   .dropbtn {
-  background-color: #4CAF50;
-  color: black;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid black;
-  cursor: pointer;
+    background-color: #4CAF50;
+    color: black;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid black;
+    cursor: pointer;
   }
 
   .dropdown {
-  position: inherit;
-  display: inline-block;
+    position: inherit;
+    display: inline-block;
   }
   .dropdown-content {
-  display:none;
-  position: absolute;
-  background-color: #232732;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 0;
+    display:none;
+    position: absolute;
+    background-color: #232732;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 0;
   }
 
   .dropdown-content p {
-  color: white;
-  padding: 7px 5px;
-  text-decoration: none;
-  display: block;
+    color: white;
+    padding: 7px 5px;
+    text-decoration: none;
+    display: block;
   }
 
 
   .dropdown:hover .dropdown-content {
-  display: block;
+    display: block;
   }
 
   .dropdown:hover .dropbtn {
-  background-color: #3e8e41;
+    background-color: #3e8e41;
   }
 
   .dropdown-content {
-  right: 0;
+    right: 0;
   }
 
     
@@ -195,8 +196,9 @@ header a{
           <h1 id="webname"> GLOW <span class="official">The Official Online Store </span></h1>
     
   <nav> <ul> 
-      <li> <a href="Mainpage.html"> Home </a>
-      <li> <a href="Cart.html"> Cart </a> 
+      <li> <a href="#"> Home </a> </li>
+      <li> <a href="#"> Cart </a> </li>
+      <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
   </ul> </nav>
       </div>
   </header>
