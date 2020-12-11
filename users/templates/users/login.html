@@ -1,76 +1,77 @@
 {% extends 'users/layout.html' %}
 
-{% block title %} Log in {% endblock %}
+{% block head %} 
+  <title>Log in</title>
 
-{% block body %}
-<style>
-body{
-  margin: 0;
-  background:url('../static/users/unknown.png') no-repeat ;
-  background-size: 1550px 760px;
-}
-
-h1{
-  color:black;
-  text-align: center;
-  background:white;
-  width:300px;
-}
-
-p{
-  font-weight: bold;
-  font-size:10pt;
-  color:#232732;
-  text-align: center;
-  margin-top: 5px;
-  margin-bottom:5px;
-
-}
-#m9 button{
-  background:white;
-  padding-left: 20px;
-  padding-right:20px;
-  color:#232732;
-  margin:8%;
-  cursor: pointer;
-}
-
-#m9 button a{
-  text-decoration: none;
-  color:#232732;
-}
-
-#m9 button a:hover{
-  font-weight: normal;
-  color:#232732;
+  <style>
+  body{
+    margin: 0;
+    background:url('../static/users/unknown.png') no-repeat ;
+    background-size: 1550px 760px;
   }
 
-#m9 input[type="email"]{
-  
-  width :200px;
-  margin-top: 1%;
-}
+  h1{
+    color:black;
+    text-align: center;
+    background:white;
+    width:300px;
+  }
 
-#m9 input[type="password"]{
-  width :200px;
-  margin-top: 8%;
-  margin-bottom:5px;
-}
+  p{
+    font-weight: bold;
+    font-size:10pt;
+    color:#232732;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom:5px;
+
+  }
+  #m9 button{
+    background:white;
+    padding-left: 20px;
+    padding-right:20px;
+    color:#232732;
+    margin:8%;
+    cursor: pointer;
+  }
+
+  #m9 button a{
+    text-decoration: none;
+    color:#232732;
+  }
+
+  #m9 button a:hover{
+    font-weight: normal;
+    color:#232732;
+    }
+
+  #m9 input[type="email"]{
+    
+    width :200px;
+    margin-top: 1%;
+  }
+
+  #m9 input[type="password"]{
+    width :200px;
+    margin-top: 8%;
+    margin-bottom:5px;
+  }
 
 
-h1 a:hover{
-  color:#072639;
-  font-weight:bold;
-  
-}
+  h1 a:hover{
+    color:#072639;
+    font-weight:bold;
+    
+  }
 
 
 
-#m9 {border: 8px solid #232732; margin-top:260px; margin-left:90px; text-align:center; color:#232732;}
+  #m9 {border: 8px solid #232732; margin-top:260px; margin-left:90px; text-align:center; color:#232732;}
 
-</style>
+  </style>
+{% endblock %}
 
-
+{% block body %}
 <body>
   <h1 id="m9">
     <div class="container">
