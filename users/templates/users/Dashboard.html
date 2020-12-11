@@ -3,18 +3,19 @@
 {% block title %} Dashboard {% endblock %}
 {% block body %}
 <style>
+  body
+  {
+    margin:0px;
+  }
   .Container {
     overflow: hidden;
-}
+  }
 
   header{
     background-color: #232732;
     color: #ffffff;
-    padding-top: 30px;
-    padding-bottom: 10px;
-    min-height: 70px;
-    border-bottom: #BFB367 7px solid;
-}
+    border-bottom: #BFB367 6px solid;
+  }
   
   header #webname {
     font-weight: bold;
@@ -23,7 +24,7 @@
     float: left;
     margin-left: 50px;
   
-    }
+  }
 
 header .official  {
   color: #BFB367;
@@ -182,7 +183,20 @@ header a{
   .dropdown-content {
     right: 0;
   }
-
+  h8 {
+  color: #BFB367;
+  margin-top: 10%;
+  margin-bottom: 5%;
+  display:inline;
+  }
+  h7 {
+  font-size: 40px;
+  color: white;
+  display:inline;
+  }
+#header{
+  display:inline-block;
+}
     
 </style>
  
@@ -192,12 +206,14 @@ header a{
 <body>
 
   <header>
-      <div class="Container";>
-          <h1 id="webname"> GLOW <span class="official">The Official Online Store </span></h1>
+      <div class="Container">
+          <div id="header">
+        <h7 id="hhh">BlackJack</h7>
+        <h8>The Official online store </h8>
+     </div>
     
-  <nav> <ul> 
+  <nav> <ul style="margin-top:12px;"> 
       <li> <a href="#"> Home </a> </li>
-      <li> <a href="#"> Cart </a> </li>
       <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
   </ul> </nav>
       </div>

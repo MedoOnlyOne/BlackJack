@@ -37,13 +37,13 @@ def LogIn(request):
             login(request, user)
             return HttpResponseRedirect(reverse("index"))
         else:
-            return render(request, "users/Log In.html", {
+            return render(request, "users/login.html", {
                 "message": "Invalid username and/or password."
             })
     else:
         if request.user.is_authenticated:
             return HttpResponseRedirect(reverse('index'))
-        return render(request, "users/Log In.html")
+        return render(request, "users/login.html")
 
 def LogOut(request):
     logout(request)
@@ -81,31 +81,6 @@ def SignUp(request):
         return render(request, "users/signup.html")
 
     
-    # """if request.method == 'POST':
-    #     first = request.POST['first_name']
-    #     last = request.POST['last_name']
-    #     username = request.POST['username']
-    #     email = request.POST['email']
-    #     password = request.POST['password']
-    #     confirm_password = request.POST['confirm_password']
-
-    #     if password == confirm_password:
-    #         #try:
-    #         user = User.objects.create_user(first_name=first, last_name=last, username=username, email=email, password=password)
-    #         user.save()
-        
-    #         return render(request, 'users/index.html', {
-    #             'first': first,
-    #             'last': last,
-    #             'email': email,
-    #             'username': username
-    #         })
-    #         except:
-    #             return render(request, 'users/signup.html')
-        
-    #     else:
-    #         return render(request, 'users/signup.html', {
-    #             'message': "password didn't match",'user':user
-    #         })"""
+  
 
 
