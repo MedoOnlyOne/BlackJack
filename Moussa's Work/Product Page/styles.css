@@ -1,44 +1,37 @@
 header a{
-  color:#FFAD3F;
+  color:white;
   text-decoration:none;
   text-transform: uppercase;
   font-size:16px;
 }
 header{
-  background:#EEEEEE;
-  color:#FFAD3F;
+  background:#232732;
   font-weight: bold;
   padding-top:10px;
-  min-height:50px;
+  min-height:20px;
   padding: 10px;
   margin-top: 0px;
-
 }
 header li{
   float:right;
   display:inline;
   padding: 0 20px 0 20px;
-  margin-top: 3%;
-}
-#l {
-  width : 100px;
-  height: 100px;
-  padding-top: 0px;
-  display: inline;
+  margin-top: 0%;
 }
 body {
   padding : 0px;
   margin: 0px;
-
 }
 .m {
   float: right;
   display: inline;
-  margin-top: 5%;
-  margin-right: 15%;
-  border: black 5px solid;
+  margin-top: 6%;
+  border: #232732 5px solid;
   border-radius: 5px;
   padding: 3% 5% 5% 5%;
+  margin-left: 10%;
+  margin-bottom: 15%;
+  margin-right: 15%;
 }
 #x {
   display: inline;
@@ -49,6 +42,7 @@ body {
   margin-top: 5%;
   margin-left: 5%;
   border-radius: 10px;
+  display: inline;
 }
 h1 {
   font-weight: bold;
@@ -61,17 +55,22 @@ h4 {
 }
 #CO {
   margin-left: 9%;
-  background-color: #F3A04A;
+  background-color: #232732;
+  color: white;
 }
 input[type="text"] {
-background-color: #F3A04A;
+background-color: #232732;
+color: white;
 }
 .cart {
   display: block;
-  background-color: #F3A04A;
+  background-color: #232732;
   margin-bottom: 10%;
   height: 35px;
   width: 300px;
+  color: white;
+  font-weight: bold;
+
 }
 .wl {
   display: block;
@@ -80,6 +79,7 @@ background-color: #F3A04A;
 #i {
   color: red;
   display: inline;
+  background-color: #232732;
 }
 .v {
   display:inline-block;
@@ -103,30 +103,31 @@ h5 {
 }
 .art {
   display: block;
-  background-color: #F3A04A;
+  background-color: #232732;
   margin-bottom: 10%;
   height: 35px;
   width: 150px;
   margin-left: 20%;
+  color: white;
+  font-weight: bold;
 }
 .rating {
     display: inline-block;
-    flex-direction: row-reverse;
+    flex-direction:row-reverse;
     justify-content: center;
-    width: 150px;
-
+    width: 160px;
 }
 
 .rating>input {
-    display: none
+    display: none;
 }
 
 .rating>label {
     position: relative;
     width: 1em;
     font-size: 2vw;
-    color: #FFB774;
-    cursor: pointer
+    color: #232732;
+    cursor: pointer;
 }
 
 .rating>label::before {
@@ -171,4 +172,26 @@ textarea {
   margin-left: 0%;
   width: 300px;
   height: 150px;
+}
+span {
+  font-size: 40px;
+  color: white;
+  display:inline-block;
+}
+h8 {
+  color: #BFB367;
+  margin-top: 10%;
+}
+.cart2 {
+  display: block;
+  background-color: #232732;
+  margin-bottom: 10%;
+  height: 35px;
+  width: 300px;
+  color: white;
+  font-weight: bold;
+  margin-left: 1%;
+}
+ii {
+  display :inline-block;
 }
