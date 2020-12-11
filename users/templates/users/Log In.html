@@ -32,7 +32,18 @@ p{
   padding-right:20px;
   color:#232732;
   margin:8%;
+  cursor: pointer;
 }
+
+#m9 button a{
+  text-decoration: none;
+  color:#232732;
+}
+
+#m9 button a:hover{
+  font-weight: normal;
+  color:#232732;
+  }
 
 #m9 input[type="email"]{
   
@@ -74,7 +85,7 @@ h1 a:hover{
         <p style="color:red">Incorrect username or password</p>
         {% endif %}
         <p> Haven't signed up yet? </p>
-        <button type="submit" class="button_1"> Sign up now</button>
+        <button class="button_1"><a href="{% url 'signup' %}">Sign up now</a></button>
       </form>
     </div>
   </h1>
