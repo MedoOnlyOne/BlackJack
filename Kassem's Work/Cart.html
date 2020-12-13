@@ -1,0 +1,265 @@
+<!DOCTYPE HTML>
+<html lang="en">
+ 
+ <style>
+     .Container {
+        overflow: hidden;
+    }
+   
+
+    header{
+        background-color: #232732;
+        color: #ffffff;
+        padding-top: 30px;
+        padding-bottom: 10px;
+        min-height: 70px;
+        border-bottom: #BFB367 7px solid;
+    }
+     
+   header #webname {
+          font-weight: bold;
+          font-size:36pt;
+          color:white;
+          float: left;
+          margin-left: 50px;
+      
+          }
+    
+    header .official  {
+        color: #BFB367;
+        font-size: 12pt;
+        font-weight: bold;
+    }
+    
+    header #webname h1{ margin:0;}
+    
+     header ul{
+        margin:0;
+        padding: 0;
+    }
+    
+    header li {
+        display: inline;
+        padding: 0 20px 0 20px;
+    }
+    
+    header a{
+        text-decoration: none;
+        color: #ffffff;
+        text-transform: uppercase;
+        font-size:15pt;
+    }
+    
+    header nav{float:right;
+    padding-right:30px;}
+    
+        
+    header a:hover {
+        color: white;
+        font-weight: bold;
+    }
+    
+  #sidemenu {
+    float:left;
+    padding: 40px 70px 50px 30px;
+    background-color:#232732;
+    border-right: 8px  #BFB367 solid;
+    text-align:center;
+    height: 635px;  //597
+    text-decoration:none;
+    overflow:
+}
+
+   #sidemenu nav{text-align:left; }
+ 
+   #sidemenu a{
+   text-decoration: none;
+   color: #BFB367;
+   padding:8px 30px;
+   display:block;
+   font-size:16pt;
+   } 
+   
+   a [href="Cart.html"]
+   {
+    color:#BFB367;
+   }
+   body
+   {
+    background-color:#232732;
+   }
+   #items
+   {
+    position:relative;
+    left:40px;
+    background-color:#232732;
+    float:left;
+    width:715px;
+   }
+   .itemscontainer
+   {
+    border:navy;
+   }
+   .item
+   {
+    float:left;
+    width:700px; //1120is the best
+    max-height:200px;
+    position:relative;
+    background-color:white;
+    border:5px solid #BFB367;
+    margin:3px;
+    
+   }
+    .item p
+    {
+        color:#232732;
+        font-size:17px;
+        position:relative;
+        top:17px;
+        margin:1px;
+    }
+    .item img
+    {
+        float:left;
+        height:135px;
+        margin-right:5px;
+    }
+    .total
+    {
+        float:right;
+        width:349px;
+        position:relative;
+        right:7px;
+        background-color:white;
+        border:5px solid #BFB367;
+        margin:0px;
+    }
+    .total [title="total"]
+    {
+        margin-top:30px;
+        font-size:30px;
+        font-weight:bold;
+        color:#232732;
+        margin-left:10px;
+        text-align:center;
+        
+    }
+    
+ </style>
+ 
+ 
+ 
+ 
+ <body >
+
+<header>
+    <div class="Container";>
+        <h1 id="webname"> BLACK JACK <span class="official">The Official Online Store </span></h1>
+   
+<nav> <ul> 
+    <li> <a href="Mainpage.html"> Home </a>
+    <li> <a href="Cart.html"> Cart </a> 
+</ul> </nav>
+    </div>
+</header>
+
+
+
+<section id="sidemenu">
+    <h1 style="color:white; padding-left:40px; font-size:23pt;">   DASHBOARD  </h1>
+    <nav> <ul> 
+    <li> <a href="My Account.html"> My Account </a>
+    <li> <a href="Cart.html"> Track Order </a> 
+    <li> <a href="Log In.html"> Items </a>
+    <li> <a href="Cart.html" style="color:white; font-weight:bold;"> Cart </a>
+    <li> <a href="Profile.html"> Profile </a> 
+    <li> <a href="Cart.html"> One </a> 
+    <li> <a href="Cart.html"> Two </a> 
+    <li> <a href="Cart.html"> Three </a>   
+</ul> </nav>
+</section>
+
+<br>
+<br>
+<div id="items">
+    <p style="color:white; font-size:20pt; font-weight:bold; margin-left:2pt;" >Shopping Cart</p>
+    <div class="itemscontainer">
+        <div class="item" title="item">
+            <img src="No image.jpg" > 
+            <p style="font-size:25px; font-weight:bold; position:relative; top:5px;">Product 1 Name</p>
+            <p><span style="font-weight:bold;">Category: </span> Sweatshirts</p>
+            <p><span style="font-weight:bold;">Color: </span> Red</p>
+            <p><span style="font-weight:bold;">Sold By: </span> GLOW egypt</p>
+            
+            <input type="button" name="-" value="-" style="display:inline;bottom:-17px; position:relative; margin-left:2px; ">
+            <p style="display:inline;"><span style="font-weight:bold; bottom:10px;">Quantity : </span> 1</p>
+            <input type="button" name="+" value="+" style=" display:inline;bottom:-17px; position:relative; margin-right:2px;">
+            
+            <p style="float:right;"><span style="font-weight:bold;">Price : </span> 100$</p>
+            
+        </div>
+        
+        <div class="item" title="item">
+            <img src="No image.jpg" > 
+            <p style="font-size:25px; font-weight:bold; position:relative; top:5px;">Product 2 Name</p>
+            <p><span style="font-weight:bold;">Category: </span> Sweatshirts</p>
+            <p><span style="font-weight:bold;">Color: </span> Red</p>
+            <p><span style="font-weight:bold;">Sold By: </span> GLOW egypt</p>
+            
+            <input type="button" name="-" value="-" style="display:inline;bottom:-17px; position:relative; margin-left:2px; ">
+            <p style="display:inline;"><span style="font-weight:bold; bottom:10px;">Quantity : </span> 1</p>
+            <input type="button" name="+" value="+" style=" display:inline;bottom:-17px; position:relative; margin-right:2px;">
+            
+            <p style="float:right;"><span style="font-weight:bold;">Price : </span> 100$</p>
+            
+        </div>
+        
+        <div class="item" title="item">
+            <img src="No image.jpg" > 
+            <p style="font-size:25px; font-weight:bold; position:relative; top:5px;">Product 3 Name</p>
+            <p><span style="font-weight:bold;">Category: </span> Sweatshirts</p>
+            <p><span style="font-weight:bold;">Color: </span> Red</p>
+            <p><span style="font-weight:bold;">Sold By: </span> GLOW egypt</p>
+            
+            <input type="button" name="-" value="-" style="display:inline;bottom:-17px; position:relative; margin-left:2px; ">
+            <p style="display:inline;"><span style="font-weight:bold; bottom:10px;">Quantity : </span> 1</p>
+            <input type="button" name="+" value="+" style=" display:inline;bottom:-17px; position:relative; margin-right:2px;">
+            
+            <p style="float:right;"><span style="font-weight:bold;">Price : </span> 100$</p>
+            
+        </div>
+        
+         <div class="item" title="item">
+            <img src="No image.jpg" > 
+            <p style="font-size:25px; font-weight:bold; position:relative; top:5px;">Product 4 Name</p>
+            <p><span style="font-weight:bold;">Category: </span> Sweatshirts</p>
+            <p><span style="font-weight:bold;">Color: </span> Red</p>
+            <p><span style="font-weight:bold;">Sold By: </span> GLOW egypt</p>
+            
+            <input type="button" name="-" value="-" style="display:inline;bottom:-17px; position:relative; margin-left:2px; ">
+            <p style="display:inline;"><span style="font-weight:bold; bottom:10px;">Quantity : </span> 1</p>
+            <input type="button" name="+" value="+" style=" display:inline;bottom:-17px; position:relative; margin-right:2px;">
+            
+            <p style="float:right;"><span style="font-weight:bold;">Price : </span> 100$</p>
+            
+        </div>
+        
+    </div>
+    
+</div>
+<div class="total" style="height:214pt;position:relative; top:85px;">
+    <p title="total"><span>TOTAL :</span> 400$</p>
+    <br>
+    <p style="font-size:20px;margin-left:5px; font-weight:bold;margin-bottom:4px; ">Add Coupon <span style="font-size:12px;">(optional)</span></p>
+    <input type="text" name="username" placeholder="PLACE YOUR COUPON HERE" style="display:inline; height:40px; width:240px; margin-left:5px; margin-top:0px;text-align:center;"> 
+    <input type="button" name="Submit" value="Submit" style="display:inline; height:43px; width:80px; margin:5px; font-weight:bold; margin-bottom:20px; ">
+    
+    <form action="Checkout.html">
+    <input type="submit" value="PROCEED TO CHECKOUT" style=" height:40px; width:337px; margin-left:5px; font-weight:bold;">
+    </form>
+</div>
+
+
+</body>
+</html>
