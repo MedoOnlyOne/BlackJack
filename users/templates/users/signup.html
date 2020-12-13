@@ -45,7 +45,7 @@
           margin-top: 10%;
         }
 
-        #m9 button{
+        #m9 .button_1{
           background:#232732;
           padding-left: 20px;
           padding-right:20px;
@@ -54,8 +54,20 @@
           margin-top: 8%;
           display: block;
           margin-left: 35%;
-          margin-bottom: 8%;
         }
+        #m9 .btn_1{
+          background:#232732;
+          margin: 20px -15px;
+          padding: 0px 20px;
+          display: inline-block;
+        }
+        #m9 .btn_1 a{
+        text-decoration: none;
+        color:white;
+        font-weight: bold;
+        }
+
+        #m9 button:hover{cursor: pointer;}
         #m9 input[type="email"]{
           margin-top: 8%;
 
@@ -160,15 +172,6 @@ h7 {
         <input type="text" name="phone_num" class="phone_num" placeholder="Phone number">
       </div>
       <div>
-      <div>
-          <input name="Preferred_Currency" list="Preferred_Currency" placeholder="Preferred Currency" id="PC">
-          <datalist id="Preferred_Currency" >
-              <option value="EGP">Egyptian Pound</option>
-              <option value="EUR">Euro</option>
-              <option value="USD">US Dollar</option>
-              <option value="GBP">Pound Sterling</option>
-      </datalist>
-      </div>
         <!-- <h2>Country</h2> -->
         <input name="country" list="countries" placeholder="Select Country" id="CO">
           <datalist id="countries" >
@@ -368,8 +371,20 @@ h7 {
               <option value="Zambia">
               <option value="Zimbabwe">
           </datalist>
+        </div>
+        <div>
+          <input name="Preferred_Currency" list="Preferred_Currency" placeholder="Preferred Currency" id="PC">
+          <datalist id="Preferred_Currency" >
+              <option value="EGP">Egyptian Pound</option>
+              <option value="EUR">Euro</option>
+              <option value="USD">US Dollar</option>
+              <option value="GBP">Pound Sterling</option>
+      </datalist>
+      </div>
           <button type="submit" class="button_1">Sign up</button>
         </form>
+        <p style="display: inline-block; font-weight: lighter; font-size: 15px; margin-top: -80px; margin-left: -50px;">Have an account?</p>
+        <button form="" formmethod="get" class="btn_1"><a href="{% url 'login' %}">Log in</a></button>
         </div>    
       </div>
        </div>

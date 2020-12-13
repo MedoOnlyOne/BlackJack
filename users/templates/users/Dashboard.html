@@ -56,7 +56,7 @@
 
         
     header a:hover {
-      color: white;d
+      color: white;
       font-weight: bold;
     }
 
@@ -71,6 +71,8 @@
     }
 
     #sidemenu nav{text-align:left; }
+
+    #sidemenu nav ul li{list-style: none;}
 
     #sidemenu a{
     text-decoration: none;
@@ -113,8 +115,8 @@
     }
 
 
-    #info input{
-      margin-left:20px;
+    #info input,
+    #info select{
           width :300px;
           margin-top: 20px;
           margin-bottom: 5px;
@@ -123,7 +125,6 @@
     #info form button{
       font-weight:bold;
       padding:5px;
-      background:white;
       padding-left: 20px;
       padding-right:20px;
       margin-top: 20px;
@@ -139,8 +140,6 @@
       color: #BFB367 ;
       font-weight:bold;
     }
-
-    button .hover {padding: 10px 10px 10px 10px;}
 
     .dropbtn {
       background-color: #4CAF50;
@@ -197,7 +196,17 @@
   #header{
     display:inline-block;
   }
-      
+  button[type="button"]{
+    width:140px;
+    background :#232732;
+    color: #BFB367 ;
+    font-weight:bold;
+  }
+  button:hover,
+  #Button:hover{
+    cursor: pointer;
+    color: #FFF;
+  }
   </style>
 {% endblock %}
 {% block body %} 
@@ -245,57 +254,87 @@
     </div>
 
     <div class="box" id="info">
-      <form>
+      <form method="post" action="{% url 'index' %}">
+        {% csrf_token %}
         <div>
           First Name :
-          <input type="text" placeholder="First Name">
-          <button type="submit"> Edit </button>
+          <input type="text" id="first_name" name="first" value="{{first}}" disabled="true" style="margin-left: 115px;">
+          <button type="button" onclick="Enable('first_name')"> Edit </button>
         </div>     
         <div>
           Last Name :
-          <input type="text" placeholder="Last Name">
-          <button type="submit"> Edit </button>
+          <input type="text" id="last_name" name="last" value="{{last}}" disabled="true" style="margin-left: 115px;">
+          <button type="button" onclick="Enable('last_name')"> Edit </button>
         </div> 
         <div>
           Phone Number :
-          <input type="text" placeholder="Phone Number">
-          <button type="submit"> Edit </button>
+          <input type="text" id="code" name="code" value="{{code}}" disabled="true" style="margin-left: 83px; width:50px">
+          <input type="text" id="number" name="num" value="{{num}}" disabled="true" style="margin-left: 5px; width:230px">
+          <button type="button" onclick="Enable('number'); Enable('code')"> Edit </button>
         </div>  
         <div>
           Email :
-          <input type="text" placeholder="Email">
-          <button type="submit"> Edit </button>
+          <input type="text" id="email" name="email" value="{{email}}" disabled="true" style="margin-left: 155px;">
+          <button type="button" onclick="Enable('email')"> Edit </button>
         </div>   
         <div>
           Password :
-          <input type="text" placeholder="Password">
-          <button type="submit" > Edit </button>
+          <input type="text" id="password" name="password" value="{{password}}" disabled="true" style="margin-left: 125px;">
+          <button type="button" onclick="Enable('password')"> Edit </button>
         </div>     
         <div>
           Address :
-          <input type="text" placeholder="Address">
-          <button type="submit"> Edit </button>
+          <input type="text" id="address" disabled="true" style="margin-left: 135px;">
+          <button type="button" onclick="Enable('address')"> Edit </button>
         </div>       
         <div>
           Account Type:
-          <input type="text" placeholder="Customer By Defualt">
-          <button type="submit"> Become A Seller </button>
+          <select id="acc_type" disabled="true" style="margin-left: 95px;">
+            <option value="Buyer">Buyer</option>
+            <option value="Seller">Seller</option>
+          </select> 
+          <button type="button" onclick="Enable('acc_type')"> Edit </button>
         </div>     
         <div class="dropdown">
           Preferred Currency :
-          <input type="text" placeholder="Preferred Currency"> 
-          <button class="dropbtn"> Currency </button>
-          <div class="dropdown-content">
-            <p> Euro   </p>
-            <p> Dollar </p>
-            <p> Egyptian Pound </p>
-            <p> Denar </p>
-            <p> Reyal </p>
-          </div>
+          <select id="currency" name="currency" disabled="true" style="margin-left: 40px;">
+            {% for c in currency_list %}
+              <option value="{{c}}"
+                  {% if c == currency %}selected="selected"{% endif %}>
+                  {% if c == 'EGP' %}
+                  Egyptian Pound
+                  {% endif %}
+                  {% if c == 'USD' %}
+                  US Dollar
+                  {% endif %}
+                  {% if c == 'EUR' %}
+                  Euro
+                  {% endif %}
+                  {% if c == 'GBP'%}
+                  Pound Sterling
+                  {% endif %}
+              </option>
+          {% endfor %}
+          </select> 
+          <button type="button" onclick="Enable('currency')"> Edit </button>
         </div>
-     </form>
+        <button type="submit" id="Button" onclick="EnableAll()"> CONFIRM </button>
+      </form>
     </div>
-    <button type="submit" id="Button"> CONFIRM </button>
   </div>
 </body>
+
+<script>
+  function Enable(input_id) {
+        document.getElementById(input_id).disabled = false;
+    }
+  
+    function EnableAll() {
+      var inputs, index;
+      inputs = document.getElementsByTagName('input');
+      for (index = 0; index < inputs.length; ++index) {
+          inputs[index].disabled = false;
+      }
+  }
+</script>
 {%endblock%}

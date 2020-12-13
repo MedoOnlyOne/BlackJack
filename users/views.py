@@ -11,18 +11,49 @@ from .models import User, Product
 
 @login_required(login_url='login/')
 def index(request):
-    
-    # get user's wishList, cart and parchases
-    wishList = request.user.wishList.all()
-    cart = request.user.cart.all()
-    parchases = request.user.parchases.all()
-    shops = request.user.shops.all()
-    return render(request, 'users/Dashboard.html', {
-        'wishList': wishList,
-        'cart': cart,
-        'parchases': parchases,
-        'shops':shops
-    })
+    if request.method == "POST":
+        first = request.POST.get("first", "")
+        last = request.POST.get("last", "")
+        code = request.POST.get("code", "")
+        num = request.POST.get("num", "")
+        email = request.POST.get("email", "")
+        password = request.POST.get("password", "")
+        currency = request.POST.get("currency", "")
+        
+        user = User.objects.filter(username=request.user.username)
+        user.update(first_name=first, last_name=last, phone_number=num, phone_number_code=code, password=password, email=email, preferred_currency=currency)
+
+        return HttpResponseRedirect(reverse("index"))
+
+    else:
+        # get user's wishList, cart and parchases
+        wishList = request.user.wishList.all()
+        cart = request.user.cart.all()
+        parchases = request.user.parchases.all()
+        shops = request.user.shops.all()
+        
+        first_name = request.user.first_name
+        last_name = request.user.last_name
+        num = request.user.phone_number
+        code = request.user.phone_number_code
+        email = request.user.email
+        password = request.user.password
+        currency = request.user.preferred_currency
+
+        return render(request, 'users/Dashboard.html', {
+            'wishList': wishList,
+            'cart': cart,
+            'parchases': parchases,
+            'shops':shops,
+            'first': first_name,
+            'last': last_name,
+            'num': num,
+            'code': code,
+            'email': email,
+            'password':password,
+            'currency':currency,
+            'currency_list': ["EGP","EUR","USD","GBP"]
+        })
 
 def LogIn(request):
     if request.method == "POST":
