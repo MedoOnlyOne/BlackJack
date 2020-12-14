@@ -26,11 +26,11 @@
     
     }
 
-  header .official  {
-    color: #BFB367;
-    font-size: 12pt;
-    font-weight: bold;
-  }
+    header .official  {
+      color: #BFB367;
+      font-size: 12pt;
+      font-weight: bold;
+    }
 
     header #webname h1{ margin:0;}
 
@@ -44,20 +44,19 @@
       padding: 0 20px 0 20px;
     }
 
-  header a{
-    text-decoration: none;
-    color: #ffffff;
-    text-transform: uppercase;
-    font-size:15pt;
-  }
+    header a{
+      text-decoration: none;
+      color: #BFB367;
+      text-transform: uppercase;
+      font-size:15pt;
+    }
 
     header nav{float:right;
     padding-right:30px;}
 
         
     header a:hover {
-      color: white;
-      font-weight: bold;
+      color:white;
     }
 
     #sidemenu {
@@ -83,9 +82,7 @@
     } 
 
     #sidemenu a:hover {
-        background-color: white;
-        font-weight: bold;
-        padding: 10px 10px 10px 10px;
+        color:white;
     }
       
     .container-1 {color:#232732;
@@ -98,9 +95,6 @@
       border-bottom: solid 8px #BFB367 ;
       border-right: solid 8px #BFB367 ;
     }
-
-
-
 
     #info {   border-right: solid 8px #BFB367 ;
     border-bottom: solid 8px #BFB367 ;
@@ -132,13 +126,28 @@
       margin-bottom: 5px; 
     }
 
-    #Button {
-      margin-top:40px; margin-left:36em; margin-bottom:50px;
-      width:140px;
-      height:60px;
+    #ConfirmButton {
+      margin-top:40px; margin-bottom:60px; margin-right:70px;
+      width:120px;
+      height:30px;
       background-color :#232732;
       color: #BFB367 ;
       font-weight:bold;
+    }
+    #ChangePassword {
+      margin-top:40px; margin-bottom:60px;
+      width:162px;
+      height:30px;
+      background-color :#232732;
+      color: #BFB367 ;
+      font-weight:bold;
+    }
+    #ConfirmButton:hover,
+    #ChangePassword:hover,
+    button[type="button"]:hover
+    {
+      cursor: pointer;
+      color: #FFF;
     }
 
     .dropbtn {
@@ -182,13 +191,13 @@
     .dropdown-content {
       right: 0;
     }
-    h8 {
+    #official {
     color: #BFB367;
     margin-top: 10%;
     margin-bottom: 5%;
     display:inline;
     }
-    h7 {
+    #BlackJack {
     font-size: 40px;
     color: white;
     display:inline;
@@ -202,11 +211,7 @@
     color: #BFB367 ;
     font-weight:bold;
   }
-  button:hover,
-  #Button:hover{
-    cursor: pointer;
-    color: #FFF;
-  }
+
   </style>
 {% endblock %}
 {% block body %} 
@@ -216,8 +221,8 @@
   <header>
       <div class="Container">
           <div id="header">
-        <h7 id="hhh">BlackJack</h7>
-        <h8>The Official online store </h8>
+        <span id="BlackJack">BlackJack</span>
+        <span id="official">The Official online store </span>
      </div>
     
   <nav> <ul style="margin-top:12px;"> 
@@ -232,7 +237,7 @@
   <section id="sidemenu">
       <h1 style="color:white; padding-left:40px; font-size:23pt;">   DASHBOARD  </h1>
       <nav> <ul> 
-      <li> <a href="#"> My Account </a>
+      <li> <a href="{% url 'userdashboard' %}"> My Account </a>
       <li> <a href="#"> Track Order </a> 
       <li> <a href="#"> Items </a>
       <li> <a href="#"> Cart </a> 
@@ -248,13 +253,13 @@
   <div class="container-1">
     <div class="box" id="upperinfo">
   
-      <h1> Personal Information</h1>
+      <h1> My account </h1>
       <p> </p>
   
     </div>
 
     <div class="box" id="info">
-      <form method="post" action="{% url 'index' %}">
+      <form method="post" action="{% url 'userdashboard' %}">
         {% csrf_token %}
         <div>
           First Name :
@@ -276,20 +281,15 @@
           Email :
           <input type="text" id="email" name="email" value="{{email}}" disabled="true" style="margin-left: 155px;">
           <button type="button" onclick="Enable('email')"> Edit </button>
-        </div>   
-        <div>
-          Password :
-          <input type="text" id="password" name="password" value="{{password}}" disabled="true" style="margin-left: 125px;">
-          <button type="button" onclick="Enable('password')"> Edit </button>
-        </div>     
+        </div>        
         <div>
           Address :
-          <input type="text" id="address" disabled="true" style="margin-left: 135px;">
+          <input type="text" id="address" name="address" value="{{address}}" disabled="true" style="margin-left: 135px;">
           <button type="button" onclick="Enable('address')"> Edit </button>
         </div>       
         <div>
           Account Type:
-          <select id="acc_type" disabled="true" style="margin-left: 95px;">
+          <select id="acc_type" name="is_seller" disabled="true" style="margin-left: 95px;">
             <option value="Buyer">Buyer</option>
             <option value="Seller">Seller</option>
           </select> 
@@ -318,7 +318,13 @@
           </select> 
           <button type="button" onclick="Enable('currency')"> Edit </button>
         </div>
-        <button type="submit" id="Button" onclick="EnableAll()"> CONFIRM </button>
+        <div style="margin:10px 0px;">
+          <div style="display:inline; float: right;">
+            <button type="button" id="ChangePassword">Change Password</button></div>
+          
+          <div style="display:inline; float: left; margin-left: 350px;">
+            <button type="submit" id="ConfirmButton" onclick="EnableAll()"> Confirm </button></div>
+        </div>
       </form>
     </div>
   </div>
@@ -327,13 +333,13 @@
 <script>
   function Enable(input_id) {
         document.getElementById(input_id).disabled = false;
-    }
+     }
   
     function EnableAll() {
-      var inputs, index;
+      var inputs, i;
       inputs = document.getElementsByTagName('input');
-      for (index = 0; index < inputs.length; ++index) {
-          inputs[index].disabled = false;
+      for (i = 0; i < inputs.length; ++i) {
+          inputs[i].disabled = false;
       }
   }
 </script>
