@@ -3,24 +3,74 @@
    <head>
         <title>Log In</title>
         <meta name="viewport" content="width=device-width">
-   </head>
-
+   </head> 
+    
         <style>
-
-        body{
-          margin: 0;
-          background:url('unknown.png') no-repeat ;
-          background-size: 1550px 760px;
+         
+     .UpperLabel {
+        overflow: hidden;
+    }
+   
+    header{
+        background-color: #232732;
+        color: #ffffff;
+        padding-top: 20px;
+        border-bottom: #BFB367 7px solid;
+    }
+     
+   header #webname {
+          font-weight: bold;
+          font-size:36pt;
+          color:white;
+          float: left;
+          margin-left: 50px;
+      
+          }
+    
+    header .official  {
+        color: #BFB367;
+        font-size: 12pt;
+        font-weight: bold;
+    }
+    
+    header #webname h1{ margin:0;}
+    
+     header ul{
+        margin:0;
+        padding: 0;
+    }
+    
+    header li {
+        display: inline;
+        padding: 0 20px 0 20px;
+    }
+    
+    header a{
+        text-decoration: none;
+        color: #ffffff;
+        text-transform: uppercase;
+        font-size:15pt;
+    }
+    
+         header nav{float:right;
+          padding-right:30px;}
+    
+        
+        header a:hover {
+        color: white;
+        font-weight: bold;
         }
-
+        
+        body{
+       display:inline;       }  
+      
         h1{
           color:black;
           text-align: center;
           background:white;
           width:300px;
-          margin-top: 0%;
         }
-
+        
         p{
           font-weight: bold;
           font-size:10pt;
@@ -28,7 +78,7 @@
           text-align: center;
           margin-top: 5px;
           margin-bottom:5px;
-
+        
         }
         #m9 button{
           background:white;
@@ -37,56 +87,52 @@
           color:#232732;
           margin:8%;
         }
-
+        
         #m9 input[type="email"]{
-
+          
           width :200px;
           margin-top: 1%;
         }
-
+        
         #m9 input[type="password"]{
           width :200px;
           margin-top: 8%;
           margin-bottom:5px;
         }
-
+      
 
        h1 a:hover{
          color:#072639;
          font-weight:bold;
-
+         
        }
-       header {
-         background-color:#232732;
-         text-decoration:none;
-         margin-bottom:0%;
-         overflow: hidden;
-       }
-       #header {
-         background-color: #232732;
-         height: 50px;
-       }
-       h8 {
-         color: #BFB367;
-         margin-top: 10%;
-         margin-bottom: 5%;
-       }
-       h7 {
-         font-size: 40px;
-         color: white;
-       }
-
-
-       #m9 {border: 8px solid #232732; margin-top:5%; margin-left:90px; text-align:center; color:#232732;}
+       
+ 
+       
+       #m9 {  border: 8px solid #232732; margin-top:90px; margin-left:130px; text-align:center; color:#232732; position:absolute;}
+       
+       #LogInImage { width:200px; height:200px; margin-right: 600px; margin-top:90px; float:right; }
 
         </style>
+   
+   
+   
+   
+  
+   
+   <header>
+    <div class="UpperLabel";>
+        <h2 id="webname"> BlackJack <span class="official">The Official Online Store </span></h2>
+   
+      <nav> <ul> 
+         <li> <a href="Mainpage.html"> Home </a>
+         <li> <a href="Cart.html"> Cart </a> 
+      </ul> </nav>
+       </div>
+   </header>
 
-
-    <body>
-      <div id="header">
-        <h7 id="hhh">BlackJack</h7>
-        <h8>The Official online store </h8>
-     </div id="m99">
+     <body>
+     
        <h1 id="m9">
         <div class="container">
          <h1> Log in </h1>
@@ -96,11 +142,14 @@
          <div style="display:inline;">
          <p> Haven't signed up yet? </p>
            <form> </form>
-           <button type="submit" class="button_1"> Sign up now</button>
+           <button type="submit" class="button_1"> Sign up now !</button>
          </div>
          </div>
         </h1>
 
+      <div id="LogInImage">
+         <img src="SignUp.jpg" alt="Log in">                  
+      </div>   
 
       </body>
 </html>
