@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+        <title>Log In</title>
+        <meta name="viewport" content="width=device-width">
+      <style>
+      .UpperLabel {
+          overflow: hidden;
+      }
+    
+    header{
+      background-color: #232732;
+      color: #ffffff;
+      border-bottom: #BFB367 6px solid;
+    }
+    
+    h2{
+      margin:0.65em;
+    }
+
+    header #webname {
+      font-weight: bold;
+      font-size:36pt;
+      color:white;
+      float: left;
+      margin-left: 50px; 
+    }
+      
+      header .official  {
+          color: #BFB367;
+          font-size: 12pt;
+          font-weight: bold;
+      }
+      
+      header #webname h1{ margin:0;}
+      
+      header ul{
+          margin:0;
+          padding: 0;
+      }
+      
+      header li {
+          display: inline;
+          padding: 0 20px 0 20px;
+      }
+      
+      header a{
+          text-decoration: none;
+          color: #ffffff;
+          text-transform: uppercase;
+          font-size:15pt;
+      }
+      
+        header nav{float:right;
+        padding-right:30px;}
+
+
+      header a:hover {
+      color: white;
+      font-weight: bold;
+      }
+
+      body
+      {
+        margin:0px;
+      }
+    
+      h1{
+        color:black;
+        text-align: center;
+        background:white;
+        width:300px;
+      }
+      
+      p{
+        font-weight: bold;
+        font-size:10pt;
+        color:#232732;
+        text-align: center;
+        margin-top: 5px;
+        margin-bottom:5px;
+      
+      }
+      #m9 button{
+        background:white;
+        padding-left: 20px;
+        padding-right:20px;
+        color:#232732;
+        margin:8%;
+      }
+      
+      #m9 input[type="email"]{
+        
+        width :200px;
+        margin-top: 1%;
+      }
+      
+      #m9 input[type="password"]{
+        width :200px;
+        margin-top: 8%;
+        margin-bottom:5px;
+      }
+    
+
+      h1 a:hover{
+        color:#072639;
+        font-weight:bold;
+        
+      }
+      
+      #BlackJack {
+      font-size: 40px;
+      color: white;
+      display:inline;
+      }
+        
+      #m9 {  border: 8px solid #BFB367; margin-top:90px; margin-left:130px; text-align:center; color:#232732; position:absolute;}
+      
+      #LogInImage { width:200px; height:200px; margin-right: 600px; margin-top:90px; float:right; }
+      #official {
+        color: #BFB367;
+        margin-top: 10%;
+        margin-bottom: 5%;
+        display:inline;
+      }
+      </style>
+        </head>
+   
+   
+   
+   
+  
+  <body>
+   
+    <header>
+        <div class="Container">
+            <div id="header">
+              <span id="BlackJack">BlackJack</span>
+              <span id="official">The Official online store </span>
+            </div>
+        </div>
+    </header>
+
+
+     
+       <h1 id="m9">
+        <div class="container">
+         <h2> Log in </h2>
+          <form action="{% url 'login' %}" method="POST"> 
+            {% csrf_token %}
+           <input type="email" placeholder="Enter Email...">
+           <input type="password" placeholder="Enter Password...">
+           <button type="submit" class="button_1">Login</button>
+          </form>
+          <div style="display:inline;">
+            {% if message %}
+            <p style="color:red">Incorrect username or password</p>
+            {% endif %}
+            <p> Haven't signed up yet? </p>
+          </div>
+          <button type="submit" class="button_1" href="{% url 'signup' %}"> Sign up now !</button>
+         </div>
+        </h1>
+
+      <div id="LogInImage">
+         <img src="login.jpg" alt="Log in">                  
+      </div>   
+
+      </body>
+</html>

@@ -3,8 +3,7 @@
 {% block head %} 
   <title>Dashboard</title>
   <style>
-    body
-    {
+    body {
       margin:0px;
     }
     .Container {
@@ -34,9 +33,9 @@
 
     header #webname h1{ margin:0;}
 
-      header ul{
-        margin:0;
-        padding: 0;
+    header ul{
+      margin:0;
+      padding: 0;
     }
 
     header li {
@@ -211,12 +210,15 @@
     color: #BFB367 ;
     font-weight:bold;
   }
-
+  #ChangePassword a{
+    color:#BFB367 ;
+    text-decoration:none;
+  }
+  #ChangePassword a:hover{
+    color:#fff ;}
   </style>
 {% endblock %}
 {% block body %} 
- 
-<body>
 
   <header>
       <div class="Container">
@@ -320,7 +322,7 @@
         </div>
         <div style="margin:10px 0px;">
           <div style="display:inline; float: right;">
-            <button type="button" id="ChangePassword">Change Password</button></div>
+            <button type="button" id="ChangePassword"><a href="{% url 'changepassword' %}">Change Password</a></button></div>
           
           <div style="display:inline; float: left; margin-left: 350px;">
             <button type="submit" id="ConfirmButton" onclick="EnableAll()"> Confirm </button></div>
@@ -328,8 +330,9 @@
       </form>
     </div>
   </div>
-</body>
+{% endblock %}
 
+{% block script %}
 <script>
   function Enable(input_id) {
         document.getElementById(input_id).disabled = false;

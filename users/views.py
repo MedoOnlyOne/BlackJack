@@ -69,13 +69,13 @@ def LogIn(request):
             login(request, user)
             return HttpResponseRedirect(reverse("userdashboard"))
         else:
-            return render(request, "users/login.html", {
+            return render(request, "users/login2.html", {
                 "message": "Invalid username and/or password."
             })
     else:
         if request.user.is_authenticated:
             return HttpResponseRedirect(reverse('userdashboard'))
-        return render(request, "users/login.html")
+        return render(request, "users/login2.html")
 
 def LogOut(request):
     logout(request)

@@ -1,38 +1,67 @@
-header a{
-  color:white;
-  text-decoration:none;
-  text-transform: uppercase;
-  font-size:16px;
+body{
+  margin: 0px;
 }
+
+.Container {
+  overflow: hidden;
+}
+
 header{
-  background:#232732;
-  font-weight: bold;
-  padding-top:10px;
-  min-height:20px;
-  padding: 10px;
-  margin-top: 0px;
+  background-color: #232732;
+  color: #ffffff;
+  border-bottom: #BFB367 6px solid;
 }
-header li{
-  float:right;
-  display:inline;
+header ul{
+  margin:0;
+  padding: 0;
+}
+
+header li {
+  display: inline;
   padding: 0 20px 0 20px;
-  margin-top: 0%;
 }
+
+header a{
+  text-decoration: none;
+  color: #BFB367;
+  text-transform: uppercase;
+  font-size:15pt;
+}
+
+header nav{float:right;
+padding-right:30px;}
+
+  
+header a:hover {
+  color: white;
+
+}
+
+#BlackJack {
+  font-size: 40px;
+  color: white;
+  display:inline;
+  }
+#official {
+    color: #BFB367;
+    margin-top: 10%;
+    margin-bottom: 5%;
+    display:inline;
+    font-size: 16px;
+  }
+
 body {
   padding : 0px;
   margin: 0px;
 }
+#header{
+  display:inline-block;
+}
 .product {
-  float: right;
-  display: inline;
-  margin-top: 6%;
+  margin-top: 15px;
   border: #232732 5px solid;
   border-radius: 5px;
   padding: 3% 5% 5% 5%;
-  margin-top:54px;
-  margin-left: 10%;
-  margin-bottom: 15%;
-  margin-right: 15%;
 }
 #x {
   display: inline;
@@ -116,6 +145,7 @@ h5 {
   font-weight: bold;
 }
 .rating {
+    margin-left: 45%;
     display: inline-block;
     flex-direction:row-reverse;
     justify-content: center;
@@ -163,39 +193,82 @@ h6 {
 }
 .Dis {
   display:inline-block;
-  border: black 2px solid;
+  border: solid 4px #BFB367;
+  padding: 10px;
+}
+.Dis h6{
+  margin-left:41%;
 }
 .Rev {
-  display:inline-block;
-  border-bottom: black 2px solid;
-    border-left: black 2px solid;
-      border-right: black 2px solid;
-  margin-left: 40%;
+  display:block;
+  margin-top:10px;
+  border: solid 4px #BFB367;
+  padding: 10px;
+}
+.Rev h6{
+  margin-left:42%;
 }
 textarea {
-  margin-left: 0%;
-  width: 300px;
+  display:inline-block;
+  margin-top:10px;
+  margin-left: 150px;
+  width: 80%;
   height: 150px;
+  margin-bottom:5px ;
 }
 span {
   font-size: 40px;
   color: white;
   display:inline-block;
 }
-h8 {
-  color: #BFB367;
-  margin-top: 10%;
-}
-.cart2 {
+
+.review {
   display: block;
   background-color: #232732;
-  margin-bottom: 10%;
+  margin: 10px 0px;
   height: 35px;
-  width: 300px;
+  width: 100px;
   color: white;
   font-weight: bold;
-  margin-left: 1%;
+  margin-left: 44.5%;
 }
-ii {
+#ii {
   display :inline-block;
+}
+.rate {
+  display:block;
+  margin-right:45%;
+  height: 46px;
+  padding: 0 10px;
+}
+.rate:not(:checked) > input {
+  position:absolute;
+  top:-9999px; 
+  visibility: hidden;
+}
+.rate:not(:checked) > label {
+  float:right;
+  width:1em;
+  overflow:hidden;
+  white-space:nowrap;
+  cursor:pointer;
+  font-size:30px;
+  color:#ccc;
+}
+.rate:not(:checked) > label:before {
+  content: '★ ';
+}
+.rate > input:checked ~ label {
+  color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+  color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+  color: #c59b08;
 }
