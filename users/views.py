@@ -127,7 +127,7 @@ def changepassword(request):
                 if new_password==confirm_new_password:
                     user = User.objects.get(username=request.user.username)
                     #user.update(password=new_password)
-                    user.password=new_password
+                    user.set_password(new_password)
                     user.save()
                     return HttpResponseRedirect(reverse('userdashboard'),{'message':"Password changed successfully."})
                 else:
