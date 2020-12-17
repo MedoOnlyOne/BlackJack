@@ -1,84 +1,115 @@
 <!DOCTYPE HTML>
 <html lang="en">
  
- <style>
-     .Container {
-        overflow: hidden;
+  <title>Cart</title>
+  <style>
+    body {
+      margin:0px;
     }
-   
+    .Container {
+      overflow: hidden;
+    }
 
     header{
-        background-color: #232732;
-        color: #ffffff;
-        padding-top: 30px;
-        padding-bottom: 10px;
-        min-height: 70px;
-        border-bottom: #BFB367 7px solid;
+      background-color: #232732;
+      color: #ffffff;
+      border-bottom: #BFB367 6px solid;
     }
-     
-   header #webname {
-          font-weight: bold;
-          font-size:36pt;
-          color:white;
-          float: left;
-          margin-left: 50px;
-      
-          }
     
+    #official {
+    color: #BFB367;
+    margin-top: 10%;
+    margin-bottom: 5%;
+    display:inline;
+    }
+    #BlackJack {
+    font-size: 40px;
+    color: white;
+    display:inline;
+    }
+  #header{
+    display:inline-block;
+  }
+    
+    header #webname {
+      font-weight: bold;
+      font-size:36pt;
+      color:white;
+      float: left;
+      margin-left: 50px;
+    
+    }
+
     header .official  {
-        color: #BFB367;
-        font-size: 12pt;
-        font-weight: bold;
+      color: #BFB367;
+      font-size: 12pt;
+      font-weight: bold;
     }
-    
+
     header #webname h1{ margin:0;}
-    
-     header ul{
-        margin:0;
-        padding: 0;
+
+    header ul{
+      margin:0;
+      padding: 0;
     }
-    
+
     header li {
-        display: inline;
-        padding: 0 20px 0 20px;
+      display: inline;
+      padding: 0 20px 0 20px;
     }
-    
+
     header a{
-        text-decoration: none;
-        color: #ffffff;
-        text-transform: uppercase;
-        font-size:15pt;
+      text-decoration: none;
+      color: #BFB367;
+      text-transform: uppercase;
+      font-size:15pt;
     }
-    
+
     header nav{float:right;
     padding-right:30px;}
-    
+
         
     header a:hover {
-        color: white;
-        font-weight: bold;
+      color:white;
+    }
+
+    #sidemenu {
+      float:left;
+      padding: 40px 70px 50px 30px;
+      background-color:#232732;
+      border-right: 8px  #BFB367 solid;
+      text-align:center;
+      height: 650px;
+      text-decoration:none;
+    }
+
+    #sidemenu nav{text-align:left; }
+
+    #sidemenu nav ul li{list-style: none;}
+
+    #sidemenu a{
+    text-decoration: none;
+    color: #BFB367;
+    padding:8px 30px;
+    display:block;
+    font-size:16pt;
+    } 
+
+    #sidemenu a:hover {
+        color:white;
+    }
+      
+    .container-1 {color:#232732;
+      display:flex;
+      flex-direction:column;
     }
     
-  #sidemenu {
-    float:left;
-    padding: 40px 70px 50px 30px;
-    background-color:#232732;
-    border-right: 8px  #BFB367 solid;
-    text-align:center;
-    height: 635px;  //597
-    text-decoration:none;
-    overflow:
-}
-
-   #sidemenu nav{text-align:left; }
- 
-   #sidemenu a{
-   text-decoration: none;
-   color: #BFB367;
-   padding:8px 30px;
-   display:block;
-   font-size:16pt;
-   } 
+    #upperinfo
+    {
+      text-align:center;
+      border-bottom: solid 8px #BFB367 ;
+      border-right: solid 8px #BFB367 ;
+    }
    
    a [href="Cart.html"]
    {
@@ -86,13 +117,13 @@
    }
    body
    {
-    background-color:#232732;
+    background-color:white;
    }
    #items
    {
     position:relative;
     left:40px;
-    background-color:#232732;
+    background-color:white;
     float:left;
     width:715px;
    }
@@ -130,7 +161,7 @@
         float:right;
         width:349px;
         position:relative;
-        right:7px;
+        right:15px;
         background-color:white;
         border:5px solid #BFB367;
         margin:0px;
@@ -153,37 +184,48 @@
  
  <body >
 
-<header>
-    <div class="Container";>
-        <h1 id="webname"> BLACK JACK <span class="official">The Official Online Store </span></h1>
-   
-<nav> <ul> 
-    <li> <a href="Mainpage.html"> Home </a>
-    <li> <a href="Cart.html"> Cart </a> 
-</ul> </nav>
+  <header>
+      <div class="Container">
+          <div id="header">
+        <span id="BlackJack">BlackJack</span>
+        <span id="official">The Official online store </span>
+     </div>
+    
+  <nav> <ul style="margin-top:12px;"> 
+      <li> <a href="#"> Home </a> </li>
+      <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
+  </ul> </nav>
+      </div>
+  </header>
+
+
+
+  <section id="sidemenu">
+      <h1 style="color:white; padding-left:40px; font-size:23pt;">   DASHBOARD  </h1>
+      <nav> <ul> 
+      <li> <a href="{% url 'userdashboard' %}"> My Account </a>
+      <li> <a href="#"> Track Order </a> 
+      <li> <a href="#"> Items </a>
+      <li> <a href="Cart.html"> Cart </a> 
+      <li> <a href="#"> One </a> 
+      <li> <a href="#"> Two </a> 
+      <li> <a href="#"> Three </a>   
+  </ul> </nav>
+  </section>
+
+
+
+
+  <div class="container-1">
+    <div class="box" id="upperinfo">
+      <h1> Shopping Cart </h1>
+      <p> </p>
     </div>
-</header>
-
-
-
-<section id="sidemenu">
-    <h1 style="color:white; padding-left:40px; font-size:23pt;">   DASHBOARD  </h1>
-    <nav> <ul> 
-    <li> <a href="My Account.html"> My Account </a>
-    <li> <a href="Cart.html"> Track Order </a> 
-    <li> <a href="Log In.html"> Items </a>
-    <li> <a href="Cart.html" style="color:white; font-weight:bold;"> Cart </a>
-    <li> <a href="Profile.html"> Profile </a> 
-    <li> <a href="Cart.html"> One </a> 
-    <li> <a href="Cart.html"> Two </a> 
-    <li> <a href="Cart.html"> Three </a>   
-</ul> </nav>
-</section>
+  </div>
 
 <br>
 <br>
 <div id="items">
-    <p style="color:white; font-size:20pt; font-weight:bold; margin-left:2pt;" >Shopping Cart</p>
     <div class="itemscontainer">
         <div class="item" title="item">
             <img src="No image.jpg" > 
