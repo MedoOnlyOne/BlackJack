@@ -131,7 +131,6 @@ def changepassword(request):
                     user.save()
                     user_ = authenticate(request, username=request.user.username, password=new_password)
                     login(request,user_)
-                    message = "Password changed successfully"
                     return render(request,'users/changepassword.html',{'message':"Password changed successfully."})
                 else:
                     return render(request,'users/changepassword.html',{'message':"Passwords don't match."})

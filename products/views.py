@@ -34,10 +34,18 @@ def product(request, productname):
             else:
                 #currency_ratio=requests.get('https://free.currconv.com/api/v7/convert',{'apiKey':config('API_KEY'),'q':'EGP'+'_'+preferred_currency,'compact':'ultra'}).json()['EGP'+'_'+preferred_currency]
                 currency_ratio=1
+        rating = 0
+        reviews = product.reviews.all()
+        for rev in reviews:
+            rating += rev.stars
+        if len(reviews) > 0:
+            rating /= len(reviews)
+        else:
+            rating = 0
         return render(request,'products/product copy.html',{
         'product': product,
+        'rating': rating,
         'price' : round(product.price*decimal.Decimal(currency_ratio),2),
-        'user' : request.user,
         'preferred_currency':preferred_currency
         })
     

@@ -18,7 +18,7 @@ class Product(models.Model):
     featured = models.BooleanField(default=False)
     image = models.ImageField(null=True,blank=True,upload_to='product_images/')
     shop = models.ForeignKey('shop.Shop',on_delete=models.CASCADE)
-    reviews = models.ManyToManyField(Review, blank=True, related_name="Review")
+    reviews = models.ManyToManyField(Review, blank=True, related_name="reviews")
     def __str__(self):
         return f'{self.name}'
     def __unicode__(self):

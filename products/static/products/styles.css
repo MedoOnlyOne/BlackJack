@@ -58,24 +58,32 @@ body {
   display:inline-block;
 }
 .product {
-  margin-top: 15px;
-  border: #232732 5px solid;
+  margin: 10px 5px;
+  margin-top: 20px;
+  border: solid 4px #BFB367;
   border-radius: 5px;
-  padding: 3% 5% 5% 5%;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.product .info{
+  width: 50%;
+  float: right;
+}
+.product .info .info-text{text-align: center;}
+.product .image{
+  width: 30%;
+  float: left;
+  margin-left: 20%;
 }
 #x {
   display: inline;
 }
-img{
-  margin-top:50px;
-}
+
 #productimage {
-  width : 500px;
-  height: 500px;
-  margin-top: 5%;
-  margin-left: 5%;
+  width:300px;
+  height:300px;
   border-radius: 10px;
-  display: inline;
 }
 h1 {
   font-weight: bold;
@@ -85,6 +93,7 @@ h1 {
 }
 h4 {
   display: inline-block;
+  margin-bottom: 0px;
 }
 #CO {
   margin-left: 9%;
@@ -95,15 +104,20 @@ input[type="text"] {
 background-color: #232732;
 color: white;
 }
-.cart {
+.cart, .wishlist {
   display: block;
+  margin:20px auto;
   background-color: #232732;
-  margin-bottom: 10%;
   height: 35px;
   width: 300px;
-  color: white;
+  color: #BFB367;;
   font-weight: bold;
+  font-size:24px;
 
+}
+.cart:hover, .wishlist:hover{
+  cursor: pointer;
+  color: #fff;
 }
 .wl {
   display: block;
@@ -121,7 +135,11 @@ color: white;
   width: 250px;
 }
 .Related {
-  margin-left: 15%;
+  border: solid 4px #BFB367;
+  margin: 10px 5px;
+  margin-top: 20px;
+  text-align: center;
+  padding: 10px;
 }
 .re {
   width: 250px;
@@ -183,35 +201,32 @@ h5 {
     opacity: 0.4
 }
 h2 {
-   display: block;
-   margin-top: 10%;
    margin-bottom: 0px;
 }
 h6 {
+  text-align: center;
   font-size: 25px;
   margin: 0;
 }
 .Dis {
   display:inline-block;
   border: solid 4px #BFB367;
+  text-align: center;
   padding: 10px;
+  margin: 10px 5px;
 }
-.Dis h6{
-  margin-left:41%;
-}
+
 .Rev {
+  text-align: center;
   display:block;
-  margin-top:10px;
+  margin:10px 5px;
   border: solid 4px #BFB367;
   padding: 10px;
 }
-.Rev h6{
-  margin-left:42%;
-}
+
 textarea {
   display:inline-block;
   margin-top:10px;
-  margin-left: 150px;
   width: 80%;
   height: 150px;
   margin-bottom:5px ;
@@ -222,24 +237,25 @@ span {
   display:inline-block;
 }
 
-.review {
+.review_btn {
   display: block;
   background-color: #232732;
-  margin: 10px 0px;
+  margin: 10px auto;
   height: 35px;
   width: 100px;
-  color: white;
+  color: #BFB367;
   font-weight: bold;
-  margin-left: 44.5%;
+}
+.review_btn:hover{
+  cursor: pointer;
+  color: #fff;
 }
 #ii {
   display :inline-block;
 }
 .rate {
   display:block;
-  margin-right:45%;
   height: 46px;
-  padding: 0 10px;
 }
 .rate:not(:checked) > input {
   position:absolute;
@@ -247,7 +263,6 @@ span {
   visibility: hidden;
 }
 .rate:not(:checked) > label {
-  float:right;
   width:1em;
   overflow:hidden;
   white-space:nowrap;
@@ -255,20 +270,20 @@ span {
   font-size:30px;
   color:#ccc;
 }
-.rate:not(:checked) > label:before {
+/* .rate:not(:checked) > label:before {
   content: '★ ';
-}
+} */
 .rate > input:checked ~ label {
-  color: #ffc700;    
+  color: #BFB367;    
 }
 .rate:not(:checked) > label:hover,
 .rate:not(:checked) > label:hover ~ label {
-  color: #deb217;  
+  color: #BFB367;  
 }
 .rate > input:checked + label:hover,
 .rate > input:checked + label:hover ~ label,
 .rate > input:checked ~ label:hover,
 .rate > input:checked ~ label:hover ~ label,
 .rate > label:hover ~ input:checked ~ label {
-  color: #c59b08;
+  color: #BFB367;
 }
