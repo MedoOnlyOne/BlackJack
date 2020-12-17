@@ -10,13 +10,6 @@
     background-size: 1550px 760px;
   }
 
-  h1{
-    color:black;
-    text-align: center;
-    background:white;
-    width:300px;
-  }
-
   p{
     font-weight: bold;
     font-size:10pt;
@@ -66,23 +59,29 @@
 
 
 
-  #m9 {border: 8px solid #232732; margin-top:260px; margin-left:90px; text-align:center; color:#232732;}
+  #m9 {border: 8px solid #232732;
+    margin-top:260px; 
+    margin-left:90px;
+    text-align:center;
+    color:#232732;  
+    text-align: center;
+    background:white;
+    width:300px;}
 
   </style>
 {% endblock %}
 
 {% block body %}
 <body>
-  <h1 id="m9">
-    <div class="container">
+  <h1>
+    <div class="container" id="m9">
       <h1> Log in </h1>
       <form action="{% url 'login' %}" method="POST">
         {% csrf_token %}
         <input type="username" name="username" placeholder="Enter Username...">
         <input type="password" name="password" placeholder="Enter Password...">
         <button type="submit" name="submit" class="button_1">Login</button>
-        <div style="display:inline;">
-        {% if message%}
+        {% if message %}
         <p style="color:red">Incorrect username or password</p>
         {% endif %}
         <p> Haven't signed up yet? </p>

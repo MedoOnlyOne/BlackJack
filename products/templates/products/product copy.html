@@ -1,0 +1,117 @@
+{% extends 'products/layout.html' %}
+{% load static %}
+{% block title%}{{ product.name }}{% endblock %}
+{% block head %}
+      <link rel="stylesheet" href="{% static 'products/styles.css' %}">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <!-- <title>DDDDDDDDDDD</title> -->
+{% endblock %}
+{% block body%}
+<header>
+  <div class="Container">
+      <div id="header">
+    <span id="BlackJack">BlackJack</span>
+    <span id="official">The Official online store </span>
+ </div>
+
+<nav> <ul style="margin-top:12px;"> 
+  <li> <a href="#"> Home </a> </li>
+  <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
+</ul> </nav>
+</header>
+
+    <div class="product">
+      <div class="info">
+        <div class="info-text">
+          <h1>{{ product.name }}</h1>
+          <h2>Price: {{ price }}</h2>
+          <h2>Quantity: {{ product.remaininginstock }}</h2>
+          <h2>Rating: {{ rating }}</h2>
+        </div>
+        <!-- <input type="text"> -->
+        <!-- <br>
+        <h4>Color</h4>
+        <input name="color" list="colors" placeholder="Select Color" id="CO">
+                  <datalist id="colors" >
+                      <option value="blue">
+                      <option value="red">
+                      <option value="green">
+                      <option value="white">
+                      <option value="black">
+                      <option value="purple">
+                      <option value="brown">
+                  </datalist> -->
+        <form action="" method="POST">
+          {% csrf_token %}
+          <button type="submit" name="add_to_wishlist" class="wishlist"><i class="fa fa-heart"></i> Add to wishlist</button>
+        </form>
+        <form action="" method="POST">
+          {% csrf_token %}
+          <button type="submit" name="add_to_cart" class="cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+        </form>
+        
+      </div>
+      <div class="image">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" id="productimage">
+      </div>      
+    </div>
+<div class="Dis">
+  <h6>Product Discription</h6>
+  <p id="discription">You know what's sucky about regular flashlights?
+    They only come in two colors: white or that yellowish-white that reminds us of the teeth of an avid coffee drinker.
+    What fun is that kind of flashlight? We'll answer that: NO FUN AT ALL.
+    You know what is fun? Using the Multi-Color LED Flashlight to cast a sickly green glow over your face while telling a zombie story around a campfire.No campfire?
+     Make a fake one with the orange light!</p>
+</div>
+<div class="Rev">
+<form action="{% url 'products:productpage' product.name %}" method="POST">
+  {% csrf_token %}
+<h6>Write a Review</h6>
+<textarea name="review" placeholder="Write your review here"></textarea>
+<!-- <div class="rating"> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
+</div> -->
+<div class="rate">
+  <input type="radio" id="star5" name="rate" value="5" />
+  <label for="star5" title="star5">★</label>
+  <input type="radio" id="star4" name="rate" value="4" />
+  <label for="star4" title="srat4">★</label>
+  <input type="radio" id="star3" name="rate" value="3" />
+  <label for="star3" title="star3">★</label>
+  <input type="radio" id="star2" name="rate" value="2" />
+  <label for="star2" title="star2">★</label>
+  <input type="radio" id="star1" name="rate" value="1" />
+  <label for="star1" title="star1">★</label>
+</div>
+<input type="submit" name="add_review" class="review_btn">
+</form>
+</div>
+
+<div class="Related">
+  <h6>Related Products</h6>
+ <div class="v">
+   <img src="" class="re">
+   <h5> Product Name</h5>
+   <h5>price</h5>
+   <button type="submit" class="art">Add to Cart</button>
+  </div>
+  <div class="v">
+    <img src="" class="re">
+    <h5> Product Name</h5>
+    <h5>price</h5>
+    <button type="submit" class="art">Add to Cart</button>
+   </div>
+   <div class="v">
+     <img src="" class="re">
+     <h5> Product Name</h5>
+     <h5>price</h5>
+     <button type="submit" class="art">Add to Cart</button>
+    </div>
+    <div class="v">
+      <img src="" class="re">
+      <h5> Product Name</h5>
+      <h5>price</h5>
+      <button type="submit" class="art">Add to Cart</button>
+     </div>
+
+    </div>
+    {% endblock %}

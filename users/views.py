@@ -7,23 +7,25 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from .models import User, Product
+from passlib.hash import django_pbkdf2_sha256
 # Create your views here.
 
 @login_required(login_url='login/')
 def index(request):
     if request.method == "POST":
-        first = request.POST.get("first", "")
+        first = request.POST.get("first","")
         last = request.POST.get("last", "")
         code = request.POST.get("code", "")
         num = request.POST.get("num", "")
         email = request.POST.get("email", "")
-        password = request.POST.get("password", "")
+        address = request.POST.get("address", "")
         currency = request.POST.get("currency", "")
         
+        
         user = User.objects.filter(username=request.user.username)
-        user.update(first_name=first, last_name=last, phone_number=num, phone_number_code=code, password=password, email=email, preferred_currency=currency)
+        user.update(first_name=first, last_name=last, phone_number=num, phone_number_code=code, email=email,address=address, preferred_currency=currency)
 
-        return HttpResponseRedirect(reverse("index"))
+        return HttpResponseRedirect(reverse("userdashboard"))
 
     else:
         # get user's wishList, cart and parchases
@@ -31,14 +33,13 @@ def index(request):
         cart = request.user.cart.all()
         parchases = request.user.parchases.all()
         shops = request.user.shops.all()
-        
         first_name = request.user.first_name
         last_name = request.user.last_name
         num = request.user.phone_number
         code = request.user.phone_number_code
         email = request.user.email
-        password = request.user.password
         currency = request.user.preferred_currency
+        address = request.user.address
 
         return render(request, 'users/Dashboard.html', {
             'wishList': wishList,
@@ -50,9 +51,9 @@ def index(request):
             'num': num,
             'code': code,
             'email': email,
-            'password':password,
             'currency':currency,
-            'currency_list': ["EGP","EUR","USD","GBP"]
+            'currency_list': ["EGP","EUR","USD","GBP"],
+            'address': address,
         })
 
 def LogIn(request):
@@ -66,15 +67,15 @@ def LogIn(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("index"))
+            return HttpResponseRedirect(reverse("userdashboard"))
         else:
-            return render(request, "users/login.html", {
+            return render(request, "users/login2.html", {
                 "message": "Invalid username and/or password."
             })
     else:
         if request.user.is_authenticated:
-            return HttpResponseRedirect(reverse('index'))
-        return render(request, "users/login.html")
+            return HttpResponseRedirect(reverse('userdashboard'))
+        return render(request, "users/login2.html")
 
 def LogOut(request):
     logout(request)
@@ -93,6 +94,7 @@ def SignUp(request):
         country = request.POST['country']
         code = request.POST['code']
         phone_num = request.POST['phone_num']
+        address = request.POST['address']
         # Be sure that password matches confirm_password
         if password != confirm_password:
             return render(request, "users/signup.html", {
@@ -101,20 +103,45 @@ def SignUp(request):
 
         # Try to create new user
         try:
-            user = User.objects.create_user(first_name=first, last_name=last, username=username, email=email, password=password, preferred_currency=currency, phone_number=phone_num, phone_number_code=code, country=country)
+            user = User.objects.create_user(first_name=first, last_name=last, username=username, email=email, password=password, preferred_currency=currency,address=address, phone_number=phone_num, phone_number_code=code, country=country)
             user.save()
         except IntegrityError:
             return render(request, "users/signup.html", {
                 "message": "Username already taken."
             })
         login(request, user)
-        return HttpResponseRedirect(reverse("index"))
+        return HttpResponseRedirect(reverse("userdashboard"))
     else:
         if request.user.is_authenticated:
-            return HttpResponseRedirect(reverse('index'))
+            return HttpResponseRedirect(reverse('userdashboard'))
         return render(request, "users/signup.html")
-
-    
-  
+@login_required
+def changepassword(request):
+    if request.method=='POST':
+        try:
+           old_password = request.POST.get('old_password','')
+           new_password = request.POST.get('new_password','')
+           confirm_new_password = request.POST.get('confirm_new_password','')
+           hash = request.user.password
+           if django_pbkdf2_sha256.verify(old_password, hash):
+                if new_password==confirm_new_password:
+                    user = User.objects.get(username=request.user.username)
+                    #user.update(password=new_password)
+                    user.set_password(new_password)
+                    user.save()
+                    user_ = authenticate(request, username=request.user.username, password=new_password)
+                    login(request,user_)
+                    return render(request,'users/changepassword.html',{'message':"Password changed successfully."})
+                else:
+                    return render(request,'users/changepassword.html',{'message':"Passwords don't match."})
+           else:
+                return render(request,'users/changepassword.html',{'message':"Incorrect password."})
+        except:
+            return render(request,'users/changepassword.html',{'message':"An unexpected error happend, please try again later."})
+    else:
+        return render(request,"users/changepassword.html")
+        
+ 
+                
 
 

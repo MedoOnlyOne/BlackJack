@@ -22,13 +22,14 @@ body {
   padding : 0px;
   margin: 0px;
 }
-.m {
+.product {
   float: right;
   display: inline;
   margin-top: 6%;
   border: #232732 5px solid;
   border-radius: 5px;
   padding: 3% 5% 5% 5%;
+  margin-top:54px;
   margin-left: 10%;
   margin-bottom: 15%;
   margin-right: 15%;
@@ -36,7 +37,10 @@ body {
 #x {
   display: inline;
 }
-#z {
+img{
+  margin-top:50px;
+}
+#productimage {
   width : 500px;
   height: 500px;
   margin-top: 5%;

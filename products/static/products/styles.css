@@ -1,0 +1,289 @@
+body{
+  margin: 0px;
+}
+
+.Container {
+  overflow: hidden;
+}
+
+header{
+  background-color: #232732;
+  color: #ffffff;
+  border-bottom: #BFB367 6px solid;
+}
+header ul{
+  margin:0;
+  padding: 0;
+}
+
+header li {
+  display: inline;
+  padding: 0 20px 0 20px;
+}
+
+header a{
+  text-decoration: none;
+  color: #BFB367;
+  text-transform: uppercase;
+  font-size:15pt;
+}
+
+header nav{float:right;
+padding-right:30px;}
+
+  
+header a:hover {
+  color: white;
+
+}
+
+#BlackJack {
+  font-size: 40px;
+  color: white;
+  display:inline;
+  }
+#official {
+    color: #BFB367;
+    margin-top: 10%;
+    margin-bottom: 5%;
+    display:inline;
+    font-size: 16px;
+  }
+
+body {
+  padding : 0px;
+  margin: 0px;
+}
+#header{
+  display:inline-block;
+}
+.product {
+  margin: 10px 5px;
+  margin-top: 20px;
+  border: solid 4px #BFB367;
+  border-radius: 5px;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.product .info{
+  width: 50%;
+  float: right;
+}
+.product .info .info-text{text-align: center;}
+.product .image{
+  width: 30%;
+  float: left;
+  margin-left: 20%;
+}
+#x {
+  display: inline;
+}
+
+#productimage {
+  width:300px;
+  height:300px;
+  border-radius: 10px;
+}
+h1 {
+  font-weight: bold;
+  display: inline;
+  margin-top: 0;
+  margin-right: 10%;
+}
+h4 {
+  display: inline-block;
+  margin-bottom: 0px;
+}
+#CO {
+  margin-left: 9%;
+  background-color: #232732;
+  color: white;
+}
+input[type="text"] {
+background-color: #232732;
+color: white;
+}
+.cart, .wishlist {
+  display: block;
+  margin:20px auto;
+  background-color: #232732;
+  height: 35px;
+  width: 300px;
+  color: #BFB367;;
+  font-weight: bold;
+  font-size:24px;
+
+}
+.cart:hover, .wishlist:hover{
+  cursor: pointer;
+  color: #fff;
+}
+.wl {
+  display: block;
+  background-color: #F3A04A;
+}
+#i {
+  color: red;
+  display: inline;
+  background-color: #232732;
+}
+.v {
+  display:inline-block;
+  border: black 2px solid;
+  margin: 10px;
+  width: 250px;
+}
+.Related {
+  border: solid 4px #BFB367;
+  margin: 10px 5px;
+  margin-top: 20px;
+  text-align: center;
+  padding: 10px;
+}
+.re {
+  width: 250px;
+  height: 100px;
+}
+h3 {
+  margin-left: 38%;
+}
+h5 {
+  text-align: center;
+  font-weight: bold;
+}
+.art {
+  display: block;
+  background-color: #232732;
+  margin-bottom: 10%;
+  height: 35px;
+  width: 150px;
+  margin-left: 20%;
+  color: white;
+  font-weight: bold;
+}
+.rating {
+    margin-left: 45%;
+    display: inline-block;
+    flex-direction:row-reverse;
+    justify-content: center;
+    width: 160px;
+}
+
+.rating>input {
+    display: none;
+}
+
+.rating>label {
+    position: relative;
+    width: 1em;
+    font-size: 2vw;
+    color: #232732;
+    cursor: pointer;
+}
+
+.rating>label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+    opacity: 1 !important
+}
+
+.rating>input:checked~label:before {
+    opacity: 1
+}
+
+.rating:hover>input:checked~label:before {
+    opacity: 0.4
+}
+h2 {
+   margin-bottom: 0px;
+}
+h6 {
+  text-align: center;
+  font-size: 25px;
+  margin: 0;
+}
+.Dis {
+  display:inline-block;
+  border: solid 4px #BFB367;
+  text-align: center;
+  padding: 10px;
+  margin: 10px 5px;
+}
+
+.Rev {
+  text-align: center;
+  display:block;
+  margin:10px 5px;
+  border: solid 4px #BFB367;
+  padding: 10px;
+}
+
+textarea {
+  display:inline-block;
+  margin-top:10px;
+  width: 80%;
+  height: 150px;
+  margin-bottom:5px ;
+}
+span {
+  font-size: 40px;
+  color: white;
+  display:inline-block;
+}
+
+.review_btn {
+  display: block;
+  background-color: #232732;
+  margin: 10px auto;
+  height: 35px;
+  width: 100px;
+  color: #BFB367;
+  font-weight: bold;
+}
+.review_btn:hover{
+  cursor: pointer;
+  color: #fff;
+}
+#ii {
+  display :inline-block;
+}
+.rate {
+  display:block;
+  height: 46px;
+}
+.rate:not(:checked) > input {
+  position:absolute;
+  top:-9999px; 
+  visibility: hidden;
+}
+.rate:not(:checked) > label {
+  width:1em;
+  overflow:hidden;
+  white-space:nowrap;
+  cursor:pointer;
+  font-size:30px;
+  color:#ccc;
+}
+/* .rate:not(:checked) > label:before {
+  content: '★ ';
+} */
+.rate > input:checked ~ label {
+  color: #BFB367;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+  color: #BFB367;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+  color: #BFB367;
+}
