@@ -41,8 +41,15 @@
                       <option value="purple">
                       <option value="brown">
                   </datalist> -->
-        <button class="wishlist"><i class="fa fa-heart"></i> Add to wishlist</button>
-        <button type="submit" class="cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+        <form action="" method="POST">
+          {% csrf_token %}
+          <button type="submit" name="add_to_wishlist" class="wishlist"><i class="fa fa-heart"></i> Add to wishlist</button>
+        </form>
+        <form action="" method="POST">
+          {% csrf_token %}
+          <button type="submit" name="add_to_cart" class="cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+        </form>
+        
       </div>
       <div class="image">
         <img src="{{ product.image.url }}" alt="{{ product.name }}" id="productimage">
@@ -75,7 +82,7 @@
   <input type="radio" id="star1" name="rate" value="1" />
   <label for="star1" title="star1">★</label>
 </div>
-<input type="submit" class="review_btn">
+<input type="submit" name="add_review" class="review_btn">
 </form>
 </div>
 

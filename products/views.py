@@ -15,13 +15,21 @@ def index(request):
 
 def product(request, productname):
     if request.method=='POST':
-        text=request.POST.get('review','')
-        rating=request.POST.get('rate',1)
-        rev=Review(text=text,stars=rating)
-        rev.save()
-        product=Product.objects.get(name=productname)
-        product.reviews.add(rev)
-        return HttpResponseRedirect(reverse('products:productpage',args=[productname]))
+        if 'add_review' in request.POST:
+            text=request.POST.get('review','')
+            rating=request.POST.get('rate',1)
+            rev=Review(text=text,stars=rating)
+            rev.save()
+            product=Product.objects.get(name=productname)
+            product.reviews.add(rev)
+            return HttpResponseRedirect(reverse('products:productpage',args=[productname]))
+        
+        elif 'add_to_cart' in request.POST:
+            return HttpResponse("Cart")
+        
+        elif 'add_to_wishlist' in request.POST:
+            return HttpResponse("WishList")
+
     else:
         product = Product.objects.get(name=productname)
         if not request.user.is_authenticated:
