@@ -59,7 +59,7 @@
      Make a fake one with the orange light!</p>
 </div>
 <div class="Rev">
-<form action="" method="POST">
+<form action="{% url 'products:productpage' product.name %}" method="POST">
   {% csrf_token %}
 <h6>Write a Review</h6>
 <textarea name="review" placeholder="Write your review here"></textarea>

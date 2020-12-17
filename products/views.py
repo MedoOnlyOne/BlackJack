@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from .models import Product
+from .models import Product,Review
 import requests 
 import decimal
 from decouple import config
@@ -15,7 +15,13 @@ def index(request):
 
 def product(request, productname):
     if request.method=='POST':
-        return 1
+        text=request.POST.get('review','')
+        rating=request.POST.get('rate',1)
+        rev=Review(text=text,stars=rating)
+        rev.save()
+        product=Product.objects.get(name=productname)
+        product.reviews.add(rev)
+        return HttpResponseRedirect(reverse('products:productpage',args=[productname]))
     else:
         product = Product.objects.get(name=productname)
         if not request.user.is_authenticated:
