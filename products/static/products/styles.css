@@ -6,6 +6,10 @@ body{
   overflow: hidden;
 }
 
+p{
+  padding-left: 10px;
+}
+
 header{
   background-color: #232732;
   color: #ffffff;
@@ -64,18 +68,22 @@ body {
   border-radius: 5px;
   padding: 10px;
   overflow: hidden;
+  display:flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+  flex-wrap:wrap;
 }
 
 .product .info{
-  width: 50%;
+  /* width: 50%; */
   float: right;
 }
 .product .info .info-text{text-align: center;}
-.product .image{
-  width: 30%;
+/* .product .image{
+  width: 30%; 
   float: left;
   margin-left: 20%;
-}
+} */
 #x {
   display: inline;
 }
@@ -223,7 +231,18 @@ h6 {
   border: solid 4px #BFB367;
   padding: 10px;
 }
-
+.user-reviews{
+  display:block;
+  margin:10px 5px;
+  border: solid 4px #BFB367;
+  padding:10px;
+}
+.single-review{
+  display:block;
+  border: solid 2px #BFB367;
+  padding:10px;
+  margin-bottom: 10px;
+}
 textarea {
   display:inline-block;
   margin-top:10px;
@@ -255,14 +274,16 @@ span {
 }
 .rate {
   display:block;
+  margin-right: 44.5%;
   height: 46px;
 }
 .rate:not(:checked) > input {
   position:absolute;
-  top:-9999px; 
+  top:-9999px;
   visibility: hidden;
 }
 .rate:not(:checked) > label {
+  float:right;
   width:1em;
   overflow:hidden;
   white-space:nowrap;
@@ -270,20 +291,21 @@ span {
   font-size:30px;
   color:#ccc;
 }
-/* .rate:not(:checked) > label:before {
+.rate:not(:checked) > label:before {
   content: '★ ';
-} */
+}
 .rate > input:checked ~ label {
-  color: #BFB367;    
+  color: #ffc700;    
 }
 .rate:not(:checked) > label:hover,
 .rate:not(:checked) > label:hover ~ label {
-  color: #BFB367;  
+  color: #deb217;  
 }
 .rate > input:checked + label:hover,
 .rate > input:checked + label:hover ~ label,
 .rate > input:checked ~ label:hover,
 .rate > input:checked ~ label:hover ~ label,
 .rate > label:hover ~ input:checked ~ label {
-  color: #BFB367;
+  color: #c59b08;
 }
+

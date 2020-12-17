@@ -22,7 +22,7 @@ def index(request, shopname):
             'usershops':usershops
         })
     except Shop.DoesNotExist:
-        return HttpResponse('<h1>Shop does Not Exist!</h1>')
+        return render(request,'shop/404.html')
 
 @login_required()
 def addproduct(request,shopname):

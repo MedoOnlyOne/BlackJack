@@ -29,9 +29,8 @@ def index(request):
 
     else:
         # get user's wishList, cart and parchases
-        wishList = request.user.wishList.all()
+        wishlist = request.user.wishlist.all()
         cart = request.user.cart.all()
-        parchases = request.user.parchases.all()
         shops = request.user.shops.all()
         first_name = request.user.first_name
         last_name = request.user.last_name
@@ -42,9 +41,8 @@ def index(request):
         address = request.user.address
 
         return render(request, 'users/Dashboard.html', {
-            'wishList': wishList,
+            'wishlist': wishlist,
             'cart': cart,
-            'parchases': parchases,
             'shops':shops,
             'first': first_name,
             'last': last_name,
