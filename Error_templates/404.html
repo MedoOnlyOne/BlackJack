@@ -3,11 +3,75 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Page Not Found!</title>
+        <title>Product Not Found!</title>
+        <style>
+            .Container {
+                overflow: hidden;
+                }
+
+            header{
+            background-color: #232732;
+            color: #ffffff;
+            border-bottom: #BFB367 6px solid;
+            }
+            header ul{
+            margin:0;
+            padding: 0;
+            }
+
+            header li {
+            display: inline;
+            padding: 0 20px 0 20px;
+            }
+
+            header a{
+            text-decoration: none;
+            color: #BFB367;
+            text-transform: uppercase;
+            font-size:15pt;
+            }
+
+            header nav{float:right;
+            padding-right:30px;}
+
+            
+            header a:hover {
+            color: white;
+
+            }
+
+            #BlackJack {
+                font-size: 40px;
+                color: white;
+                display:inline;
+            }
+            #official {
+                color: #BFB367;
+                margin-top: 10%;
+                margin-bottom: 5%;
+                display:inline;
+                font-size: 16px;
+            }
+
+            body {
+            padding : 0px;
+            margin: 0px;
+            }
+        </style>
     </head>
-    <header style="background-color:yellow">
-    </header>
     <body>
+        <header>
+            <div class="Container">
+                <div id="header">
+              <span id="BlackJack">BlackJack</span>
+              <span id="official">The Official online store </span>
+           </div>
+          
+          <nav> <ul style="margin-top:12px;"> 
+            <li> <a href="#"> Home </a> </li>
+            <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
+          </ul> </nav>
+          </header>          
         Oops! This page could not be found!
     </body>
 </html>

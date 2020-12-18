@@ -1,10 +1,13 @@
 from django.db import models
+import datetime
 import uuid
 # Create your models here.
 
 class Review(models.Model):
     text = models.TextField()
     stars = models.DecimalField(max_digits=7,decimal_places=2)
+    user = models.ForeignKey('users.User',on_delete=models.CASCADE,null=True)
+    date = models.DateTimeField(auto_now=True, blank=True)
     def __str__(self):
         return f'{self.text}'
 
@@ -23,3 +26,15 @@ class Product(models.Model):
         return f'{self.name}'
     def __unicode__(self):
         return self.id
+
+# class Cart(models.Model):
+#     products = models.ManyToManyField(Product, blank=True, related_name="purchased_product")
+
+#     def __str__(self):
+#         return f'{self.products}'
+
+# class Wishlist(models.Model):
+#     products = models.ManyToManyField(Product, blank=True, related_name="wished_product")
+
+#     def __str__(self):
+#         return f'{self.products}'
