@@ -106,7 +106,6 @@
     
     #upperinfo
     {
-      text-align:center;
       border-bottom: solid 8px #BFB367 ;
       border-right: solid 8px #BFB367 ;
     }
@@ -119,6 +118,13 @@
    {
     background-color:white;
    }
+   
+   .flex-container
+   {
+    display: flex;
+    flex-direction: row;
+   }
+  
    #items
    {
     position:relative;
@@ -134,7 +140,7 @@
    .item
    {
     float:left;
-    width:700px; //1120is the best
+    width:700px;
     max-height:200px;
     position:relative;
     background-color:white;
@@ -161,19 +167,18 @@
         float:right;
         width:349px;
         position:relative;
-        right:15px;
+        left:70px;
         background-color:white;
         border:5px solid #BFB367;
         margin:0px;
     }
     .total [title="total"]
     {
-        margin-top:30px;
+        position :relative;
+        left:87px;
         font-size:30px;
         font-weight:bold;
         color:#232732;
-        margin-left:10px;
-        text-align:center;
         
     }
     
@@ -218,13 +223,16 @@
 
   <div class="container-1">
     <div class="box" id="upperinfo">
-      <h1> Shopping Cart </h1>
+      <h1 style="position:relative; left:480px;"> Shopping Cart </h1>
       <p> </p>
     </div>
   </div>
 
 <br>
 <br>
+
+<div class="flex-container">
+ 
 <div id="items">
     <div class="itemscontainer">
         <div class="item" title="item">
@@ -295,13 +303,13 @@
     <br>
     <p style="font-size:20px;margin-left:5px; font-weight:bold;margin-bottom:4px; ">Add Coupon <span style="font-size:12px;">(optional)</span></p>
     <input type="text" name="username" placeholder="PLACE YOUR COUPON HERE" style="display:inline; height:40px; width:240px; margin-left:5px; margin-top:0px;text-align:center;"> 
-    <input type="button" name="Submit" value="Submit" style="display:inline; height:43px; width:80px; margin:5px; font-weight:bold; margin-bottom:20px; ">
+    <input type="button" name="Submit" value="Submit" style="display:inline; height:45px; width:80px; position:relative; left:5px; font-weight:bold; margin-bottom:20px; ">
     
     <form action="Checkout.html">
     <input type="submit" value="PROCEED TO CHECKOUT" style=" height:40px; width:337px; margin-left:5px; font-weight:bold;">
     </form>
 </div>
 
-
+</div>
 </body>
 </html>

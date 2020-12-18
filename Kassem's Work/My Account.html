@@ -106,7 +106,6 @@
     
     #upperinfo
     {
-      text-align:center;
       border-bottom: solid 8px #BFB367 ;
       border-right: solid 8px #BFB367 ;
     }
@@ -119,14 +118,13 @@
    {
     background-color:white;
    }
-   .title
+   
+    .flex-container
    {
-    color:white;
-    font-size:20pt;
-    font-weight:bold;
-    margin-left:2pt;
-    display:inline;
+    display: flex;
+    flex-direction: column;
    }
+
    .infocontainer
    {
     position : relative;
@@ -158,6 +156,7 @@
  <body style="background-color:">
 
   <header>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <div class="Container">
           <div id="header">
         <span id="BlackJack">BlackJack</span>
@@ -191,40 +190,41 @@
 
   <div class="container-1">
     <div class="box" id="upperinfo">
-      <h1> My Account </h1>
+      <h1 style="position:relative; left:480px;"> My Account </h1>
       <p> </p>
     </div>
   </div>
 
 <br>
+<br>
 
+<div class="flex-container">
 
-<div class="infocontainer">
- <p class="title">Account Settings</p>
- <fieldset class="accountinformation" style="border: 6px  #BFB367 solid; width:1100px;background-color:white;">
-  <legend class="Legend" >ACCOUNT INFORMATION</legend>
-     <p><span style="font-weight:bold;">Email:  </span>arahmanmmk@yahoo.com</p>
-     <p><span style="font-weight:bold;">Password:  </span>**********</p>
-</fieldset>
- 
- <fieldset class="accountinformation" style="border: 6px  #BFB367 solid; width:1100px; background-color:white;">
-  <legend class="Legend" >PERSONAL INFORMATION</legend>
-  <p><span style="font-weight:bold;">First Name:  </span>Abdelrahman</p>
-  <p><span style="font-weight:bold;">Last Name:  </span>Kassem</p>
-  <p><span style="font-weight:bold;">User Name:  </span>Kassem99</p>
-  <p><span style="font-weight:bold;">Phone Number:  </span>01023423232</p>
-</fieldset>
- 
- <fieldset class="accountinformation" style="border: 6px  #BFB367 solid; width:1100px;background-color:white;">
-  <legend class="Legend" >SHOPPING INFORMATION</legend>
-  <p><span style="font-weight:bold;">Preferred Currency:  </span>Egyptian Pound</p>
-  <p><span style="font-weight:bold;">Shipping Address:  </span>11 Abdo Pasha ...</p>
-</fieldset>
- 
-  <form action="Dashboard.html" style="display:inline;">
- <input type="submit" name="Edit" value="Edit" style="display:inline; height:37px; width:90px; margin:5px; font-weight:bold; float:right; position:relative;top:15px; ">
- </form>
-
+ <div class="infocontainer">
+  <fieldset class="accountinformation" style="border: 6px  #BFB367 solid; width:1100px;background-color:white;">
+   <legend class="Legend" >ACCOUNT INFORMATION</legend>
+      <p><span style="font-weight:bold;">Email:  </span>arahmanmmk@yahoo.com</p>
+      <p><span style="font-weight:bold;">Password:  </span>**********</p>
+ </fieldset>
+  
+  <fieldset class="accountinformation" style="border: 6px  #BFB367 solid; width:1100px; background-color:white;">
+   <legend class="Legend" >PERSONAL INFORMATION</legend>
+   <p><span style="font-weight:bold;">First Name:  </span>Abdelrahman</p>
+   <p><span style="font-weight:bold;">Last Name:  </span>Kassem</p>
+   <p><span style="font-weight:bold;">User Name:  </span>Kassem99</p>
+   <p><span style="font-weight:bold;">Phone Number:  </span>01023423232</p>
+ </fieldset>
+  
+  <fieldset class="accountinformation" style="border: 6px  #BFB367 solid; width:1100px;background-color:white;">
+   <legend class="Legend" >SHOPPING INFORMATION</legend>
+   <p><span style="font-weight:bold;">Preferred Currency:  </span>Egyptian Pound</p>
+   <p><span style="font-weight:bold;">Shipping Address:  </span>11 Abdo Pasha ...</p>
+ </fieldset>
+  
+   <form action="Dashboard.html" style="display:inline;">
+  <input type="submit" name="Edit" value="Edit" style="display:inline; height:37px; width:90px; font-weight:bold; position:relative;top:15px; left:1050px">
+  </form>
+ </div>
 
 </body>
 </html>
