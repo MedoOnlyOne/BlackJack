@@ -5,6 +5,8 @@
   <style>
     body {
       margin:0px;
+      overflow-x: hiddden;
+      background-color:white;
     }
     .Container {
       overflow: hidden;
@@ -14,6 +16,7 @@
       background-color: #232732;
       color: #ffffff;
       border-bottom: #BFB367 6px solid;
+      width:1141pt;
     }
     
     #official {
@@ -99,13 +102,19 @@
         color:white;
     }
       
-    .container-1 {color:#232732;
+    .container-1
+    {color:#232732;
       display:flex;
       flex-direction:column;
+      min-width:1000px;
     }
     
     #upperinfo
     {
+      color:#232732;
+      display:flex;
+      flex-direction:rows;
+      width:1170px;
       border-bottom: solid 8px #BFB367 ;
       border-right: solid 8px #BFB367 ;
     }
@@ -114,12 +123,26 @@
    {
     color:#BFB367;
    }
-   body
+   
+      .flex-body
    {
-    background-color:white;
+        display: flex;
+        flex-direction: column;
    }
    
-    .flex-container
+   .flex-container1
+   {
+        display: flex;
+        flex-direction: row;
+   }
+   
+      .flex-container2
+   {
+        display: flex;
+        flex-direction: column;
+   }
+   
+   .flex-container3
    {
     display: flex;
     flex-direction: column;
@@ -155,8 +178,8 @@
  
  <body style="background-color:">
 
+<div class="flex-body">
   <header>
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <div class="Container">
           <div id="header">
         <span id="BlackJack">BlackJack</span>
@@ -170,7 +193,7 @@
       </div>
   </header>
 
-
+<div class="flex-container1">
 
   <section id="sidemenu">
       <h1 style="color:white; padding-left:40px; font-size:23pt;">   DASHBOARD  </h1>
@@ -186,14 +209,12 @@
   </section>
 
 
+<div class="flex-container2">
 
-
-  <div class="container-1">
-    <div class="box" id="upperinfo">
-      <h1 style="position:relative; left:480px;"> My Account </h1>
-      <p> </p>
-    </div>
-  </div>
+<div class="box" id="upperinfo">
+  <h1 style="position:relative; left:480px;"> My Account </h1>
+  <br>
+</div>
 
 <br>
 <br>
@@ -225,6 +246,8 @@
   <input type="submit" name="Edit" value="Edit" style="display:inline; height:37px; width:90px; font-weight:bold; position:relative;top:15px; left:1050px">
   </form>
  </div>
-
+</div>
+</div>
+</div>
 </body>
 </html>
