@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="en">
-  <head>
+ 
   <title>Cart</title>
   <style>
     body {
@@ -16,7 +16,7 @@
       background-color: #232732;
       color: #ffffff;
       border-bottom: #BFB367 6px solid;
-      width:1141pt;
+      width:auto;
     }
     
     #official {
@@ -82,7 +82,7 @@
       background-color:#232732;
       border-right: 8px  #BFB367 solid;
       text-align:center;
-      height: 650px;
+      height: 900px;
       text-decoration:none;
     }
 
@@ -124,7 +124,7 @@
     color:#BFB367;
    }
    
-      .flex-body
+    .flex-body
    {
         display: flex;
         flex-direction: column;
@@ -145,7 +145,7 @@
    .flex-container3
    {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
    }
   
    #items
@@ -154,7 +154,7 @@
     left:40px;
     background-color:white;
     float:left;
-    width:715px;
+    width:1000px;
    }
    .itemscontainer
    {
@@ -163,7 +163,7 @@
    .item
    {
     float:left;
-    width:700px;
+    width:900px;
     max-height:200px;
     position:relative;
     background-color:white;
@@ -187,18 +187,20 @@
     }
     .total
     {
-        float:right;
-        width:349px;
         position:relative;
-        left:70px;
+        left:40px;
+        top:15px;
+        height:220px;
+        text-align:center;
+        float:left;
+        width:900px;
         background-color:white;
         border:5px solid #BFB367;
         margin:0px;
     }
-    .total
+    .total [title="total"]
     {
         position :relative;
-        left:87px;
         font-size:30px;
         font-weight:bold;
         color:#232732;
@@ -206,11 +208,13 @@
     }
     
  </style>
- </head>
  
  
  
- <body>
+ 
+ <body >
+
+<div class="flex-body">
   <header>
       <div class="Container">
           <div id="header">
@@ -244,7 +248,7 @@
 <div class="flex-container2">
 
 <div class="box" id="upperinfo">
-  <h1 style="position:relative; left:480px;"> Shopping Cart </h1>
+  <h1 style="position:relative; left:430px;"> Shopping Cart </h1>
   <br>
 </div>
 
@@ -318,19 +322,16 @@
     </div>
     
 </div>
-
-
-
-<div class="total" style="height:214pt;position:relative; top:85px;">
+<div class="total" >
     <p title="total"><span>TOTAL :</span> 400$</p>
-    <br>
-    <p style="font-size:20px;margin-left:5px; font-weight:bold;margin-bottom:4px; ">Add Coupon <span style="font-size:12px;">(optional)</span></p>
-    <input type="text" name="username" placeholder="PLACE YOUR COUPON HERE" style="display:inline; height:40px; width:240px; margin-left:5px; margin-top:0px;text-align:center;"> 
+    <input type="text" name="username" placeholder="PLACE YOUR COUPON HERE (optional)" style="display:inline; height:40px; width:540px; margin-left:5px; margin-top:0px;text-align:center;"> 
     <input type="button" name="Submit" value="Submit" style="display:inline; height:45px; width:80px; position:relative; left:5px; font-weight:bold; margin-bottom:20px; ">
     
     <form action="Checkout.html">
-    <input type="submit" value="PROCEED TO CHECKOUT" style=" height:40px; width:337px; margin-left:5px; font-weight:bold;">
+    <input type="submit" value="PROCEED TO CHECKOUT" style=" height:40px; width:637px; margin-left:9px; font-weight:bold;">
     </form>
+</div>
+</div>
 </div>
 </div>
 </div>
