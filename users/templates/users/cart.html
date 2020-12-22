@@ -1,7 +1,7 @@
 {% extends 'users/layout.html' %}
 
 {% block head %} 
-  <title>Dashboard</title>
+  <title>Cart</title>
   <style>
     body {
       margin:0px;
@@ -14,6 +14,11 @@
       background-color: #232732;
       color: #ffffff;
       border-bottom: #BFB367 6px solid;
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      right: 0px;
+      z-index: 1;
     }
     
     header #webname {
@@ -64,8 +69,11 @@
       background-color:#232732;
       border-right: 8px  #BFB367 solid;
       text-align:center;
-      height: 597px;
       text-decoration:none;
+      position: fixed;
+      z-index: 1;
+      bottom: 0px;
+      top: 52px;
     }
 
     #sidemenu nav{text-align:left; }
@@ -87,6 +95,8 @@
     .container-1 {color:#232732;
       display:flex;
       flex-direction:column;
+      margin-top: 55px;
+      margin-left: 340px;
     }
 
 
@@ -115,19 +125,21 @@
   }
     #items
    {
-    position:relative;
+     margin-left: 40px;
+     overflow: hidden;
+    /* position:relative;
     left:40px;
     background-color:white;
     float:left;
-    width:715px;
+    width:715px; */
    }
 
    .item
    {
     float:left;
     width:700px;
-    max-height:200px;
-    position:relative;
+    /* max-height:200px;
+    position:relative; */
     background-color:white;
     border:5px solid #BFB367;
     margin:3px;
@@ -154,22 +166,15 @@
     }
     .total
     {
-        float:right;
-        width:349px;
-        position:relative;
-        left:70px;
-        background-color:white;
-        border:5px solid #BFB367;
-        margin:0px;
-    }
-    .total
-    {
-        position :relative;
-        left:87px;
-        font-size:30px;
-        font-weight:bold;
-        color:#232732;
-        
+      font-size:30px;
+      font-weight:bold;
+      color:#232732;
+      width:680px;
+      background-color:white;
+      border:5px solid #BFB367;
+      margin:23px 43px;
+      padding-bottom: 10px;
+      text-align: center;
     }
     a [href="Cart.html"]
    {
@@ -302,10 +307,10 @@
         </div>
 
 
-        <div class="total" style="height:214pt;position:relative; top:85px;">
-            <p title="total"><span>TOTAL :</span> 400$</p>
+        <div class="total">
+            <p title="total" style="margin-top: 10px;margin-bottom: 0px;"><span>TOTAL :</span> 400$</p>
             <br>
-            <p style="font-size:20px;margin-left:5px; font-weight:bold;margin-bottom:4px; ">Add Coupon <span style="font-size:12px;">(optional)</span></p>
+            <p style="font-size:20px;margin-left:5px; font-weight:bold;margin-bottom:4px;margin-top: 0px;">Add Coupon <span style="font-size:12px;">(optional)</span></p>
             <input type="text" name="username" placeholder="PLACE YOUR COUPON HERE" style="display:inline; height:40px; width:240px; margin-left:5px; margin-top:0px;text-align:center;"> 
             <input type="button" name="Submit" value="Submit" style="display:inline; height:45px; width:80px; position:relative; left:5px; font-weight:bold; margin-bottom:20px; ">
             
