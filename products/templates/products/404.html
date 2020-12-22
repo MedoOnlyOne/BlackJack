@@ -71,9 +71,13 @@
         </div>
         
         <nav> <ul style="margin-top:12px;"> 
-        <li> <a href="#"> Home </a> </li>
-        <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
-        </ul> </nav>
+            <li> <a href="#"> Home </a> </li>
+            <li> <a href="{% url 'userdashboard'%}"> Profile </a></li>
+            {% if user.is_authenticated %}
+            <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
+            {% else %}
+            <li> <a href="{% url 'login' %}">  Login  </a> </li>
+            {% endif %}
         </header>
     <div>          
         <p>Oops! This product could not be found!</p>

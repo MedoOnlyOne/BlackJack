@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="en">
- 
+  <head>
   <title>Cart</title>
   <style>
     body {
@@ -113,7 +113,7 @@
     {
       color:#232732;
       display:flex;
-      flex-direction:rows;
+      flex-direction:row;
       width:1170px;
       border-bottom: solid 8px #BFB367 ;
       border-right: solid 8px #BFB367 ;
@@ -195,7 +195,7 @@
         border:5px solid #BFB367;
         margin:0px;
     }
-    .total [title="total"]
+    .total
     {
         position :relative;
         left:87px;
@@ -206,13 +206,11 @@
     }
     
  </style>
+ </head>
  
  
  
- 
- <body >
-
-<div class="flex-body">
+ <body>
   <header>
       <div class="Container">
           <div id="header">
@@ -320,6 +318,9 @@
     </div>
     
 </div>
+
+
+
 <div class="total" style="height:214pt;position:relative; top:85px;">
     <p title="total"><span>TOTAL :</span> 400$</p>
     <br>
@@ -330,8 +331,6 @@
     <form action="Checkout.html">
     <input type="submit" value="PROCEED TO CHECKOUT" style=" height:40px; width:337px; margin-left:5px; font-weight:bold;">
     </form>
-</div>
-</div>
 </div>
 </div>
 </div>

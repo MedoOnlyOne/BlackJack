@@ -9,6 +9,8 @@ from django.urls import reverse
 from .models import User, Product
 from passlib.hash import django_pbkdf2_sha256
 # Create your views here.
+def cart(request):
+    return render(request,"users/cart.html")
 
 @login_required(login_url='login/')
 def index(request):
@@ -39,13 +41,14 @@ def index(request):
         email = request.user.email
         currency = request.user.preferred_currency
         address = request.user.address
-
+        is_seller = request.user.is_seller
         return render(request, 'users/Dashboard.html', {
             'wishlist': wishlist,
             'cart': cart,
             'shops':shops,
             'first': first_name,
             'last': last_name,
+            'is_seller':is_seller,
             'num': num,
             'code': code,
             'email': email,
@@ -65,12 +68,14 @@ def LogIn(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
+            print(request.headers)
             return HttpResponseRedirect(reverse("userdashboard"))
         else:
             return render(request, "users/login2.html", {
                 "message": "Invalid username and/or password."
             })
     else:
+        print(request.headers)
         if request.user.is_authenticated:
             return HttpResponseRedirect(reverse('userdashboard'))
         return render(request, "users/login2.html")
@@ -139,7 +144,8 @@ def changepassword(request):
     else:
         return render(request,"users/changepassword.html")
         
- 
+def become_a_seller(request):
+    return render(request,'users/StoreName.html')
                 
 
 

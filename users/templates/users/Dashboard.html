@@ -9,7 +9,12 @@
     .Container {
       overflow: hidden;
     }
-
+    .buttonsContainer{
+      display:flex;
+      justify-content:space-evenly;
+      align-items:center;
+      flex-wrap:wrap;
+    }
     header{
       background-color: #232732;
       color: #ffffff;
@@ -141,8 +146,17 @@
       color: #BFB367 ;
       font-weight:bold;
     }
+    #Become_a_seller{
+      margin-top:40px; margin-bottom:60px;
+      width:162px;
+      height:30px;
+      background-color :#232732;
+      color: #BFB367 ;
+      font-weight:bold
+    }
     #ConfirmButton:hover,
     #ChangePassword:hover,
+    #Become_a_seller:hover,
     button[type="button"]:hover
     {
       cursor: pointer;
@@ -210,11 +224,11 @@
     color: #BFB367 ;
     font-weight:bold;
   }
-  #ChangePassword a{
+  #ChangePassword a,#Become_a_seller a{
     color:#BFB367 ;
     text-decoration:none;
   }
-  #ChangePassword a:hover{
+  #ChangePassword a:hover, #Become_a_seller a:hover{
     color:#fff ;}
   </style>
 {% endblock %}
@@ -229,7 +243,12 @@
     
   <nav> <ul style="margin-top:12px;"> 
       <li> <a href="#"> Home </a> </li>
+      <li> <a href="{% url 'userdashboard'%}"> Profile </a></li>
+      {% if user.is_authenticated %}
       <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
+      {% else %}
+      <li> <a href="{% url 'login' %}">  Login  </a> </li>
+      {% endif %}
   </ul> </nav>
       </div>
   </header>
@@ -240,12 +259,12 @@
       <h1 style="color:white; padding-left:40px; font-size:23pt;">   DASHBOARD  </h1>
       <nav> <ul> 
       <li> <a href="{% url 'userdashboard' %}"> My Account </a>
-      <li> <a href="#"> Track Order </a> 
-      <li> <a href="#"> Items </a>
+      <li> <a href="#"> Orders </a> 
+      <li> <a href="#"> Wishlist </a>
       <li> <a href="#"> Cart </a> 
-      <li> <a href="#"> One </a> 
+      <!-- <li> <a href="#"> One </a> 
       <li> <a href="#"> Two </a> 
-      <li> <a href="#"> Three </a>   
+      <li> <a href="#"> Three </a>    -->
   </ul> </nav>
   </section>
 
@@ -289,14 +308,6 @@
           <input type="text" id="address" name="address" value="{{address}}" disabled="true" style="margin-left: 135px;">
           <button type="button" onclick="Enable('address')"> Edit </button>
         </div>       
-        <div>
-          Account Type:
-          <select id="acc_type" name="is_seller" disabled="true" style="margin-left: 95px;">
-            <option value="Buyer">Buyer</option>
-            <option value="Seller">Seller</option>
-          </select> 
-          <button type="button" onclick="Enable('acc_type')"> Edit </button>
-        </div>     
         <div class="dropdown">
           Preferred Currency :
           <select id="currency" name="currency" disabled="true" style="margin-left: 40px;">
@@ -320,13 +331,18 @@
           </select> 
           <button type="button" onclick="Enable('currency')"> Edit </button>
         </div>
-        <div style="margin:10px 0px;">
-          <div style="display:inline; float: right;">
-            <button type="button" id="ChangePassword"><a href="{% url 'changepassword' %}">Change Password</a></button></div>
+        <div>
+          Account Type:
+          <input type="text" id="acc_type" name="acc_type"{% if is_seller %} value="Buyer and seller" {% else %} value="Buyer" {% endif %} disabled="true" style="margin-left: 95px;">
+        </div>     
+        <div class="buttonsContainer">
+          <!-- <div style="display:inline; float: right;"> -->
+            <button type="button" id="ChangePassword"><a href="{% url 'changepassword' %}">Change Password</a></button>
           
-          <div style="display:inline; float: left; margin-left: 350px;">
-            <button type="submit" id="ConfirmButton" onclick="EnableAll()"> Confirm </button></div>
-        </div>
+          <!-- <div style="display:inline; float: left; margin-left: 350px;"> -->
+            <button type="submit" id="ConfirmButton" onclick="EnableAll()"> Confirm </button>
+            <button type="button" id="Become_a_seller"><a href="{% url 'become_a_seller'%}">Become a seller</a></button>
+          </div>
       </form>
     </div>
   </div>

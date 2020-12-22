@@ -26,19 +26,23 @@ def product(request, productid):
             return HttpResponseRedirect(reverse('products:productpage',args=[productid]))
 
         elif 'add_to_cart' in request.POST:
-            product_name = request.POST['productname']
-            product = Product.objects.get(name=product_name)
-            request.user.cart.add(product)
+            if request.user.is_authenticated:
+                product_name = request.POST['productname']
+                product = Product.objects.get(name=product_name)
+                request.user.cart.add(product)
 
-            return HttpResponseRedirect(reverse('products:productpage',args=[productid]))
-        
+                return HttpResponseRedirect(reverse('products:productpage',args=[productid]))
+            else:
+                return HttpResponseRedirect(reverse('login'))
         elif 'add_to_wishlist' in request.POST:
-            product_name = request.POST['productname']
-            product = Product.objects.get(name=product_name)
-            request.user.wishlist.add(product)
+            if request.user.is_authenticated:
+                product_name = request.POST['productname']
+                product = Product.objects.get(name=product_name)
+                request.user.wishlist.add(product)
 
-            return HttpResponseRedirect(reverse('products:productpage',args=[productid]))
-
+                return HttpResponseRedirect(reverse('products:productpage',args=[productid]))
+            else:
+                return HttpResponseRedirect(reverse('login'))
     else:
         try:
             product = Product.objects.get(id=productid)
@@ -60,8 +64,12 @@ def product(request, productid):
                 rating /= len(reviews)
             else:
                 rating = 0
-            in_wishlist=product in request.user.wishlist.all()
-            in_cart=product in request.user.cart.all()
+            if request.user.is_authenticated:
+                in_wishlist=product in request.user.wishlist.all()
+                in_cart=product in request.user.cart.all()
+            else:
+                in_wishlist=None
+                in_cart=None
             return render(request,'products/product copy.html',{
             'product': product,
             'rating': rating,
@@ -74,6 +82,6 @@ def product(request, productid):
         except (Product.DoesNotExist,ValidationError) :
             return render(request,'products/404.html')
         
-
+    
     
 
