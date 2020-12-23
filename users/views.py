@@ -10,8 +10,20 @@ from .models import User, Product
 from passlib.hash import django_pbkdf2_sha256
 # Create your views here.
 def cart(request):
-    return render(request,"users/cart.html")
-
+    products=request.user.cart.all()
+    return render(request,"users/cart.html",
+    {
+        'products':products,
+        'user':request.user 
+    }
+    )
+def wishlist(request):
+    products=request.user.wishlist.all()
+    return render(request,"users/wishlist.html",
+    {
+        'products':products,
+        'user':request.user 
+    })
 @login_required(login_url='login/')
 def index(request):
     if request.method == "POST":
@@ -68,14 +80,12 @@ def LogIn(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
-            print(request.headers)
             return HttpResponseRedirect(reverse("userdashboard"))
         else:
             return render(request, "users/login2.html", {
                 "message": "Invalid username and/or password."
             })
     else:
-        print(request.headers)
         if request.user.is_authenticated:
             return HttpResponseRedirect(reverse('userdashboard'))
         return render(request, "users/login2.html")
@@ -146,6 +156,5 @@ def changepassword(request):
         
 def become_a_seller(request):
     return render(request,'users/StoreName.html')
-                
 
 

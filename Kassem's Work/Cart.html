@@ -1,7 +1,7 @@
-<!DOCTYPE HTML>
-<html lang="en">
+
  
-  <title>Cart</title>
+  {% block title%}Cart{% endblock %}
+  {% block head %}
   <style>
     body {
       margin:0px;
@@ -209,10 +209,10 @@
     
  </style>
  
+{% endblock %}
  
  
- 
- <body >
+{% block body %}
 
 <div class="flex-body">
   <header>
@@ -336,5 +336,4 @@
 </div>
 </div>
 </div>
-</body>
-</html>
+{% endblock %}
