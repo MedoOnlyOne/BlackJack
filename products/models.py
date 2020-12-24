@@ -6,7 +6,7 @@ import uuid
 class Review(models.Model):
     text = models.TextField()
     stars = models.DecimalField(max_digits=7,decimal_places=2)
-    user = models.ForeignKey('users.User',on_delete=models.CASCADE,null=True)
+    user = models.ForeignKey('users.User',on_delete=models.SET_NULL,null=True)
     date = models.DateTimeField(auto_now=True, blank=True)
     def __str__(self):
         return f'{self.text}'

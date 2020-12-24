@@ -14,5 +14,5 @@ class User(AbstractUser):
     is_seller = models.BooleanField(default=False)
     cart = models.ManyToManyField(Product, blank=True, related_name="cart")
     wishlist = models.ManyToManyField(Product, blank=True, related_name="wishlist" )
-    shops = models.ManyToManyField(Shop,blank=True, related_name="OwnedShops")
+    shop = models.ForeignKey('shop.Shop', on_delete=models.SET_NULL, null=True, default=None)
    

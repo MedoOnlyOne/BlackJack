@@ -82,53 +82,8 @@
 
 {% block body %}
   <div id="items">
-      <div class="itemscontainer">
-          <!-- <div class="item" title="item">
-              <img src="../static/users/No image.jpg"> 
-              <p style="font-size:25px; font-weight:bold; position:relative; top:5px;">Product 1 Name</p>
-              <p><span style="font-weight:bold;">Category: </span> Sweatshirts</p>
-              <p><span style="font-weight:bold;">Color: </span> Red</p>
-              <p><span style="font-weight:bold;">Sold By: </span> GLOW egypt</p>
-              
-              <input type="button" name="-" value="-" class="count">
-              <p style="display:inline;"><span style="font-weight:bold; bottom:10px;">Quantity : </span> 1</p>
-              <input type="button" name="+" value="+" class="count">
-              
-              <p style="float:right;"><span style="font-weight:bold;">Price : </span> 100$</p>
-              
-          </div> -->
-          
-          <!-- <div class="item" title="item">
-              <img src="../static/users/No image.jpg"> 
-              <p style="font-size:25px; font-weight:bold; position:relative; top:5px;">Product 2 Name</p>
-              <p><span style="font-weight:bold;">Category: </span> Sweatshirts</p>
-              <p><span style="font-weight:bold;">Color: </span> Red</p>
-              <p><span style="font-weight:bold;">Sold By: </span> GLOW egypt</p>
-              
-              <input type="button" name="-" value="-" class="count">
-              <p style="display:inline;"><span style="font-weight:bold; bottom:10px;">Quantity : </span> 1</p>
-              <input type="button" name="+" value="+" class="count">
-              
-              <p style="float:right;"><span style="font-weight:bold;">Price : </span> 100$</p>
-              
-          </div>
-          
-          <div class="item" title="item">
-              <img src="../static/users/No image.jpg"> 
-              <p style="font-size:25px; font-weight:bold; position:relative; top:5px;">Product 3 Name</p>
-              <p><span style="font-weight:bold;">Category: </span> Sweatshirts</p>
-              <p><span style="font-weight:bold;">Color: </span> Red</p>
-              <p><span style="font-weight:bold;">Sold By: </span> GLOW egypt</p>
-              
-              <input type="button" name="-" value="-" class="count">
-              <p style="display:inline;"><span style="font-weight:bold; bottom:10px;">Quantity : </span> 1</p>
-              <input type="button" name="+" value="+" class="count">
-              
-              <p style="float:right;"><span style="font-weight:bold;">Price : </span> 100$</p>
-              
-          </div>
-          
-            <div class="item" title="item">
+      <div class="itemscontainer">  
+            <!-- <div class="item" title="item">
               <img src="../static/users/No image.jpg"> 
               <p style="font-size:25px; font-weight:bold; position:relative; top:5px;">Product 4 Name</p>
               <p><span style="font-weight:bold;">Category: </span> Sweatshirts</p>
@@ -141,21 +96,21 @@
               
               <p style="float:right;"><span style="font-weight:bold;">Price : </span> 100$</p>
               
-          </div> -->
+          </div> --> 
           {% for product in products %}
           <div class="item" title="{{ product.name }}">
             <img src="{{ product.image.url }}" height="135" width="135"> 
             <p style="font-size:25px; font-weight:bold; position:relative; top:5px;"><a href="{% url 'products:productpage' product.id %}">Product name : {{ product.name }}</a></p>
             <p><span style="font-weight:bold;">Sold By: </span>{{ product.shop.name }}</p>
-            <button type="button" name="-" id="dec" class="count">-</button>
+            <button type="button" name="-" class="count" onclick="dec()">-</button>
               <p style="display:inline;"><span style="font-weight:bold; bottom:10px;">Quantity : </span> <span id="q" name="q">1</span></p>
-              <button type="button" name="+" id="inc" class="count" 
+              <button type="button" name="+" class="count" onclick="inc()"
               {% if q == product.remaininginstock %}
                 disabled="true"
               {% endif %}
               >+</button>
               
-              <p ><span style="font-weight:bold;">Price : </span> {{product.price}}</p>
+              <p ><span style="font-weight:bold;">Price : <span id="p">{{product.price}}</span></p>
               
           </div>
           {% endfor %} 
@@ -163,7 +118,7 @@
   </div>
       
   <div class="total">
-      <p title="total" style="margin-top: 10px;margin-bottom: 0px;"><span>Total :</span>{{sum}}</p>
+      <p title="total" style="margin-top: 10px;margin-bottom: 0px;">Total :<span id="t"></span></p>
       <br>
       <p style="font-size:20px;margin-left:5px; font-weight:bold;margin-bottom:4px;margin-top: 0px;">Redeem Coupon <span style="font-size:12px;">(optional)</span></p>
       <input type="text" name="username" placeholder="Place your coupon here" style="display:inline; height:40px; width:240px; margin-left:5px; margin-top:0px;text-align:center;"> 
@@ -178,19 +133,32 @@
 
 {% block script %}
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        var inc = document.getElementById('inc');
-        inc.addEventListener('click', function() {
-          var q = document.getElementById('q');
+      function total(){
+        var items = document.getElementsByClassName("item");
+        var lenitems = items.length;
+        var total = 0;
+        for(var i = 0; i < lenitems; i++){
+          total = total + (items[i].querySelector('#q').innerHTML * items[i].querySelector('#p').innerHTML);
+        }
+        document.querySelector('#t').innerHTML = total;
+      }
+
+      function inc() {
+          var q = document.querySelector('#q');
           q.innerHTML++;
-        });
-        var dec = document.getElementById('dec');
-        dec.addEventListener('click', function() {
-          var q = document.getElementById('q');
+          total();
+        };
+      
+        function dec() {
+          var q = document.querySelector("#q");
           if (q.innerHTML > 0){
             q.innerHTML--;
+            total();
           }
-        });  
+        };
+
+      document.addEventListener('DOMContentLoaded', function() {
+        total(); 
       });
     </script>
 {% endblock %}

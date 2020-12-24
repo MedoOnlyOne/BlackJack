@@ -1,0 +1,27 @@
+{% extends 'shop/layout.html' %}
+
+{% block head %} 
+  <title>Dashboard</title>
+
+{% endblock %}
+
+{% block name %}My Products{% endblock %}
+
+{% block body %} 
+{% endblock %}
+
+{% block script %}
+<script>
+  function Enable(input_id) {
+        document.getElementById(input_id).disabled = false;
+     }
+  
+    function EnableAll() {
+      var inputs, i;
+      inputs = document.getElementsByTagName('input');
+      for (i = 0; i < inputs.length; ++i) {
+          inputs[i].disabled = false;
+      }
+  }
+</script>
+{%endblock%}

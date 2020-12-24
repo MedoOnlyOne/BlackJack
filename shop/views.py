@@ -18,8 +18,7 @@ def index(request, shopname):
             usershops=None
         return render(request, 'shop/index.html',{
             'shop': shop,
-            'products': products,
-            'usershops':usershops
+            'products': products
         })
     except Shop.DoesNotExist:
         return render(request,'shop/404.html')
@@ -43,3 +42,11 @@ def addproduct(request,shopname):
         shop.products.add(p)
 
         return HttpResponseRedirect(reverse('shopdashboard',args=[shop.name]))
+@login_required
+def dashboard(request):
+    if request.user.shop:
+        return render(request,'shop/Dashboard.html',{
+            'shop':request.user.shop
+        })
+    else:
+        return HttpResponseRedirect(reverse('userdashboard'))
