@@ -124,82 +124,74 @@
     color:#fff ;}
   </style>
 {% endblock %}
-{% block body %} 
-  <div class="container-1">
-    <div class="box" id="upperinfo">
-  
-      <h1> My account </h1>
-      <p> </p>
-  
-    </div>
 
-    <div class="box" id="info">
-      <form method="post" action="{% url 'userdashboard' %}">
-        {% csrf_token %}
-        <div>
-          First Name :
-          <input type="text" id="first_name" name="first" value="{{first}}" disabled="true" style="margin-left: 115px;">
-          <button type="button" onclick="Enable('first_name')"> Edit </button>
-        </div>     
-        <div>
-          Last Name :
-          <input type="text" id="last_name" name="last" value="{{last}}" disabled="true" style="margin-left: 115px;">
-          <button type="button" onclick="Enable('last_name')"> Edit </button>
-        </div> 
-        <div>
-          Phone Number :
-          <input type="text" id="code" name="code" value="{{code}}" disabled="true" style="margin-left: 83px; width:50px">
-          <input type="text" id="number" name="num" value="{{num}}" disabled="true" style="margin-left: 5px; width:230px">
-          <button type="button" onclick="Enable('number'); Enable('code')"> Edit </button>
-        </div>  
-        <div>
-          Email :
-          <input type="text" id="email" name="email" value="{{email}}" disabled="true" style="margin-left: 155px;">
-          <button type="button" onclick="Enable('email')"> Edit </button>
-        </div>        
-        <div>
-          Address :
-          <input type="text" id="address" name="address" value="{{address}}" disabled="true" style="margin-left: 135px;">
-          <button type="button" onclick="Enable('address')"> Edit </button>
-        </div>       
-        <div class="dropdown">
-          Preferred Currency :
-          <select id="currency" name="currency" disabled="true" style="margin-left: 40px;">
-            {% for c in currency_list %}
-              <option value="{{c}}"
-                  {% if c == currency %}selected="selected"{% endif %}>
-                  {% if c == 'EGP' %}
-                  Egyptian Pound
-                  {% endif %}
-                  {% if c == 'USD' %}
-                  US Dollar
-                  {% endif %}
-                  {% if c == 'EUR' %}
-                  Euro
-                  {% endif %}
-                  {% if c == 'GBP'%}
-                  Pound Sterling
-                  {% endif %}
-              </option>
-          {% endfor %}
-          </select> 
-          <button type="button" onclick="Enable('currency')"> Edit </button>
-        </div>
-        <div>
-          Account Type:
-          <input type="text" id="acc_type" name="acc_type"{% if is_seller %} value="Buyer and seller" {% else %} value="Buyer" {% endif %} disabled="true" style="margin-left: 95px;">
-        </div>     
-        <div class="buttonsContainer">
-          <!-- <div style="display:inline; float: right;"> -->
-            <button type="button" id="ChangePassword"><a href="{% url 'changepassword' %}">Change Password</a></button>
-          
-          <!-- <div style="display:inline; float: left; margin-left: 350px;"> -->
-            <button type="submit" id="ConfirmButton" onclick="EnableAll()"> Confirm </button>
-            <button type="button" id="Become_a_seller"><a href="{% url 'become_a_seller'%}">Become a seller</a></button>
-          </div>
-      </form>
+{% block name %}My account{% endblock %}
+
+{% block body %} 
+  <form method="post" action="{% url 'userdashboard' %}">
+    {% csrf_token %}
+    <div>
+      First Name :
+      <input type="text" id="first_name" name="first" value="{{first}}" disabled="true" style="margin-left: 115px;">
+      <button type="button" onclick="Enable('first_name')"> Edit </button>
+    </div>     
+    <div>
+      Last Name :
+      <input type="text" id="last_name" name="last" value="{{last}}" disabled="true" style="margin-left: 115px;">
+      <button type="button" onclick="Enable('last_name')"> Edit </button>
+    </div> 
+    <div>
+      Phone Number :
+      <input type="text" id="code" name="code" value="{{code}}" disabled="true" style="margin-left: 83px; width:50px">
+      <input type="text" id="number" name="num" value="{{num}}" disabled="true" style="margin-left: 5px; width:230px">
+      <button type="button" onclick="Enable('number'); Enable('code')"> Edit </button>
+    </div>  
+    <div>
+      Email :
+      <input type="text" id="email" name="email" value="{{email}}" disabled="true" style="margin-left: 155px;">
+      <button type="button" onclick="Enable('email')"> Edit </button>
+    </div>        
+    <div>
+      Address :
+      <input type="text" id="address" name="address" value="{{address}}" disabled="true" style="margin-left: 135px;">
+      <button type="button" onclick="Enable('address')"> Edit </button>
+    </div>       
+    <div class="dropdown">
+      Preferred Currency :
+      <select id="currency" name="currency" disabled="true" style="margin-left: 40px;">
+        {% for c in currency_list %}
+          <option value="{{c}}"
+              {% if c == currency %}selected="selected"{% endif %}>
+              {% if c == 'EGP' %}
+              Egyptian Pound
+              {% endif %}
+              {% if c == 'USD' %}
+              US Dollar
+              {% endif %}
+              {% if c == 'EUR' %}
+              Euro
+              {% endif %}
+              {% if c == 'GBP'%}
+              Pound Sterling
+              {% endif %}
+          </option>
+      {% endfor %}
+      </select> 
+      <button type="button" onclick="Enable('currency')"> Edit </button>
     </div>
-  </div>
+    <div>
+      Account Type:
+      <input type="text" id="acc_type" name="acc_type"{% if is_seller %} value="Buyer and seller" {% else %} value="Buyer" {% endif %} disabled="true" style="margin-left: 95px;">
+    </div>     
+    <div class="buttonsContainer">
+      <!-- <div style="display:inline; float: right;"> -->
+        <button type="button" id="ChangePassword"><a href="{% url 'changepassword' %}">Change Password</a></button>
+      
+      <!-- <div style="display:inline; float: left; margin-left: 350px;"> -->
+        <button type="submit" id="ConfirmButton" onclick="EnableAll()"> Confirm </button>
+        <button type="button" id="Become_a_seller"><a href="{% url 'become_a_seller'%}">Become a seller</a></button>
+      </div>
+  </form>
 {% endblock %}
 
 {% block script %}

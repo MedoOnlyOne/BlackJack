@@ -157,4 +157,7 @@ def changepassword(request):
 def become_a_seller(request):
     return render(request,'users/StoreName.html')
 
+def orders(request):
+    return render(request,'users/orders.html')
+
 
