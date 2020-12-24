@@ -1,128 +1,7 @@
 {% extends 'users/layout.html' %}
-{% block title %}Cart{% endblock %}
 {% block head %} 
- 
+  <title>Cart</title>
   <style>
-    body {
-      margin:0px;
-    }
-    .Container {
-      overflow: hidden;
-    }
-
-    header{
-      background-color: #232732;
-      color: #ffffff;
-      border-bottom: #BFB367 6px solid;
-      position: fixed;
-      top: 0px;
-      left: 0px;
-      right: 0px;
-      z-index: 1;
-    }
-    
-    header #webname {
-      font-weight: bold;
-      font-size:36pt;
-      color:white;
-      float: left;
-      margin-left: 50px;
-    
-    }
-
-    header .official  {
-      color: #BFB367;
-      font-size: 12pt;
-      font-weight: bold;
-    }
-
-    header #webname h1{ margin:0;}
-
-    header ul{
-      margin:0;
-      padding: 0;
-    }
-
-    header li {
-      display: inline;
-      padding: 0 20px 0 20px;
-    }
-
-    header a{
-      text-decoration: none;
-      color: #BFB367;
-      text-transform: uppercase;
-      font-size:15pt;
-    }
-
-    header nav{float:right;
-    padding-right:30px;}
-
-        
-    header a:hover {
-      color:white;
-    }
-
-    #sidemenu {
-      float:left;
-      padding: 40px 70px 50px 30px;
-      background-color:#232732;
-      border-right: 8px  #BFB367 solid;
-      text-align:center;
-      text-decoration:none;
-      position: fixed;
-      z-index: 1;
-      bottom: 0px;
-      top: 52px;
-    }
-
-    #sidemenu nav{text-align:left; }
-
-    #sidemenu nav ul li{list-style: none;}
-
-    #sidemenu a{
-    text-decoration: none;
-    color: #BFB367;
-    padding:8px 30px;
-    display:block;
-    font-size:16pt;
-    } 
-
-    #sidemenu a:hover {
-        color:white;
-    }
-      
-    .container-1 {color:#232732;
-      display:flex;
-      flex-direction:column;
-      margin-top: 55px;
-      margin-left: 340px;
-    }
-
-
-    #upperinfo  {text-align:center;
-      border-bottom: solid 8px #BFB367 ;
-      border-right: solid 8px #BFB367 ;
-    }
-
-    #info {   border-right: solid 8px #BFB367 ;
-    border-bottom: solid 8px #BFB367 ;
-    font-weight:bold;}
-
-    #official {
-    color: #BFB367;
-    margin-top: 10%;
-    margin-bottom: 5%;
-    display:inline;
-    }
-    #BlackJack {
-    font-size: 40px;
-    color: white;
-    display:inline;
-    }
-  #header{
-    display:inline-block;
-  }
     #items
    {
      margin-left: 40px;
@@ -145,6 +24,13 @@
     margin:3px;
     
    }
+   .item a{
+        color:black;
+        text-decoration: none;
+    }
+    .item a:hover{
+        color:#BFB367;
+    }
    .itemscontainer
    {
     border:navy;
@@ -188,47 +74,10 @@
     width:25px;
     margin-bottom: 5px; 
    }
+   button:hover,input[type="submit"]:hover{cursor: pointer;}
   </style>
 {% endblock %}
 {% block body %} 
-
-  <header>
-      <div class="Container">
-          <div id="header">
-        <span id="BlackJack">BlackJack</span>
-        <span id="official">The Official online store </span>
-     </div>
-    
-  <nav> <ul style="margin-top:12px;"> 
-      <li> <a href="#"> Home </a> </li>
-      <li> <a href="{% url 'userdashboard'%}"> Profile </a></li>
-      {% if user.is_authenticated %}
-      <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
-      {% else %}
-      <li> <a href="{% url 'login' %}">  Login  </a> </li>
-      {% endif %}
-  </ul> </nav>
-      </div>
-  </header>
-
-
-
-  <section id="sidemenu">
-      <h1 style="color:white; padding-left:40px; font-size:23pt;">   DASHBOARD  </h1>
-      <nav> <ul> 
-      <li> <a href="{% url 'userdashboard' %}"> My Account </a>
-      <li> <a href="#"> Orders </a> 
-      <li> <a href="{% url 'wishlist' %}"> Wishlist </a>
-      <li> <a href="{% url 'cart' %}"> Cart </a> 
-      <!-- <li> <a href="#"> One </a> 
-      <li> <a href="#"> Two </a> 
-      <li> <a href="#"> Three </a>    -->
-  </ul> </nav>
-  </section>
-
-
-
-
   <div class="container-1">
     <div class="box" id="upperinfo">
   
@@ -302,15 +151,19 @@
                     
                 </div> -->
                 {% for product in products %}
-                <div class="item" title="item">
+                <div class="item" title="{{ product.name }}">
                   <img src="{{ product.image.url }}" height="135" width="135"> 
-                  <p style="font-size:25px; font-weight:bold; position:relative; top:5px;">Product name : {{ product.name }}</p>
+                  <p style="font-size:25px; font-weight:bold; position:relative; top:5px;"><a href="{% url 'products:productpage' product.id %}">Product name : {{ product.name }}</a></p>
                   <p><span style="font-weight:bold;">Sold By: </span>{{ product.shop.name }}</p>
-                  <input type="button" name="-" value="-" class="count">
-                    <p style="display:inline;"><span style="font-weight:bold; bottom:10px;">Quantity : </span> 1</p>
-                    <input type="button" name="+" value="+" class="count">
+                  <button type="button" name="-" id="dec" class="count">-</button>
+                    <p style="display:inline;"><span style="font-weight:bold; bottom:10px;">Quantity : </span> <span id="q" name="q">1</span></p>
+                    <button type="button" name="+" id="inc" class="count" 
+                    {% if q == product.remaininginstock %}
+                      disabled="true"
+                    {% endif %}
+                    >+</button>
                     
-                    <p style="float:right;"><span style="font-weight:bold;">Price : </span> {{product.price}}</p>
+                    <p ><span style="font-weight:bold;">Price : </span> {{product.price}}</p>
                     
                 </div>
                 {% endfor %} 
@@ -333,4 +186,24 @@
 
 
     </div>
+{% endblock %}
+
+
+{% block script %}
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var inc = document.getElementById('inc');
+        inc.addEventListener('click', function() {
+          var q = document.getElementById('q');
+          q.innerHTML++;
+        });
+        var dec = document.getElementById('dec');
+        dec.addEventListener('click', function() {
+          var q = document.getElementById('q');
+          if (q.innerHTML > 0){
+            q.innerHTML--;
+          }
+        });  
+      });
+    </script>
 {% endblock %}

@@ -1,6 +1,9 @@
-{% extends 'users/layout.html' %}
-{% block head%}
-      <title>Log In</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In</title>
   <style>
     .UpperLabel {
         overflow: hidden;
@@ -124,45 +127,41 @@
         display:inline;
       }
       </style>
-     {%endblock%}
-   
-   
-   
-   
-  
-  {% block body %} 
-    <header>
-        <div class="Container">
-            <div id="header">
-              <span id="BlackJack">BlackJack</span>
-              <span id="official">The Official online store </span>
-            </div>
+</head>
+<body>
+  <header>
+    <div class="Container">
+        <div id="header">
+          <span id="BlackJack">BlackJack</span>
+          <span id="official">The Official online store </span>
         </div>
-    </header>
+    </div>
+</header>
 
 
-     
-       <h1 id="m9">
-        <div class="container">
-         <h2> Log in </h2>
-          <form action="{% url 'login' %}" method="POST"> 
-            {% csrf_token %}
-           <input type="text" name="username" placeholder="Enter Username...">
-           <input type="password" name="password" placeholder="Enter Password...">
-           <button type="submit"  name="submit" class="button_1">Login</button>
-          </form>
-          <div style="display:inline;">
-            {% if message %}
-            <p style="color:red">Incorrect username or password</p>
-            {% endif %}
-            <p> Haven't signed up yet? </p>
-          </div>
-          <button formmethod="get" class="button_1" > <a href="{% url 'signup' %}">Sign up now !</a></button>
-         </div>
-        </h1>
+ 
+   <h1 id="m9">
+    <div class="container">
+     <h2> Log in </h2>
+      <form action="{% url 'login' %}" method="POST"> 
+        {% csrf_token %}
+       <input type="text" name="username" placeholder="Enter Username...">
+       <input type="password" name="password" placeholder="Enter Password...">
+       <button type="submit"  name="submit" class="button_1">Login</button>
+      </form>
+      <div style="display:inline;">
+        {% if message %}
+        <p style="color:red">Incorrect username or password</p>
+        {% endif %}
+        <p> Haven't signed up yet? </p>
+      </div>
+      <button formmethod="get" class="button_1" > <a href="{% url 'signup' %}">Sign up now !</a></button>
+     </div>
+    </h1>
 
-      <div id="LogInImage">
-         <img src="../static/users/login.jpg" alt="Log in">                  
-      </div>   
+  <div id="LogInImage">
+     <img src="../static/users/login.jpg" alt="Log in">                  
+  </div>   
 
-  {%endblock%}
+</body>
+</html>
