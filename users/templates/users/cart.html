@@ -102,15 +102,15 @@
             <img src="{{ product.image.url }}" height="135" width="135"> 
             <p style="font-size:25px; font-weight:bold; position:relative; top:5px;"><a href="{% url 'products:productpage' product.id %}">Product name : {{ product.name }}</a></p>
             <p><span style="font-weight:bold;">Sold By: </span>{{ product.shop.name }}</p>
-            <button type="button" name="-" class="count" onclick="dec()">-</button>
-              <p style="display:inline;"><span style="font-weight:bold; bottom:10px;">Quantity : </span> <span id="q" name="q">1</span></p>
-              <button type="button" name="+" class="count" onclick="inc()"
+            <button type="button" name="-" class="count" onclick="dec({{product.name}})">-</button>
+              <p style="display:inline;"><span style="font-weight:bold; bottom:10px;">Quantity : </span> <span id="{{product.name}}" name="q">1</span></p>
+              <button type="button" name="+" class="count" onclick="inc({{product.name}})"
               {% if q == product.remaininginstock %}
                 disabled="true"
               {% endif %}
               >+</button>
               
-              <p ><span style="font-weight:bold;">Price : <span id="p">{{product.price}}</span></p>
+              <p ><span style="font-weight:bold;">Price : <span name="p">{{product.price}}</span></p>
               
           </div>
           {% endfor %} 
@@ -138,21 +138,22 @@
         var lenitems = items.length;
         var total = 0;
         for(var i = 0; i < lenitems; i++){
-          total = total + (items[i].querySelector('#q').innerHTML * items[i].querySelector('#p').innerHTML);
+          total = total + (items[i].querySelector('span[name="q"]').innerHTML * items[i].querySelector('span[name="p"]').innerHTML);
         }
         document.querySelector('#t').innerHTML = total;
       }
 
-      function inc() {
-          var q = document.querySelector('#q');
-          q.innerHTML++;
+      function inc(name) {
+        // console.log(name.innerHTML);
+        //   var q = document.getElementById(name);
+          name.innerHTML++;
           total();
         };
       
-        function dec() {
-          var q = document.querySelector("#q");
-          if (q.innerHTML > 0){
-            q.innerHTML--;
+        function dec(name) {
+          // var q = document.querySelector("#q");
+          if (name.innerHTML > 0){
+            name.innerHTML--;
             total();
           }
         };

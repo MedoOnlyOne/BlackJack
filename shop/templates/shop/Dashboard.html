@@ -1,27 +1,127 @@
 {% extends 'shop/layout.html' %}
-
 {% block head %} 
-  <title>Dashboard</title>
+  <title>My Products</title>
+  <style>
+    #items
+   {
+     margin-left: 40px;
+     overflow: hidden;
+    /* position:relative;
+    left:40px;
+    background-color:white;
+    float:left;
+    width:715px; */
+   }
 
+   .item
+   {
+    float:left;
+    width:700px;
+    /* max-height:200px;
+    position:relative; */
+    background-color:white;
+    border:5px solid #BFB367;
+    margin:3px;
+    
+   }
+   .item a{
+        color:black;
+        text-decoration: none;
+    }
+    .item a:hover{
+        color:#BFB367;
+    }
+   .itemscontainer
+   {
+    border:navy;
+   }
+
+   .item p
+    {
+        color:#232732;
+        font-size:17px;
+        position:relative;
+        top:17px;
+        margin:1px;
+    }
+    .item img
+    {
+        float:left;
+        height:135px;
+        margin-right:5px;
+    }
+    .total
+    {
+      font-size:30px;
+      font-weight:bold;
+      color:#232732;
+      width:680px;
+      background-color:white;
+      border:5px solid #BFB367;
+      margin:23px 43px;
+      padding-bottom: 10px;
+      text-align: center;
+    }
+    a [href="Cart.html"]
+   {
+    color:#BFB367;
+   }
+   .count{
+    display:inline;
+    bottom:-17px; 
+    position:relative; 
+    margin-left:2px;
+    width:25px;
+    margin-bottom: 5px; 
+   }
+  </style>
 {% endblock %}
 
 {% block name %}My Products{% endblock %}
 
-{% block body %} 
+{% block body %}
+  <div id="items">
+    <div class="itemscontainer">
+        <!-- <div class="item" title="item">
+            <img src="../static/users/No image.jpg"> 
+            <p style="font-size:25px; font-weight:bold; position:relative; top:5px;">Product 1 Name</p>
+            <p><span style="font-weight:bold;">Category: </span> Sweatshirts</p>
+            <p><span style="font-weight:bold;">Color: </span> Red</p>
+            <p><span style="font-weight:bold;">Sold By: </span> GLOW egypt</p>
+            
+            <input type="button" name="-" value="-" class="count">
+            <p style="display:inline;"><span style="font-weight:bold; bottom:10px;">Quantity : </span> 1</p>
+            <input type="button" name="+" value="+" class="count">
+            
+            <p style="float:right;"><span style="font-weight:bold;">Price : </span> 100$</p>
+            
+        </div> -->
+        
+        <!-- <div class="item" title="item">
+            <img src="../static/users/No image.jpg"> 
+            <p style="font-size:25px; font-weight:bold; position:relative; top:5px;">Product 2 Name</p>
+            <p><span style="font-weight:bold;">Category: </span> Sweatshirts</p>
+            <p><span style="font-weight:bold;">Color: </span> Red</p>
+            <p><span style="font-weight:bold;">Sold By: </span> GLOW egypt</p>
+            
+            <input type="button" name="-" value="-" class="count">
+            <p style="display:inline;"><span style="font-weight:bold; bottom:10px;">Quantity : </span> 1</p>
+            <input type="button" name="+" value="+" class="count">
+            
+            <p style="float:right;"><span style="font-weight:bold;">Price : </span> 100$</p>
+            
+        </div>
+       
+      -->
+       
+        {% for product in products %}
+        <div class="item" title="{{ product.name }}">
+          <img src="{{ product.image.url }}" height="135" width="135"> 
+          <p style="font-size:25px; font-weight:bold; position:relative; top:5px;"><a href="{% url 'products:productpage' product.id %}">Product name : {{ product.name }}</a></p>
+          <p><span style="font-weight:bold;">Price : </span> {{product.price}}</p>
+            
+        </div>
+        {% endfor %} 
+    </div>
+  </div>
 {% endblock %}
-
-{% block script %}
-<script>
-  function Enable(input_id) {
-        document.getElementById(input_id).disabled = false;
-     }
-  
-    function EnableAll() {
-      var inputs, i;
-      inputs = document.getElementsByTagName('input');
-      for (i = 0; i < inputs.length; ++i) {
-          inputs[i].disabled = false;
-      }
-  }
-</script>
-{%endblock%}

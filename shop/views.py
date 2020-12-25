@@ -10,12 +10,10 @@ from django.contrib.auth.decorators import login_required
 def index(request, shopname):
     try:
     #if shopname in Shop.objects.all():
+        if shopname=='addproduct':
+            return addproduct(request,shopname)
         shop = Shop.objects.get(name=shopname)
         products = shop.products.all()
-        try:
-            usershops=request.user.shops.all()
-        except:
-            usershops=None
         return render(request, 'shop/index.html',{
             'shop': shop,
             'products': products
@@ -26,12 +24,12 @@ def index(request, shopname):
 @login_required()
 def addproduct(request,shopname):
     if request.method=='GET':
-        if Shop.objects.get(name=shopname) in request.user.shops.all():
+        if request.user.shop:
             return render(request,'shop/AddProduct.html',{
-                'shopname': shopname
+                'shop': request.user.shop
             })
         else:
-            return HttpResponse('<h1>Access Denied<h1>')
+            return render(request,'shop/not_a_seller.html')
     else:
         name = request.POST['productname']
         img = request.FILES['img']
@@ -46,7 +44,8 @@ def addproduct(request,shopname):
 def dashboard(request):
     if request.user.shop:
         return render(request,'shop/Dashboard.html',{
-            'shop':request.user.shop
+            'shop':request.user.shop,
+            'products' : request.user.shop.products.all()
         })
     else:
-        return HttpResponseRedirect(reverse('userdashboard'))
+        return render(request,'shop/not_a_seller.html')

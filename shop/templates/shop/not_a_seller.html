@@ -1,10 +1,9 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        {% block head %}{% endblock %}
+        <title>Shop not found!</title>
         <style>
             body {
             margin:0px;
@@ -12,7 +11,17 @@
             .Container {
             overflow: hidden;
             }
-        
+            p{
+            text-align: center;
+            font-size: 32pt;
+           }
+           p a{
+               text-decoration:none;
+               color:black;
+           }
+           p a:hover{
+               color:#BFB367;
+           }
             header{
             background-color: #232732;
             color: #ffffff;
@@ -66,44 +75,8 @@
             color:white;
             }
         
-            #sidemenu {
-            float:left;
-            padding: 40px 70px 50px 30px;
-            background-color:#232732;
-            border-right: 8px  #BFB367 solid;
+            #upperinfo  {
             text-align:center;
-            text-decoration:none;
-            position: fixed;
-            z-index: 1;
-            bottom: 0px;
-            top: 52px;
-            }
-        
-            #sidemenu nav{text-align:left; }
-        
-            #sidemenu nav ul li{list-style: none;}
-        
-            #sidemenu a{
-            text-decoration: none;
-            color: #BFB367;
-            padding:8px 30px;
-            display:block;
-            font-size:16pt;
-            } 
-        
-            #sidemenu a:hover {
-                color:white;
-            }
-            
-            .container-1 {color:#232732;
-            display:flex;
-            flex-direction:column;
-            margin-top: 55px;
-            margin-left: 340px;
-            }
-        
-        
-            #upperinfo  {text-align:center;
             border-bottom: solid 8px #BFB367 ;
             border-right: solid 8px #BFB367 ;
             }
@@ -148,31 +121,10 @@
         </ul> </nav>
             </div>
         </header>
-        
-        <section id="sidemenu">
-            <h1 style="color:white; padding-left:40px; font-size:23pt;">   DASHBOARD  </h1>
-            <nav> <ul> 
-            <li> <a href="{% url 'shopdashboard' %}"> My Prodcuts </a>
-            <li> <a href="{% url 'addproduct' %}"> Add Product </a> </li>
-            <li> <a href="#"> Add coupon </a> 
-            <li> <a href="#"> Orders </a>
-            
-        </ul> </nav>
-        </section>
-        
-        <div class="container-1">
-            <div class="box" id="upperinfo">
-          
-              <h1>{% block name %} {% endblock %}</h1>
-              <p> </p>
-            </div>
 
-            <div class="box" id="info">
-                {% block body %}
-                {% endblock %}
-            </div>
+        <div class="box" id="info">
+            <p style="margin-top:50px; padding-top:20px;">You don't have a Shop yet!</p>
+            <p><a href="{% url 'become_a_seller' %}">Do you want to become a seller ?</a></p>
         </div>
     </body>
-    {% block script%}
-    {% endblock %}
 </html>
