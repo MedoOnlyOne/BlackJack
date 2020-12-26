@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
-from .models import Shop
+from .models import Shop, Coupon
 from products.models import Product
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -74,3 +74,30 @@ def dashboard(request):
         })
     else:
         return render(request,'shop/not_a_seller.html')
+
+@login_required
+def addcoupon(request):
+    if request.method == "GET":
+        active_coupons = []
+        coupons = request.user.shop.coupons.all()
+        for coupon in coupons:
+            if coupon.activated:
+                active_coupons.append(coupon)
+        return render(request, 'shop/AddCoupon.html',{
+            'coupons': active_coupons
+        })
+    else:
+        name = request.POST.get('name','')
+        code = request.POST.get('code','')
+        discount = request.POST.get('discount','')
+        c = Coupon(name=name, code=code, activated=True, discount=discount)
+        c.save()
+        request.user.shop.coupons.add(c)
+        return HttpResponseRedirect(reverse('addcoupon'))
+
+@login_required
+def deactivatecoupon(request, couponid):
+    c = Coupon.objects.get(code=couponid)
+    c.activated = False
+    c.save()
+    return HttpResponseRedirect(reverse('addcoupon'))

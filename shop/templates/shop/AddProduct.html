@@ -16,9 +16,15 @@
     }
     h3{display: inline;}
     input[type="text"],
-    input[type="number"],
+    input[type="number"]{
+      width :300px;
+      height:25px;
+      margin-top: 20px;
+      margin-bottom: 5px;
+    }
     textarea{
       width :300px;
+      height: 300px;
       margin-top: 20px;
       margin-bottom: 5px;
     }
@@ -49,24 +55,24 @@
   <div class="add_product">
     <form action="{% url 'addproduct' %}" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
-      <div>
+      <div style="display:flex; flex-wrap:wrap;">
         <h3>Product Name:</h3>
         <input type="text" placeholder="Product name: ..." name="product" style="margin-left: 65px;">
       </div>
-      <div>
+      <div style="display:flex; flex-wrap:wrap;">
         <h3>Remaining in stock:</h3>
         <input type="number" placeholder="Remaining in stock: ..." name="remaining_in_stock" style="margin-left: 18px;">
       </div>
-      <div>
+      <div style="display:flex; flex-wrap:wrap;">
         <h3>Price:</h3>
         <input type="number" step="10" placeholder="Product price: ..." name="price" style="margin-left: 150px;">
       </div>
-      <div style="padding: 0px;">
-        <h3 style="display: inline-block; margin: 0px;padding: 0px;">Discription:</h3>
-        <textarea placeholder="Discription: ..." name="discription" style="margin: 10px 90px;"></textarea>
+      <div style="padding: 0px; display:flex; flex-wrap:wrap;">
+        <h3 style="display: inline; margin: 1px;padding: 0px;">Description:</h3>
+        <textarea placeholder="Description: ..." name="discription" style="margin: 10px 90px;"></textarea>
       </div>
-      <div>
-        <h3>Image:</h3>
+      <div >
+        <h3 >Image:</h3><br>
         <input type="file" id="fileToUpload" name="image">
       </div>
       <input type="submit" value="Add product">
