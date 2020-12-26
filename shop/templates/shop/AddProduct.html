@@ -1,225 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Submitting a Product</title>
-        <meta name="viewport" content="width=device-width">
-        <style>
-            body {
-            margin:0px;
-            }
-            .Container {
-            overflow: hidden;
-            }
-        
-            header{
-            background-color: #232732;
-            color: #ffffff;
-            border-bottom: #BFB367 6px solid;
-            position: fixed;
-            top: 0px;
-            left: 0px;
-            right: 0px;
-            z-index: 1;
-            }
-            
-            header #webname {
-            font-weight: bold;
-            font-size:36pt;
-            color:white;
-            float: left;
-            margin-left: 50px;            
-            }
-        
-            header .official  {
-            color: #BFB367;
-            font-size: 12pt;
-            font-weight: bold;
-            }
-        
-            header #webname h1{ margin:0;}
-        
-            header ul{
-            margin:0;
-            padding: 0;
-            }
-        
-            header li {
-            display: inline;
-            padding: 0 20px 0 20px;
-            }
-        
-            header a{
-            text-decoration: none;
-            color: #BFB367;
-            text-transform: uppercase;
-            font-size:15pt;
-            }
-        
-            header nav{float:right;
-            padding-right:30px;}
-        
-                
-            header a:hover {
-            color:white;
-            }
-        
-            #upperinfo  {text-align:center;
-            border-bottom: solid 8px #BFB367 ;
-            border-right: solid 8px #BFB367 ;
-            }
-        
-            #info {   border-right: solid 8px #BFB367 ;
-            border-bottom: solid 8px #BFB367 ;
-            font-weight:bold;}
-        
-            #official {
-            color: #BFB367;
-            margin-top: 10%;
-            margin-bottom: 5%;
-            display:inline;
-            }
-            #BlackJack {
-            font-size: 40px;
-            color: white;
-            display:inline;
-            }
-        #header{
-            display:inline-block;
-        }
-        img {
-          width: 100px;
-          height: 100px;
-        }
-        h1{
-          color:black;
-          text-align: center;
-          padding-right: 0%;
-          padding-left: 0%;
-          background:white;
-          width: 460px;
-          margin-left: 6%;
-          margin-bottom: 0%;
-          margin-top: 5%;
-          border:6px solid #BFB367;
-          border-radius: 5px;
-        }
-      p{
-          color:black;
-          text-align: center;
-          padding:20px;
-          background:white;
-          width:300px;
-          margin-left:13%;
-          margin-bottom: 0%;
-          margin-top: 10%;
-        }
+{% extends 'shop/layout.html' %}
 
-        #m9 button{
-          background:#232732;
-          padding-left: 20px;
-          padding-right:20px;
-          color:white;
-          font-weight: bold;
-          margin-top: 8%;
-          display: block;
-          margin-left: 33%;
-          margin-bottom: 8%;
-        }
-        #m9 input[type="email"]{
-          margin-left: 7%;
-          margin-top: 8%;
+{% block head %}
+  <title>Add Product</title>
 
-        }
-        #m9 input[type="password"]{
-          margin-left: 0%;
-          margin-top: 8%;
-        }
-        h2 {
-        display: inline;
-        font-size: 15px;
-        }
-        input[type="text"] {
-        margin-top: 8%;
-        }
-        #CO {
-        margin-top: 8%;
-        }
+  <style>
+    .add_product{
+      width: 100%;
+    }
+    form {
+      margin-left: 20%;
+      /* text-align:center; */
+      padding-left:15px;
+      padding-right:10px;
+      font-size:14pt;
+    }
+    h3{display: inline;}
+    input[type="text"],
+    input[type="number"],
+    textarea{
+      width :300px;
+      margin-top: 20px;
+      margin-bottom: 5px;
+    }
+    input[type="file"]{
+      margin-top: 20px;
+      } 
+    input[type="submit"]
+    {
+      display: block;
+      margin:20px;
+      margin-left: 200px;
+      width:120px;
+      height:30px;
+      background-color :#232732;
+      color: #BFB367 ;
+      font-weight:bold;
+    }
+    input[type="submit"]:hover{
+      cursor: pointer;
+      color: #FFF;
+    }
+  </style>
+{% endblock %}
+
+{% block name %}Add product{% endblock %}
+
+{% block body %}
+  <div class="add_product">
+    <form action="{% url 'addproduct' %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div>
+        <h3>Product Name:</h3>
+        <input type="text" placeholder="Product name: ..." name="product" style="margin-left: 65px;">
+      </div>
+      <div>
+        <h3>Remaining in stock:</h3>
+        <input type="number" placeholder="Remaining in stock: ..." name="remaining_in_stock" style="margin-left: 18px;">
+      </div>
+      <div>
+        <h3>Price:</h3>
+        <input type="number" step="10" placeholder="Product price: ..." name="price" style="margin-left: 150px;">
+      </div>
+      <div style="padding: 0px;">
+        <h3 style="display: inline-block; margin: 0px;padding: 0px;">Discription:</h3>
+        <textarea placeholder="Discription: ..." name="discription" style="margin: 10px 90px;"></textarea>
+      </div>
+      <div>
+        <h3>Image:</h3>
+        <input type="file" id="fileToUpload" name="image">
+      </div>
+      <input type="submit" value="Add product">
+    </form>
+  </div>
+{% endblock %}
+
 
     
-        input[type="file"] {
-        margin-left: 31%;
-        margin-right: 0px;
-        display: block;
-        }
-        h3 {
-            display: inline;
-            font-size: 15px;
-            margin-left: 0%;
-        }
-        h4 {
-        display: inline;
-        font-size: 15px;
-        margin-right: 3%;
-        }
-        textarea {
-        display: block;
-        margin-left:31%;
-        }
-        h5 {
-        display: inline;
-        font-size: 15px;
-        margin-left: 0%;
-        margin-right: 17%;
-        }
-        </style>
-    </head>
-
-
-    <body>
-        <header>
-            <div class="Container">
-                <div id="header">
-                <span id="BlackJack">BlackJack</span>
-                <span id="official">The Official online store </span>
-                </div>
-            <nav> <ul style="margin-top:12px;"> 
-                <li> <a href="#"> Home </a> </li>
-                <li> <a href="{% url 'userdashboard'%}"> Profile </a></li>
-                {% if user.is_authenticated %}
-                <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
-                {% else %}
-                <li> <a href="{% url 'login' %}">  Login  </a> </li>
-                {% endif %}
-            </ul> </nav>
-        </div>    
-        </header>
-        
-       <h1 id="m9">
-         <div id="m99">
-         <p id="signup"> Product Form </p>
-       <div>
-         <h4> Product Name </h4>
-         <input type="text" placeholder="Enter the product name">
-       </div>
-       <div>
-         <h2 > Remaining Stock </h2>
-         <input type="text" placeholder="Enter the remaining stock">
-       </div>
-       <div>
-         <h5> Price </h5>
-         <input type="text" placeholder="Enter product price">
-       </div>
-       <div>
-         <h2>Product Discription:</h2>
-         <textarea placeholder="Discription"></textarea>
-       </div>
-       <div>
-         <h3>Upload The Product's Image:</h3>
-         <input type="file" name="fileToUpload" id="fileToUpload">
-       </div>
-          <button type="submit" class="button_1">Upload Product</button>
-         </div>
-       </h1>
-
-      </body>
-</html>

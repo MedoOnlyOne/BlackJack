@@ -11,7 +11,7 @@ def index(request, shopname):
     try:
     #if shopname in Shop.objects.all():
         if shopname=='addproduct':
-            return addproduct(request,shopname)
+            return addproduct(request)
         shop = Shop.objects.get(name=shopname)
         products = shop.products.all()
         return render(request, 'shop/index.html',{
@@ -22,7 +22,7 @@ def index(request, shopname):
         return render(request,'shop/404.html')
 
 @login_required()
-def addproduct(request,shopname):
+def addproduct(request):
     if request.method=='GET':
         if request.user.shop:
             return render(request,'shop/AddProduct.html',{
@@ -31,15 +31,40 @@ def addproduct(request,shopname):
         else:
             return render(request,'shop/not_a_seller.html')
     else:
-        name = request.POST['productname']
-        img = request.FILES['img']
-        shop = Shop.objects.get(name=shopname)
-        p = Product(name=name,image=img,price=100,description='aaaa',remaininginstock=1,featured=False,shop=shop)
+        name = request.POST.get('product','')
+        price = request.POST.get('price','')
+        remaining = request.POST.get('remaining_in_stock','')
+        disc = request.POST.get('discription','')
+        img = request.FILES.get('image')
+        print(f"### {name}  {price} {remaining} {disc}  {img}   ##############")
+        shop = Shop.objects.get(name=request.user.shop)
+        p = Product(name=name,image=img,price=price,description=disc,remaininginstock=remaining,featured=False,shop=shop)
         p.save()
-        shop = Shop.objects.get(name=shopname)
+        print(f"### {p.name}  {p.price} {p.remaininginstock} {p.description}  #################")
         shop.products.add(p)
 
-        return HttpResponseRedirect(reverse('shopdashboard',args=[shop.name]))
+        return HttpResponseRedirect(reverse('shopdashboard'))
+
+
+@login_required
+def editproduct(request, productid):
+    if request.method == "GET":
+        return render(request,'shop/EditProduct.html',{
+            'product':Product.objects.get(id=productid)
+        })
+    else:
+        name = request.POST.get('product','')
+        price = request.POST.get('price','')
+        remaining = request.POST.get('remaining_in_stock','')
+        disc = request.POST.get('description','')
+        p = Product.objects.get(id=productid)
+        p.name = name
+        p.price = price
+        p.description = disc
+        p.remaininginstock = remaining
+        p.save()
+        return HttpResponseRedirect(reverse('shopdashboard'))
+
 @login_required
 def dashboard(request):
     if request.user.shop:
