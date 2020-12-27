@@ -7,5 +7,6 @@ urlpatterns = [
     path('deactivatecoupon/<str:couponid>', views.deactivatecoupon, name='deactivatecoupon'),
     path('editproduct/<str:productid>/', views.editproduct, name='editproduct'),
     path('',views.dashboard,name='shopdashboard'),
-    path('<str:shopname>/', views.index, name='shop')
+    path('<str:shopname>/', views.index, name='shop'),
+    path('activecoupons/', views.activecoupons,name='activecoupons')
 ]

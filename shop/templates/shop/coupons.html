@@ -1,0 +1,53 @@
+{% extends 'shop/layout.html' %}
+{% block head %}
+<title>Active coupons</title>
+<style>
+    .coupon{
+        margin: 10px;
+        border: #BFB367 4px solid;
+        padding:10px;
+        text-align:center;
+    }
+    .deactivate{
+      width:120px;
+      height:30px;
+      background-color :#232732;
+      font-weight:bold; 
+    }
+    .deactivate a{
+      color: #BFB367;
+      text-decoration: none;
+    }
+    .deactivate a:hover{
+      color: #FFF;
+      cursor: pointer;
+    }
+    #info {   
+      border-right: solid 8px #BFB367 ;
+      border-bottom: solid 8px #BFB367 ;
+      font-weight:bold;
+    }
+        
+</style>
+{% endblock %}
+{% block body %}
+{% if coupons %}
+<h2 style="text-align: center;">Your active coupons</h2>
+    {% for coupon in coupons %}
+    {% if coupon.activated%}
+    <div class="coupon">
+        <p style="display: inline; margin-right: 15px;">Name: {{coupon.name}}</p>   
+        <p style="display: inline; margin-right: 15px;">Code: {{coupon.code}}</p>  
+        <p style="display: inline; margin-right: 15px;">Discount: {{coupon.discount}}%</p>
+        <strong style="color:red;">{{ message }}</strong>
+        <button class="deactivate"><a href="{% url 'deactivatecoupon' coupon.code %}">Deactivate</a></button>
+    </div>
+    {% endif %}
+    {% endfor %}
+  {% else %}
+  <div id="info">
+    <p style="margin-top:50px; padding-top:20px;">You don't have active coupons</p>
+</div>
+  {% endif %}
+  
+  {% endblock %}

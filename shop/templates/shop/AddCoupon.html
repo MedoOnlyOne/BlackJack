@@ -18,7 +18,7 @@
       display: block;
       margin:20px;
       margin-left:12%;
-      width:120px;
+      width:140px;
       height:30px;
       background-color :#232732;
       color: #BFB367 ;
@@ -52,29 +52,17 @@
 {% block name %}Add coupon{% endblock %}
 
 {% block body %}
-  <div class="add_coupon">
+  <div class="add_coupon" >
     <form action="{% url 'addcoupon' %}" method="POST">
       {% csrf_token %}
-      <input type="text" placeholder="Coupon name:..." name="name">
-      <input type="text" placeholder="Coupon code:..." name="code">
-      <input type="text" placeholder="Discount percentage:..." name="discount">
-      <input type="submit" value="Add coupon">
+      <input type="text" placeholder="Coupon name" name="name">
+      <input type="text" placeholder="Discount percentage" name="discount">
+      <input type="submit" value="Generate coupon">
     </form>
   </div>
-  
-  {% if coupons %}
-  <div class="coupons">
-    <h2 style="text-align: center;">Your active coupons</h2>
-    {% for coupon in coupons %}
-    <ul>
-      <li>
-      <p style="display: inline; margin-right: 15px;">Name: {{coupon.name}}</p>   
-      <p style="display: inline; margin-right: 15px;">Code: {{coupon.code}}</p>  
-      <p style="display: inline; margin-right: 15px;">Discount: {{coupon.discount}}%</p>
-      <button class="deactivate"><a href="{% url 'deactivatecoupon' coupon.code %}">Deactivate</a></button>
-      </li>
-    </ul>
-    {% endfor %}
-  </div>
+  {% if success %}
+  <div style="text-align: center; margin-bottom: 8px;"><strong style="color:green; margin:6%;">{{ message }}</strong></div>
+  {% else %}
+  <div style="text-align: center; margin-bottom: 8px;"><strong style="color:red; margin:6%;">{{ message }}</strong></div>
   {% endif %}
 {% endblock %}

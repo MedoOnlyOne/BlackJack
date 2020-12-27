@@ -4,7 +4,8 @@ from .models import Shop, Coupon
 from products.models import Product
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-
+import string 
+import random 
 #from django.db import TypeError
 
 def index(request, shopname):
@@ -12,6 +13,8 @@ def index(request, shopname):
     #if shopname in Shop.objects.all():
         if shopname=='addproduct':
             return addproduct(request)
+        elif shopname=='activecoupons':
+            return activecoupons(request)
         shop = Shop.objects.get(name=shopname)
         products = shop.products.all()
         return render(request, 'shop/index.html',{
@@ -78,26 +81,54 @@ def dashboard(request):
 @login_required
 def addcoupon(request):
     if request.method == "GET":
-        active_coupons = []
         coupons = request.user.shop.coupons.all()
-        for coupon in coupons:
-            if coupon.activated:
-                active_coupons.append(coupon)
         return render(request, 'shop/AddCoupon.html',{
-            'coupons': active_coupons
+            'coupons': coupons
         })
     else:
-        name = request.POST.get('name','')
-        code = request.POST.get('code','')
-        discount = request.POST.get('discount','')
-        c = Coupon(name=name, code=code, activated=True, discount=discount)
-        c.save()
-        request.user.shop.coupons.add(c)
-        return HttpResponseRedirect(reverse('addcoupon'))
-
+        name = request.POST['name']
+        if name.isspace() or name=='':
+             return render(request, 'shop/AddCoupon.html',{
+             'message':'Enter a name'
+        })
+        if Coupon.objects.filter(name=name):
+             return render(request, 'shop/AddCoupon.html',{
+             'message':'Name Already in use'
+        })
+        letters = string.ascii_letters
+        code = ''.join(random.choice(letters) for i in range(5))
+        while Coupon.objects.filter(code=code):
+            code = ''.join(random.choice(letters) for i in range(5))
+        try:
+            discount = int(request.POST['discount'])
+            if discount>=100:
+                  return render(request, 'shop/AddCoupon.html',{
+                    'message':'Enter a valid discount percentage'
+                  })
+            c = Coupon(name=name, code=code, activated=True, discount=discount)
+            c.save()
+            request.user.shop.coupons.add(c)
+            return render(request,'shop/AddCoupon.html',{
+                'message':'Entered succesfully',
+                'success':True
+            })
+        except ValueError:
+            return render(request, 'shop/AddCoupon.html',{
+            'message':'Enter a valid discount percentage'
+        })
 @login_required
 def deactivatecoupon(request, couponid):
     c = Coupon.objects.get(code=couponid)
     c.activated = False
     c.save()
-    return HttpResponseRedirect(reverse('addcoupon'))
+    return HttpResponseRedirect(reverse('activecoupons'))
+
+@login_required
+def activecoupons(request):
+    if not request.user.shop:
+        return render(request,'shop/not_a_seller.html')
+    coupons=request.user.shop.coupons.all()
+    if coupons:
+        return render(request,'shop/coupons.html',{
+            'coupons':coupons
+        })
