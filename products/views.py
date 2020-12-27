@@ -19,11 +19,12 @@ def product(request, productid):
         if 'add_review' in request.POST:
             text=request.POST.get('review','')
             rating=request.POST.get('rate',1)
-            rev=Review(text=text,stars=rating)
+            u = request.user
+            rev=Review(text=text,stars=rating, user=u)
             rev.save()
             product=Product.objects.get(id=productid)
             product.reviews.add(rev)
-            return HttpResponseRedirect(reverse('products:productpage',args=[productid]))
+            return HttpResponseRedirect(reverse('productpage',args=[productid]))
 
         elif 'add_to_cart' in request.POST:
             if request.user.is_authenticated:
@@ -31,7 +32,7 @@ def product(request, productid):
                 product = Product.objects.get(name=product_name)
                 request.user.cart.add(product)
 
-                return HttpResponseRedirect(reverse('products:productpage',args=[productid]))
+                return HttpResponseRedirect(reverse('productpage',args=[productid]))
             else:
                 return HttpResponseRedirect(reverse('login'))
         elif 'add_to_wishlist' in request.POST:
@@ -40,7 +41,7 @@ def product(request, productid):
                 product = Product.objects.get(name=product_name)
                 request.user.wishlist.add(product)
 
-                return HttpResponseRedirect(reverse('products:productpage',args=[productid]))
+                return HttpResponseRedirect(reverse('productpage',args=[productid]))
             else:
                 return HttpResponseRedirect(reverse('login'))
     else:

@@ -7,6 +7,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from .models import User, Product
+from shop.models import Shop
 from passlib.hash import django_pbkdf2_sha256
 # Create your views here.
 def cart(request):
@@ -160,4 +161,7 @@ def become_a_seller(request):
 def orders(request):
     return render(request,'users/orders.html')
 
-
+def discovershops(request):
+    return render(request, 'users/discovershops.html', {
+        'shops': Shop.objects.all()
+    })

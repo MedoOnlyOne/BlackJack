@@ -45,7 +45,7 @@
                       <option value="purple">
                       <option value="brown">
                   </datalist> -->
-        <form action="{% url 'products:productpage' product.id %}" method="POST">
+        <form action="{% url 'productpage' product.id %}" method="POST">
           {% csrf_token %}
           <input type="hidden" name="productname" value="{{ product.name }}">
           <button type="submit" name="add_to_wishlist" class="wishlist" 
@@ -55,7 +55,7 @@
           >
           <i class="fa fa-heart"></i> Add to wishlist</button>
         </form>
-        <form action="{% url 'products:productpage' product.id %}" method="POST">
+        <form action="{% url 'productpage' product.id %}" method="POST">
           {% csrf_token %}
           <input type="hidden" name="productname" value="{{ product.name }}">
           <button type="submit" name="add_to_cart" class="cart"
@@ -71,16 +71,12 @@
         <img src="{{ product.image.url }}" alt="{{ product.name }}" id="productimage">
       </div>      
     </div>
-<div class="Dis">
+<div class="Dis"  style="width: 97.5%;">
   <h6>Product Discription</h6>
-  <p id="discription">You know what's sucky about regular flashlights?
-    They only come in two colors: white or that yellowish-white that reminds us of the teeth of an avid coffee drinker.
-    What fun is that kind of flashlight? We'll answer that: NO FUN AT ALL.
-    You know what is fun? Using the Multi-Color LED Flashlight to cast a sickly green glow over your face while telling a zombie story around a campfire.No campfire?
-     Make a fake one with the orange light!</p>
+  <p id="discription">{{product.description}}</p>
 </div>
 <div class="Rev">
-<form action="{% url 'products:productpage' product.id %}" method="POST">
+<form action="{% url 'productpage' product.id %}" method="POST">
   {% csrf_token %}
 <h6>Write a Review</h6>
 <textarea name="review" placeholder="Write your review here"></textarea>

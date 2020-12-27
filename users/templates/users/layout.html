@@ -156,7 +156,8 @@
             <li> <a href="{% url 'userdashboard' %}"> My Account </a>
             {% if user.is_seller %}
             <li> <a href="{% url 'shopdashboard' %}"> My shop </a>
-            {% endif %} 
+            {% endif %}
+            <li> <a href="{% url 'discovershops' %}"> Discover shops </a> 
             <li> <a href="{% url 'orders' %}"> Orders </a> 
             <li> <a href="{% url 'wishlist' %}"> Wishlist </a>
             <li> <a href="{% url 'cart' %}"> Cart </a> 

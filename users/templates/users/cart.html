@@ -100,7 +100,7 @@
           {% for product in products %}
           <div class="item" title="{{ product.name }}">
             <img src="{{ product.image.url }}" height="135" width="135"> 
-            <p style="font-size:25px; font-weight:bold; position:relative; top:5px;"><a href="{% url 'products:productpage' product.id %}">Product name : {{ product.name }}</a></p>
+            <p style="font-size:25px; font-weight:bold; position:relative; top:5px;"><a href="{% url 'productpage' product.id %}">Product name : {{ product.name }}</a></p>
             <p><span style="font-weight:bold;">Sold By: </span>{{ product.shop.name }}</p>
             <button type="button" name="-" class="count" onclick="dec({{product.name}})">-</button>
               <p style="display:inline;"><span style="font-weight:bold; bottom:10px;">Quantity : </span> <span id="{{product.name}}" name="q">1</span></p>
