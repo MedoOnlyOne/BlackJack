@@ -52,6 +52,10 @@ p{
     margin-bottom: 0%;
 
   }
+  #button_1:hover{
+    cursor: pointer;
+    color: #BFB367;
+  }
   #m9 input[type="email"]{
     margin-left: 6%;
     margin-top: 3%;
@@ -147,29 +151,33 @@ p{
   </style>
 </head>
 <body>
-  <form>
+  <form action="{% url 'create_shop' %}" method="POST">
+    {% csrf_token %}
     <div id="header">
       <h7 id="hhh">BlackJack</h7>
       <h8>The Official online store </h8>
    </div>
    <div id="info">
-   <p id="signup"> 4.Store Name</p>
-   <span id="disc">Once chosen, you won't be able to change it. If you're still not sure, keep it empty and you can choose it later </span>
+   <p id="signup">Create a shop</p>
+   <span id="disc">Once chosen, you won't be able to change it.</span>
  </div>
      <h1 id="m9">
        <div id="m99">
 
        <h2>Store Name</h2>
-       <input type="text" id="ID">
+       <input type="text" id="ID" name="shopName" style="width: 300px; margin-left: 57px;">
      </div>
       <div>
-        <h2>Category</h2>
-        <input type="text" id="Cat">
+        <h2>Store address</h2>
+        <input type="text" id="Cat" name="shopAddress" style="width: 300px;">
+      </div>
+      <div style="display: flex; flex-wrap: wrap; margin-bottom: 10px;">
+        <h2 style="margin-left: 30px;">Descreption</h2>
+        <textarea name="shopDescreption" style="width: 300px; height: 150px; margin-left: 60px;"></textarea>
       </div>
      </h1>
     <footer>
-       <button type="submit" id="button_1"><a href="StoreName.html">Save And Continue</a></button>
-       <button type="submit" id="button_2"><a href="verify.html">Back</a></button>
+       <input id="button_1" type="submit" value="Create shop">
    </footer>
   </form>
 </body>

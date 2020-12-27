@@ -4,8 +4,9 @@ from products.models import Product
 class Shop(models.Model):
     name = models.CharField(max_length=30)
     description = models.TextField(max_length=100)
+    address = models.TextField(max_length=100,)
     products = models.ManyToManyField(Product, blank=True, related_name="products")
-    coupons = models.ManyToManyField('shop.Coupon',null=True,default=None)
+    coupons = models.ManyToManyField('shop.Coupon',default=None)
     def __str__(self):
         return f"{self.name}"
 

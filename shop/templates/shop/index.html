@@ -1,24 +1,90 @@
-{% extends 'shop/layout.html' %}
-{% block head %} 
-  <title>{{shop.name}} Products</title>
-  <style>
-    #items
-   {
-     margin-left: 40px;
-     overflow: hidden;
-    /* position:relative;
-    left:40px;
-    background-color:white;
-    float:left;
-    width:715px; */
-   }
-
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>{{shop.name}}</title>
+      <style>
+        .Container{
+          overflow:hidden;
+        }
+        header{
+        background-color: #232732;
+        color: #ffffff;
+        border-bottom: #BFB367 6px solid;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        z-index: 1;
+        }
+        #header{
+          display:inline-block;
+        }
+        header #webname {
+        font-weight: bold;
+        font-size:36pt;
+        color:white;
+        float: left;
+        margin-left: 50px;
+        
+        }
+    
+        header .official  {
+        color: #BFB367;
+        font-size: 12pt;
+        font-weight: bold;
+        }
+    
+        header #webname h1{ margin:0;}
+    
+        header ul{
+        margin:0;
+        padding: 0;
+        }
+    
+        header li {
+        display: inline;
+        padding: 0 20px 0 20px;
+        }
+    
+        header a{
+        text-decoration: none;
+        color: #BFB367;
+        text-transform: uppercase;
+        font-size:15pt;
+        }
+    
+        header nav{float:right;
+        padding-right:30px;}
+    
+            
+        header a:hover {
+        color:white;
+        }
+        .items
+        {
+          /* margin-top:100px; */
+          width:730px;
+          /* padding:0px; */
+          margin: auto;
+          overflow: hidden;
+        }
+        #official {
+            color: #BFB367;
+            margin-top: 10%;
+            margin-bottom: 5%;
+            display:inline;
+            }
+        #BlackJack {
+            font-size: 40px;
+            color: white;
+            display:inline;
+        }
    .item
    {
     float:left;
     width:700px;
-    /* max-height:200px;
-    position:relative; */
     background-color:white;
     border:5px solid #BFB367;
     margin:3px;
@@ -31,10 +97,6 @@
     .item a:hover{
         color:#BFB367;
     }
-   .itemscontainer
-   {
-    border:navy;
-   }
 
    .item p
     {
@@ -74,14 +136,45 @@
     width:25px;
     margin-bottom: 5px; 
    }
+   .shop_info{
+     width: 700px;
+     border:5px solid #BFB367;
+     margin: 60px auto;
+     margin-bottom: 10px;
+     padding-left: 10px;
+   }
   </style>
-{% endblock %}
 
-{% block name %}{{shop.name}} Products{% endblock %}
+</head>
+<body>
+  <div>
+  <header>
+    <div class="Container">
+        <div id="header">
+        <span id="BlackJack">BlackJack</span>
+        <span id="official">The Official online store </span>
+    </div>
+    
+  <nav> <ul style="margin-top:12px;"> 
+    <li> <a href="#"> Home </a> </li>
+    <li> <a href="{% url 'userdashboard'%}"> Profile </a></li>
+    {% if user.is_authenticated %}
+    <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
+    {% else %}
+    <li> <a href="{% url 'login' %}">  Login  </a> </li>
+    {% endif %}
+  </ul> </nav>
+    </div>
+</header>
+</div>
 
-{% block body %}
-  <div id="items">
-    <div class="itemscontainer">
+  <div class="shop_info" title="{{ shop.name }}"> 
+    <p><span style="font-weight:bold;">Shop name : </span> {{shop.name}}</p>
+    <p><span style="font-weight:bold;">Shop address : </span> {{shop.address}}</p>
+    <p><span style="font-weight:bold;">Shop description : </span> {{shop.description}}</p>
+  </div>
+
+  <div class="items">
         {% for product in products %}
         <div class="item" title="{{ product.name }}">
           <img src="{{ product.image.url }}" height="135" width="135"> 
@@ -93,4 +186,6 @@
         {% endfor %} 
     </div>
   </div>
-{% endblock %}
+</body>
+</html>
+

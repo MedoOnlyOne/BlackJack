@@ -165,3 +165,18 @@ def discovershops(request):
     return render(request, 'users/discovershops.html', {
         'shops': Shop.objects.all()
     })
+
+def create_shop(request):
+    if request.method == "GET":
+        return render(request, "users/StoreName.html")
+    else:
+        shopName = request.POST.get('shopName', '')
+        shopAddress = request.POST.get('shopAddress', '')
+        shopDesc = request.POST.get('shopDescreption', '')
+        sh = Shop(name=shopName, address=shopAddress, description=shopDesc)
+        sh.save()
+        u = request.user
+        u.shop = sh
+        u.is_seller = True
+        u.save()
+        return HttpResponseRedirect(reverse('shopdashboard'))

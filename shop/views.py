@@ -15,8 +15,8 @@ def index(request, shopname):
             return addproduct(request)
         elif shopname=='activecoupons':
             return activecoupons(request)
-        if request.user.shop and request.user.shop.name == shopname:
-            return HttpResponseRedirect(reverse('shopdashboard'))
+        # if request.user.shop and request.user.shop.name == shopname:
+        #     return HttpResponseRedirect(reverse('shopdashboard'))
         shop = Shop.objects.get(name=shopname)
         products = shop.products.all()
         return render(request, 'shop/index.html',{
