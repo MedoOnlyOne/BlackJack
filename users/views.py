@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required #@login_required(login_url='login/')
 from django.core import serializers
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect,JsonResponse
 from django.urls import reverse
 from .models import User, Product
 from shop.models import Shop
@@ -12,8 +12,24 @@ from passlib.hash import django_pbkdf2_sha256
 
 
 # Create your views here.
+@login_required
 def cart(request):
-    if request.method=='POST':
+    if request.is_ajax():
+        coupon_code=request.GET['coupon_code']
+        products=request.user.cart.all()
+        for product in products:
+            for coupon in product.shop.coupons.all():
+                print(coupon_code,coupon.code)
+                if coupon_code==coupon.code and coupon.activated:
+                    return JsonResponse({
+                        'success':True,
+                        'discount':coupon.discount,
+                        'shopname':coupon.shop.name
+                    })
+        return JsonResponse({
+                            'success':False
+                        })
+    elif request.method=='POST':
         HttpResponse('<h1>ZEB</h1>')
     else:
         products=request.user.cart.all()
@@ -188,4 +204,5 @@ def create_shop(request):
 
 @login_required
 def checkout(request):
-    pass
+    print(request.POST['total'])
+    return render(request,'users/checkout.html')

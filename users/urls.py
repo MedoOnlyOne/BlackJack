@@ -12,5 +12,5 @@ urlpatterns = [
     path('wishlist/',views.wishlist,name='wishlist'),
     path('orders/',views.orders,name='orders'),
     path('discovershops/', views.discovershops, name="discovershops"),
-    path('transaction/<str:orderid>',views.checkout, name='checkout')
+    path('transaction',views.checkout, name='checkout')
 ]
