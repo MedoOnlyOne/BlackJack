@@ -39,14 +39,13 @@
         <p style="display: inline; margin-right: 15px;">Name: {{coupon.name}}</p>   
         <p style="display: inline; margin-right: 15px;">Code: {{coupon.code}}</p>  
         <p style="display: inline; margin-right: 15px;">Discount: {{coupon.discount}}%</p>
-        <strong style="color:red;">{{ message }}</strong>
         <button class="deactivate"><a href="{% url 'deactivatecoupon' coupon.code %}">Deactivate</a></button>
     </div>
     {% endif %}
     {% endfor %}
   {% else %}
   <div id="info">
-    <p style="margin-top:50px; padding-top:20px;">You don't have active coupons</p>
+    <p style="margin-top:50px; padding-top:20px; font-size:36px; text-align:center">You don't have active coupons</p>
 </div>
   {% endif %}
   

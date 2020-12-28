@@ -190,7 +190,7 @@
       <!-- <div style="display:inline; float: left; margin-left: 350px;"> -->
         <button type="submit" id="ConfirmButton" onclick="EnableAll()"> Confirm </button>
         {% if not request.user.is_seller %}
-        <button type="button" id="Become_a_seller"><a href="{% url 'become_a_seller'%}">Become a seller</a></button>
+        <button type="button" id="Become_a_seller"><a href="{% url 'create_shop'%}">Become a seller</a></button>
         {% endif %}
       </div>
   </form>

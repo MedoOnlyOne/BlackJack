@@ -9,15 +9,20 @@ from django.urls import reverse
 from .models import User, Product
 from shop.models import Shop
 from passlib.hash import django_pbkdf2_sha256
+
+
 # Create your views here.
 def cart(request):
-    products=request.user.cart.all()
-    return render(request,"users/cart.html",
-    {
-        'products':products,
-        'user':request.user 
-    }
-    )
+    if request.method=='POST':
+        HttpResponse('<h1>ZEB</h1>')
+    else:
+        products=request.user.cart.all()
+        return render(request,"users/cart.html",
+        {
+            'products':products,
+            'user':request.user 
+        })
+
 def wishlist(request):
     products=request.user.wishlist.all()
     return render(request,"users/wishlist.html",
@@ -43,7 +48,7 @@ def index(request):
         return HttpResponseRedirect(reverse("userdashboard"))
 
     else:
-        # get user's wishList, cart and parchases
+        # Get user's wishList, cart and parchases
         wishlist = request.user.wishlist.all()
         cart = request.user.cart.all()
         shop = request.user.shop
@@ -133,11 +138,11 @@ def SignUp(request):
 def changepassword(request):
     if request.method=='POST':
         try:
-           old_password = request.POST.get('old_password','')
-           new_password = request.POST.get('new_password','')
-           confirm_new_password = request.POST.get('confirm_new_password','')
-           hash = request.user.password
-           if django_pbkdf2_sha256.verify(old_password, hash):
+            old_password = request.POST.get('old_password','')
+            new_password = request.POST.get('new_password','')
+            confirm_new_password = request.POST.get('confirm_new_password','')
+            hash = request.user.password
+            if django_pbkdf2_sha256.verify(old_password, hash):
                 if new_password==confirm_new_password:
                     user = User.objects.get(username=request.user.username)
                     #user.update(password=new_password)
@@ -148,16 +153,13 @@ def changepassword(request):
                     return render(request,'users/changepassword.html',{'message':"Password changed successfully."})
                 else:
                     return render(request,'users/changepassword.html',{'message':"Passwords don't match."})
-           else:
+            else:
                 return render(request,'users/changepassword.html',{'message':"Incorrect password."})
         except:
             return render(request,'users/changepassword.html',{'message':"An unexpected error happend, please try again later."})
     else:
         return render(request,"users/changepassword.html")
         
-def become_a_seller(request):
-    return render(request,'users/StoreName.html')
-
 def orders(request):
     return render(request,'users/orders.html')
 
@@ -165,10 +167,13 @@ def discovershops(request):
     return render(request, 'users/discovershops.html', {
         'shops': Shop.objects.all()
     })
-
+@login_required
 def create_shop(request):
     if request.method == "GET":
-        return render(request, "users/StoreName.html")
+        if not request.user.shop:
+            return render(request, "users/StoreName.html")
+        else:
+            return HttpResponseRedirect(reverse('userdashboard'))
     else:
         shopName = request.POST.get('shopName', '')
         shopAddress = request.POST.get('shopAddress', '')
@@ -180,3 +185,7 @@ def create_shop(request):
         u.is_seller = True
         u.save()
         return HttpResponseRedirect(reverse('shopdashboard'))
+
+@login_required
+def checkout(request):
+    pass

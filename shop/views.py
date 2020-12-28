@@ -83,6 +83,8 @@ def dashboard(request):
 @login_required
 def addcoupon(request):
     if request.method == "GET":
+        if not request.user.shop:
+            return render(request,'shop/not_a_seller.html')
         coupons = request.user.shop.coupons.all()
         return render(request, 'shop/AddCoupon.html',{
             'coupons': coupons
@@ -93,21 +95,24 @@ def addcoupon(request):
              return render(request, 'shop/AddCoupon.html',{
              'message':'Enter a name'
         })
+        coupons=Coupon.objects.filter(name=name)
         if Coupon.objects.filter(name=name):
-             return render(request, 'shop/AddCoupon.html',{
-             'message':'Name Already in use'
-        })
+            for coupon in coupons:
+                if coupon.shop.id == request.user.shop.id :
+                    return render(request, 'shop/AddCoupon.html',{
+                'message':'Name Already in use'
+                })
         letters = string.ascii_letters
         code = ''.join(random.choice(letters) for i in range(5))
         while Coupon.objects.filter(code=code):
             code = ''.join(random.choice(letters) for i in range(5))
         try:
             discount = int(request.POST['discount'])
-            if discount>=100:
+            if discount>=100 and discount<0:
                   return render(request, 'shop/AddCoupon.html',{
                     'message':'Enter a valid discount percentage'
                   })
-            c = Coupon(name=name, code=code, activated=True, discount=discount)
+            c = Coupon(name=name, code=code, activated=True, discount=discount,shop=request.user.shop)
             c.save()
             request.user.shop.coupons.add(c)
             return render(request,'shop/AddCoupon.html',{
@@ -130,7 +135,9 @@ def activecoupons(request):
     if not request.user.shop:
         return render(request,'shop/not_a_seller.html')
     coupons=request.user.shop.coupons.all()
-    if coupons:
-        return render(request,'shop/coupons.html',{
+    return render(request,'shop/coupons.html',{
             'coupons':coupons
         })
+# @login_required
+# def checkout(request):
+
