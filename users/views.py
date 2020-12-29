@@ -6,10 +6,10 @@ from django.core import serializers
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect,JsonResponse
 from django.urls import reverse
-from .models import User, Product
+from .models import User, Product,Order
 from shop.models import Shop
 from passlib.hash import django_pbkdf2_sha256
-
+import uuid
 
 # Create your views here.
 @login_required
@@ -203,6 +203,15 @@ def create_shop(request):
         return HttpResponseRedirect(reverse('shopdashboard'))
 
 @login_required
-def checkout(request):
-    print(request.POST['total'])
-    return render(request,'users/checkout.html')
+def createtransaction(request):
+    order = Order(user=request.user,bill=request.POST['total'])
+    order.products.add(*request.user.cart.all())
+    order.save()
+    return HttpResponseRedirect(reverse('checkout'),{
+        'order':order
+    },args=[order.id])
+@login_required
+def checkout(request,orderid):
+    order=Order.objects.get(id=orderid)
+    print(order)
+    return render(request,'checkout.html')

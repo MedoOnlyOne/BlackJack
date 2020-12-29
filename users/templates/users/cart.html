@@ -123,16 +123,13 @@
       <p style="font-size:20px;margin-left:5px; font-weight:bold;margin-bottom:4px;margin-top: 0px;">Redeem Coupon <span style="font-size:12px;">(optional)</span></p>
       <input type="text" name="username" id="coupon_code" placeholder="Place your coupon here" style="display:inline; height:40px; width:240px; margin-left:5px; margin-top:0px;text-align:center;"> 
       <input type="button" id="add_coupon" name="Submit" value="Submit" style="display:inline; height:45px; width:80px; position:relative; left:5px; font-weight:bold; margin-bottom:20px; ">
-      <form action="{% url 'checkout' %}" method="POST">
+      <form action="{% url 'create_transaction' %}" method="POST">
         {% csrf_token %}
       <input id="bill" type="hidden" name="total">
       <input type="submit" name="proceed_to_checkout" value="Proceed to checkout" style=" height:40px; width:337px; margin-left:5px; font-weight:bold;">
       </form>
   </div>
-  <script
-  src="https://code.jquery.com/jquery-3.5.1.js"
-  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-  crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   <script src="../static/users/cart.js"></script>
 
 {% endblock %}

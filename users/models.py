@@ -26,3 +26,4 @@ class Order(models.Model):
     user=models.ForeignKey('users.User',on_delete=models.PROTECT)
     products = models.ManyToManyField('products.Product', related_name="ordered_products")
     is_delivered = models.BooleanField(default=False)       
+    bill = models.DecimalField(max_digits=6,decimal_places=2,default=100)
