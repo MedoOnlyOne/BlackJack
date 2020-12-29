@@ -6,8 +6,8 @@ from django.core import serializers
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect,JsonResponse
 from django.urls import reverse
-from .models import User, Product,Order
-from shop.models import Shop
+from .models import User, Product,Order,InCart
+from shop.models import Shop,Coupon
 from passlib.hash import django_pbkdf2_sha256
 import uuid
 
@@ -36,6 +36,7 @@ def cart(request):
         return render(request,"users/cart.html",
         {
             'products':products,
+            'len':len(products),
             'user':request.user 
         })
 
@@ -204,14 +205,27 @@ def create_shop(request):
 
 @login_required
 def createtransaction(request):
-    order = Order(user=request.user,bill=request.POST['total'])
-    order.products.add(*request.user.cart.all())
+    products_in_cart=[]
+    for product in request.user.cart.all():
+        product_in_cart=InCart(quantity=request.POST[f'{product.id}_quantity'])
+        product_in_cart.product = product
+        product_in_cart.save()
+        products_in_cart.append(product_in_cart)
+    print(request.POST)
+    if Coupon.objects.filter(code=request.POST['coupon_code']):  
+        coupon=Coupon.objects.get(code=request.POST['coupon_code'])
+    else:
+        coupon=None
+    order = Order(bill=request.POST['total'],coupon=coupon)
     order.save()
-    return HttpResponseRedirect(reverse('checkout'),{
-        'order':order
-    },args=[order.id])
+    for p in products_in_cart:
+        order.products.add(p)
+    return HttpResponseRedirect(reverse('checkout', args=[order.id]))
+
 @login_required
 def checkout(request,orderid):
     order=Order.objects.get(id=orderid)
-    print(order)
-    return render(request,'checkout.html')
+    return render(request,'users/checkout.html',{
+        'order': order,
+        'products': order.products.all()
+    })

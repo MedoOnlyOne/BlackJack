@@ -103,14 +103,14 @@
             <p style="font-size:25px; font-weight:bold; position:relative; top:5px;"><a href="{% url 'productpage' product.id %}">Product name : {{ product.name }}</a></p>
             <p><span style="font-weight:bold;">Sold By: </span><span id="shopname">{{ product.shop.name }}</span></p>
             <button type="button" name="-" class="count" onclick="dec({{product.name}})">-</button>
-              <p style="display:inline;"><span style="font-weight:bold; bottom:10px;">Quantity : </span> <span id="{{product.name}}" name="q">1</span></p>
+              <p style="display:inline;"><span style="font-weight:bold; bottom:10px;">Quantity : </span> <span id="{{product.name}}" name="{{product.name}}" class="q">1</span></p>
               <button type="button" name="+" class="count" onclick="inc({{product.name}})"
               {% if q == product.remaininginstock %}
                 disabled="true"
               {% endif %}
               >+</button>
               
-              <p ><span style="font-weight:bold;">Price : <span name="p">{{product.price}}</span></p>
+              <p ><span style="font-weight:bold;">Price : <span class="p">{{product.price}}</span></p>
               
           </div>
           {% endfor %} 
@@ -126,11 +126,16 @@
       <form action="{% url 'create_transaction' %}" method="POST">
         {% csrf_token %}
       <input id="bill" type="hidden" name="total">
+      <input id="coupon" type="hidden" name="coupon_code">
+      {% for product in products %}
+      <input  type="hidden" class="quantity_of_product" name="{{product.id}}_quantity"> 
+      {% endfor %}
       <input type="submit" name="proceed_to_checkout" value="Proceed to checkout" style=" height:40px; width:337px; margin-left:5px; font-weight:bold;">
       </form>
   </div>
-  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-  <script src="../static/users/cart.js"></script>
-
 {% endblock %}
 
+{% block script%}
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+  <script src="../static/users/cart.js"></script>
+{% endblock %}
