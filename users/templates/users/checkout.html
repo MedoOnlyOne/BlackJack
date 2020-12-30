@@ -95,15 +95,14 @@
         <legend class="Checkout info">CHECKOUT</legend>
         <fieldset class="Order Summery" style="border:2px solid;">
             <legend class="Order Summery legend">ORDER SUMMERY</legend>
-            {% for product in products %}
+            {% for product,price in products_prices %}
             <div class="product" style="border-bottom:0.5px solid #232732;">
                 <div class="productimage">
-                <img src="{{ product.product.image.url }}" style="text-align : left;" width="70" height = "80" >
-                </div>
-                <br>
+                    <img src="{{ product.product.image.url }}" style="text-align : left;" width="70" height = "80" >
+                </div> <br>
                 <p class="order" >{{product.product.name}}</p>
                 <p class="quantity" >Quantity : {{product.quantity}}</p>
-                <p class="price" >Price : $60</p>
+                <p class="price" >Price : {{price}}</p>
             </div>
             {% endfor %}
             <br>

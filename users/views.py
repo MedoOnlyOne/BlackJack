@@ -220,12 +220,30 @@ def createtransaction(request):
     order.save()
     for p in products_in_cart:
         order.products.add(p)
+    request.user.orders.add(order)
     return HttpResponseRedirect(reverse('checkout', args=[order.id]))
 
 @login_required
 def checkout(request,orderid):
-    order=Order.objects.get(id=orderid)
-    return render(request,'users/checkout.html',{
-        'order': order,
-        'products': order.products.all()
-    })
+    order = Order.objects.get(id=orderid)
+    if order in request.user.orders.all():
+        prices = [product.product.price for product in order.products.all()]
+        quantities = [product.quantity for product in order.products.all()]
+        # print(prices)
+        # print(quantities)
+        if order.coupon:
+            for product in order.products.all():
+                if product.product.shop==order.coupon.shop:
+                    prodcuts_prices=[(order.products.all()[i],float(prices[i])*quantities[i]*(100-order.coupon.discount)/100) for i in range(len(order.products.all()))]
+                    return render(request,'users/checkout.html',{
+                        'order': order,
+                        'products_prices': prodcuts_prices
+                    })
+        else:
+            prodcuts_prices=[(order.products.all()[i],float(prices[i])*quantities[i]) for i in range(len(order.products.all()))]
+            return render(request,'users/checkout.html',{
+                'order': order,
+                'products_prices': prodcuts_prices
+            })
+    else:
+        return HttpResponseRedirect(reverse('userdashboard'))
