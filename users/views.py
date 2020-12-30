@@ -178,7 +178,7 @@ def changepassword(request):
         return render(request,"users/changepassword.html")
         
 def orders(request):
-    return render(request,'users/orders.html')
+    return render(request,'users/orders.html',{'orders':request.user.orders.all()})
 
 def discovershops(request):
     return render(request, 'users/discovershops.html', {

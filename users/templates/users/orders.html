@@ -2,12 +2,68 @@
 {% block head %} 
   <title>Orders</title>
   <style>
+    #items
+   {
+     margin-left: 40px;
+     overflow: hidden;
+    /* position:relative;
+    left:40px;
+    background-color:white;
+    float:left;
+    width:715px; */
+   }
+
+   .item
+   {
+    float:left;
+    width:700px;
+    /* max-height:200px;
+    position:relative; */
+    background-color:white;
+    border:5px solid #BFB367;
+    margin:3px;
     
+   }
+   .item a{
+        color:black;
+        text-decoration: none;
+    }
+    .item a:hover{
+        color:#BFB367;
+    }
+   .item p
+    {
+        color:#232732;
+        font-size:17px;
+        margin-left: 8.5%;
+    }
   </style>
 {% endblock %}
 
 {% block name %}Orders{% endblock %}
 
 {% block body %} 
-
+<div id="items">
+  <div class="itemscontainer">  
+        
+    {% for order in orders %}
+      <div class="item"> 
+          <ol>
+            {% for product in order.products.all %}
+              <ul style="border:2px solid #BFB367; margin:10px">
+                <li><a href="{% url 'productpage' product.product.id %}">{{product.product.name}}</a></li>
+                <li>Quantity: <span>{{product.quantity}}</span></li>
+              </ul>
+            {% endfor %}
+          </ol>
+          <p>Total: {{order.bill}}</p>
+          <!-- <p>Status: {% if order.is_delivered %}
+            Delivered
+          {% endif %}
+          Not delivered
+          </p> -->
+      </div>
+    {% endfor %} 
+  </div>
+</div>
 {% endblock %}
