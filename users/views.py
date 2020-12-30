@@ -247,3 +247,21 @@ def checkout(request,orderid):
             })
     else:
         return HttpResponseRedirect(reverse('userdashboard'))
+
+@login_required
+def finalcheck(request):
+    ordered_products = Order.objects.get(id=request.POST['order_id']).products.all()
+    for product in ordered_products:
+        p = Product.objects.get(name=product.product.name)
+        if (p.remaininginstock - product.quantity) >= 0:
+            p.remaininginstock = p.remaininginstock - product.quantity
+            p.save()
+            product.delete()
+        else:
+            p.remaininginstock = 0
+            p.save()
+            product.delete()
+    
+    request.user.cart.clear()
+       
+    return HttpResponseRedirect(reverse("userdashboard"))

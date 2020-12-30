@@ -109,24 +109,28 @@
             <p class="total" style="text-align:right; font-weight:bold; font-size:20px ; text-decoration : underline ">TOTAL = ${{order.bill}}</p>
         </fieldset>
         <br>
-    <fieldset class="Shipping Info" style="border:2px solid;">
-        <legend class="Shipping Info legend">SHIPPING INFORMATION</legend>
-            <div>
-            <input type="text" name="Billing" placeholder="Billing Address" class="address" >
+        <form action="{% url 'finalcheck' %}" method="POST">
+            {% csrf_token %}
+            <fieldset class="Shipping Info" style="border:2px solid;">
+                <legend class="Shipping Info legend">SHIPPING INFORMATION</legend>
+                    <div>
+                    <input type="text" name="Billing" placeholder="Billing Address" class="address" >
+                    <br>
+                    <input type="text" name="Shipping" placeholder="Shipping Address" class="address"> 
+                    </div>
+            </fieldset>
             <br>
-            <input type="text" name="Shipping" placeholder="Shipping Address" class="address"> 
-            </div>
-    </fieldset>
-    <br>
-        <fieldset class="payment" style="border:2px solid;">
-            <legend class="paymenttitle">PAYMENT INFORMATION</legend>
-            <input type="text" class="Card" name="Card Number" placeholder="Card Number"> <br>
-            <input type="text" class="date" name="Month" placeholder="Month" >
-            <input type="text" class="date" name="Year" placeholder="Year" > <br>
-            <input type="text" class="Card" name="Security Code" placeholder="Security Code">
-            
-    </fieldset>
-        <input class="submit" type="submit" value = "Purchase">
+                <fieldset class="payment" style="border:2px solid;">
+                    <legend class="paymenttitle">PAYMENT INFORMATION</legend>
+                    <input type="text" class="Card" name="Card Number" placeholder="Card Number"> <br>
+                    <input type="text" class="date" name="Month" placeholder="Month" >
+                    <input type="text" class="date" name="Year" placeholder="Year" > <br>
+                    <input type="text" class="Card" name="Security Code" placeholder="Security Code">
+                    <input type="hidden" name="order_id" value="{{order.id}}">
+                    
+            </fieldset>
+                <input class="submit" type="submit" value = "Purchase">
+        </form>
     </fieldset>
     </div>
 {% endblock %}
