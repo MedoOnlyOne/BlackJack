@@ -74,6 +74,21 @@
     width:25px;
     margin-bottom: 5px; 
    }
+   .deactivate{
+      width:120px;
+      height:30px;
+      background-color :#232732;
+      font-weight:bold; 
+      margin-left:60%;
+    }
+    .deactivate a{
+      color: #BFB367;
+      text-decoration: none;
+    }
+    .deactivate a:hover{
+      color: #FFF;
+      cursor: pointer;
+    }
   </style>
 {% endblock %}
 
@@ -144,10 +159,10 @@
         {% for product in products %}
         <div class="item" title="{{ product.name }}">
           <img src="{{ product.image.url }}" height="135" width="135"> 
-          <p style="font-size:25px; font-weight:bold; position:relative; top:5px;"><a href="{% url 'products:productpage' product.id %}">Product name : {{ product.name }}</a></p>
+          <p style="font-size:25px; font-weight:bold; position:relative; top:5px;"><a href="{% url 'productpage' product.id %}">Product name : {{ product.name }}</a></p>
           <p><span style="font-weight:bold;">Sold By: </span>{{ product.shop.name }}</p>
           <p><span style="font-weight:bold;">Price : </span> {{product.price}}</p>
-            
+          <button class="deactivate"><a href="{% url 'removefromwishlist' product.id %}">Remove</a></button>
         </div>
         {% endfor %} 
     </div>

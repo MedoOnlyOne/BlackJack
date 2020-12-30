@@ -1,4 +1,4 @@
-{% extends 'users/layout.html' %}
+{% extends 'shop/layout.html' %}
 {% block head %} 
   <title>Orders</title>
   <style>
@@ -43,6 +43,7 @@
 {% block name %}Orders{% endblock %}
 
 {% block body %} 
+{% if orders %}
 <div id="items">
   <div class="itemscontainer">  
         
@@ -50,6 +51,7 @@
       <div class="item"> 
           <ol>
             {% for product in order.products.all %}
+            {% if product.product.shop.name == shop.name %}
               <ul style="border:2px solid #BFB367; margin:10px; list-style-type:none;">
                 <li><a href="{% url 'productpage' product.product.id %}"><h2 style="display:inline;">Product: </h2><span style="font-size:20px;">{{product.product.name}}</span></a></li>
                 <li><h2 style="display:inline;">Quantity: </h2> <span style="font-size: 20px;">{{product.quantity}}</span></li>
@@ -58,9 +60,9 @@
               {% endif %}
                 <li><h2 style="display:inline;">Status: </h2><span style="font-size: 20px;">{% if order.is_delivered %}Delivered{% else %}In progress{% endif %}</span></li>
               </ul>
+              {% endif %}
             {% endfor %}
           </ol>
-          <p>Total: {{order.bill}}</p>
           <!-- <p>Status: {% if order.is_delivered %}
             Delivered
           {% endif %}
@@ -70,4 +72,9 @@
     {% endfor %} 
   </div>
 </div>
+{% else %}
+<div>
+  <p style="font-size:36px; text-align:center">You don't have any orders</p>
+</div>
+{% endif %}
 {% endblock %}

@@ -4,24 +4,24 @@
   <style>
     #items
    {
-     margin-left: 40px;
      overflow: hidden;
     /* position:relative;
     left:40px;
     background-color:white;
-    float:left;
-    width:715px; */
+    float:left;*/
+    width:710px; 
+    margin:10px auto 10px auto;
+
    }
 
    .item
    {
-    float:left;
     width:700px;
     /* max-height:200px;
     position:relative; */
+    height:135px;
     background-color:white;
     border:5px solid #BFB367;
-    margin:3px;
     
    }
    .item a{
@@ -55,12 +55,13 @@
       font-size:30px;
       font-weight:bold;
       color:#232732;
-      width:680px;
+      width:700px;
       background-color:white;
       border:5px solid #BFB367;
-      margin:23px 43px;
       padding-bottom: 10px;
       text-align: center;
+      margin:10px auto 10px auto;
+
     }
     a [href="Cart.html"]
    {
@@ -75,6 +76,21 @@
     margin-bottom: 5px; 
    }
    button:hover,input[type="submit"]:hover{cursor: pointer;}
+   .deactivate{
+      width:120px;
+      height:30px;
+      background-color :#232732;
+      font-weight:bold; 
+      margin-left:60%;
+    }
+    .deactivate a{
+      color: #BFB367;
+      text-decoration: none;
+    }
+    .deactivate a:hover{
+      color: #FFF;
+      cursor: pointer;
+    }
   </style>
 {% endblock %}
 
@@ -104,13 +120,14 @@
             <p><span style="font-weight:bold;">Sold By: </span><span id="shopname">{{ product.shop.name }}</span></p>
             <button type="button" name="-" class="count" onclick="dec({{product.name}})">-</button>
               <p style="display:inline;"><span style="font-weight:bold; bottom:10px;">Quantity : </span> <span id="{{product.name}}" name="{{product.name}}" class="q">1</span></p>
-              <button type="button" name="+" class="count" onclick="inc({{product.name}})"
+              <button type="button" name="+" class="count" onclick="inc({{product.name}}, {{product.remaininginstock}})"
               {% if q == product.remaininginstock %}
                 disabled="true"
               {% endif %}
               >+</button>
               
               <p ><span style="font-weight:bold;">Price : <span class="p">{{product.price}}</span></p>
+              <button class="deactivate"><a href="{% url 'removefromcart' product.id %}">Remove</a></button>
               
           </div>
           {% endfor %} 
@@ -141,9 +158,17 @@
       style=" height:40px; width:337px; margin-left:5px; font-weight:bold;">
       </form>
   </div>
+  {% if message %}
+  <div>oijoijoijoijoijoijo</div>
+  {% endif %}
 {% endblock %}
 
 {% block script%}
+  {% if message %}
+    <script>
+      let message={{message}};
+    console.log(message);</script>
+  {% endif %}
   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   <script src="../static/users/cart.js"></script>
 {% endblock %}

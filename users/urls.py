@@ -14,5 +14,8 @@ urlpatterns = [
     path('discovershops/', views.discovershops, name="discovershops"),
     path('createtransaction/',views.createtransaction,name='create_transaction'),
     path('transaction/<str:orderid>',views.checkout, name='checkout'),
-    path('finalcheck/',views.finalcheck, name='finalcheck')
+    path('finalcheck/',views.finalcheck, name='finalcheck'),
+    path('contactus/', views.contactus, name='contactus'),
+    path('removefromwishlist/<str:productid>',views.removefromwishlist,name='removefromwishlist'),
+    path('removefromcart/<str:productid>',views.removefromcart,name='removefromcart')
 ]

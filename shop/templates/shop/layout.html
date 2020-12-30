@@ -140,6 +140,7 @@
         <nav> <ul style="margin-top:12px;"> 
             <li> <a href="#"> Home </a> </li>
             <li> <a href="{% url 'userdashboard'%}"> Profile </a></li>
+            <li> <a href="{% url 'contactus' %}"> Contact Us </a></li>
             {% if user.is_authenticated %}
             <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
             {% else %}
@@ -156,7 +157,7 @@
             <li> <a href="{% url 'addproduct' %}"> Add Product </a> </li>
             <li> <a href="{% url 'addcoupon' %}"> Add coupon </a> 
             <li> <a href="{% url 'activecoupons' %}"> Active Coupons</a></li>
-            <li> <a href="#"> Orders </a>
+            <li> <a href="{% url 'shop_orders'%}"> Orders </a>
             
         </ul> </nav>
         </section>

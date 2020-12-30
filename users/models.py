@@ -15,7 +15,7 @@ class User(AbstractUser):
     is_seller = models.BooleanField(default=False)
     cart = models.ManyToManyField('products.Product', blank=True, related_name="cart")
     wishlist = models.ManyToManyField('products.Product', blank=True, related_name="wishlist" )
-    shop = models.ForeignKey('shop.Shop', on_delete=models.SET_NULL, null=True, blank=True, default=None)
+    shop = models.ForeignKey('shop.Shop', related_name="user_shop",on_delete=models.SET_NULL, null=True, blank=True, default=None)
     orders = models.ManyToManyField('users.Order', blank=True, related_name="user_orders")
     def __str__(self):
         return f'{self.username}'

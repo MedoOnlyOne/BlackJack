@@ -22,14 +22,17 @@
       color: #FFF;
       cursor: pointer;
     }
-    #info {   
+    /* #info {   
       border-right: solid 8px #BFB367 ;
       border-bottom: solid 8px #BFB367 ;
       font-weight:bold;
-    }
+    } */
         
 </style>
 {% endblock %}
+
+{% block name %}Coupons{% endblock %}
+
 {% block body %}
 {% if coupons %}
 <h2 style="text-align: center;">Your active coupons</h2>
@@ -44,8 +47,8 @@
     {% endif %}
     {% endfor %}
   {% else %}
-  <div id="info">
-    <p style="margin-top:50px; padding-top:20px; font-size:36px; text-align:center">You don't have active coupons</p>
+  <div>
+    <p style="font-size:36px; text-align:center">You don't have active coupons</p>
 </div>
   {% endif %}
   

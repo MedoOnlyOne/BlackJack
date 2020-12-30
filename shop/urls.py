@@ -8,5 +8,6 @@ urlpatterns = [
     path('editproduct/<str:productid>/', views.editproduct, name='editproduct'),
     path('',views.dashboard,name='shopdashboard'),
     path('<str:shopname>/', views.index, name='shop'),
-    path('activecoupons/', views.activecoupons,name='activecoupons')
+    path('activecoupons/', views.activecoupons,name='activecoupons'),
+    path('orders/',views.orders,name='shop_orders')
 ]

@@ -1,0 +1,45 @@
+{% extends 'users/layout.html' %}
+{% block head %} 
+  <title>Contact us</title>
+  <style>
+      form{
+          width: 25%;
+          margin: 10px auto;
+      }
+
+    input[type="text"], textarea{
+        display:block;
+        width:300px;
+    }
+
+    button
+    {
+      margin-top:20px;
+      margin-left:100px;
+      width:120px;
+      height:30px;
+      background-color :#232732;
+      color: #BFB367 ;
+      font-weight:bold;
+    }
+    button:hover{
+        cursor: pointer;
+        color: #FFF;
+    }
+  </style>
+{% endblock %}
+
+{% block name %}Contact Us{% endblock %}
+
+{% block body %}
+  <form action="{% url 'contactus' %}" method="POST">
+      {% csrf_token %}
+      <input type="text" name="subject" placeholder="Subject">
+      <br>
+      <textarea name="message" cols="30" rows="10" placeholder="Message"></textarea>
+      {% if message%}
+        <script> alert("{{message}}");</script>
+      {% endif %}
+      <button type="submit">Contact us</button>
+  </form>
+{% endblock %}

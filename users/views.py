@@ -10,6 +10,8 @@ from .models import User, Product,Order,InCart
 from shop.models import Shop,Coupon
 from passlib.hash import django_pbkdf2_sha256
 import uuid
+from django.conf import settings 
+from django.core.mail import send_mail 
 
 # Create your views here.
 @login_required
@@ -19,7 +21,6 @@ def cart(request):
         products=request.user.cart.all()
         for product in products:
             for coupon in product.shop.coupons.all():
-                print(coupon_code,coupon.code)
                 if coupon_code==coupon.code and coupon.activated:
                     return JsonResponse({
                         'success':True,
@@ -29,15 +30,12 @@ def cart(request):
         return JsonResponse({
                             'success':False
                         })
-    elif request.method=='POST':
-        HttpResponse('<h1>ZEB</h1>')
-    else:
+    elif request.method=='GET':
+        print(request.GET)
         products=request.user.cart.all()
         return render(request,"users/cart.html",
         {
             'products':products,
-            'len':len(products),
-            'user':request.user 
         })
 
 def wishlist(request):
@@ -207,11 +205,12 @@ def create_shop(request):
 def createtransaction(request):
     products_in_cart=[]
     for product in request.user.cart.all():
+        if request.POST[f'{product.id}_quantity']=='0':
+            continue
         product_in_cart=InCart(quantity=request.POST[f'{product.id}_quantity'])
         product_in_cart.product = product
         product_in_cart.save()
         products_in_cart.append(product_in_cart)
-    print(request.POST)
     if Coupon.objects.filter(code=request.POST['coupon_code']):  
         coupon=Coupon.objects.get(code=request.POST['coupon_code'])
     else:
@@ -229,8 +228,6 @@ def checkout(request,orderid):
     if order in request.user.orders.all():
         prices = [product.product.price for product in order.products.all()]
         quantities = [product.quantity for product in order.products.all()]
-        # print(prices)
-        # print(quantities)
         if order.coupon:
             for product in order.products.all():
                 if product.product.shop==order.coupon.shop:
@@ -250,18 +247,57 @@ def checkout(request,orderid):
 
 @login_required
 def finalcheck(request):
+    order = Order.objects.get(id=request.POST['order_id'])
     ordered_products = Order.objects.get(id=request.POST['order_id']).products.all()
     for product in ordered_products:
         p = Product.objects.get(name=product.product.name)
-        if (p.remaininginstock - product.quantity) >= 0:
-            p.remaininginstock = p.remaininginstock - product.quantity
-            p.save()
-            product.delete()
-        else:
-            p.remaininginstock = 0
-            p.save()
-            product.delete()
+        if order not in p.shop.orders.all():
+            p.shop.orders.add(order)
+        p.remaininginstock = p.remaininginstock - product.quantity
+        p.save()
+    request.user.cart.clear()    
+    order.is_ordered=True
+    order.save()
+
+    subject = 'Order has been sent successfully'
+    message = f'Hi {request.user.username}, thank you for ordering from our store.'
+    email_from = settings.EMAIL_HOST_USER 
+    recipient_list = [request.user.email, ] 
+    send_mail( subject, message, email_from, recipient_list )
     
-    request.user.cart.clear()
-       
+
+    subject = 'Products from your shop have been ordered'
+    message = f'User {request.user.username} has ordered from your shop, check you shop dashboard for order details.'
+    email_from = settings.EMAIL_HOST_USER 
+    recipient_list = list(set([product.product.shop.user_shop.all()[0].email for product in ordered_products]))
+    print(recipient_list)
+    send_mail( subject, message, email_from, recipient_list )
+
     return HttpResponseRedirect(reverse("userdashboard"))
+
+@login_required
+def contactus(request):
+    if request.method == "GET":
+        return render(request,"users/contactus.html")
+    else:
+        subject=request.POST['subject']
+        message=request.POST['message']
+        if len(message)<30:
+            return render(request,"users/contactus.html",{'message':'Please type a longer message'})
+        if  len(subject)<5:
+            return render(request,"users/contactus.html",{'message':'Please type a longer subject'})
+        email_from = settings.EMAIL_HOST_USER
+        superusers = User.objects.filter(is_superuser=True) 
+        recipient_list = [user.email for user in superusers]
+        send_mail( subject, message, email_from, recipient_list )
+        return HttpResponseRedirect(reverse('userdashboard'))
+@login_required
+def removefromwishlist(request,productid):
+    product=Product.objects.get(id=productid)
+    request.user.wishlist.remove(product)
+    return HttpResponseRedirect(reverse('wishlist'))
+@login_required
+def removefromcart(request,productid):
+    product=Product.objects.get(id=productid)
+    request.user.cart.remove(product)
+    return HttpResponseRedirect(reverse('cart'))

@@ -112,7 +112,8 @@
             
         <nav> <ul style="margin-top:12px;"> 
             <li> <a href="#"> Home </a> </li>
-            <li> <a href="{% url 'userdashboard'%}"> Profile </a></li>
+            <li> <a href="{% url 'userdashboard'%}"> Profile </a></li>            <li> <a href="#"> Contact Us </a></li>
+            <li> <a href="#"> Contact Us </a></li>
             {% if user.is_authenticated %}
             <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
             {% else %}
@@ -121,6 +122,7 @@
         </ul> </nav>
             </div>
         </header>
+        
 
         <div class="box" id="info">
             <p style="margin-top:50px; padding-top:20px;">You don't have a Shop yet!</p>

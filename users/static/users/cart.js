@@ -23,8 +23,10 @@ function total(){
   }
 }
 
-function inc(id) {
-    id.innerHTML++;
+function inc(id, stock) {
+    if (id.innerHTML < stock){
+      id.innerHTML++;
+    }
     total();
   };
 

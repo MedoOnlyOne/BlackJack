@@ -15,6 +15,8 @@ def index(request, shopname):
             return addproduct(request)
         elif shopname=='activecoupons':
             return activecoupons(request)
+        elif shopname=='orders':
+            return orders(request)
         # if request.user.shop and request.user.shop.name == shopname:
         #     return HttpResponseRedirect(reverse('shopdashboard'))
         shop = Shop.objects.get(name=shopname)
@@ -126,8 +128,7 @@ def addcoupon(request):
 @login_required
 def deactivatecoupon(request, couponid):
     c = Coupon.objects.get(code=couponid)
-    c.activated = False
-    c.save()
+    c.delete()
     return HttpResponseRedirect(reverse('activecoupons'))
 
 @login_required
@@ -138,6 +139,9 @@ def activecoupons(request):
     return render(request,'shop/coupons.html',{
             'coupons':coupons
         })
-# @login_required
-# def checkout(request):
+@login_required
+def orders(request):
+    if not request.user.shop:
+        return render(request,'shop/not_a_seller.html')
+    return render(request,'shop/orders.html',{'orders':request.user.shop.orders.all(),'shop':request.user.shop})
 

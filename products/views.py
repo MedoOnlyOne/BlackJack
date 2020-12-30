@@ -71,7 +71,7 @@ def product(request, productid):
             else:
                 in_wishlist=None
                 in_cart=None
-            return render(request,'products/product copy.html',{
+            return render(request,'products/product.html',{
             'product': product,
             'rating': rating,
             'price' : round(product.price*decimal.Decimal(currency_ratio),2),

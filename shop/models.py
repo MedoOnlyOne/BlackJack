@@ -7,6 +7,7 @@ class Shop(models.Model):
     address = models.TextField(max_length=100,)
     products = models.ManyToManyField(Product, blank=True, related_name="products")
     coupons = models.ManyToManyField('shop.Coupon',default=None,related_name='shop_coupons')
+    orders = models.ManyToManyField('users.Order',default=None,related_name='shop_orders')
     def __str__(self):
         return f"{self.name}"
 

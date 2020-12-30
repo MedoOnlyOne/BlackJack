@@ -5,6 +5,15 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>{{shop.name}}</title>
       <style>
+        html{
+          position: relative;
+          min-height: 100%;;
+        }
+        body{
+          margin: 0 0 100px;
+          bottom:50px;
+          padding: 25px;
+        }
         .Container{
           overflow:hidden;
         }
@@ -138,10 +147,10 @@
    }
    .shop_info{
      width: 700px;
-     border:5px solid #BFB367;
      margin: 60px auto;
      margin-bottom: 10px;
      padding-left: 10px;
+     text-align: center;
    }
   </style>
 
@@ -158,6 +167,7 @@
   <nav> <ul style="margin-top:12px;"> 
     <li> <a href="#"> Home </a> </li>
     <li> <a href="{% url 'userdashboard'%}"> Profile </a></li>
+    <li> <a href="{% url 'contactus' %}"> Contact Us </a></li>
     {% if user.is_authenticated %}
     <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
     {% else %}
@@ -168,13 +178,15 @@
 </header>
 </div>
 
-  <div class="shop_info" title="{{ shop.name }}"> 
+  <!-- <div class="shop_info" title="{{ shop.name }}"> 
     <p><span style="font-weight:bold;">Shop name : </span> {{shop.name}}</p>
     <p><span style="font-weight:bold;">Shop address : </span> {{shop.address}}</p>
     <p><span style="font-weight:bold;">Shop description : </span> {{shop.description}}</p>
-  </div>
-
-  <div class="items">
+  </div> -->
+<div class=shop_info>
+  <h1>{{shop.name}}</h1>
+</div>
+  <div class="items" style="margin-bottom:50px;">
         {% for product in products %}
         <div class="item" title="{{ product.name }}">
           <img src="{{ product.image.url }}" height="135" width="135"> 
@@ -186,6 +198,10 @@
         {% endfor %} 
     </div>
   </div>
+  <footer style="position: absolute;left: 0;right:0px;bottom: 0;height: 100px;overflow: hidden; padding:10px;border-top: 3px solid #BFB367;">
+    <p><span style="font-weight: bold;">Address:</span> {{shop.address}}</p>
+    <p><span style="font-weight: bold;">Description:</span> {{shop.description}}</p>
+  </footer>
 </body>
 </html>
 
