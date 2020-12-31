@@ -107,7 +107,7 @@
             </div>
             {% endfor %}
             <br>
-            <p class="total" style="text-align:right; font-weight:bold; font-size:20px ; text-decoration : underline ">TOTAL = {{order.bill}} {{currency_symbol}}</p>
+            <p class="total" style="text-align:right; font-weight:bold; font-size:20px ; text-decoration : underline ">TOTAL = {{order.bill|mul:currency_ratio|floatformat:2}} {{currency_symbol}}</p>
         </fieldset>
         <br>
         <form action="{% url 'finalcheck' %}" method="POST">

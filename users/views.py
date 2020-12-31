@@ -246,7 +246,7 @@ def createtransaction(request):
         coupon=Coupon.objects.get(code=request.POST['coupon_code'])
     else:
         coupon=None
-    order = Order(bill=request.POST['total'],coupon=coupon)
+    order = Order(bill=round(float(request.POST['total'])/get_currency_ratio(request),2),coupon=coupon)
     order.save()
     for p in products_in_cart:
         order.products.add(p)

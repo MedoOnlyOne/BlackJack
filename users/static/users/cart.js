@@ -31,7 +31,6 @@ function inc(id, stock) {
   };
 
 function dec(id) {
-    // var q = document.querySelector("#q");
     if (id.innerHTML > 0){
         id.innerHTML--;
         total();
@@ -58,7 +57,6 @@ coupon_button.addEventListener('click',function () {
                 shopname=response['shopname'];
             }
             total();
-            // alert("Discount is applied successfly for products from shop " + shopname);
         }
         ,
         error: function(xhr) {
