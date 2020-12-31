@@ -1,4 +1,5 @@
 {% extends 'users/layout.html' %}
+{% load mathfilters %}
 {% block head %} 
   <title>Wishlist</title>
   <style>
@@ -97,71 +98,12 @@
 {% block body %}
   <div id="items">
     <div class="itemscontainer">
-        <!-- <div class="item" title="item">
-            <img src="../static/users/No image.jpg"> 
-            <p style="font-size:25px; font-weight:bold; position:relative; top:5px;">Product 1 Name</p>
-            <p><span style="font-weight:bold;">Category: </span> Sweatshirts</p>
-            <p><span style="font-weight:bold;">Color: </span> Red</p>
-            <p><span style="font-weight:bold;">Sold By: </span> GLOW egypt</p>
-            
-            <input type="button" name="-" value="-" class="count">
-            <p style="display:inline;"><span style="font-weight:bold; bottom:10px;">Quantity : </span> 1</p>
-            <input type="button" name="+" value="+" class="count">
-            
-            <p style="float:right;"><span style="font-weight:bold;">Price : </span> 100$</p>
-            
-        </div> -->
-        
-        <!-- <div class="item" title="item">
-            <img src="../static/users/No image.jpg"> 
-            <p style="font-size:25px; font-weight:bold; position:relative; top:5px;">Product 2 Name</p>
-            <p><span style="font-weight:bold;">Category: </span> Sweatshirts</p>
-            <p><span style="font-weight:bold;">Color: </span> Red</p>
-            <p><span style="font-weight:bold;">Sold By: </span> GLOW egypt</p>
-            
-            <input type="button" name="-" value="-" class="count">
-            <p style="display:inline;"><span style="font-weight:bold; bottom:10px;">Quantity : </span> 1</p>
-            <input type="button" name="+" value="+" class="count">
-            
-            <p style="float:right;"><span style="font-weight:bold;">Price : </span> 100$</p>
-            
-        </div>
-        
-        <div class="item" title="item">
-            <img src="../static/users/No image.jpg"> 
-            <p style="font-size:25px; font-weight:bold; position:relative; top:5px;">Product 3 Name</p>
-            <p><span style="font-weight:bold;">Category: </span> Sweatshirts</p>
-            <p><span style="font-weight:bold;">Color: </span> Red</p>
-            <p><span style="font-weight:bold;">Sold By: </span> GLOW egypt</p>
-            
-            <input type="button" name="-" value="-" class="count">
-            <p style="display:inline;"><span style="font-weight:bold; bottom:10px;">Quantity : </span> 1</p>
-            <input type="button" name="+" value="+" class="count">
-            
-            <p style="float:right;"><span style="font-weight:bold;">Price : </span> 100$</p>
-            
-        </div>
-        
-          <div class="item" title="item">
-            <img src="../static/users/No image.jpg"> 
-            <p style="font-size:25px; font-weight:bold; position:relative; top:5px;">Product 4 Name</p>
-            <p><span style="font-weight:bold;">Category: </span> Sweatshirts</p>
-            <p><span style="font-weight:bold;">Color: </span> Red</p>
-            <p><span style="font-weight:bold;">Sold By: </span> GLOW egypt</p>
-            
-            <input type="button" name="-" value="-" class="count">
-            <p style="display:inline;"><span style="font-weight:bold; bottom:10px;">Quantity : </span> 1</p>
-            <input type="button" name="+" value="+" class="count">
-            
-            <p style="float:right;"><span style="font-weight:bold;">Price : </span> 100$</p>
-            
-        </div> -->
         {% for product in products %}
         <div class="item" title="{{ product.name }}">
           <img src="{{ product.image.url }}" height="135" width="135"> 
           <p style="font-size:25px; font-weight:bold; position:relative; top:5px;"><a href="{% url 'productpage' product.id %}">Product name : {{ product.name }}</a></p>
           <p><span style="font-weight:bold;">Sold By: </span>{{ product.shop.name }}</p>
-          <p><span style="font-weight:bold;">Price : </span> {{product.price}}</p>
+          <p><span style="font-weight:bold;">Price : </span> {{product.price|mul:currency_ratio|floatformat:2}}{{currency_symbol}}</p>
           <button class="deactivate"><a href="{% url 'removefromwishlist' product.id %}">Remove</a></button>
         </div>
         {% endfor %} 

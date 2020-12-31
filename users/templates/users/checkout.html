@@ -1,4 +1,5 @@
 {% extends 'users/layout.html' %}
+{% load mathfilters %}
 {% block head %} 
     <title> Checkout </title>        
     <style>            
@@ -102,11 +103,11 @@
                 </div> <br>
                 <p class="order" >{{product.product.name}}</p>
                 <p class="quantity" >Quantity : {{product.quantity}}</p>
-                <p class="price" >Price : {{price}}</p>
+                <p class="price" >Price : {{price|mul:currency_ratio|floatformat:2}}{{currency_symbol}}</p>
             </div>
             {% endfor %}
             <br>
-            <p class="total" style="text-align:right; font-weight:bold; font-size:20px ; text-decoration : underline ">TOTAL = ${{order.bill}}</p>
+            <p class="total" style="text-align:right; font-weight:bold; font-size:20px ; text-decoration : underline ">TOTAL = {{order.bill}} {{currency_symbol}}</p>
         </fieldset>
         <br>
         <form action="{% url 'finalcheck' %}" method="POST">

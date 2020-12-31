@@ -1,5 +1,6 @@
 {% extends 'products/layout.html' %}
 {% load static %}
+{% load mathfilters %}
 {% block title%}{{ product.name }}{% endblock %}
 {% block head %}
       <link rel="stylesheet" href="{% static 'products/styles.css' %}">
@@ -29,7 +30,7 @@
       <div class="info">
         <div class="info-text">
           <h1>{{ product.name }}</h1>
-          <h2>Price: {{ price }}</h2>
+          <h2>Price: {{ product.price|mul:currency_ratio|floatformat:2 }} {{currency_symbol}}</h2>
           <h2>Quantity: {{ product.remaininginstock }}</h2>
           <h2>Rating: {{ rating }}</h2>
         </div>

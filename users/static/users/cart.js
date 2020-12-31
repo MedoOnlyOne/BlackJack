@@ -15,8 +15,8 @@ function total(){
 
     q_form[i].value = items[i].querySelector('span[class="q"]').innerHTML;
     }
-  document.querySelector('#t').innerHTML = total;
-  document.getElementById('bill').value=total;
+  document.querySelector('#t').innerHTML = total.toFixed(2);
+  document.getElementById('bill').value = total.toFixed(2);
   if(is_valid)
   {
     document.getElementById('coupon').value=document.getElementById('coupon_code').value;
@@ -44,12 +44,6 @@ document.addEventListener('DOMContentLoaded', function() {
 var coupon_button=document.getElementById('add_coupon');
 
 coupon_button.addEventListener('click',function () {
-    // let request=new XMLHttpRequest();
-    // request.open('GET',window.location.href,true);
-    // request.setRequestHeader("Content-Type", "application/json;");
-    // request.setRequestHeader('X-Requested-With', 'XMLHttpRequest') ;
-    // coupon_code=document.getElementById('coupon_code').value
-    // request.send({coupon_code:coupon_code});
     $.ajax({
         url: window.location.href,
         type: "get", //send it through get method

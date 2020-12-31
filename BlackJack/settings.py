@@ -141,7 +141,7 @@ AUTH_USER_MODEL = 'users.User'
 
 LOGIN_URL='/login'
 
-# settings to send emails
+# Settings to send emails
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True

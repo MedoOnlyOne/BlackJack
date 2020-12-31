@@ -6,7 +6,32 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 import string 
 import random 
-#from django.db import TypeError
+from decouple import config
+import requests
+
+
+currency_symbols={
+    'EGP':'L.E.',
+    'EUR':'€',
+    'USD':'$',
+    'GBP':'£'
+}
+
+
+def get_currency_ratio(request):
+    if not request.user.is_authenticated:
+        return 1
+    preferred_currency=request.user.preferred_currency
+    if preferred_currency=='EGP':
+        return 1
+    else:
+        return requests.get('https://free.currconv.com/api/v7/convert',{'apiKey':config('API_KEY'),'q':'EGP'+'_'+preferred_currency,'compact':'ultra'}).json()['EGP'+'_'+preferred_currency]
+
+def get_preffered_currency(request):
+    if not request.user.is_authenticated:
+        return 'EGP'
+    return request.user.preferred_currency
+
 
 def index(request, shopname):
     try:
@@ -17,13 +42,14 @@ def index(request, shopname):
             return activecoupons(request)
         elif shopname=='orders':
             return orders(request)
-        # if request.user.shop and request.user.shop.name == shopname:
-        #     return HttpResponseRedirect(reverse('shopdashboard'))
         shop = Shop.objects.get(name=shopname)
-        products = shop.products.all()
+        products = shop.products.all() 
+        currency_ratio=get_currency_ratio(request)
         return render(request, 'shop/index.html',{
             'shop': shop,
-            'products': products
+            'products': products,
+            'currency_ratio':currency_ratio,
+            'currency_symbol':currency_symbols[get_preffered_currency(request)]
         })
     except Shop.DoesNotExist:
         return render(request,'shop/404.html')
@@ -74,10 +100,14 @@ def editproduct(request, productid):
 
 @login_required
 def dashboard(request):
+    preferred_currency=get_preffered_currency(request)
+    currency_ratio=get_currency_ratio(request)
     if request.user.shop:
         return render(request,'shop/Dashboard.html',{
             'shop':request.user.shop,
-            'products' : request.user.shop.products.all()
+            'products' : request.user.shop.products.all(),
+            'currency_ratio':currency_ratio,
+            'currency_symbol':currency_symbols[preferred_currency]
         })
     else:
         return render(request,'shop/not_a_seller.html')

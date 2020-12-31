@@ -7,12 +7,17 @@ import requests
 import decimal
 from decouple import config
 # Create your views here.
+currency_symbols={
+    'EGP':'L.E.',
+    'EUR':'€',
+    'USD':'$',
+    'GBP':'£'
+}
 
 def index(request):
     return render(request, 'products/index.html',{
         'products': Product.objects.all()
     })
-
 
 def product(request, productid):
     if request.method=='POST':
@@ -55,8 +60,7 @@ def product(request, productid):
                 if preferred_currency=='EGP':
                     currency_ratio=1
                 else:
-                    #currency_ratio=requests.get('https://free.currconv.com/api/v7/convert',{'apiKey':config('API_KEY'),'q':'EGP'+'_'+preferred_currency,'compact':'ultra'}).json()['EGP'+'_'+preferred_currency]
-                    currency_ratio=1
+                    currency_ratio=requests.get('https://free.currconv.com/api/v7/convert',{'apiKey':config('API_KEY'),'q':'EGP'+'_'+preferred_currency,'compact':'ultra'}).json()['EGP'+'_'+preferred_currency]
             rating = 0
             reviews = product.reviews.all()
             for rev in reviews:
@@ -74,8 +78,9 @@ def product(request, productid):
             return render(request,'products/product.html',{
             'product': product,
             'rating': rating,
-            'price' : round(product.price*decimal.Decimal(currency_ratio),2),
+            'currency_ratio': currency_ratio,
             'preferred_currency':preferred_currency,
+            'currency_symbol':currency_symbols[preferred_currency],
             'reviews':reviews,
             'in_wishlist':in_wishlist,
             'in_cart': in_cart

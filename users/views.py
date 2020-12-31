@@ -12,6 +12,28 @@ from passlib.hash import django_pbkdf2_sha256
 import uuid
 from django.conf import settings 
 from django.core.mail import send_mail 
+from decouple import config 
+import requests
+currency_symbols={
+    'EGP':'L.E.',
+    'EUR':'€',
+    'USD':'$',
+    'GBP':'£'
+}
+
+def get_currency_ratio(request):
+    if not request.user.is_authenticated:
+        return 1
+    preferred_currency=request.user.preferred_currency
+    if preferred_currency=='EGP':
+        return 1
+    else:
+        return requests.get('https://free.currconv.com/api/v7/convert',{'apiKey':config('API_KEY'),'q':'EGP'+'_'+preferred_currency,'compact':'ultra'}).json()['EGP'+'_'+preferred_currency]
+
+def get_preffered_currency(request):
+    if not request.user.is_authenticated:
+        return 'EGP'
+    return request.user.preferred_currency
 
 # Create your views here.
 @login_required
@@ -31,17 +53,24 @@ def cart(request):
                             'success':False
                         })
     elif request.method=='GET':
-        print(request.GET)
+        preferred_currency=get_preffered_currency(request)
+        currency_ratio=get_currency_ratio(request)
         products=request.user.cart.all()
         return render(request,"users/cart.html",
         {
+            'currency_ratio':currency_ratio,
+            'currency_symbol':currency_symbols[preferred_currency],
             'products':products,
         })
-
+@login_required
 def wishlist(request):
+    preferred_currency=get_preffered_currency(request)
+    currency_ratio=get_currency_ratio(request)
     products=request.user.wishlist.all()
     return render(request,"users/wishlist.html",
     {
+        'currency_ratio':currency_ratio,
+        'currency_symbol':currency_symbols[preferred_currency],
         'products':products,
         'user':request.user 
     })
@@ -174,9 +203,11 @@ def changepassword(request):
             return render(request,'users/changepassword.html',{'message':"An unexpected error happend, please try again later."})
     else:
         return render(request,"users/changepassword.html")
-        
+
+@login_required        
 def orders(request):
     return render(request,'users/orders.html',{'orders':request.user.orders.all()})
+
 
 def discovershops(request):
     return render(request, 'users/discovershops.html', {
@@ -224,6 +255,8 @@ def createtransaction(request):
 
 @login_required
 def checkout(request,orderid):
+    preferred_currency=get_preffered_currency(request)
+    currency_ratio=get_currency_ratio(request)
     order = Order.objects.get(id=orderid)
     if order in request.user.orders.all():
         prices = [product.product.price for product in order.products.all()]
@@ -234,13 +267,17 @@ def checkout(request,orderid):
                     prodcuts_prices=[(order.products.all()[i],float(prices[i])*quantities[i]*(100-order.coupon.discount)/100) for i in range(len(order.products.all()))]
                     return render(request,'users/checkout.html',{
                         'order': order,
-                        'products_prices': prodcuts_prices
+                        'products_prices': prodcuts_prices,
+                        'currency_ratio':currency_ratio,
+                        'currency_symbol':currency_symbols[preferred_currency]
                     })
         else:
             prodcuts_prices=[(order.products.all()[i],float(prices[i])*quantities[i]) for i in range(len(order.products.all()))]
             return render(request,'users/checkout.html',{
                 'order': order,
-                'products_prices': prodcuts_prices
+                'products_prices': prodcuts_prices,
+                'currency_ratio':currency_ratio,
+                'currency_symbol':currency_symbols[preferred_currency]
             })
     else:
         return HttpResponseRedirect(reverse('userdashboard'))

@@ -1,3 +1,4 @@
+{% load mathfilters %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -191,7 +192,7 @@
         <div class="item" title="{{ product.name }}">
           <img src="{{ product.image.url }}" height="135" width="135"> 
           <p style="font-size:25px; font-weight:bold; position:relative; top:5px;"><a href="{% url 'productpage' product.id %}">Product name : {{ product.name }}</a></p>
-          <p><span style="font-weight:bold;">Price : </span> {{product.price}}</p>
+          <p><span style="font-weight:bold;">Price : </span> {{product.price|mul:currency_ratio|floatformat:2}}{{currency_symbol}}</p>
           <p><span style="font-weight:bold;">Description : </span> {{product.description}}</p>
             
         </div>
