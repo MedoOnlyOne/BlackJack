@@ -136,7 +136,7 @@
   </div>
       
   <div class="total">
-      <p title="total" style="margin-top: 10px;margin-bottom: 0px;">Total :<span id="t"></span></p>
+      <p title="total" style="margin-top: 10px;margin-bottom: 0px;">Total :<span id="t"></span>{{currency_symbol}}</p> 
       <br>
       <p style="font-size:20px;margin-left:5px; font-weight:bold;margin-bottom:4px;margin-top: 0px;">Redeem Coupon <span style="font-size:12px;">(optional)</span></p>
       <input type="text" name="username" id="coupon_code" placeholder="Place your coupon here" style="display:inline; height:40px; width:240px; margin-left:5px; margin-top:0px;text-align:center;"> 
@@ -162,11 +162,6 @@
 {% endblock %}
 
 {% block script%}
-  {% if message %}
-    <script>
-      let message={{message}};
-    console.log(message);</script>
-  {% endif %}
   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   <script src="../static/users/cart.js"></script>
 {% endblock %}

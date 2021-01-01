@@ -224,13 +224,27 @@ def create_shop(request):
         shopName = request.POST.get('shopName', '')
         shopAddress = request.POST.get('shopAddress', '')
         shopDesc = request.POST.get('shopDescreption', '')
-        sh = Shop(name=shopName, address=shopAddress, description=shopDesc)
-        sh.save()
-        u = request.user
-        u.shop = sh
-        u.is_seller = True
-        u.save()
-        return HttpResponseRedirect(reverse('shopdashboard'))
+        if not shopName or not shopAddress or not shopDesc:
+            return render(request, "users/StoreName.html",{
+                'message':'All fields are required'
+            })
+        for char in shopName:
+            if not char.isalnum() and not char==' ':
+                return render(request, "users/StoreName.html",{
+                'message':'Shop name must only contain alphanumeric characters and spaces.'
+            })
+        if not Shop.objects.filter(name=shopName):
+            sh = Shop(name=shopName, address=shopAddress, description=shopDesc)
+            sh.save()
+            u = request.user
+            u.shop = sh
+            u.is_seller = True
+            u.save()
+            return HttpResponseRedirect(reverse('shopdashboard'))
+        else:
+            return render(request, "users/StoreName.html",{
+                'message':'This Shop name already Exists'
+            })
 
 @login_required
 def createtransaction(request):

@@ -151,6 +151,7 @@ p{
   </style>
 </head>
 <body>
+  <div>
   <form action="{% url 'create_shop' %}" method="POST">
     {% csrf_token %}
     <div id="header">
@@ -174,11 +175,16 @@ p{
       <div style="display: flex; flex-wrap: wrap; margin-bottom: 10px;">
         <h2 style="margin-left: 30px;">Descreption</h2>
         <textarea name="shopDescreption" style="width: 300px; height: 150px; margin-left: 60px;"></textarea>
+        <div style="padding-left:100px; color:red; font-size:25px; margin-left:30px">
+          {{message}}
+        </div>
       </div>
-     </h1>
+    </h1>
+     
     <footer>
        <input id="button_1" type="submit" value="Create shop">
-   </footer>
+    </footer>
   </form>
+</div>
 </body>
 </html>

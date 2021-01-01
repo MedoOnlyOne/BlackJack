@@ -25,11 +25,10 @@ class Order(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     # user=models.ForeignKey('users.User',on_delete=models.PROTECT, blank=True, null=True)
     products = models.ManyToManyField('users.InCart', related_name="ordered_products")
-    # products = models.ManyToManyField('products.Product', related_name="ordered_products")
     is_delivered = models.BooleanField(default=False)
     is_ordered = models.BooleanField(default=False)       
     bill = models.FloatField(default=0.0)
-    coupon = models.ForeignKey('shop.Coupon',on_delete=models.SET_NULL,null=True)
+    coupon = models.ForeignKey('shop.Coupon',on_delete=models.SET_NULL,null=True,blank=True)
     created = models.DateTimeField(auto_now=True)
     class Meta:
         ordering = ['created']

@@ -6,8 +6,9 @@ class Shop(models.Model):
     description = models.TextField(max_length=100)
     address = models.TextField(max_length=100,)
     products = models.ManyToManyField(Product, blank=True, related_name="products")
-    coupons = models.ManyToManyField('shop.Coupon',default=None,related_name='shop_coupons')
-    orders = models.ManyToManyField('users.Order',default=None,related_name='shop_orders')
+    coupons = models.ManyToManyField('shop.Coupon',blank=True,default=None,related_name='shop_coupons')
+    orders = models.ManyToManyField('users.Order',blank=True,default=None,related_name='shop_orders')
+    featured = models.BooleanField(default=False)
     def __str__(self):
         return f"{self.name}"
 

@@ -1,5 +1,6 @@
 config.txt
 .vscode/*
-**/__pycache_
+**/__pycache__
 .env
 pyvenv.cfg
+.Moussa
