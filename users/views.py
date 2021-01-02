@@ -206,7 +206,13 @@ def changepassword(request):
 
 @login_required        
 def orders(request):
-    return render(request,'users/orders.html',{'orders':request.user.orders.all()})
+    preferred_currency=get_preffered_currency(request)
+    currency_ratio=get_currency_ratio(request)
+    return render(request,'users/orders.html',{
+        'orders':request.user.orders.all(),
+        'currency_ratio':currency_ratio,
+        'currency_symbol':currency_symbols[preferred_currency]
+        })
 
 
 def discovershops(request):
@@ -352,3 +358,7 @@ def removefromcart(request,productid):
     product=Product.objects.get(id=productid)
     request.user.cart.remove(product)
     return HttpResponseRedirect(reverse('cart'))
+
+def home(request):
+    #logic here
+    return render(request,'users/Mainpage.html')

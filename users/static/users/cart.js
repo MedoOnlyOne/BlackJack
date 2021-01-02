@@ -45,7 +45,7 @@ var coupon_button=document.getElementById('add_coupon');
 coupon_button.addEventListener('click',function () {
     $.ajax({
         url: window.location.href,
-        type: "get", //send it through get method
+        type: "get", 
         data: { 
           coupon_code:document.getElementById('coupon_code').value
         },
@@ -53,14 +53,19 @@ coupon_button.addEventListener('click',function () {
             is_valid=response['success'];
             if (is_valid)
             {
-                discount=response['discount'];
-                shopname=response['shopname'];
+              discount=response['discount'];
+              shopname=response['shopname'];
+              alert('Coupon succesfully entered for shop '+shopname);
+            }
+            else
+            {
+              alert('Invalid coupon');  
             }
             total();
         }
         ,
-        error: function(xhr) {
-          console.log('ERROR')
+        error: function(e) {
+          console.log('ERROR!',e);
         }
       });
 })

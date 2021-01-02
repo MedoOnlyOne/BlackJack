@@ -1,4 +1,5 @@
 {% extends 'users/layout.html' %}
+{% load mathfilters%}
 {% block head %} 
   <title>Orders</title>
   <style>
@@ -60,7 +61,7 @@
               </ul>
             {% endfor %}
           </ol>
-          <p>Total: {{order.bill}}</p>
+          <p>Total: {{order.bill|mul:currency_ratio|floatformat:2}}{{currency_symbol}}</p>
           <!-- <p>Status: {% if order.is_delivered %}
             Delivered
           {% endif %}
