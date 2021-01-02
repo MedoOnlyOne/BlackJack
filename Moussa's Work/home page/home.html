@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="./home.css">  <!-- domain.com/home-->
+                                                           <!-- domain.com/static/users/home.css-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title> GLOW Official Page </title>
+</head>
+
+
+<body>
+  <div>
+  <header>
+    <div class="Container">
+        <div id="header">
+        <span id="BlackJack">BlackJack</span>
+        <span id="official">The Official online store </span>
+    </div>
+
+<nav> <ul style="margin-top:12px;">
+    <li> <a href="{% url 'home' %}"> Home </a> </li>
+    <li> <a href="{% url 'userdashboard' %}"> Profile </a></li>
+    <li> <a href="{% url 'contactus' %}"> Contact Us </a></li>
+     {% if user.is_authenticated %} 
+    <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
+    {% else %}
+    <li> <a href="{% url 'login' %}">  Login  </a> </li>
+     {% endif %}
+</ul> </nav>
+    </div>
+</header>
+</div>
+<div class="search">
+  <input type="text" name="search" id="s" placeholder="What are you looking for ?">
+  <button type="button" name="button" id="b">Search</button>
+</div>
+<div class="head">
+    <div class="cathead"><h4><a href="#" id="cur">cat1</a></h4></div>
+    <div class="cathead"><h4><a href="#" >cat2</a></h4></div>
+    <div class="cathead"><h4><a href="#" >cat3</a></h4></div>
+    <div class="cathead"><h4><a href="#" >cat4</a></h4></div>
+    <div class="cathead"><h4><a href="#" >cat5</a></h4></div>
+    <div class="cathead"><h4><a href="#" >cat6</a></h4></div>
+    <div class="cathead"><h4><a href="#" >cat7</a></h4></div>
+    <div class="cathead"><h4><a href="#" >cat8</a></h4></div>
+    </div>
+<h2>cat1</h2>
+<div class="Related">
+ <div class="v">
+   <img src="" class="re">
+   <h5> Product Name</h5>
+   <h5>price</h5>
+
+  </div>
+  <div class="v">
+    <img src="" class="re">
+    <h5> Product Name</h5>
+    <h5>price</h5>
+
+   </div>
+   <div class="v">
+     <img src="" class="re">
+     <h5> Product Name</h5>
+     <h5>price</h5>
+
+    </div>
+    <div class="v">
+      <img src="" class="re">
+      <h5> Product Name</h5>
+      <h5>price</h5>
+
+     </div>
+
+</div>
+<h2>cat2</h2>
+<div class="Related">
+ <div class="v">
+   <img src="" class="re">
+   <h5> Product Name</h5>
+   <h5>price</h5>
+
+  </div>
+  <div class="v">
+    <img src="" class="re">
+    <h5> Product Name</h5>
+    <h5>price</h5>
+
+   </div>
+   <div class="v">
+     <img src="" class="re">
+     <h5> Product Name</h5>
+     <h5>price</h5>
+
+    </div>
+    <div class="v">
+      <img src="" class="re">
+      <h5> Product Name</h5>
+      <h5>price</h5>
+
+     </div>
+
+</div>
+<h2>cat3</h2>
+<div class="Related">
+ <div class="v">
+   <img src="" class="re">
+   <h5> Product Name</h5>
+   <h5>price</h5>
+
+  </div>
+  <div class="v">
+    <img src="" class="re">
+    <h5> Product Name</h5>
+    <h5>price</h5>
+
+   </div>
+   <div class="v">
+     <img src="" class="re">
+     <h5> Product Name</h5>
+     <h5>price</h5>
+
+    </div>
+    <div class="v">
+      <img src="" class="re">
+      <h5> Product Name</h5>
+      <h5>price</h5>
+
+     </div>
+
+</div>
+<h2>cat4</h2>
+<div class="Related">
+ <div class="v">
+   <img src="" class="re">
+   <h5> Product Name</h5>
+   <h5>price</h5>
+
+  </div>
+  <div class="v">
+    <img src="" class="re">
+    <h5> Product Name</h5>
+    <h5>price</h5>
+
+   </div>
+   <div class="v">
+     <img src="" class="re">
+     <h5> Product Name</h5>
+     <h5>price</h5>
+
+    </div>
+    <div class="v">
+      <img src="" class="re">
+      <h5> Product Name</h5>
+      <h5>price</h5>
+     </div>
+
+</div>
+
+<footer> <p> BlackJack Official Page &copy; 2020 </p> </footer>
+
+</body>
+</html>
