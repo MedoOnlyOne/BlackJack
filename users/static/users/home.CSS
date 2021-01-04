@@ -1,4 +1,4 @@
-body {
+  body {
   margin:0px;
   }
   .Container {
@@ -135,9 +135,8 @@ margin-bottom: 5%;
 }
 .search {
 display: block;
-margin-left: 0%;
-margin-bottom: 0%;
-margin-top: 55px;
+margin-top:65px;
+margin-bottom:0.5em;
 }
 #s {
 width: 70%;

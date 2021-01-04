@@ -31,10 +31,12 @@
     </div>
 </header>
 </div>
+<form method="GET" action="{% url 'search' %}">
 <div class="search">
-  <input type="text" name="search" id="s" placeholder="What are you looking for ?">
-  <button type="button" name="button" id="b">Search</button>
+  <input type="text" name="product_name" id="s" placeholder="What are you looking for ?">
+  <button type="submit" name="button" id="b">Search</button>
 </div>
+</form>
 <div class="head">
     <div class="cathead"><h4><a href="#" id="cur">cat1</a></h4></div>
     <div class="cathead"><h4><a href="#" >cat2</a></h4></div>
