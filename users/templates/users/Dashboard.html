@@ -78,6 +78,10 @@
       cursor: pointer;
     }
 
+    .info-field{
+      padding-left: 0.5em;
+    }
+
     .dropdown {
       position: inherit;
       display: inline-block;
@@ -130,33 +134,33 @@
 {% block body %} 
   <form method="post" action="{% url 'userdashboard' %}">
     {% csrf_token %}
-    <div>
+    <div class="info-field">
       First Name :
       <input type="text" id="first_name" name="first" value="{{first}}" disabled="true" style="margin-left: 115px;">
       <button type="button" onclick="Enable('first_name')"> Edit </button>
     </div>     
-    <div>
+    <div class="info-field">
       Last Name :
       <input type="text" id="last_name" name="last" value="{{last}}" disabled="true" style="margin-left: 115px;">
       <button type="button" onclick="Enable('last_name')"> Edit </button>
     </div> 
-    <div>
+    <div class="info-field">
       Phone Number :
       <input type="text" id="code" name="code" value="{{code}}" disabled="true" style="margin-left: 83px; width:50px">
       <input type="text" id="number" name="num" value="{{num}}" disabled="true" style="margin-left: 5px; width:230px">
       <button type="button" onclick="Enable('number'); Enable('code')"> Edit </button>
     </div>  
-    <div>
+    <div class="info-field">
       Email :
       <input type="text" id="email" name="email" value="{{email}}" disabled="true" style="margin-left: 155px;">
       <button type="button" onclick="Enable('email')"> Edit </button>
     </div>        
-    <div>
+    <div class="info-field">
       Address :
       <input type="text" id="address" name="address" value="{{address}}" disabled="true" style="margin-left: 135px;">
       <button type="button" onclick="Enable('address')"> Edit </button>
     </div>       
-    <div class="dropdown">
+    <div class="dropdown info-field">
       Preferred Currency :
       <select id="currency" name="currency" disabled="true" style="margin-left: 40px;">
         {% for c in currency_list %}
@@ -179,7 +183,7 @@
       </select> 
       <button type="button" onclick="Enable('currency')"> Edit </button>
     </div>
-    <div>
+    <div class="info-field">
       Account Type:
       <input type="text" id="acc_type" name="acc_type"{% if is_seller %} value="Buyer and seller" {% else %} value="Buyer" {% endif %} disabled="true" style="margin-left: 95px;">
     </div>     

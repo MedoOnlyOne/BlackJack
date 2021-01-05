@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from products.models import Product
+from shop.models import Shop
 from django.db.models import Q 
 
 
@@ -27,20 +28,29 @@ def get_preffered_currency(request):
 
 # Create your views here.
 def search(request):
-    if request.GET.get('product_name',None) is None:
-        return render(request,'search/index.html')
-    else:
-        query = request.GET['product_name']
-        sort_by = request.GET.get('sort_by',None)
-        preferred_currency=get_preffered_currency(request)
-        currency_ratio=get_currency_ratio(request)
-        results = Product.objects.filter(Q(name__icontains=query))
+    query = request.GET['search_name']
+    search_by = request.GET['search_for']
+    sort_by = request.GET.get('sort_by',None)
+    preferred_currency=get_preffered_currency(request)
+    currency_ratio=get_currency_ratio(request)
+    if search_by=='products':
+        results = Product.objects.filter(name__icontains=query)
         if sort_by=='name':
             results=sorted(results,key=lambda item:item.name)
         else:
             results=sorted(results,key=lambda item:item.price)
         return render(request, 'search/searchResults.html',{
-            'products': results,
+            'results': results,
             'currency_ratio':currency_ratio,
-            'currency_symbol':currency_symbols[preferred_currency]
+            'currency_symbol':currency_symbols[preferred_currency],
+            'is_products_search':True
+        })
+    else:
+        results=Shop.objects.filter(name__icontains=query)
+        results=sorted(results,key=lambda item:item.name)
+        return render(request, 'search/searchResults.html',{
+            'results': results,
+            'currency_ratio':currency_ratio,
+            'currency_symbol':currency_symbols[preferred_currency],
+            'is_products_search':False
         })
