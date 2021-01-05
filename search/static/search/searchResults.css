@@ -92,15 +92,17 @@ body{
 }
 .container{
     display:grid;
-    grid-template-rows:47px 1fr;
+    grid-template-rows:47px 1fr 70px;
     grid-template-columns: repeat(11,1fr);
-    height: 100vh;
+    min-height: 100vh;
+    max-height: 100%;
 }
 .sort{
     grid-column-start:1;
     grid-column-end:3;
     grid-row-start:2;
-    grid-row-end: 2;
+    grid-row-end: 4;
+    grid-area:2/1/4/3;
     padding:1.5em;
     font-size:1.2rem;
     background-color:#232732;
@@ -109,10 +111,7 @@ body{
 }
 .products-search{
     margin-top:1em;
-    grid-column-start:3;
-    grid-column-end:11;
-    grid-row-start:2;
-    grid-row-end: 2;
+    grid-area:2/3/2/11;
     margin-left: 4%;
 }
 .search {
@@ -199,4 +198,29 @@ body{
     .sort{
         margin-top:85px;
     }
+}
+
+.pagination{
+    margin-top: 20px;
+    display:flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom:20px;
+    width:90%;
+    grid-area:3/3/3/11;
+    margin:1em 0em;
+}
+.page{
+    font-size:1.25rem;
+    font-weight: bold;
+    padding:0.2em;
+    border:#BFB367 3px solid;
+    margin-right: 0.5em;
+    height:auto;
+    text-align: center;
+}
+.page:hover{
+    background-color: #232732;
+    color:#BFB367;
+    cursor:pointer;
 }
