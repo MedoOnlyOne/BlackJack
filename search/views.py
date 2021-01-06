@@ -60,21 +60,29 @@ def search_paginated(request):
     sort_by = request.GET.get('sort_by',None)
     preferred_currency=get_preffered_currency(request)
     currency_ratio=get_currency_ratio(request)
+    url=request.build_absolute_uri()
+    if '&page=' in url:
+        last=-1
+        for index in range(len(url)-1,-1,-1):
+            if url[index]=='=':
+                last=index
+                break
+        url=url[:last-5]
     if search_by=='products':
         results = Product.objects.filter(name__icontains=query)
         if sort_by=='name':
             results=sorted(results,key=lambda item:item.name)
         else:
             results=sorted(results,key=lambda item:item.price)
-        paginator=Paginator(results,5)
+        paginator=Paginator(results,1)
         page_num=request.GET.get('page',1)
         page_obj=paginator.get_page(page_num)
-        print('HOBA')    
         return render(request, 'search/searchResults_paginated.html',{
             'results': page_obj,
             'currency_ratio':currency_ratio,
             'currency_symbol':currency_symbols[preferred_currency],
-            'is_products_search':True
+            'is_products_search':True,
+            'current_path':url
         })
     else:
         results=Shop.objects.filter(name__icontains=query)

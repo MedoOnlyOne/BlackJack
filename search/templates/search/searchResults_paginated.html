@@ -89,16 +89,53 @@
     {% if results %}
     <div class="pagination">
         {% if not results.has_previous %}
-            {% if not results.paginator.num_pages > 3 %}
-                <div class="page">1</div>
-                {% if results.paginator.num_pages >= 2 %}
-                <div class="page">2</div>
-                {% endif %}
-                {% if results.paginator.num_pages == 3 %}
-                <div class="page">3</div>
-                {% endif %}
+            {% if results.paginator.num_pages <= 5 %}
+                {% for n in results.paginator.page_range %}
+                <div id="{{n}}" class="page"><a href="{{current_path}}&page={{n}}">{{n}}</a></div>
+                {% endfor %}
+            {% else %}
+                <div class="page" id="1"><a href="{{current_path}}&page=1">1</a></div>
+                <div class="page" id="2"><a href="{{current_path}}&page=2">2</a></div>
+                <div class="page" id="3"><a href="{{current_path}}&page=3">3</a></div>
+                <div class="dots">...</div>
+                <div class="page" id="{{results.paginator.num_pages}}"><a href="{{current_path}}&page={{results.paginator.num_pages}}">{{results.paginator.num_pages}}</a></div>
             {% endif %}
-        {% endif %}
+        {% elif not results.has_next %}         <!-- Last page -->
+            {% if results.paginator.num_pages <= 5 %}
+                {% for n in results.paginator.page_range %}
+                    <div id="{{n}}" class="page"><a href="{{current_path}}&page={{n}}">{{n}}</a></div>
+                {% endfor %}
+            {% else %}
+            <div class="page" id="1"><a href="{{current_path}}&page=1">1</a></div>
+            <div class="dots">...</div>
+            <div class="page" id="{{results.number|sub:2}}"><a href="{{current_path}}&page={{results.number|sub:2}}">{{results.number|sub:2}}</a></div>
+            <div class="page" id="{{results.number|sub:1}}"><a href="{{current_path}}&page={{results.number|sub:1}}">{{results.number|sub:1}}</a></div>
+            <div class="page" id="{{results.number}}"><a href="{{current_path}}&page={{results.number}}">{{results.number}}</a></div>
+            {% endif %}
+        {% else %}              <!-- In the middle -->                          
+            <!-- code -->
+            {% if results.number > 2 %}
+                <div class="page" id="1"><a href="{{current_path}}&page=1">1</a></div>
+            {% endif %}
+            {% if results.number > 4  %}
+                <div class="dots">...</div>
+            {% endif %}
+            {% if results.number|sub:2 > 1 %}
+                <div class="page" id="{{results.number|sub:2}}"><a href="{{current_path}}&page={{results.number|sub:2}}">{{results.number|sub:2}}</a></div>
+            {% endif %}
+                <div class="page" id="{{results.number|sub:1}}"><a href="{{current_path}}&page={{results.number|sub:1}}">{{results.number|sub:1}}</a></div>
+                <div class="page" id="{{results.number}}"><a href="{{current_path}}&page={{results.number}}">{{results.number}}</a></div>
+                <div class="page" id="{{results.number|add:1}}"><a href="{{current_path}}&page={{results.number|add:1}}">{{results.number|add:1}}</a></div>
+            {% if results.number|add:2 <= results.paginator.num_pages %}
+                <div class="page" id="{{results.number|add:2}}"><a href="{{current_path}}&page={{results.number|add:2}}">{{results.number|add:2}}</a></div>
+            {% endif %}
+            {% if results.paginator.num_pages|sub:results.number > 3 %}
+                <div class="dots">...</div>
+            {% endif %}
+            {% if results.paginator.num_pages|sub:results.number > 2 %}
+                <div class="page" id="{{results.paginator.num_pages}}"><a href="{{current_path}}&page={{results.paginator.num_pages}}">{{results.paginator.num_pages}}</a></div>
+            {% endif %}
+        {% endif %}    
     </div>
     {% endif %}
 </div>
@@ -134,4 +171,5 @@
         }
     }
     </script>
+    <script src="../static/search/search.js"></script>
 {% endblock %}
