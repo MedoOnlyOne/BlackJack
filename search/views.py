@@ -33,33 +33,6 @@ def search(request):
     sort_by = request.GET.get('sort_by',None)
     preferred_currency=get_preffered_currency(request)
     currency_ratio=get_currency_ratio(request)
-    if search_by=='products':
-        results = Product.objects.filter(name__icontains=query)
-        if sort_by=='name':
-            results=sorted(results,key=lambda item:item.name)
-        else:
-            results=sorted(results,key=lambda item:item.price)
-        return render(request, 'search/searchResults.html',{
-            'results': results,
-            'currency_ratio':currency_ratio,
-            'currency_symbol':currency_symbols[preferred_currency],
-            'is_products_search':True
-        })
-    else:
-        results=Shop.objects.filter(name__icontains=query)
-        results=sorted(results,key=lambda item:item.name)
-        return render(request, 'search/searchResults.html',{
-            'results': results,
-            'currency_ratio':currency_ratio,
-            'currency_symbol':currency_symbols[preferred_currency],
-            'is_products_search':False
-        })
-def search_paginated(request):
-    query = request.GET['search_name']
-    search_by = request.GET['search_for']
-    sort_by = request.GET.get('sort_by',None)
-    preferred_currency=get_preffered_currency(request)
-    currency_ratio=get_currency_ratio(request)
     url=request.build_absolute_uri()
     if '&page=' in url:
         last=-1
@@ -74,10 +47,10 @@ def search_paginated(request):
             results=sorted(results,key=lambda item:item.name)
         else:
             results=sorted(results,key=lambda item:item.price)
-        paginator=Paginator(results,1)
+        paginator=Paginator(results,5)
         page_num=request.GET.get('page',1)
         page_obj=paginator.get_page(page_num)
-        return render(request, 'search/searchResults_paginated.html',{
+        return render(request, 'search/searchResults.html',{
             'results': page_obj,
             'currency_ratio':currency_ratio,
             'currency_symbol':currency_symbols[preferred_currency],
@@ -90,7 +63,7 @@ def search_paginated(request):
         paginator=Paginator(results,5)
         page_num=request.GET.get(['page'],1)
         page_obj=paginator.get_page(page_num)    
-        return render(request, 'search/searchResults_paginated.html',{
+        return render(request, 'search/searchResults.html',{
             'results': page_obj,
             'currency_ratio':currency_ratio,
             'currency_symbol':currency_symbols[preferred_currency],

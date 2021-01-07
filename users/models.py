@@ -3,14 +3,18 @@ from django.contrib.auth.models import AbstractUser
 from products.models import Product
 from shop.models import Shop
 import uuid
+from django.contrib.auth import user_logged_out
+from django.dispatch import receiver
+import datetime
+import pytz
 # Create your models here.
 
 class User(AbstractUser):
     # every user will have 3 specified lists (parchases, cart, wishList)
-    phone_number=models.CharField(max_length=15,null=False,default="")
-    phone_number_code=models.CharField(max_length=4,null=False,default="+20")
-    country=models.CharField(max_length=30,null=False,default="Egypt")
-    preferred_currency=models.CharField(max_length=3,null=False,default="EGP")
+    phone_number = models.CharField(max_length=15,null=False,default="")
+    phone_number_code = models.CharField(max_length=4,null=False,default="+20")
+    country = models.CharField(max_length=30,null=False,default="Egypt")
+    preferred_currency = models.CharField(max_length=3,null=False,default="EGP")
     address = models.CharField(max_length=100,null=False,default="")
     is_seller = models.BooleanField(default=False)
     cart = models.ManyToManyField('products.Product', blank=True, related_name="cart")
@@ -38,4 +42,4 @@ class Order(models.Model):
 class InCart(models.Model):
     product = models.ForeignKey('products.Product',on_delete=models.CASCADE,null=True,default=None)
     quantity = models.PositiveSmallIntegerField(default=1)
-    
+

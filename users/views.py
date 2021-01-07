@@ -85,7 +85,7 @@ def index(request):
         address = request.POST.get("address", "")
         currency = request.POST.get("currency", "")
         
-        
+
         user = User.objects.filter(username=request.user.username)
         user.update(first_name=first, last_name=last, phone_number=num, phone_number_code=code, email=email,address=address, preferred_currency=currency)
 
@@ -104,6 +104,10 @@ def index(request):
         currency = request.user.preferred_currency
         address = request.user.address
         is_seller = request.user.is_seller
+
+        print(request.session)
+
+
         return render(request, 'users/Dashboard.html', {
             'wishlist': wishlist,
             'cart': cart,
