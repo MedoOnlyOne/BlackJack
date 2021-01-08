@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from products.models import Product
 from shop.models import Shop
 import uuid
-from django.contrib.auth import user_logged_out
+from django.contrib.auth import user_logged_in
 from django.dispatch import receiver
 import datetime
 import pytz
@@ -42,4 +42,15 @@ class Order(models.Model):
 class InCart(models.Model):
     product = models.ForeignKey('products.Product',on_delete=models.CASCADE,null=True,default=None)
     quantity = models.PositiveSmallIntegerField(default=1)
+
+class UserLogin(models.Model):
+    user = models.ForeignKey('users.User',related_name='user_login',on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now=True)
+
+
+@receiver(user_logged_in)
+def create_user_login(sender,request,user,**kwargs):
+    u = UserLogin(user=user)
+    u.save()
+
 

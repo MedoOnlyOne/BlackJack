@@ -14,6 +14,10 @@ from django.conf import settings
 from django.core.mail import send_mail 
 from decouple import config 
 import requests
+from users.models import UserLogin
+import datetime,string,random,pytz
+
+
 currency_symbols={
     'EGP':'L.E.',
     'EUR':'€',
@@ -39,19 +43,32 @@ def get_preffered_currency(request):
 @login_required
 def cart(request):
     if request.is_ajax():
-        coupon_code=request.GET['coupon_code']
-        products=request.user.cart.all()
-        for product in products:
-            for coupon in product.shop.coupons.all():
-                if coupon_code==coupon.code and coupon.activated:
-                    return JsonResponse({
-                        'success':True,
-                        'discount':coupon.discount,
-                        'shopname':coupon.shop.name
-                    })
-        return JsonResponse({
-                            'success':False
+        coupon_code = request.GET['coupon_code']
+        user_coupon = Coupon.objects.filter(code=coupon_code)
+        if user_coupon and user_coupon[0].coupon_type=='user':
+            if user_coupon[0].activated:
+                return JsonResponse({
+                    'success': True,
+                    'discount': user_coupon[0].discount,
+                    'type': 'user'
+                })
+            return JsonResponse({
+                'success':False
+            })
+        else:
+            products=request.user.cart.all()
+            for product in products:
+                for coupon in product.shop.coupons.all():
+                    if coupon_code==coupon.code and coupon.activated:
+                        return JsonResponse({
+                            'success':True,
+                            'discount':coupon.discount,
+                            'shopname':coupon.shop.name,
+                            'type':'shop'
                         })
+            return JsonResponse({
+                                'success':False
+                            })
     elif request.method=='GET':
         preferred_currency=get_preffered_currency(request)
         currency_ratio=get_currency_ratio(request)
@@ -105,7 +122,6 @@ def index(request):
         address = request.user.address
         is_seller = request.user.is_seller
 
-        print(request.session)
 
 
         return render(request, 'users/Dashboard.html', {
@@ -123,7 +139,7 @@ def index(request):
             'address': address,
         })
 
-def LogIn(request):
+def login(request):
     if request.method == "POST":
     
         # Try to sign user in
@@ -134,6 +150,35 @@ def LogIn(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
+            userlogins = UserLogin.objects.filter(user=user)
+            timestamps = [login.timestamp for login in userlogins]
+            month = 60*60*24*30
+            week = 60*60*24*7
+            now = datetime.datetime.now(pytz.timezone('Africa/Cairo'))
+            timestamps_this_month = [timestamp for timestamp in timestamps if (now-timestamp).total_seconds()<month]    
+            days_active_in_this_month = set()
+            for timestamp in timestamps_this_month:
+                days_active_in_this_month.add(timestamp.day)
+            if len(days_active_in_this_month)>=7:
+                user_coupon = Coupon.objects.filter(coupon_type='user',name=user.username)
+                if not user_coupon and (now-user.date_joined).total_seconds()>month:
+                    letters = string.ascii_letters
+                    code = ''.join(random.choice(letters) for i in range(5))
+                    user_coupon = Coupon(name=f'{user.username}_coupon',shop=None,coupon_type='user',discount=10,code=code,activated=True)
+                    user_coupon.save()
+                    ##send email to tell user a coupon has  been created for him
+                else:
+                    if not user_coupon[0].activated:
+                        user_coupon[0].activated=True
+                        user_coupon[0].save()
+                    ## send email to tell user a coupon has been reactivated
+            elif len(days_active_in_this_month)<7:
+                user_coupon = Coupon.objects.filter(coupon_type='user',name=user.username)
+                if user_coupon:
+                    if (now - user_coupon[0].created).total_seconds()>week:
+                        user_coupon[0].activated=False
+                        user_coupon[0].save()
+                        ## send email to tell user that coupon is no longer active due to inactivity
             return HttpResponseRedirect(reverse("userdashboard"))
         else:
             return render(request, "users/login2.html", {
@@ -143,6 +188,55 @@ def LogIn(request):
         if request.user.is_authenticated:
             return HttpResponseRedirect(reverse('userdashboard'))
         return render(request, "users/login2.html")
+
+def login22(request):
+    if request.method == "POST":
+
+        # Try to sign user in
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+
+        # Check if authentication successful
+        if user is not None:
+            login(request, user)
+            userlogins = UserLogin.objects.filter(user=user)
+            timestamps = [login.timestamp for login in userlogins]
+            minute = 60
+            week = 60*60*24*7
+            now = datetime.datetime.now(pytz.timezone('Africa/Cairo'))
+            timestamps_this_minute = [timestamp for timestamp in timestamps if (now-timestamp).total_seconds()<minute]    
+            seconds_active_in_this_minute = set()
+            for timestamp in timestamps_this_minute:
+                seconds_active_in_this_minute.add(timestamp.second)
+            if len(seconds_active_in_this_minute)>=3:
+                user_coupon = Coupon.objects.filter(coupon_type='user',name=user.username)
+                if not user_coupon and (now-user.date_joined).total_seconds()>week:
+                    letters = string.ascii_letters
+                    code = ''.join(random.choice(letters) for i in range(5))
+                    user_coupon = Coupon(name=user.username,shop=None,coupon_type='user',discount=10,code=code,activated=True)
+                    user_coupon.save()
+                    ##send email to tell user a coupon has  been created for him
+                else:
+                    if not user_coupon[0].activated:
+                        user_coupon[0].activated=True
+                        user_coupon[0].save()
+            elif len(seconds_active_in_this_minute)<3:
+                user_coupon = Coupon.objects.filter(coupon_type='user',name=user.username)
+                if user_coupon:
+                    if (now - user_coupon[0].created).total_seconds()>20:
+                        user_coupon[0].activated=False
+                        user_coupon[0].save()
+            return HttpResponseRedirect(reverse("userdashboard"))
+        else:
+            return render(request, "users/login2.html", {
+                "message": "Invalid username and/or password."
+            })
+    else:
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(reverse('userdashboard'))
+        return render(request, "users/login2.html")
+#for testing
 
 def LogOut(request):
     logout(request)
@@ -286,20 +380,32 @@ def checkout(request,orderid):
         prices = [product.product.price for product in order.products.all()]
         quantities = [product.quantity for product in order.products.all()]
         if order.coupon:
-            for product in order.products.all():
-                if product.product.shop==order.coupon.shop:
-                    prodcuts_prices=[(order.products.all()[i],float(prices[i])*quantities[i]*(100-order.coupon.discount)/100) for i in range(len(order.products.all()))]
-                    return render(request,'users/checkout.html',{
+            if order.coupon.coupon_type=='user':
+                products_prices=[(order.products.all()[i],float(prices[i])*quantities[i]*(100-order.coupon.discount)/100) for i in range(len(order.products.all()))]                    
+                return render(request,'users/checkout.html',{
                         'order': order,
-                        'products_prices': prodcuts_prices,
+                        'products_prices': products_prices,
                         'currency_ratio':currency_ratio,
                         'currency_symbol':currency_symbols[preferred_currency]
                     })
+            else:
+                products_prices=[]
+                for index,product in enumerate(order.products.all()):
+                    if product.product.shop==order.coupon.shop:
+                        products_prices.append((product,float(prices[index])*quantities[index]*(100-order.coupon.discount)/100))
+                    else:
+                        products_prices.append((product,float(prices[index])*quantities[index]))
+                return render(request,'users/checkout.html',{
+                    'order': order,
+                    'products_prices': products_prices,
+                    'currency_ratio':currency_ratio,
+                    'currency_symbol':currency_symbols[preferred_currency]
+                })
         else:
-            prodcuts_prices=[(order.products.all()[i],float(prices[i])*quantities[i]) for i in range(len(order.products.all()))]
+            products_prices=[(order.products.all()[i],float(prices[i])*quantities[i]) for i in range(len(order.products.all()))]
             return render(request,'users/checkout.html',{
                 'order': order,
-                'products_prices': prodcuts_prices,
+                'products_prices': products_prices,
                 'currency_ratio':currency_ratio,
                 'currency_symbol':currency_symbols[preferred_currency]
             })

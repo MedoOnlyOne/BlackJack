@@ -1,15 +1,17 @@
 var is_valid=false;
 var shopname='';
 var discount=0;
+var type='shop';
 function total(){
   var items = document.getElementsByClassName("item");
   var q_form = document.getElementsByClassName("quantity_of_product");
+  var shopnames = document.getElementsByClassName("shopname");
   var lenitems = items.length;
   var total = 0;
   for(var i = 0; i < lenitems; i++){
-    let price=(items[i].querySelector('span[class="q"]').innerHTML * items[i].querySelector('span[class="p"]').innerHTML)
-    if (is_valid && shopname==document.getElementById('shopname').innerHTML)
-        total = total + price*(100-discount)/100;
+    let price=(items[i].querySelector('span[class="q"]').innerHTML * items[i].querySelector('span[class="p"]').innerHTML);
+    if (is_valid && (type=='user' || shopname==shopnames[i].innerHTML))
+      total = total + price*(100-discount)/100;
     else
         total = total + price;
 
@@ -53,9 +55,18 @@ coupon_button.addEventListener('click',function () {
             is_valid=response['success'];
             if (is_valid)
             {
-              discount=response['discount'];
-              shopname=response['shopname'];
-              alert('Coupon succesfully entered for shop '+shopname);
+              if (response['type']=='user')
+              {
+                discount=response['discount'];
+                type=response['type'];
+                alert('User Coupon entered successfully');
+              }
+              else{
+                discount=response['discount'];
+                shopname=response['shopname'];
+                type=response['type'];
+                alert('Coupon successfully entered for shop '+shopname);
+              }
             }
             else
             {
