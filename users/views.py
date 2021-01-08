@@ -55,6 +55,16 @@ def cart(request):
             return JsonResponse({
                 'success':False
             })
+        elif user_coupon and user_coupon[0].coupon_type=='event':
+            if user_coupon[0].activated:
+                return JsonResponse({
+                    'success': True,
+                    'discount': user_coupon[0].discount,
+                    'type': 'event'
+                })
+            return JsonResponse({
+                'success':False
+            })    
         else:
             products=request.user.cart.all()
             for product in products:
@@ -139,7 +149,7 @@ def index(request):
             'address': address,
         })
 
-def login(request):
+def loginview(request):
     if request.method == "POST":
     
         # Try to sign user in
@@ -189,7 +199,7 @@ def login(request):
             return HttpResponseRedirect(reverse('userdashboard'))
         return render(request, "users/login2.html")
 
-def login22(request):
+def loginview2(request):
     if request.method == "POST":
 
         # Try to sign user in
@@ -380,8 +390,8 @@ def checkout(request,orderid):
         prices = [product.product.price for product in order.products.all()]
         quantities = [product.quantity for product in order.products.all()]
         if order.coupon:
-            if order.coupon.coupon_type=='user':
-                products_prices=[(order.products.all()[i],float(prices[i])*quantities[i]*(100-order.coupon.discount)/100) for i in range(len(order.products.all()))]                    
+            if order.coupon.coupon_type=='user' or order.coupon.coupon_type=='event':
+                products_prices = [(order.products.all()[i],float(prices[i])*quantities[i]*(100-order.coupon.discount)/100) for i in range(len(order.products.all()))]                    
                 return render(request,'users/checkout.html',{
                         'order': order,
                         'products_prices': products_prices,
@@ -389,7 +399,7 @@ def checkout(request,orderid):
                         'currency_symbol':currency_symbols[preferred_currency]
                     })
             else:
-                products_prices=[]
+                products_prices = []
                 for index,product in enumerate(order.products.all()):
                     if product.product.shop==order.coupon.shop:
                         products_prices.append((product,float(prices[index])*quantities[index]*(100-order.coupon.discount)/100))
@@ -398,8 +408,8 @@ def checkout(request,orderid):
                 return render(request,'users/checkout.html',{
                     'order': order,
                     'products_prices': products_prices,
-                    'currency_ratio':currency_ratio,
-                    'currency_symbol':currency_symbols[preferred_currency]
+                    'currency_ratio': currency_ratio,
+                    'currency_symbol': currency_symbols[preferred_currency]
                 })
         else:
             products_prices=[(order.products.all()[i],float(prices[i])*quantities[i]) for i in range(len(order.products.all()))]

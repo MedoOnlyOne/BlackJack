@@ -10,11 +10,10 @@ function total(){
   var total = 0;
   for(var i = 0; i < lenitems; i++){
     let price=(items[i].querySelector('span[class="q"]').innerHTML * items[i].querySelector('span[class="p"]').innerHTML);
-    if (is_valid && (type=='user' || shopname==shopnames[i].innerHTML))
+    if (is_valid && (type=='user' || type=='event' ||shopname==shopnames[i].innerHTML))
       total = total + price*(100-discount)/100;
     else
         total = total + price;
-
     q_form[i].value = items[i].querySelector('span[class="q"]').innerHTML;
     }
   document.querySelector('#t').innerHTML = total.toFixed(2);
@@ -60,6 +59,12 @@ coupon_button.addEventListener('click',function () {
                 discount=response['discount'];
                 type=response['type'];
                 alert('User Coupon entered successfully');
+              }
+              else if (response['type']=='event')
+              {
+                discount=response['discount'];
+                type=response['type'];
+                alert('Event Coupon entered successfully');
               }
               else{
                 discount=response['discount'];
