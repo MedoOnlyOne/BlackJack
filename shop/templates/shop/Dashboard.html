@@ -6,12 +6,7 @@
     #items
    {
      margin-left: 40px;
-     overflow: hidden;
-    /* position:relative;
-    left:40px;
-    background-color:white;
-    float:left;
-    width:715px; */
+     overflow: auto;
    }
 
    .item
@@ -74,22 +69,40 @@
     margin-bottom: 5px; 
    }
   </style>
+  <link rel="stylesheet" href="../static/users/wishlist.css">
 {% endblock %}
 
 {% block name %}My Products{% endblock %}
 
 {% block body %}
+  
+  {% if products %}
   <div id="items">
     <div class="itemscontainer">                        
         {% for product in products %}
         <div class="item" title="{{ product.name }}">
-          <img src="{{ product.image.url }}" height="135" width="135"> 
-          <p style="font-size:25px; font-weight:bold; position:relative; top:5px;"><a href="{% url 'editproduct' product.id %}">Product name : {{ product.name }}</a></p>
-          <p><span style="font-weight:bold;">Price : </span> {{product.price|mul:currency_ratio|floatformat:3}}{{currency_symbol}}</p>
-          <p><span style="font-weight:bold;">Description : </span> {{product.description}}</p>
-            
+          <div style="overflow: auto;">
+            <img src="{{ product.image.url }}" height="135" width="135"> 
+            <p style="font-size:25px; font-weight:bold; position:relative; top:5px;"><a href="{% url 'productpage' product.id %}">Product name : {{ product.name }}</a></p>
+            <p><span style="font-weight:bold;">Price : </span> {{product.price|mul:currency_ratio|floatformat:2}}{{currency_symbol}}</p>
+            <p><span style="font-weight:bold;">Description : </span> {{product.description}}</p>
+          </div>
+          <div style="display: flex; ">
+            <div style="margin:auto 5em">
+              <button class="deactivate"><a href="{% url 'editproduct' product.id %}">Edit</a></button>
+            </div>
+            <div style="margin:auto 5em">
+              <button class="deactivate"><a href="{% url 'removefromshop' product.id %}">Remove</a></button>
+            </div>
+          </div>
         </div>
+       
         {% endfor %} 
     </div>
   </div>
+  {% else %}
+  <p style="font-size: 2.5rem; text-align: center;">
+      Your shop doesn't have any products yet
+  </p>
+  {% endif %}
 {% endblock %}

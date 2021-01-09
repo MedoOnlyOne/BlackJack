@@ -19,7 +19,7 @@ import datetime,string,random,pytz
 
 
 currency_symbols={
-    'EGP':'L.E.',
+    'EGP':'EGP',
     'EUR':'€',
     'USD':'$',
     'GBP':'£'

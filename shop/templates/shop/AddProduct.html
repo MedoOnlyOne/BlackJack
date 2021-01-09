@@ -1,5 +1,5 @@
 {% extends 'shop/layout.html' %}
-
+{% load static %}
 {% block head %}
   <title>Add Product</title>
 
@@ -31,7 +31,7 @@
     input[type="file"]{
       margin-top: 20px;
       } 
-    input[type="submit"]
+    #submit_btn
     {
       display: block;
       margin:20px;
@@ -41,6 +41,12 @@
       background-color :#232732;
       color: #BFB367 ;
       font-weight:bold;
+    }
+    #submit_btn:disabled,
+    #submit_btn[disabled]
+    {
+      color:#ccc;
+      cursor:default;
     }
     input[type="submit"]:hover{
       cursor: pointer;
@@ -57,27 +63,30 @@
       {% csrf_token %}
       <div style="display:flex; flex-wrap:wrap;">
         <h3>Product Name:</h3>
-        <input type="text" placeholder="Product name: ..." name="product" style="margin-left: 65px;">
+        <input type="text" id="product_name" placeholder="Product name" name="product" style="margin-left: 65px;">
       </div>
       <div style="display:flex; flex-wrap:wrap;">
-        <h3>Remaining in stock:</h3>
-        <input type="number" placeholder="Remaining in stock: ..." name="remaining_in_stock" style="margin-left: 18px;">
+        <h3>Remaining in Stock:</h3>
+        <input type="number" id="stock" placeholder="Remaining in stock" name="remaining_in_stock" style="margin-left: 18px;">
       </div>
-      <div style="display:flex; flex-wrap:wrap;">
-        <h3>Price:</h3>
-        <input type="number" step="10" placeholder="Product price: ..." name="price" style="margin-left: 150px;">
+      <div>
+        <h3>Price</h3>
+        <input type="number" id="price" step="0.01" placeholder="Product price in {{currency_name}}" name="price" style="margin-left: 150px;">
+        <br>
+        <h3>in {{currency_name}}:</h3>
       </div>
-      <div style="padding: 0px; display:flex; flex-wrap:wrap;">
+      <div style="padding: 0px; display:flex; flex-wrap:wrap; margin-top: 1em;">
         <h3 style="display: inline; margin: 1px;padding: 0px;">Description:</h3>
-        <textarea placeholder="Description: ..." name="discription" style="margin: 10px 90px;"></textarea>
+        <textarea placeholder="Description" id="description" name="discription" style="margin: 10px 90px;"></textarea>
       </div>
       <div >
         <h3 >Image:</h3><br>
         <input type="file" id="fileToUpload" name="image">
       </div>
-      <input type="submit" value="Add product">
+      <input id="submit_btn" type="submit" value="Add product" disabled>
     </form>
   </div>
+  <script src="{% static 'shop/addproduct.js' %}"></script>
 {% endblock %}
 
 

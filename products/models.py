@@ -22,19 +22,17 @@ class Product(models.Model):
     image = models.ImageField(null=True,blank=True,upload_to='product_images/')
     shop = models.ForeignKey('shop.Shop',on_delete=models.CASCADE)
     reviews = models.ManyToManyField(Review, blank=True, related_name="reviews")
+    categories = [
+        ('clothing','Clothing'),
+        ('tvs','TVs'),
+        ('electronics','Electronics'),
+        ('home_applicanes','Home Appliances'),
+        ('furniture','Furniture'),
+        ('other','Other')
+    ]
+    category = models.CharField(max_length=15,choices=categories,default='other')
     def __str__(self):
         return f'{self.name}'
     def __unicode__(self):
         return self.id
 
-# class Cart(models.Model):
-#     products = models.ManyToManyField(Product, blank=True, related_name="purchased_product")
-
-#     def __str__(self):
-#         return f'{self.products}'
-
-# class Wishlist(models.Model):
-#     products = models.ManyToManyField(Product, blank=True, related_name="wished_product")
-
-#     def __str__(self):
-#         return f'{self.products}'

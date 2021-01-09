@@ -8,16 +8,12 @@ import decimal
 from decouple import config
 # Create your views here.
 currency_symbols={
-    'EGP':'L.E.',
+    'EGP':'EGP',
     'EUR':'€',
     'USD':'$',
     'GBP':'£'
 }
 
-def index(request):
-    return render(request, 'products/index.html',{
-        'products': Product.objects.all()
-    })
 
 def product(request, productid):
     if request.method=='POST':
@@ -33,8 +29,8 @@ def product(request, productid):
 
         elif 'add_to_cart' in request.POST:
             if request.user.is_authenticated:
-                product_name = request.POST['productname']
-                product = Product.objects.get(name=product_name)
+                product_id = request.POST['productid']
+                product = Product.objects.get(id=product_id)
                 request.user.cart.add(product)
 
                 return HttpResponseRedirect(reverse('productpage',args=[productid]))
@@ -42,8 +38,8 @@ def product(request, productid):
                 return HttpResponseRedirect(reverse('login'))
         elif 'add_to_wishlist' in request.POST:
             if request.user.is_authenticated:
-                product_name = request.POST['productname']
-                product = Product.objects.get(name=product_name)
+                product_id = request.POST['productid']
+                product = Product.objects.get(id=product_id)
                 request.user.wishlist.add(product)
 
                 return HttpResponseRedirect(reverse('productpage',args=[productid]))
@@ -75,6 +71,15 @@ def product(request, productid):
             else:
                 in_wishlist=None
                 in_cart=None
+            is_user_product=False
+            if request.user:
+                if request.user.shop:
+                    if product.shop.id==request.user.shop.id:
+                        is_user_product=True
+            user_has_review=False
+            if request.user:
+                if Review.objects.filter(user=request.user,reviews=product):
+                    user_has_review=True
             return render(request,'products/product.html',{
             'product': product,
             'rating': rating,
@@ -83,7 +88,9 @@ def product(request, productid):
             'currency_symbol':currency_symbols[preferred_currency],
             'reviews':reviews,
             'in_wishlist':in_wishlist,
-            'in_cart': in_cart
+            'in_cart': in_cart,
+            'is_user_product':is_user_product,
+            'user_has_review':user_has_review
             })
         except (Product.DoesNotExist,ValidationError) :
             return render(request,'products/404.html')

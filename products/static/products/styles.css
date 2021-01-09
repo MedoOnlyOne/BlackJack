@@ -62,16 +62,18 @@ body {
   display:inline-block;
 }
 .product {
-  margin: 10px 5px;
-  margin-top: 20px;
-  border: solid 4px #BFB367;
-  border-radius: 5px;
-  padding: 10px;
-  overflow: hidden;
   display:flex;
   flex-direction: row-reverse;
   justify-content: space-evenly;
   flex-wrap:wrap;
+}
+.product-container{
+  border: solid 4px #BFB367;
+  margin: 10px 5px;
+  margin-top: 20px;
+  border-radius: 5px;
+  padding: 10px;
+  overflow: hidden;
 }
 
 .product .info{
@@ -268,6 +270,12 @@ span {
 .review_btn:hover{
   cursor: pointer;
   color: #fff;
+}
+.review_btn:disabled,
+.review_btn[disabled]
+{
+  color:#ccc;
+  cursor:default;
 }
 #ii {
   display :inline-block;

@@ -25,7 +25,7 @@
   {% endif %}
 </ul> </nav>
 </header>
-
+    <div class="product-container">
     <div class="product">
       <div class="info">
         <div class="info-text">
@@ -34,24 +34,11 @@
           <h2>Quantity: {{ product.remaininginstock }}</h2>
           <h2>Rating: {{ rating }}</h2>
         </div>
-        <!-- <input type="text"> -->
-        <!-- <br>
-        <h4>Color</h4>
-        <input name="color" list="colors" placeholder="Select Color" id="CO">
-                  <datalist id="colors" >
-                      <option value="blue">
-                      <option value="red">
-                      <option value="green">
-                      <option value="white">
-                      <option value="black">
-                      <option value="purple">
-                      <option value="brown">
-                  </datalist> -->
         <form action="{% url 'productpage' product.id %}" method="POST">
           {% csrf_token %}
-          <input type="hidden" name="productname" value="{{ product.name }}">
+          <input type="hidden" name="productid" value="{{ product.id }}">
           <button type="submit" name="add_to_wishlist" class="wishlist" 
-          {% if in_wishlist %}
+          {% if in_wishlist or is_user_product%}
             disabled style="color:#ccc; cursor:default;"
           {% endif %}
           >
@@ -59,19 +46,25 @@
         </form>
         <form action="{% url 'productpage' product.id %}" method="POST">
           {% csrf_token %}
-          <input type="hidden" name="productname" value="{{ product.name }}">
+          <input type="hidden" name="productid" value="{{ product.id }}">
           <button type="submit" name="add_to_cart" class="cart"
-          {% if in_cart %}
+          {% if in_cart or product.remaininginstock == 0 or is_user_product %}
             disabled style="color:#ccc; cursor:default;"
           {% endif %}
           >
           <i class="fa fa-shopping-cart"></i> Add to Cart</button>
         </form>
-        
       </div>
       <div class="image">
         <img src="{{ product.image.url }}" alt="{{ product.name }}" id="productimage">
-      </div>      
+      </div>
+    </div>
+    {% if product.remaininginstock == 0 %}
+      <div style="color:red; font-size: 1.5rem; text-align: center;">
+          <br>
+          Product is out of stock!
+      </div>
+    {% endif %}      
     </div>
 <div class="Dis"  style="width: 97.5%;">
   <h6>Product Discription</h6>
@@ -81,7 +74,7 @@
 <form action="{% url 'productpage' product.id %}" method="POST">
   {% csrf_token %}
 <h6>Write a Review</h6>
-<textarea name="review" placeholder="Write your review here"></textarea>
+<textarea name="review" id="review_text" placeholder="Write your review here"></textarea>
 <!-- <div class="rating"> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
 </div> -->
 <div class="rate">
@@ -96,11 +89,12 @@
   <input type="radio" id="star1" name="rate" value="1" />
   <label for="star1" title="text">1 star</label>
 </div>
-<input type="submit" name="add_review" class="review_btn">
+<input type="submit" name="add_review" id="review_btn" class="review_btn" disabled>
 </form>
 </div>
 <div class="user-reviews">
   <h6>User Reviews</h6>
+  {% if reviews %}
   {% for review in reviews%}
     <div class="single-review">
     <p>By <em style="font-size: 1.1em;">{{ review.user.username }}</em></p>
@@ -108,6 +102,9 @@
     <p>{{ review.text }}</p>
     </div>
   {% endfor %}
+  {% else %}
+    <p style="font-size: 1.5rem; text-align: center;">There are no reviews for this product.</p>
+  {% endif %}
 </div>
 
 <div class="Related">
@@ -136,24 +133,21 @@
       <h5>price</h5>
       <button type="submit" class="art">Add to Cart</button>
      </div>
-
     </div>
+    {% if not is_user_product and not user_has_review%}
+      <script>
+        var review=document.getElementById('review_text');
+        var submit=document.getElementById('review_btn');
+        review.addEventListener('input',function (){
+          console.log(review.value.length);
+          if (review.value.length>30){
+            submit.disabled=false;
+          }
+          else
+            submit.disabled=true;
+        })
+      </script>
+    {% endif %}
     {% endblock %}
 
-    <!-- <script type="text/javascript">
-      var frm = $('#FORM-ID');
-      frm.submit(function () {
-          $.ajax({
-              type: frm.attr('method'),
-              url: frm.attr('action'),
-              data: frm.serialize(),
-              success: function (data) {
-                  $("#SOME-DIV").html(data);
-              },
-              error: function(data) {
-                  $("#MESSAGE-DIV").html("Something went wrong!");
-              }
-          });
-          return false;
-      });
-  </script> -->
+  

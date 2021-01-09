@@ -1,61 +1,67 @@
-<!DOCTYPE HTML>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Product Not Found!</title>
-        <style>
-            .Container {
-                overflow: hidden;
-                }
-
-            header{
-            background-color: #232732;
-            color: #ffffff;
-            border-bottom: #BFB367 6px solid;
-            }
-            header ul{
-            margin:0;
-            padding: 0;
-            }
-
-            header li {
-            display: inline;
-            padding: 0 20px 0 20px;
-            }
-
-            header a{
-            text-decoration: none;
-            color: #BFB367;
-            text-transform: uppercase;
-            font-size:15pt;
-            }
-
-            header nav{float:right;
-            padding-right:30px;}
-
-            
-            header a:hover {
-            color: white;
-
-            }
-
-            #BlackJack {
-                font-size: 40px;
-                color: white;
-                display:inline;
-            }
-            #official {
-                color: #BFB367;
-                margin-top: 10%;
-                margin-bottom: 5%;
-                display:inline;
-                font-size: 16px;
-            }
-
-            body {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found</title> 
+    <style>
+        body {
             padding : 0px;
             margin: 0px;
+        }
+        .Container {
+            overflow: hidden;
+            }
+        p{
+            text-align: center;
+            font-size: 32pt;
+        }
+        header{
+        background-color: #232732;
+        color: #ffffff;
+        border-bottom: #BFB367 6px solid;
+        }
+        header ul{
+        margin:0;
+        padding: 0;
+        }
+
+        header li {
+        display: inline;
+        padding: 0 20px 0 20px;
+        }
+
+        header a{
+        text-decoration: none;
+        color: #BFB367;
+        text-transform: uppercase;
+        font-size:15pt;
+        }
+
+        header nav{float:right;
+        padding-right:30px;}
+
+        
+        header a:hover {
+        color: white;
+
+        }
+
+        #BlackJack {
+            font-size: 40px;
+            color: white;
+            display:inline;
+        }
+        #official {
+            color: #BFB367;
+            margin-top: 10%;
+            margin-bottom: 5%;
+            display:inline;
+            font-size: 16px;
+            }
+
+            #header{
+                display:inline-block;
             }
         </style>
     </head>
@@ -63,15 +69,23 @@
         <header>
             <div class="Container">
                 <div id="header">
-              <span id="BlackJack">BlackJack</span>
-              <span id="official">The Official online store </span>
-           </div>
-          
-          <nav> <ul style="margin-top:12px;"> 
-            <li> <a href="#"> Home </a> </li>
-            <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
-          </ul> </nav>
-          </header>          
-        Oops! This page could not be found!
+                <span id="BlackJack">BlackJack</span>
+                <span id="official">The Official online store </span>
+            </div>
+            
+            <nav> <ul style="margin-top:12px;"> 
+                <li> <a href="#"> Home </a> </li>
+                <li> <a href="{% url 'userdashboard'%}"> Profile </a></li>
+                <li> <a href="{% url 'contactus' %}"> Contact Us </a></li>
+                {% if user.is_authenticated %}
+                <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
+                {% else %}
+                <li> <a href="{% url 'login' %}">  Login  </a> </li>
+                {% endif %}
+            </header>
+        <div style="text-align: center; font-size: 2.5rem;">          
+            <p>Oops! Page not found</p>
+        </div>
     </body>
-</html>
+   
+  

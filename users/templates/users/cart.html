@@ -98,6 +98,7 @@
 {% block name %}Cart{% endblock %}
 
 {% block body %}
+  {% if products %}
   <div id="items">
       <div class="itemscontainer">  
             <!-- <div class="item" title="item">
@@ -159,9 +160,16 @@
       style=" height:40px; width:337px; margin-left:5px; font-weight:bold;">
       </form>
   </div>
+  {% else %}
+  <div>
+    <p style="font-size:2.5rem; text-align:center">You don't have any products in your cart</p>
+  </div>
+  {% endif %}
 {% endblock %}
 
 {% block script%}
+  {% if products %}
   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   <script src="../static/users/cart.js"></script>
+  {% endif %}
 {% endblock %}

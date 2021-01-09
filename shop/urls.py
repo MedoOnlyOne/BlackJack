@@ -9,5 +9,6 @@ urlpatterns = [
     path('',views.dashboard,name='shopdashboard'),
     path('<str:shopname>/', views.index, name='shop'),
     path('activecoupons/', views.activecoupons,name='activecoupons'),
-    path('orders/',views.orders,name='shop_orders')
+    path('orders/',views.orders,name='shop_orders'),
+    path('remove/<str:productid>',views.removefromshop,name='removefromshop')
 ]

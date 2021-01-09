@@ -1,5 +1,5 @@
 {% extends 'shop/layout.html' %}
-
+{% load mathfilters %}
 {% block head %}
   <title>Edit Product</title>
 
@@ -38,7 +38,7 @@
         input[type="file"]{
         margin-top: 20px;
         } 
-        input[type="submit"]
+        #submit_btn
         {
         display: block;
         margin:15px;
@@ -49,9 +49,15 @@
         color: #BFB367 ;
         font-weight:bold;
         }
-        input[type="submit"]:hover{
+        #submit_btn:hover{
         cursor: pointer;
         color: #FFF;
+        }
+        #submit_btn:disabled,
+        #submit_btn[disabled]
+        {
+          color:#ccc;
+          cursor:default;
         }
   </style>
 {% endblock %}
@@ -68,28 +74,31 @@
           {% csrf_token %}
           <div>
             <h3>Product Name:</h3>
-            <input type="text" value="{{product.name}}" name="product" style="margin-left: 65px;">
+            <input type="text" id="product_name" value="{{product.name}}" name="product" style="margin-left: 65px;">
           </div>
           <div>
             <h3>Remaining in stock:</h3>
-            <input type="number" value="{{product.remaininginstock}}" name="remaining_in_stock" style="margin-left: 18px;">
+            <input type="number" id="stock" value="{{product.remaininginstock}}" name="remaining_in_stock" style="margin-left: 18px;">
           </div>
           <div>
-            <h3>Price:</h3>
-            <input type="number" step="10" value="{{product.price}}" name="price" style="margin-left: 150px;">
+            <h3>Price</h3>
+            <input type="number" id="price" step="0.01" value="{{product.price|mul:currency_ratio|floatformat:2}}" name="price" style="margin-left: 150px;">
+            <br>
+            <h3>in {{currency_name}}:</h3>
           </div>
-          <div style="display:flex; flex-wrap:wrap;">
+          <div style="display:flex; flex-wrap:wrap; margin-top: 1em;">
             <h3 style="display: inline-block; margin: 0px;padding: 0px;">Description:</h3>
-            <textarea name="description" style="margin: 10px 90px;">{{product.description}}</textarea>
+            <textarea id="description" name="description" style="margin: 10px 90px;">{{product.description}}</textarea>
           </div>
           <!-- <div>
             <h3>Image:</h3>
             <input type="file" id="fileToUpload" name="image" value="{{product.image.url}}">
           </div> -->
-          <input type="submit" value="Edit product">
+          <input id="submit_btn" type="submit" value="Edit product">
         </form>
       </div>
   </div>
+  <script src="../../../static/shop/editproduct.js"></script>
 {% endblock %}
 
 

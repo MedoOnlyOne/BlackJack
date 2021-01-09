@@ -11,12 +11,18 @@ import requests
 
 
 currency_symbols={
-    'EGP':'L.E.',
+    'EGP':'EGP',
     'EUR':'€',
     'USD':'$',
     'GBP':'£'
 }
 
+currency_names={
+    'EGP':'Egyptian Pound',
+    'EUR':'Euro',
+    'USD':'US Dollars',
+    'GBP':'English Pounds'
+}
 
 def get_currency_ratio(request):
     if not request.user.is_authenticated:
@@ -59,23 +65,22 @@ def addproduct(request):
     if request.method=='GET':
         if request.user.shop:
             return render(request,'shop/AddProduct.html',{
-                'shop': request.user.shop
+                'shop': request.user.shop,
+                'currency_name': currency_names[get_preffered_currency(request)]
             })
         else:
             return render(request,'shop/not_a_seller.html')
     else:
         name = request.POST.get('product','')
         price = request.POST.get('price','')
+        price = float(price) / get_currency_ratio(request)
         remaining = request.POST.get('remaining_in_stock','')
         disc = request.POST.get('discription','')
         img = request.FILES.get('image')
-        print(f"### {name}  {price} {remaining} {disc}  {img}   ##############")
         shop = Shop.objects.get(name=request.user.shop)
         p = Product(name=name,image=img,price=price,description=disc,remaininginstock=remaining,featured=False,shop=shop)
         p.save()
-        print(f"### {p.name}  {p.price} {p.remaininginstock} {p.description}  #################")
         shop.products.add(p)
-
         return HttpResponseRedirect(reverse('shopdashboard'))
 
 
@@ -83,11 +88,14 @@ def addproduct(request):
 def editproduct(request, productid):
     if request.method == "GET":
         return render(request,'shop/EditProduct.html',{
-            'product':Product.objects.get(id=productid)
+            'product':Product.objects.get(id=productid),
+            'currency_ratio':get_currency_ratio(request),
+            'currency_name':currency_names[get_preffered_currency(request)]
         })
     else:
         name = request.POST.get('product','')
         price = request.POST.get('price','')
+        price = float(price) / get_currency_ratio(request)
         remaining = request.POST.get('remaining_in_stock','')
         disc = request.POST.get('description','')
         p = Product.objects.get(id=productid)
@@ -175,3 +183,8 @@ def orders(request):
         return render(request,'shop/not_a_seller.html')
     return render(request,'shop/orders.html',{'orders':request.user.shop.orders.all(),'shop':request.user.shop})
 
+@login_required
+def removefromshop(request,productid):
+    product=Product.objects.get(id=productid)
+    product.delete()
+    return HttpResponseRedirect(reverse('shopdashboard'))
