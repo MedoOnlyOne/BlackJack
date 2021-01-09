@@ -24,8 +24,10 @@
         }
         h3{display: inline;}
         input[type="text"],
-        input[type="number"]{
+        input[type="number"],
+        select{
         width :300px;
+        height: 25px;
         margin-top: 20px;
         margin-bottom: 5px;
         }
@@ -75,6 +77,35 @@
           <div>
             <h3>Product Name:</h3>
             <input type="text" id="product_name" value="{{product.name}}" name="product" style="margin-left: 65px;">
+          </div>
+          <div style="display:flex; flex-wrap:wrap;">
+            <h3>Catigory:</h3>
+            <select name="cat" style="margin-left: 120px;">
+              <option value="other" 
+              {% if product.category == 'other' %}
+                selected
+              {% endif %}>Other</option>
+              <option value="clothing"
+              {% if product.category == 'clothing' %}
+                selected
+              {% endif %}>Clothing</option>
+              <option value="tvs"
+              {% if product.category == 'tvs' %}
+                selected
+              {% endif %}>TVs</option>
+              <option value="electronics"
+              {% if product.category == 'electronics' %}
+                selected
+              {% endif %}>Electronics</option>
+              <option value="home_applicanes"
+              {% if product.category == 'home_applicanes' %}
+                selected
+              {% endif %}>Home Applicanes</option>
+              <option value="furniture"
+              {% if product.category == 'furniture' %}
+                selected
+              {% endif %}>Furniture</option>
+            </select>
           </div>
           <div>
             <h3>Remaining in stock:</h3>

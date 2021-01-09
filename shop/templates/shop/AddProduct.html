@@ -16,7 +16,8 @@
     }
     h3{display: inline;}
     input[type="text"],
-    input[type="number"]{
+    input[type="number"],
+    select{
       width :300px;
       height:25px;
       margin-top: 20px;
@@ -64,6 +65,17 @@
       <div style="display:flex; flex-wrap:wrap;">
         <h3>Product Name:</h3>
         <input type="text" id="product_name" placeholder="Product name" name="product" style="margin-left: 65px;">
+      </div>
+      <div style="display:flex; flex-wrap:wrap;">
+        <h3>Catigory:</h3>
+        <select name="cat" style="margin-left: 120px;">
+          <option value="other">Other</option>
+          <option value="clothing">Clothing</option>
+          <option value="tvs">TVs</option>
+          <option value="electronics">Electronics</option>
+          <option value="home_applicanes">Home Applicanes</option>
+          <option value="furniture">Furniture</option>
+        </select>
       </div>
       <div style="display:flex; flex-wrap:wrap;">
         <h3>Remaining in Stock:</h3>

@@ -72,13 +72,14 @@ def addproduct(request):
             return render(request,'shop/not_a_seller.html')
     else:
         name = request.POST.get('product','')
+        cat = request.POST.get('cat','')
         price = request.POST.get('price','')
         price = float(price) / get_currency_ratio(request)
         remaining = request.POST.get('remaining_in_stock','')
         disc = request.POST.get('discription','')
         img = request.FILES.get('image')
         shop = Shop.objects.get(name=request.user.shop)
-        p = Product(name=name,image=img,price=price,description=disc,remaininginstock=remaining,featured=False,shop=shop)
+        p = Product(name=name,image=img,price=price,description=disc,remaininginstock=remaining,category=cat,featured=False,shop=shop)
         p.save()
         shop.products.add(p)
         return HttpResponseRedirect(reverse('shopdashboard'))
@@ -94,12 +95,14 @@ def editproduct(request, productid):
         })
     else:
         name = request.POST.get('product','')
+        cat = request.POST.get('cat','')
         price = request.POST.get('price','')
         price = float(price) / get_currency_ratio(request)
         remaining = request.POST.get('remaining_in_stock','')
         disc = request.POST.get('description','')
         p = Product.objects.get(id=productid)
         p.name = name
+        p.category = cat
         p.price = price
         p.description = disc
         p.remaininginstock = remaining
