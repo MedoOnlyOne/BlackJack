@@ -6,6 +6,7 @@ from .models import Product,Review
 import requests 
 import decimal
 from decouple import config
+import random
 # Create your views here.
 currency_symbols={
     'EGP':'EGP',
@@ -14,7 +15,26 @@ currency_symbols={
     'GBP':'£'
 }
 
+currency_names={
+    'EGP':'Egyptian Pound',
+    'EUR':'Euro',
+    'USD':'US Dollars',
+    'GBP':'English Pounds'
+}
+def get_currency_ratio(request):
+    if not request.user.is_authenticated:
+        return 1
+    preferred_currency=request.user.preferred_currency
+    if preferred_currency=='EGP':
+        return 1
+    else:
+        return requests.get('https://free.currconv.com/api/v7/convert',{'apiKey':config('API_KEY'),'q':'EGP'+'_'+preferred_currency,'compact':'ultra'}).json()['EGP'+'_'+preferred_currency]
 
+def get_preffered_currency(request):
+    if not request.user.is_authenticated:
+        return 'EGP'
+    return request.user.preferred_currency
+    
 def product(request, productid):
     if request.method=='POST':
         if 'add_review' in request.POST:
@@ -48,6 +68,35 @@ def product(request, productid):
     else:
         try:
             product = Product.objects.get(id=productid)
+            visits = product.visits
+            if visits >= 99:
+                product.featured = True
+            product.visits = visits + 1
+            product.save()
+            r_products = list(Product.objects.filter(category=product.category))
+            r_products.remove(product)
+            featured = []
+            related = []
+            if len(r_products) <= 4:
+                related = r_products
+            else:
+                for p in r_products:
+                    if p.featured:
+                        featured.append(p)
+                if len(featured) == 4:
+                    related = featured
+                elif len(featured) < 4:
+                    while len(featured) < 4:
+                        random_product = random.choice(r_products)
+                        if random_product not in featured:
+                            featured.append(random_product)
+                    related = featured
+                else:
+                    while len(related) < 4:
+                        random_product = random.choice(featured)
+                        if random_product not in related:
+                            related.append(random_product)
+
             if not request.user.is_authenticated:
                 currency_ratio=1
                 preferred_currency='EGP'
@@ -90,7 +139,11 @@ def product(request, productid):
             'in_wishlist':in_wishlist,
             'in_cart': in_cart,
             'is_user_product':is_user_product,
-            'user_has_review':user_has_review
+            'user_has_review':user_has_review,
+            'related':related,
+            'related_len':len(related),
+            'currency_ratio':get_currency_ratio(request),
+            'currency_name':currency_names[get_preffered_currency(request)]
             })
         except (Product.DoesNotExist,ValidationError) :
             return render(request,'products/404.html')

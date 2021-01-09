@@ -107,15 +107,18 @@
   {% endif %}
 </div>
 
+{% if related_len > 0 %}
 <div class="Related">
   <h6>Related Products</h6>
- <div class="v">
-   <img src="" class="re">
-   <h5> Product Name</h5>
-   <h5>price</h5>
-   <button type="submit" class="art">Add to Cart</button>
-  </div>
+  {% for p in related %}
   <div class="v">
+    <img src="{{ p.image.url}}" alt="{{p.name}}" class="re">
+    <h5><a class="p_name" href="{% url 'productpage' p.id %}">{{p.name}}</a></h5>
+    <h5>{{p.price|mul:currency_ratio|floatformat:2}} {{currency_name}}</h5>
+    <!-- <button type="submit" class="art">Add to Cart</button> -->
+   </div>
+  {% endfor %}
+  <!-- <div class="v">
     <img src="" class="re">
     <h5> Product Name</h5>
     <h5>price</h5>
@@ -132,8 +135,10 @@
       <h5> Product Name</h5>
       <h5>price</h5>
       <button type="submit" class="art">Add to Cart</button>
-     </div>
+     </div> -->
     </div>
+{% endif %}
+
     {% if not is_user_product and not user_has_review%}
       <script>
         var review=document.getElementById('review_text');

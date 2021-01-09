@@ -140,9 +140,11 @@ color: white;
 }
 .v {
   display:inline-block;
-  border: black 2px solid;
+  border: #BFB367 3px solid;
+  border-radius: 5px;
   margin: 10px;
   width: 250px;
+  height: 250px;
 }
 .Related {
   border: solid 4px #BFB367;
@@ -317,3 +319,12 @@ span {
   color: #c59b08;
 }
 
+.p_name{
+  text-decoration: none;
+  color: #000;
+  font-size: 20px;
+}
+
+.p_name:hover{
+  color: #BFB367;
+}

@@ -31,6 +31,7 @@ class Product(models.Model):
         ('other','Other')
     ]
     category = models.CharField(max_length=15,choices=categories,default='other')
+    visits = models.IntegerField(default=0)
     def __str__(self):
         return f'{self.name}'
     def __unicode__(self):
