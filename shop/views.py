@@ -88,7 +88,7 @@ def addproduct(request):
 @login_required
 def editproduct(request, productid):
     if request.method == "GET":
-        return render(request,'shop/EditProduct.html',{
+        return render(request,'shop/editproduct.html',{
             'product':Product.objects.get(id=productid),
             'currency_ratio':get_currency_ratio(request),
             'currency_name':currency_names[get_preffered_currency(request)]

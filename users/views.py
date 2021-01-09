@@ -480,5 +480,36 @@ def removefromcart(request,productid):
     return HttpResponseRedirect(reverse('cart'))
 
 def home(request):
-    #logic here
-    return render(request,'users/Mainpage.html')
+    products={}
+    displayed={}
+    for category in Product.categories:
+        products[category[0]] = list(Product.objects.filter(category=category[0]))
+        print(f'{category[0]} is  {products[category[0]]}')
+        featured = []
+        displayed_=[]
+        if len(products[category[0]]) <= 4:
+            displayed_ = products[category[0]]
+        else:
+            for p in products[category[0]]:
+                if p.featured:
+                    featured.append(p)
+            if len(featured) == 4:
+                displayed_ = featured
+            elif len(featured) < 4:
+                while len(featured) < 4:
+                    random_product = random.choice(products[category[0]])
+                    if random_product not in featured:
+                        featured.append(random_product)
+                displayed_ = featured
+            else:
+                while len(displayed_) < 4:
+                    random_product = random.choice(featured)
+                    if random_product not in displayed_:
+                        displayed_.append(random_product)
+        displayed[category[0]]=displayed_
+    print(f' displayed are {displayed}')
+    return render(request,'users/Mainpage.html',{
+        'displayed':displayed,
+        'currency_ratio':get_currency_ratio(request),
+        'currency_symbol':currency_symbols[get_preffered_currency(request)]
+    })
