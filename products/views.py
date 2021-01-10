@@ -5,7 +5,6 @@ from django.core.exceptions import ValidationError
 from .models import Product,Review
 import requests 
 import decimal
-from decouple import config
 import random,os
 # Create your views here.
 currency_symbols={

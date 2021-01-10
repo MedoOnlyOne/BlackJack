@@ -6,7 +6,6 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 import string 
 import random 
-from decouple import config
 import requests,os
 
 

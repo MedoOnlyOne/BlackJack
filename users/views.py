@@ -12,7 +12,6 @@ from passlib.hash import django_pbkdf2_sha256
 import uuid
 from django.conf import settings 
 from django.core.mail import send_mail 
-from decouple import config 
 import requests,os
 from users.models import UserLogin
 import datetime,string,random,pytz
