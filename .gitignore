@@ -4,4 +4,4 @@ config.txt
 .env
 pyvenv.cfg
 .Moussa
-/media
+media/*
