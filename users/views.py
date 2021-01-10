@@ -261,6 +261,8 @@ def SignUp(request):
         password = request.POST['password']
         confirm_password = request.POST['confirm_password']
         currency = request.POST['Preferred_Currency']
+        if currency == '':
+            currency='EGP'
         country = request.POST['country']
         code = request.POST['code']
         phone_num = request.POST['phone_num']
