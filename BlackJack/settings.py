@@ -162,3 +162,7 @@ EMAIL_HOST_PASSWORD = 'blackjack2020'
 
 
 django_heroku.settings(locals())
+
+
+import mimetypes
+mimetypes.add_type("text/css", ".css", True)
