@@ -29,4 +29,3 @@ search.addEventListener('input',function(){
         search_btn.disabled=true;
     }
 });
-window.onload = init;
