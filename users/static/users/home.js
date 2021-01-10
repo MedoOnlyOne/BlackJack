@@ -1,6 +1,9 @@
 var catheads = document.getElementsByClassName('cathead');
 var cur = document.getElementById('cur');
 var cats = document.getElementsByClassName('cat');
+var cur_cat = document.getElementById('cur_cat');
+var search = document.getElementById('s');
+var search_btn = document.getElementById('b');
 
 
 for(let i=0;i<catheads.length;i++){
@@ -18,8 +21,12 @@ for(let i=0;i<catheads.length;i++){
     });
 }
 
-
-document.addEventListener('DOMContentLoaded',function(){
-    for(let i=1;i<6;i++)
-        cats[i].style="display:none";
-})
+search.addEventListener('input',function(){
+    if (search.value.length>0){
+        search_btn.disabled=false;
+    }
+    else{
+        search_btn.disabled=true;
+    }
+});
+window.onload = init;

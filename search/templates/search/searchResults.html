@@ -46,7 +46,7 @@
         <form method="GET" action="{% url 'search' %}" id="search-form">
             <div class="search">
             <input type="text" name="search_name" id="s" placeholder="What are you looking for ?">
-            <button type="submit" id="b">Search</button>
+            <button type="submit" id="b" disabled>Search</button>
             </div>
         </form>
     {% if is_products_search %}

@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 import string 
 import random 
 from decouple import config
-import requests
+import requests,os
 
 
 currency_symbols={
@@ -31,7 +31,7 @@ def get_currency_ratio(request):
     if preferred_currency=='EGP':
         return 1
     else:
-        return requests.get('https://free.currconv.com/api/v7/convert',{'apiKey':config('API_KEY'),'q':'EGP'+'_'+preferred_currency,'compact':'ultra'}).json()['EGP'+'_'+preferred_currency]
+        return requests.get('https://free.currconv.com/api/v7/convert',{'apiKey':os.environ.get('API_KEY'),'q':'EGP'+'_'+preferred_currency,'compact':'ultra'}).json()['EGP'+'_'+preferred_currency]
 
 def get_preffered_currency(request):
     if not request.user.is_authenticated:

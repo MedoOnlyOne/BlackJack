@@ -128,10 +128,17 @@ body{
 }
 
 #b {
-    background-color: #BFB367;
-    color: #232732;
+    background-color: #232732;
+    color: #BFB367;
     height: 35px;
     font-weight: bold;
+    cursor:pointer;
+}
+#b:disabled,
+#b[disabled]
+{
+    cursor:default;
+    color:#ccc;
 }
 .itemscontainer{
     display:flex;

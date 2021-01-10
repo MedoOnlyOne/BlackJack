@@ -13,7 +13,7 @@ import uuid
 from django.conf import settings 
 from django.core.mail import send_mail 
 from decouple import config 
-import requests
+import requests,os
 from users.models import UserLogin
 import datetime,string,random,pytz
 
@@ -32,7 +32,7 @@ def get_currency_ratio(request):
     if preferred_currency=='EGP':
         return 1
     else:
-        return requests.get('https://free.currconv.com/api/v7/convert',{'apiKey':config('API_KEY'),'q':'EGP'+'_'+preferred_currency,'compact':'ultra'}).json()['EGP'+'_'+preferred_currency]
+        return requests.get('https://free.currconv.com/api/v7/convert',{'apiKey':os.environ.get('API_KEY'),'q':'EGP'+'_'+preferred_currency,'compact':'ultra'}).json()['EGP'+'_'+preferred_currency]
 
 def get_preffered_currency(request):
     if not request.user.is_authenticated:
@@ -101,7 +101,7 @@ def wishlist(request):
         'products':products,
         'user':request.user 
     })
-@login_required(login_url='login/')
+@login_required()
 def index(request):
     if request.method == "POST":
         first = request.POST.get("first","")
@@ -484,30 +484,28 @@ def home(request):
     displayed={}
     for category in Product.categories:
         products[category[0]] = list(Product.objects.filter(category=category[0]))
-        print(f'{category[0]} is  {products[category[0]]}')
         featured = []
         displayed_=[]
-        if len(products[category[0]]) <= 4:
+        if len(products[category[0]]) <= 6:
             displayed_ = products[category[0]]
         else:
             for p in products[category[0]]:
                 if p.featured:
                     featured.append(p)
-            if len(featured) == 4:
+            if len(featured) == 6:
                 displayed_ = featured
-            elif len(featured) < 4:
-                while len(featured) < 4:
+            elif len(featured) < 6:
+                while len(featured) < 6:
                     random_product = random.choice(products[category[0]])
                     if random_product not in featured:
                         featured.append(random_product)
                 displayed_ = featured
             else:
-                while len(displayed_) < 4:
+                while len(displayed_) < 6:
                     random_product = random.choice(featured)
                     if random_product not in displayed_:
                         displayed_.append(random_product)
         displayed[category[0]]=displayed_
-    print(f' displayed are {displayed}')
     return render(request,'users/Mainpage.html',{
         'displayed':displayed,
         'currency_ratio':get_currency_ratio(request),
