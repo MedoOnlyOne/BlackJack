@@ -97,10 +97,10 @@ CACHES = {
 DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydatabase',
-        'USER': 'mydatabaseuser',
-        'PASSWORD': 'mypassword',
-        'HOST': '127.0.0.1',
+        'NAME': 'd47doumctmsmv7',
+        'USER': 'hgxcbvznslartc',
+        'PASSWORD': 'b3931ab9ce5d43c0169c82f8dd01a2881ecf10f8649c59250aae470e60f6ad8b',
+        'HOST': 'ec2-34-197-188-147.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
