@@ -135,13 +135,18 @@ margin-bottom: 5%;
 }
 .search {
 display: block;
-margin-top:65px;
-margin-bottom:0.5em;
+margin-top:50px;
+padding: 10px 0px;
+background-color: #F9F9F9;
 }
 #s {
-width: 70%;
+width: 65%;
 height: 30px;
 margin-left: 15%;
+border: 1px solid black;
+border-radius: 50px;
+outline: none;
+padding: 5px 10px;
 }
 #b {
 background-color: #232732;
@@ -191,18 +196,22 @@ margin-top: 5%;
   flex-basis:200px;
   height:30px;
   text-align:center;
+}
+
+.cathead h4{
+  margin-right: 0px;
   cursor: pointer;
 }
 
 #cur  {
 background: #232732;
-padding-top: 1%;
+padding-top: 3%;
 padding-bottom: 5%;
-padding-left: 15%;
-padding-right: 15%;
-color: white;
+padding-left: 10%;
+padding-right: 10%;
+color: #BFB367;
 text-decoration: none;
-border-radius: 5px;
+border-radius: 10px;
 }
 
 

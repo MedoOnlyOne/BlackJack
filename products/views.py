@@ -121,11 +121,11 @@ def product(request, productid):
                 in_cart=None
             is_user_product=False
             if request.user:
-                if request.user.shop:
+                if request.user.is_authenticated and request.user.shop:
                     if product.shop.id==request.user.shop.id:
                         is_user_product=True
             user_has_review=False
-            if request.user:
+            if request.user.is_authenticated:
                 if Review.objects.filter(user=request.user,reviews=product):
                     user_has_review=True
             return render(request,'products/product.html',{

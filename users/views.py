@@ -100,7 +100,8 @@ def wishlist(request):
         'products':products,
         'user':request.user 
     })
-@login_required()
+
+@login_required
 def index(request):
     if request.method == "POST":
         first = request.POST.get("first","")
@@ -188,14 +189,14 @@ def loginview(request):
                         user_coupon[0].activated=False
                         user_coupon[0].save()
                         ## send email to tell user that coupon is no longer active due to inactivity
-            return HttpResponseRedirect(reverse("userdashboard"))
+            return HttpResponseRedirect(reverse("home"))
         else:
             return render(request, "users/login2.html", {
                 "message": "Invalid username and/or password."
             })
     else:
         if request.user.is_authenticated:
-            return HttpResponseRedirect(reverse('userdashboard'))
+            return HttpResponseRedirect(reverse('home'))
         return render(request, "users/login2.html")
 
 def loginview2(request):
@@ -249,7 +250,7 @@ def loginview2(request):
 
 def LogOut(request):
     logout(request)
-    return HttpResponseRedirect(reverse("login"))
+    return HttpResponseRedirect(reverse("home"))
     #request.session['user']=None
     
 def SignUp(request):
@@ -280,10 +281,10 @@ def SignUp(request):
                 "message": "Username already taken."
             })
         login(request, user)
-        return HttpResponseRedirect(reverse("userdashboard"))
+        return HttpResponseRedirect(reverse("home"))
     else:
         if request.user.is_authenticated:
-            return HttpResponseRedirect(reverse('userdashboard'))
+            return HttpResponseRedirect(reverse('home'))
         return render(request, "users/signup.html")
 @login_required
 def changepassword(request):
