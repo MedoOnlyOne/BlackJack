@@ -76,7 +76,7 @@ def addproduct(request):
         price = float(price) / get_currency_ratio(request)
         remaining = request.POST.get('remaining_in_stock','')
         disc = request.POST.get('discription','')
-        img = request.FILES.get('image')
+        img = request.FILES.get('image',)
         shop = Shop.objects.get(name=request.user.shop)
         p = Product(name=name,image=img,price=price,description=disc,remaininginstock=remaining,category=cat,featured=False,shop=shop)
         p.save()
