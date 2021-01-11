@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -48,7 +47,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
-    # 'user_visit',
 ]
 
 MIDDLEWARE = [
@@ -59,8 +57,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'user_visit.middleware.UserVisitMiddleware',
-
 ]
 
 ROOT_URLCONF = 'BlackJack.urls'
@@ -157,4 +153,3 @@ EMAIL_HOST_USER = 'bj2080534@gmail.com'
 EMAIL_HOST_PASSWORD = 'blackjack2020' 
 
 
-django_heroku.settings(locals())

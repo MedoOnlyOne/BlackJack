@@ -260,21 +260,16 @@ def SignUp(request):
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
-        confirm_password = request.POST['confirm_password']
         currency = request.POST['Preferred_Currency']
-        if currency=='':
-            currency='EGP'
         country = request.POST['country']
         code = request.POST['code']
         phone_num = request.POST['phone_num']
         address = request.POST['address']
-        # Be sure that password matches confirm_password
-        if password != confirm_password:
-            return render(request, "users/signup.html", {
-                "message": "Your passwords must match."
-            })
 
-        # Try to create new user
+        if User.objects.filter(email=email):
+            return render(request, "users/signup.html", {
+                "message": "Email already used"
+            })
         try:
             user = User.objects.create_user(first_name=first, last_name=last, username=username, email=email, password=password, preferred_currency=currency,address=address, phone_number=phone_num, phone_number_code=code, country=country)
             user.save()
