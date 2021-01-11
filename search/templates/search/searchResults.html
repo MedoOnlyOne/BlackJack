@@ -4,6 +4,7 @@
 {% block head %}
 <link rel="stylesheet" href="../../static/users/wishlist.css">
 <link rel="stylesheet" href="../../static/search/searchResults.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock %}
 {% block body %}
 <div class="container">
@@ -15,13 +16,14 @@
     </div>
    
 <nav> <ul style="margin-top:12px;"> 
-    <li> <a href="{% url 'home' %}"> Home </a> </li>
-    <li> <a href="{% url 'userdashboard' %}"> Profile </a></li>
-    <li> <a href="{% url 'contactus' %}"> Contact Us </a></li>
     {% if user.is_authenticated %}
-    <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
-    {% else %}
-    <li> <a href="{% url 'login' %}">  Login  </a> </li>
+        <li> <a href="{% url 'home' %}"> Home </a> </li>
+        <li> <a href="{% url 'userdashboard' %}"> Profile </a></li>
+        <li> <a href="{% url 'contactus' %}"> Contact Us </a></li>
+        <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
+        {% else %}
+        <li> <a href="{% url 'home' %}"> Home </a> </li>
+        <li> <a href="{% url 'login' %}">  Login  </a> </li>
     {% endif %}
 </ul> </nav>
     </div>
@@ -46,7 +48,7 @@
         <form method="GET" action="{% url 'search' %}" id="search-form">
             <div class="search">
             <input type="text" name="search_name" id="s" placeholder="What are you looking for ?">
-            <button type="submit" id="b" disabled>Search</button>
+            <button type="submit" id="b" disabled><i class="fa fa-search"></i> Search</button>
             </div>
         </form>
     {% if is_products_search %}

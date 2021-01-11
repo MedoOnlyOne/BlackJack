@@ -138,18 +138,20 @@
             </div>
             
         <nav> <ul style="margin-top:12px;"> 
-            <li> <a href="{% url 'home' %}"> Home </a> </li>
-            <li> <a href="{% url 'userdashboard' %}"> Profile </a></li>
-            <li> <a href="{% url 'contactus' %}"> Contact Us </a></li>
             {% if user.is_authenticated %}
-            <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
-            {% else %}
-            <li> <a href="{% url 'login' %}">  Login  </a> </li>
+                <li> <a href="{% url 'home' %}"> Home </a> </li>
+                <li> <a href="{% url 'userdashboard' %}"> Profile </a></li>
+                <li> <a href="{% url 'contactus' %}"> Contact Us </a></li>
+                <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
+                {% else %}
+                <li> <a href="{% url 'home' %}"> Home </a> </li> 
+                <li> <a href="{% url 'login' %}">  Login  </a> </li>
             {% endif %}
         </ul> </nav>
             </div>
         </header>
         
+        {% if user.is_authenticated %}
         <section id="sidemenu">
             <h1 style="color:white; padding-left:40px; font-size:23pt;">   DASHBOARD  </h1>
             <nav> <ul> 
@@ -166,6 +168,8 @@
             <li> <a href="#"> Three </a>    -->
         </ul> </nav>
         </section>
+        {% endif %}
+        
         
         <div class="container-1">
             <div class="box" id="upperinfo">
@@ -184,3 +188,4 @@
     </body>
  
 </html>
+
