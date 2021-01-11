@@ -8,8 +8,10 @@ if (url.searchParams.get('page'))
 else
     page_num='1';
 var current = document.getElementById(page_num);
-current.classList.add('current');
-current.childNodes[0].style = "color:#BFB367";
+if (current != null){
+    current.classList.add('current');
+    current.childNodes[0].style = "color:#BFB367";
+}
 
 search.addEventListener('input',function(){
     if (search.value.length>0){
