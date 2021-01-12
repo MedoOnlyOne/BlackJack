@@ -145,6 +145,7 @@
                 <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
                 {% else %}
                 <li> <a href="{% url 'home' %}"> Home </a> </li> 
+                <li> <a href="{% url 'signup' %}">SignUp</a></li>
                 <li> <a href="{% url 'login' %}">  Login  </a> </li>
             {% endif %}
         </ul> </nav>
@@ -159,7 +160,6 @@
             {% if user.is_seller %}
             <li> <a href="{% url 'shopdashboard' %}"> My shop </a>
             {% endif %}
-            <li> <a href="{% url 'discovershops' %}"> Discover shops </a> 
             <li> <a href="{% url 'orders' %}"> Orders </a> 
             <li> <a href="{% url 'wishlist' %}"> Wishlist </a>
             <li> <a href="{% url 'cart' %}"> Cart </a> 

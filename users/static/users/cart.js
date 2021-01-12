@@ -25,6 +25,8 @@ function total(){
 }
 
 function inc(id, stock) {
+    id=document.getElementById(id);
+    console.log(id);
     if (id.innerHTML < stock){
       id.innerHTML++;
     }
@@ -32,6 +34,7 @@ function inc(id, stock) {
   };
 
 function dec(id) {
+    id=document.getElementById(id);
     if (id.innerHTML > 0){
         id.innerHTML--;
         total();
@@ -85,3 +88,4 @@ coupon_button.addEventListener('click',function () {
         }
       });
 })
+// // // // // 

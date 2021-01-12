@@ -30,6 +30,14 @@ class Product(models.Model):
         ('furniture','Furniture'),
         ('other','Other')
     ]
+    category_map={
+        'clothing':'Clothing',
+        'tvs':'TVs',
+        'electronics':'Electronics',
+        'home_appliances':'Home Appliances',
+        'furniture':'Furniture',
+        'other':'Other'
+    }
     category = models.CharField(max_length=15,choices=categories,default='other')
     visits = models.IntegerField(default=0)
     def __str__(self):

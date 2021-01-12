@@ -5,7 +5,7 @@ var description = document.getElementById('description');
 var button = document.getElementById('submit_btn');
 
 fn =function(){
-    if (product_name.value.length>5 && stock.value!='' && description.value.length>15)
+    if (product_name.value.length>=5 && stock.value!='' && description.value.length>=15)
         {
             button.disabled=false;
         }

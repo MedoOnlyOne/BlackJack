@@ -22,6 +22,7 @@
     <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
     {% else %}
     <li> <a href="{% url 'home' %}"> Home </a> </li>
+    <li> <a href="{% url 'signup' %}">SignUp</a></li>
     <li> <a href="{% url 'login' %}">  Login  </a> </li>
     {% endif %}
 </ul> </nav>
@@ -31,7 +32,9 @@
       <div class="info">
         <div class="info-text">
           <h1>{{ product.name }}</h1>
+          <h2>Shop: <a class="shoplink" href="{% url 'shop' product.shop.name %}">{{product.shop.name}}</a> <h2>
           <h2>Price: {{ product.price|mul:currency_ratio|floatformat:2 }} {{currency_symbol}}</h2>
+          <h2>Category: {{product.get_category_display}}</h2>
           <h2>Quantity: {{ product.remaininginstock }}</h2>
           <h2>Rating: {{ rating }}</h2>
         </div>
@@ -111,6 +114,7 @@
 {% if related_len > 0 %}
 <div class="Related">
   <h6>Related Products</h6>
+  <div style="display:flex; justify-content:center">
   {% for p in related %}
   <div class="v">
     <img src="{{ p.image.url}}" alt="{{p.name}}" class="re">
@@ -118,7 +122,8 @@
     <h5>{{p.price|mul:currency_ratio|floatformat:2}} {{currency_name}}</h5>
     <!-- <button type="submit" class="art">Add to Cart</button> -->
    </div>
-  {% endfor %}
+   {% endfor %}
+  </div>
   <!-- <div class="v">
     <img src="" class="re">
     <h5> Product Name</h5>

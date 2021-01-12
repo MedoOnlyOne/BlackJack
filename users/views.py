@@ -213,13 +213,13 @@ def loginview(request):
                         send_mail( subject, message, email_from, recipient_list )
             return HttpResponseRedirect(reverse("home"))
         else:
-            return render(request, "users/login2.html", {
+            return render(request, "users/login.html", {
                 "message": "Invalid username and/or password."
             })
     else:
         if request.user.is_authenticated:
             return HttpResponseRedirect(reverse('home'))
-        return render(request, "users/login2.html")
+        return render(request, "users/login.html")
 
 def loginview2(request):
     if request.method == "POST":
@@ -261,15 +261,16 @@ def loginview2(request):
                         user_coupon[0].save()
             return HttpResponseRedirect(reverse("userdashboard"))
         else:
-            return render(request, "users/login2.html", {
+            return render(request, "users/login.html", {
                 "message": "Invalid username and/or password."
             })
     else:
         if request.user.is_authenticated:
             return HttpResponseRedirect(reverse('userdashboard'))
-        return render(request, "users/login2.html")
+        return render(request, "users/login.html")
 #for testing
 
+@login_required
 def LogOut(request):
     logout(request)
     return HttpResponseRedirect(reverse("home"))
@@ -356,7 +357,7 @@ def create_shop(request):
     else:
         shopName = request.POST.get('shopName', '')
         shopAddress = request.POST.get('shopAddress', '')
-        shopDesc = request.POST.get('shopDescreption', '')
+        shopDesc = request.POST.get('shopDescription', '')
         if not shopName or not shopAddress or not shopDesc:
             return render(request, "users/StoreName.html",{
                 'message':'All fields are required'

@@ -139,23 +139,24 @@ color: white;
   background-color: #232732;
 }
 .v {
-  display:inline-block;
+  display:block;
   border: #BFB367 3px solid;
   border-radius: 5px;
+  padding:0.5em;
   margin: 10px;
   width: 250px;
-  height: 250px;
 }
 .Related {
   border: solid 4px #BFB367;
-  margin: 10px 5px;
-  margin-top: 20px;
+  /* margin: 10px 5px;
+  margin-top: 20px; */
   text-align: center;
   padding: 10px;
+  /* display:flex; */
 }
 .re {
   width: 250px;
-  height: 100px;
+  height: 250px;
 }
 h3 {
   margin-left: 38%;
@@ -327,4 +328,15 @@ span {
 
 .p_name:hover{
   color: #BFB367;
+}
+
+.shoplink{
+  color:black;
+  text-decoration:none;
+
+}
+
+.shoplink:hover{
+  color:#BFB367;
+
 }

@@ -26,7 +26,7 @@
     }
     .item a:hover{
         color:#BFB367;
-    }
+    };
    .itemscontainer
    {
     border:navy;
@@ -99,9 +99,9 @@
             <img src="{{ product.image.url }}" height="135" width="135"> 
             <p style="font-size:25px; font-weight:bold; position:relative; top:5px;"><a href="{% url 'productpage' product.id %}">Product name : {{ product.name }}</a></p>
             <p><span style="font-weight:bold;">Sold By: </span><span class="shopname">{{ product.shop.name }}</span></p>
-            <button type="button" name="-" class="count" onclick="dec({{product.name}})">-</button>
+            <button type="button" name="-" class="count" onclick="dec('{{product.name}}')">-</button>
               <p style="display:inline;"><span style="font-weight:bold; bottom:10px;">Quantity : </span> <span id="{{product.name}}" name="{{product.name}}" class="q">{% if product.remaininginstock > 0 %}1{% else %}0{% endif %}</span></p>
-              <button type="button" name="+" class="count" onclick="inc({{product.name}}, {{product.remaininginstock}})"
+              <button id="{{product.name}}" type="button" name="+" class="count" onclick="inc('{{product.name}}', {{product.remaininginstock}})"
               {% if q == product.remaininginstock %}
                 disabled="true"
               {% endif %}

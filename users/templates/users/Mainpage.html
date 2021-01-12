@@ -27,6 +27,8 @@
     <li> <a href="{% url 'contactus' %}"> Contact Us </a></li>
     <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
     {% else %}
+    <li><a href="{% url 'home' %}"> Home </a></li>
+    <li> <a href="{% url 'signup' %}">SignUp</a></li>
     <li> <a href="{% url 'login' %}">  Login  </a> </li>
     {% endif %}
 </ul> </nav>
@@ -41,6 +43,10 @@
   <button type="submit" id="b" disabled><i class="fa fa-search"></i> Search</button>
 </div>
 </form>
+<div class="event_btn_container">
+  <!-- <a href="#event"><button class="event_btn">See our event</button></a> -->
+  <button class="event_btn" disbaled="fasle">See our event</button>
+</div>
 <div class="head">
     <div class="cathead"><h4 id="cur">Clothing</h4></div>
     <div class="cathead"><h4>TVs</h4></div>
@@ -103,7 +109,7 @@
   <h2>Home Appliances</h2>
   <div id="items">
     <div class="itemscontainer">
-        {% for product in displayed.home_appliances %}
+        {% for product in displayed.home_applicanes %}
         <div class="item" title="{{ product.name }}">
           <img src="{{ product.image.url }}" height="135" width="135"> 
           <p style="font-size:25px; font-weight:bold; position:relative; top:5px;"><a href="{% url 'productpage' product.id %}">Product name : {{ product.name }}</a></p>
@@ -118,7 +124,7 @@
   <h2>Furniture</h2>
   <div id="items">
     <div class="itemscontainer">
-        {% for product in displated.furniture %}
+        {% for product in displayed.furniture %}
         <div class="item" title="{{ product.name }}">
           <img src="{{ product.image.url }}" height="135" width="135"> 
           <p style="font-size:25px; font-weight:bold; position:relative; top:5px;"><a href="{% url 'productpage' product.id %}">Product name : {{ product.name }}</a></p>
@@ -145,7 +151,25 @@
     </div>
   </div>
 </div>
+<div id="event" style="padding-top:50px">
+<div class="event">
+  <h3>Opening Event!</h3>
+  <p>BlackJack is offering a 10% discount on all purchases for all users!
+  Log in and go to your profile for the event coupon!</p>
+  <div style="margin-left:12%;">
+    <img style="width:85%; height:600px" src="../../static/users/event.jpg">
+  </div>
+</div>
+</div>
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+  <script src="./static/users/home.js"></script>
+  <script>
+    $(".event_btn").click(function() {
+    $('html,body').animate({
+        scrollTop: $("#event").offset().top},
+        200);
+    });
+  </script>
 
-<script src="./static/users/home.js"></script>
 </body>
 </html>

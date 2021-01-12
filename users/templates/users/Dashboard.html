@@ -184,9 +184,13 @@
       <button type="button" onclick="Enable('currency')"> Edit </button>
     </div>
     <div class="info-field">
+      Event Promo Code:
+      <input type="text" value="iOpKe" disabled="true" style="margin-left: 52px;">
+    </div>    
+    <div class="info-field">
       Account Type:
       <input type="text" id="acc_type" name="acc_type"{% if is_seller %} value="Buyer and seller" {% else %} value="Buyer" {% endif %} disabled="true" style="margin-left: 95px;">
-    </div>     
+    </div>        
     <div class="buttonsContainer">
       <!-- <div style="display:inline; float: right;"> -->
         <button type="button" id="ChangePassword"><a href="{% url 'changepassword' %}">Change Password</a></button>

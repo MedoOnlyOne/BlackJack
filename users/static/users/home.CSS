@@ -1,3 +1,7 @@
+  
+  html{
+    scroll-behavior:smooth;
+  }
   body {
   margin:0px;
   }
@@ -225,3 +229,28 @@ border-radius: 10px;
   display: block;
 }
 
+.event{
+  border:2px #BFB367 solid;
+  margin-bottom:1em;
+  padding:0em 0.5em 0.5em 0.5em;
+  width:90%;
+  margin:1em auto ;
+  font-size:1.2rem;
+}
+
+.event_btn_container{
+  background-color:#f9f9f9;
+  margin:0;
+  padding-top:0.2em;
+  padding-bottom:1em;
+  padding-left:47vw;
+}
+
+.event_btn{
+  color:#BFB367;
+  background-color:#232732;
+  padding:0.5em;
+}
+.event_btn:hover{
+  cursor:pointer;
+}
