@@ -1,24 +1,15 @@
 #items
 {
   margin-left: 40px;
-  overflow: hidden;
- /* position:relative;
- left:40px;
- background-color:white;
- float:left;
- width:715px; */
+  overflow: auto;
 }
 
-.item
-{
- float:left;
- width:700px;
- /* max-height:200px;
- position:relative; */
- background-color:white;
- border:5px solid #BFB367;
- margin:3px;
- 
+.item{
+  float:left;
+  width:700px;
+  background-color:white;
+  border:5px solid #BFB367;
+  margin:3px;
 }
 .item a{
      color:black;
@@ -58,10 +49,7 @@
    padding-bottom: 10px;
    text-align: center;
  }
- a [href="Cart.html"]
-{
- color:#BFB367;
-}
+
 .count{
  display:inline;
  bottom:-17px; 
@@ -76,12 +64,11 @@
    background-color :#232732;
    font-weight:bold; 
    margin-left:60%;
+   color:#BFB367;
+   margin-bottom:0.5em
  }
- .deactivate a{
-   color: #BFB367;
-   text-decoration: none;
- }
- .deactivate a:hover{
+
+ .deactivate:hover{
    color: #FFF;
    cursor: pointer;
  }

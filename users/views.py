@@ -25,9 +25,7 @@ currency_symbols={
 }
 
 def get_currency_ratio(request):
-    if not request.user.is_authenticated:
-        return 1
-    preferred_currency=request.user.preferred_currency
+    preferred_currency=get_preffered_currency(request)
     if preferred_currency=='EGP':
         return 1
     else:
@@ -36,7 +34,10 @@ def get_currency_ratio(request):
 def get_preffered_currency(request):
     if not request.user.is_authenticated:
         return 'EGP'
+    if request.user.preferred_currency=='':
+        return 'EGP'
     return request.user.preferred_currency
+
 
 # Create your views here.
 @login_required
@@ -177,11 +178,25 @@ def loginview(request):
                     user_coupon = Coupon(name=f'{user.username}_coupon',shop=None,coupon_type='user',discount=10,code=code,activated=True)
                     user_coupon.save()
                     ##send email to tell user a coupon has  been created for him
+                    subject = 'Awarded User Coupon!'
+                    message = f'''Hi {request.user.first_name} {request.user.last_name}, due to your recent activity, you have been awarded a user coupon with 10% discount!
+                    Use this code: {code} in your cart to get your discount.                    
+                    '''
+                    email_from = settings.EMAIL_HOST_USER 
+                    recipient_list = [request.user.email, ] 
+                    send_mail( subject, message, email_from, recipient_list )
                 else:
                     if not user_coupon[0].activated:
                         user_coupon[0].activated=True
                         user_coupon[0].save()
-                    ## send email to tell user a coupon has been reactivated
+                        ## send email to tell user a coupon has been reactivated
+                        subject = 'User Coupon Reactivated!'
+                        message = f'''Hi {request.user.first_name} {request.user.last_name}, due to your recent activity, your user coupon
+                        has been reactivated due to your activity on our site! You can use code {code} in your cart for a 10% discount!                    
+                        '''
+                        email_from = settings.EMAIL_HOST_USER 
+                        recipient_list = [request.user.email, ] 
+                        send_mail( subject, message, email_from, recipient_list )
             elif len(days_active_in_this_month)<7:
                 user_coupon = Coupon.objects.filter(coupon_type='user',name=user.username)
                 if user_coupon:
@@ -189,6 +204,13 @@ def loginview(request):
                         user_coupon[0].activated=False
                         user_coupon[0].save()
                         ## send email to tell user that coupon is no longer active due to inactivity
+                        subject = 'User coupon deactivated!'
+                        message = f'''Hi {request.user.first_name} {request.user.last_name}, due to your inactivity, your user coupon has been deactivated.
+                        It will be reactivated if you become active again.                                      
+                        '''
+                        email_from = settings.EMAIL_HOST_USER 
+                        recipient_list = [request.user.email, ] 
+                        send_mail( subject, message, email_from, recipient_list )
             return HttpResponseRedirect(reverse("home"))
         else:
             return render(request, "users/login2.html", {

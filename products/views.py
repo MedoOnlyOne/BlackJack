@@ -21,9 +21,7 @@ currency_names={
     'GBP':'English Pounds'
 }
 def get_currency_ratio(request):
-    if not request.user.is_authenticated:
-        return 1
-    preferred_currency=request.user.preferred_currency
+    preferred_currency=get_preffered_currency(request)
     if preferred_currency=='EGP':
         return 1
     else:
@@ -32,7 +30,10 @@ def get_currency_ratio(request):
 def get_preffered_currency(request):
     if not request.user.is_authenticated:
         return 'EGP'
+    if request.user.preferred_currency=='':
+        return 'EGP'
     return request.user.preferred_currency
+
     
 def product(request, productid):
     if request.method=='POST':

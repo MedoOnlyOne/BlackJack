@@ -13,11 +13,15 @@
     <div class="itemscontainer">
         {% for product in products %}
         <div class="item" title="{{ product.name }}">
-          <img src="{{ product.image.url }}" height="135" width="135"> 
-          <p style="font-size:25px; font-weight:bold; position:relative; top:5px;"><a href="{% url 'productpage' product.id %}">Product name : {{ product.name }}</a></p>
-          <p><span style="font-weight:bold;">Sold By: </span>{{ product.shop.name }}</p>
-          <p><span style="font-weight:bold;">Price : </span> {{product.price|mul:currency_ratio|floatformat:2}}{{currency_symbol}}</p>
-          <button class="deactivate"><a href="{% url 'removefromwishlist' product.id %}">Remove</a></button>
+          <div style="overflow: auto;">
+            <img src="{{ product.image.url }}" height="135" width="135"> 
+            <p style="font-size:25px; font-weight:bold; position:relative; top:5px;"><a href="{% url 'productpage' product.id %}">Product name : {{ product.name }}</a></p>
+            <p><span style="font-weight:bold;">Sold By: </span>{{ product.shop.name }}</p>
+            <p><span style="font-weight:bold;">Price : </span> {{product.price|mul:currency_ratio|floatformat:2}}{{currency_symbol}}</p>
+          </div>
+          <div style="margin:auto 5em">
+            <button class="deactivate" onclick="location.href='{% url 'removefromwishlist' product.id %}'">Remove</button>
+          </div>
         </div>
         {% endfor %} 
     </div>

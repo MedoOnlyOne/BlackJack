@@ -56,17 +56,13 @@
       padding-bottom: 10px;
       text-align: center;
     }
-    a [href="Cart.html"]
-   {
-    color:#BFB367;
-   }
    .count{
-    display:inline;
-    bottom:-17px; 
-    position:relative; 
-    margin-left:2px;
-    width:25px;
-    margin-bottom: 5px; 
+      display:inline;
+      bottom:-17px; 
+      position:relative; 
+      margin-left:2px;
+      width:25px;
+      margin-bottom: 5px; 
    }
   </style>
   <link rel="stylesheet" href="../static/users/wishlist.css">
@@ -89,10 +85,10 @@
           </div>
           <div style="display: flex; ">
             <div style="margin:auto 5em">
-              <button class="deactivate"><a href="{% url 'editproduct' product.id %}">Edit</a></button>
+              <button class="deactivate" onclick="location.href='{% url 'editproduct' product.id %}'">Edit</button>
             </div>
             <div style="margin:auto 5em">
-              <button class="deactivate"><a href="{% url 'removefromshop' product.id %}">Remove</a></button>
+              <button class="deactivate" onclick="location.href='{% url 'removefromshop' product.id %}'">Remove</button>
             </div>
           </div>
         </div>
