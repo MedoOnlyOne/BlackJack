@@ -6,7 +6,7 @@ var description = document.getElementById('description');
 var button = document.getElementById('submit_btn');
 
 fn =function(){
-    if (product_name.value.length>5 && stock.value!='' && description.value.length>15 && image.value!='' && ( image.value.slice(image.value.length-3)=='jpg' || image.value.slice(image.value.length-3)=='png'))
+    if (product_name.value.length>5 && stock.value!='' && description.value.length>15 && image.value!='' )
         {
             button.disabled=false;
         }

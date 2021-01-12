@@ -7,7 +7,8 @@ from django.contrib.auth.decorators import login_required
 import string 
 import random 
 import requests,os
-
+from PIL import Image
+from django.views.decorators.cache import never_cache
 
 currency_symbols={
     'EGP':'EGP',
@@ -60,6 +61,7 @@ def index(request, shopname):
         return render(request,'shop/404.html')
 
 @login_required()
+@never_cache
 def addproduct(request):
     if request.method=='GET':
         if request.user.shop:
@@ -76,7 +78,15 @@ def addproduct(request):
         price = float(price) / get_currency_ratio(request)
         remaining = request.POST.get('remaining_in_stock','')
         disc = request.POST.get('discription','')
-        img = request.FILES.get('image',)
+        try:
+            img = request.FILES['image']
+            im = Image.open(img)
+        except:
+            return render(request,'shop/AddProduct.html',{
+                'shop': request.user.shop,
+                'currency_name': currency_names[get_preffered_currency(request)],
+                'message':'Please upload a proper image'
+            })
         shop = Shop.objects.get(name=request.user.shop)
         p = Product(name=name,image=img,price=price,description=disc,remaininginstock=remaining,category=cat,featured=False,shop=shop)
         p.save()
@@ -133,10 +143,6 @@ def addcoupon(request):
         })
     else:
         name = request.POST['name']
-        if name.isspace() or name=='':
-             return render(request, 'shop/AddCoupon.html',{
-             'message':'Enter a name'
-        })
         coupons=Coupon.objects.filter(name=name)
         if Coupon.objects.filter(name=name):
             for coupon in coupons:
@@ -148,23 +154,15 @@ def addcoupon(request):
         code = ''.join(random.choice(letters) for i in range(5))
         while Coupon.objects.filter(code=code):
             code = ''.join(random.choice(letters) for i in range(5))
-        try:
-            discount = int(request.POST['discount'])
-            if discount>=100 and discount<0:
-                  return render(request, 'shop/AddCoupon.html',{
-                    'message':'Enter a valid discount percentage'
-                  })
-            c = Coupon(name=name, code=code, activated=True, discount=discount,shop=request.user.shop)
-            c.save()
-            request.user.shop.coupons.add(c)
-            return render(request,'shop/AddCoupon.html',{
-                'message':'Entered succesfully',
-                'success':True
-            })
-        except ValueError:
-            return render(request, 'shop/AddCoupon.html',{
-            'message':'Enter a valid discount percentage'
+        discount = int(request.POST['discount'])
+        c = Coupon(name=name, code=code, activated=True, discount=discount,shop=request.user.shop)
+        c.save()
+        request.user.shop.coupons.add(c)
+        return render(request,'shop/AddCoupon.html',{
+            'message':'Entered succesfully',
+            'success':True
         })
+      
 @login_required
 def deactivatecoupon(request, couponid):
     c = Coupon.objects.get(code=couponid)

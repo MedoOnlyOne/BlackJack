@@ -99,6 +99,11 @@
     </form>
   </div>
   <script src="{% static 'shop/addproduct.js' %}"></script>
+  {% if message %}
+  <script>
+    alert("{{message}}");
+  </script>
+  {% endif %}
 {% endblock %}
 
 

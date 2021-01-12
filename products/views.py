@@ -96,16 +96,6 @@ def product(request, productid):
                         random_product = random.choice(featured)
                         if random_product not in related:
                             related.append(random_product)
-
-            if not request.user.is_authenticated:
-                currency_ratio=1
-                preferred_currency='EGP'
-            else:
-                preferred_currency=request.user.preferred_currency
-                if preferred_currency=='EGP':
-                    currency_ratio=1
-                else:
-                    currency_ratio=requests.get('https://free.currconv.com/api/v7/convert',{'apiKey':config('API_KEY'),'q':'EGP'+'_'+preferred_currency,'compact':'ultra'}).json()['EGP'+'_'+preferred_currency]
             rating = 0
             reviews = product.reviews.all()
             for rev in reviews:
@@ -132,9 +122,9 @@ def product(request, productid):
             return render(request,'products/product.html',{
             'product': product,
             'rating': rating,
-            'currency_ratio': currency_ratio,
-            'preferred_currency':preferred_currency,
-            'currency_symbol':currency_symbols[preferred_currency],
+            'currency_ratio': get_currency_ratio(request),
+            'preferred_currency':get_preffered_currency(request),
+            'currency_symbol':currency_symbols[get_preffered_currency(request)],
             'reviews':reviews,
             'in_wishlist':in_wishlist,
             'in_cart': in_cart,

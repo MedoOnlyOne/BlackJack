@@ -13,6 +13,16 @@
       margin-top: 20px;
       margin-bottom: 5px;
     } 
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
     input[type="submit"]
     {
       display: block;
@@ -28,6 +38,11 @@
     .deactivate:hover{
       cursor: pointer;
       color: #FFF;
+    }
+    #submit_btn[disabled],
+    #submit_btn:disabled{
+      cursor:default;
+      color:#ccc;
     }
     .coupons{
       margin: 10px;
@@ -46,6 +61,9 @@
     .deactivate a:hover{
       color: #FFF;
     }
+    #discount{
+      width: 300px;
+    }
   </style>
 {% endblock %}
 
@@ -55,9 +73,9 @@
   <div class="add_coupon" >
     <form action="{% url 'addcoupon' %}" method="POST">
       {% csrf_token %}
-      <input type="text" placeholder="Coupon name" name="name">
-      <input type="text" placeholder="Discount percentage" name="discount">
-      <input type="submit" value="Generate coupon">
+      <input type="text" id="name" placeholder="Coupon name" name="name">
+      <input type="number" id="discount" placeholder="Discount percentage" name="discount">
+      <input type="submit" id="submit_btn" value="Generate coupon" disabled>
     </form>
   </div>
   {% if success %}
@@ -65,4 +83,18 @@
   {% else %}
   <div style="text-align: center; margin-bottom: 8px;"><strong style="color:red; margin:6%;">{{ message }}</strong></div>
   {% endif %}
+  <script>
+    var namee=document.getElementById('name');
+    var discount=document.getElementById('discount');
+    var submit=document.getElementById('submit_btn');
+    function check(){
+      if (namee.value.length>2 && discount.value.length>0 && discount.value.length<3){
+        submit.disabled=false;
+      }
+      else
+        submit.disabled=true;
+    }
+    namee.addEventListener('input',check);
+    discount.addEventListener('input',check);
+  </script>
 {% endblock %}
