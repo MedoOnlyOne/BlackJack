@@ -9,7 +9,7 @@ import random
 import requests,os
 from PIL import Image
 from django.views.decorators.cache import never_cache
-
+from decouple import config
 currency_symbols={
     'EGP':'EGP',
     'EUR':'€',
@@ -29,7 +29,7 @@ def get_currency_ratio(request):
     if preferred_currency=='EGP':
         return 1
     else:
-        return requests.get('https://free.currconv.com/api/v7/convert',{'apiKey':os.environ.get('API_KEY'),'q':'EGP'+'_'+preferred_currency,'compact':'ultra'}).json()['EGP'+'_'+preferred_currency]
+        return requests.get('https://free.currconv.com/api/v7/convert',{'apiKey':config('API_KEY'),'q':'EGP'+'_'+preferred_currency,'compact':'ultra'}).json()['EGP'+'_'+preferred_currency]
 
 def get_preffered_currency(request):
     if not request.user.is_authenticated:

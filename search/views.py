@@ -3,7 +3,7 @@ from products.models import Product
 from shop.models import Shop
 from django.core.paginator import Paginator
 import os,requests
-
+from decouple import config
 currency_symbols={
     'EGP':'EGP',
     'EUR':'€',
@@ -16,7 +16,7 @@ def get_currency_ratio(request):
     if preferred_currency=='EGP':
         return 1
     else:
-        return requests.get('https://free.currconv.com/api/v7/convert',{'apiKey':os.environ.get('API_KEY'),'q':'EGP'+'_'+preferred_currency,'compact':'ultra'}).json()['EGP'+'_'+preferred_currency]
+        return requests.get('https://free.currconv.com/api/v7/convert',{'apiKey':config('API_KEY'),'q':'EGP'+'_'+preferred_currency,'compact':'ultra'}).json()['EGP'+'_'+preferred_currency]
 
 def get_preffered_currency(request):
     if not request.user.is_authenticated:
@@ -61,7 +61,7 @@ def search(request):
         results=Shop.objects.filter(name__icontains=query)
         results=sorted(results,key=lambda item:item.name.lower())
         paginator=Paginator(results,5)
-        page_num=request.GET.get(['page'],1)
+        page_num=request.GET.get('page',1)
         page_obj=paginator.get_page(page_num)    
         return render(request, 'search/searchResults.html',{
             'results': page_obj,

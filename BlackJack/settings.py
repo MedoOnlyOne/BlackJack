@@ -19,15 +19,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET')
+SECRET_KEY = '7569f81e36ecabfd48ccffbb25de0e7b885e884b1ba1573'
 
 #Static files
 STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG')=='True'
+DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 SESSION_ENGINE='django.contrib.sessions.backends.file'
 
@@ -134,7 +134,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
 MEDIA_URL = 'media/'
@@ -151,5 +151,4 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'bj2080534@gmail.com' 
 EMAIL_HOST_PASSWORD = 'blackjack2020' 
-
 

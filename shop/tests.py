@@ -71,8 +71,8 @@ class searchTestCase(TestCase):
         c = Client()
         c.login(username='testuser', password='12345')
         response = c.get(reverse('deactivatecoupon', kwargs={'couponcode':coupon.code}))
-        self.assertEqual(response.status_code, 302)
-
+        self.assertRedirects(response, reverse('activecoupons'), status_code=302, 
+        target_status_code=200, fetch_redirect_response=True)
     def test_active_coupons(self):
         #login and access deactivate coupone page
         
@@ -130,4 +130,5 @@ class searchTestCase(TestCase):
         c = Client()
         c.login(username='testuser', password='12345')
         response = c.get(reverse('removefromshop', kwargs={'productid':Product.objects.get(name='testproduct').id}))
-        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('shopdashboard'), status_code=302, 
+        target_status_code=200, fetch_redirect_response=True)

@@ -30,4 +30,4 @@ class searchTestCase(TestCase):
         p = Product.objects.get(name='testproduct')
         c = Client()
         response = c.get(reverse('productpage', kwargs={'productid':p.id}))
-        self.assertEqual(response.status_code, 200)  #ValueError: The 'image' attribute has no file associated with it.
+        self.assertEqual(response.status_code, 200)

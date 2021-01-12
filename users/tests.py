@@ -70,8 +70,8 @@ class searchTestCase(TestCase):
         c = Client()
         c.login(username='testuser', password='12345')
         response = c.get(reverse('logout'))
-        self.assertEqual(response.status_code, 302)
-
+        self.assertRedirects(response, reverse('home'), status_code=302, 
+        target_status_code=200, fetch_redirect_response=True)
     def test_sign_up(self):
         # access signup page
         c = Client()
@@ -181,8 +181,8 @@ class searchTestCase(TestCase):
           "order_id": order.id,
         }
         response = c.post(reverse('finalcheck'),data=data)
-        self.assertEqual(response.status_code, 302)        
-    
+        self.assertRedirects(response, reverse('userdashboard'), status_code=302, 
+        target_status_code=200, fetch_redirect_response=True)    
     def test_contact_us(self):
         # access contact us page
 
@@ -219,8 +219,8 @@ class searchTestCase(TestCase):
         c = Client()
         c.login(username='testuser', password='12345')
         response = c.get(reverse('removefromcart', kwargs={'productid':p.id}))
-        self.assertEqual(response.status_code, 302)
-
+        self.assertRedirects(response, reverse('cart'), status_code=302, 
+        target_status_code=200, fetch_redirect_response=True)
     def test_remove_from_wishlist(self):
         # access remove from wishlist
 
@@ -238,4 +238,5 @@ class searchTestCase(TestCase):
         c = Client()
         c.login(username='testuser', password='12345')
         response = c.get(reverse('removefromwishlist', kwargs={'productid':p.id})) 
-        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('wishlist'), status_code=302, 
+        target_status_code=200, fetch_redirect_response=True)

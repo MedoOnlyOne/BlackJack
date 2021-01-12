@@ -6,6 +6,7 @@ from .models import Product,Review
 import requests 
 import decimal
 import random,os
+from decouple import config
 # Create your views here.
 currency_symbols={
     'EGP':'EGP',
@@ -25,7 +26,7 @@ def get_currency_ratio(request):
     if preferred_currency=='EGP':
         return 1
     else:
-        return requests.get('https://free.currconv.com/api/v7/convert',{'apiKey':os.environ.get('API_KEY'),'q':'EGP'+'_'+preferred_currency,'compact':'ultra'}).json()['EGP'+'_'+preferred_currency]
+        return requests.get('https://free.currconv.com/api/v7/convert',{'apiKey':config('API_KEY'),'q':'EGP'+'_'+preferred_currency,'compact':'ultra'}).json()['EGP'+'_'+preferred_currency]
 
 def get_preffered_currency(request):
     if not request.user.is_authenticated:
