@@ -14,7 +14,7 @@ class Shop(models.Model):
 
 class Coupon(models.Model):
     name = models.CharField(max_length=30)
-    code = models.CharField(max_length=25)
+    code = models.CharField(max_length=25,unique=True)
     activated = models.BooleanField()
     discount = models.PositiveSmallIntegerField()
     shop = models.ForeignKey('shop.Shop',on_delete=models.CASCADE,null=True,blank=True)

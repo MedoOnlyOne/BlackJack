@@ -164,8 +164,8 @@ def addcoupon(request):
         })
       
 @login_required
-def deactivatecoupon(request, couponid):
-    c = Coupon.objects.get(code=couponid)
+def deactivatecoupon(request, couponcode):
+    c = Coupon.objects.get(code=couponcode)
     c.delete()
     return HttpResponseRedirect(reverse('activecoupons'))
 

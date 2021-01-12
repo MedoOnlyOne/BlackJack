@@ -1,4 +1,8 @@
 import json
+import os
+from PIL import Image
+from django.core.files.uploadedfile import SimpleUploadedFile
+from pathlib import Path
 from django.urls import reverse
 from django.test import TestCase, Client
 from .models import User, Order, InCart, UserLogin
@@ -6,6 +10,10 @@ from products.models import Product
 from shop.models import Shop
 from users.models import User
 # Create your tests here.
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+image_path = os.path.join(BASE_DIR,r'media\product_images\test.jpg')
 
 class searchTestCase(TestCase):
     
@@ -22,7 +30,7 @@ class searchTestCase(TestCase):
         response = c.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
     
-    def test_chech_out(self):
+    def test_check_out(self):
         # access the checkout page
         
         # Create a shop
@@ -30,7 +38,8 @@ class searchTestCase(TestCase):
 
         #craete a product and add it to shop s
         s = Shop.objects.get(name='ssss')
-        p = Product.objects.create(name='testproduct',price=100,description='aaafvdfvscd', remaininginstock=5, category='Other', shop=s)
+        img = SimpleUploadedFile(name='test.jpg', content=open(image_path, 'rb').read(), content_type='image/jpeg')
+        p = Product.objects.create(name='testproduct',price=100,description='aaafvdfvscd', remaininginstock=5, category='other', image=img,shop=s)
 
         #create incart object
         incart = InCart.objects.create(product=p, quantity=2)
@@ -45,8 +54,8 @@ class searchTestCase(TestCase):
         #login
         c = Client()
         c.login(username='testuser', password='12345')
-        # response = c.get(reverse('checkout', kwargs={'orderid':order.id})) #Image attribute has no files attached with it
-        # self.assertEqual(response.status_code, 200)
+        response = c.get(reverse('checkout', kwargs={'orderid':order.id}))
+        self.assertEqual(response.status_code, 200)
 
     def test_log_in(self):
         # access login page
@@ -61,7 +70,7 @@ class searchTestCase(TestCase):
         c = Client()
         c.login(username='testuser', password='12345')
         response = c.get(reverse('logout'))
-        # self.assertEqual(response.status_code, 200) #problem here
+        self.assertEqual(response.status_code, 302)
 
     def test_sign_up(self):
         # access signup page
@@ -125,11 +134,21 @@ class searchTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_create_transaction(self):
-        # log the user in
+        # Create a shop
+        s = Shop.objects.create(name="ssss",description="sdadads",address="awd")
+
+        #craete a product and add it to shop s
+        s = Shop.objects.get(name='ssss')
+        img = SimpleUploadedFile(name='test.jpg', content=open(image_path, 'rb').read(), content_type='image/jpeg')
+        p = Product.objects.create(name='testproduct',price=100,description='aaafvdfvscd', remaininginstock=5, category='other', image=img,shop=s)
+
+        # #create incart object
+        u = User.objects.get(username='testuser')
+        #login
         c = Client()
         c.login(username='testuser', password='12345')
-        # response = c.get(reverse('create_transaction')) #problem here
-        # self.assertEqual(response.status_code, 200)
+        response = c.post(reverse('create_transaction'),data={'{p.id}_quantity':2,'total':p.price*2}) #problem here
+        self.assertEqual(response.status_code, 302)
 
     
     def test_final_check(self):
@@ -152,14 +171,17 @@ class searchTestCase(TestCase):
         u = User.objects.get(username='testuser')
         u.orders.add(order)
         u.save()
+        # give the shop to the user
+        u.shop = s
+        u.save()
         #login
         c = Client()
         c.login(username='testuser', password='12345')
         data = {
           "order_id": order.id,
         }
-        # response = c.post(reverse('finalcheck'),data) #IndexError: list index out of range
-        # self.assertEqual(response.status_code, 200)        
+        response = c.post(reverse('finalcheck'),data=data)
+        self.assertEqual(response.status_code, 302)        
     
     def test_contact_us(self):
         # access contact us page
@@ -196,8 +218,8 @@ class searchTestCase(TestCase):
         #login
         c = Client()
         c.login(username='testuser', password='12345')
-        # response = c.get(reverse('removefromcart', kwargs={'productid':p.id}))
-        # self.assertEqual(response.status_code, 200) #302
+        response = c.get(reverse('removefromcart', kwargs={'productid':p.id}))
+        self.assertEqual(response.status_code, 302)
 
     def test_remove_from_wishlist(self):
         # access remove from wishlist
@@ -215,5 +237,5 @@ class searchTestCase(TestCase):
         #login
         c = Client()
         c.login(username='testuser', password='12345')
-        # response = c.get(reverse('removefromwishlist', kwargs={'productid':p.id})) 
-        # self.assertEqual(response.status_code, 200)  #302
+        response = c.get(reverse('removefromwishlist', kwargs={'productid':p.id})) 
+        self.assertEqual(response.status_code, 302)

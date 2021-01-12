@@ -15,8 +15,8 @@ class searchTestCase(TestCase):
         ab = Shop.objects.create(name="abab",description="sdadads",address="awd")
 
         #craete a coupone
-        coupone = Coupon.objects.create(name='c1', code='ab2d3', activated=True, discount=30)
-
+        coupon1 = Coupon.objects.create(name='c1', code='kmsov', activated=True, discount=30)
+        coupon2 = Coupon.objects.create(name='c2', code='dgdgq', activated=True, discount=30)
         #create a user
         user = User.objects.create(username='testuser')
         user.set_password('12345')
@@ -60,7 +60,8 @@ class searchTestCase(TestCase):
         
         #add coupone to a shop
         shop = Shop.objects.get(name='ssss')
-        shop.coupons.add(Coupon.objects.get(name='c1'))
+        coupon = Coupon.objects.get(name='c2')
+        shop.coupons.add(coupon)
         shop.save()
         #add that shop to the user
         u = User.objects.get(username='testuser')
@@ -69,8 +70,8 @@ class searchTestCase(TestCase):
         #login the user
         c = Client()
         c.login(username='testuser', password='12345')
-        # response = c.get(reverse('deactivatecoupon', kwargs={'couponid':Coupon.objects.get(name='c1').id}))  #problem 
-        # self.assertEqual(response.status_code, 200)
+        response = c.get(reverse('deactivatecoupon', kwargs={'couponcode':coupon.code}))
+        self.assertEqual(response.status_code, 302)
 
     def test_active_coupons(self):
         #login and access deactivate coupone page
@@ -128,5 +129,5 @@ class searchTestCase(TestCase):
         #login the user
         c = Client()
         c.login(username='testuser', password='12345')
-        # response = c.get(reverse('removefromshop', kwargs={'productid':Product.objects.get(name='testproduct').id})) #problem
-        # self.assertEqual(response.status_code, 200)
+        response = c.get(reverse('removefromshop', kwargs={'productid':Product.objects.get(name='testproduct').id}))
+        self.assertEqual(response.status_code, 302)

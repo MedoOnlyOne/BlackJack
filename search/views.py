@@ -44,7 +44,7 @@ def search(request):
     if search_by=='products':
         results = Product.objects.filter(name__icontains=query)
         if sort_by=='name':
-            results=sorted(results,key=lambda item:item.name)
+            results=sorted(results,key=lambda item:item.name.lower())
         else:
             results=sorted(results,key=lambda item:item.price)
         paginator=Paginator(results,5)
@@ -59,7 +59,7 @@ def search(request):
         })
     else:
         results=Shop.objects.filter(name__icontains=query)
-        results=sorted(results,key=lambda item:item.name)
+        results=sorted(results,key=lambda item:item.name.lower())
         paginator=Paginator(results,5)
         page_num=request.GET.get(['page'],1)
         page_obj=paginator.get_page(page_num)    

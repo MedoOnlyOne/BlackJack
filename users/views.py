@@ -390,7 +390,7 @@ def createtransaction(request):
         product_in_cart.product = product
         product_in_cart.save()
         products_in_cart.append(product_in_cart)
-    if Coupon.objects.filter(code=request.POST['coupon_code']):  
+    if Coupon.objects.filter(code=request.POST.get('coupon_code','')):  
         coupon=Coupon.objects.get(code=request.POST['coupon_code'])
     else:
         coupon=None
