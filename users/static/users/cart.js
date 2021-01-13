@@ -2,6 +2,8 @@ var is_valid=false;
 var shopname='';
 var discount=0;
 var type='shop';
+var old = document.getElementsByClassName('old_price');
+var neww = document.getElementsByClassName('new_price')
 function total(){
   var items = document.getElementsByClassName("item");
   var q_form = document.getElementsByClassName("quantity_of_product");
@@ -9,18 +11,43 @@ function total(){
   var lenitems = items.length;
   var total = 0;
   for(var i = 0; i < lenitems; i++){
-    let price=(items[i].querySelector('span[class="q"]').innerHTML * items[i].querySelector('span[class="p"]').innerHTML);
+    let price = (items[i].querySelector('span[class="q"]').innerHTML * items[i].querySelector('span[class="p"]').innerHTML); 
     if (is_valid && (type=='user' || type=='event' ||shopname==shopnames[i].innerHTML))
+    {
       total = total + price*(100-discount)/100;
-    else
-        total = total + price;
-    q_form[i].value = items[i].querySelector('span[class="q"]').innerHTML;
+      neww[i].querySelector('span').innerHTML = price*(100-discount)/100;
     }
+    else
+    {
+        total = total + price;
+        neww[i].querySelector('span').innerHTML = price ;
+    }
+    q_form[i].value = items[i].querySelector('span[class="q"]').innerHTML;
+  }
   document.querySelector('#t').innerHTML = total.toFixed(2);
   document.getElementById('bill').value = total.toFixed(2);
   if(is_valid)
   {
     document.getElementById('coupon').value=document.getElementById('coupon_code').value;
+    console.log(old);
+    for(let item of old)
+    {
+      item.style="text-decoration:line-through;"
+    }
+    for(let item of neww)
+    {
+      item.style="visibility:visible;"
+    }
+  }
+  else{
+    for(let item of old)
+    {
+      item.style="text-decoration:none;"
+    }
+    for(let item of neww)
+    {
+      item.style="visibility:hidden;"
+    }
   }
 }
 
