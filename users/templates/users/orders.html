@@ -15,7 +15,7 @@
     width:700px;
     background-color:white;
     border:5px solid #BFB367;
-    margin:3px;
+    margin:0.9em 3px;
     
    }
    .item a{
@@ -39,28 +39,46 @@
 {% block body %}
 {% if orders %} 
 <div id="items">
-  <div class="itemscontainer">  
-        
+  <div class="itemscontainer">        
     {% for order in orders %}
       <div class="item"> 
-          <ol>
             {% for product in order.products.all %}
               <ul style="border:2px solid #BFB367; margin:10px; list-style-type:none;">
-                <li><a href="{% url 'productpage' product.product.id %}"><h2 style="display:inline;">Product: </h2><span style="font-size:20px;">{{product.product.name}}</span></a></li>
-                <li><h2 style="display:inline;">Quantity: </h2> <span style="font-size: 20px;">{{product.quantity}}</span></li>
-              {% if order.coupon %}
-                <li> Coupon Used for shop {{order.coupon.shop}} with discount {{order.coupon.discount}}%</li>
-              {% endif %}
-                <li><h2 style="display:inline;">Status: </h2><span style="font-size: 20px;">{% if order.is_delivered %}Delivered{% else %}In progress{% endif %}</span></li>
+                <li><a href="{% url 'productpage' product.product.id %}"><span style="font-size: 1.5rem;">Product: </span><span style="font-size:20px;">{{product.product.name}}</span></a></li>
+                <li><span style="font-size: 1.5rem;">Quantity: </span> <span style="font-size: 20px;">{{product.quantity}}</span></li>
+                <li><span style="font-size: 1.5rem">Total Price after discount: </span><span style="font-size: 20px;">
+                {% if order.coupon %}
+                  {% if order.coupon.shop %}
+                    {% if order.coupon.shop.name == product.product.shop.name%}
+                      {{100|sub:order.coupon.discount|div:100|mul:product.product.price|mul:product.quantity}}{{currency_symbol}}
+                    {% else %}
+                      {{product.product.price|mul:product.quantity}}{{currency_symbol}}
+                    {% endif %}
+                  {% else %}
+                      {{100|sub:order.coupon.discount|div:100|mul:product.product.price|mul:product.quantity}}{{currency_symbol}}
+                  {% endif %}
+                {% else %}
+                    {{product.product.price|mul:product.quantity}}{{currency_symbol}}
+                {% endif %}
+                </span></li>
               </ul>
+              <!-- <ul style="list-style-type: none;">
+                <li></li>
+              </ul> -->
             {% endfor %}
-          </ol>
-          <p>Total: {{order.bill|mul:currency_ratio|floatformat:2}}{{currency_symbol}}</p>
-          <!-- <p>Status: {% if order.is_delivered %}
-            Delivered
+          <ul style="list-style:none; margin-left:0.8em">
+          <li><span style="font-size: 1.5rem;">Status: </span><span style="font-size: 20px;">{% if order.is_delivered %}Delivered{% else %}In progress{% endif %}</span></li>
+          {% if order.coupon %}
+                {% if order.coupon.shop %}
+                  <li><span style="font-size: 1.3rem;"> Coupon used for shop {{order.coupon.shop}} with discount {{order.coupon.discount}}%</span></li>
+                {% elif order.type == "user" %}
+                  <li> <span style="font-size: 1.3rem;"> User coupon used with discount {{order.coupon.discount}}%</span></li>
+                {% else %}
+                  <li> <span style="font-size: 1.3rem;"> Event coupon used with discount {{order.coupon.discount}}%</span></li>
+                {% endif %}
           {% endif %}
-          Not delivered
-          </p> -->
+          <li> <span style="font-size: 1.3rem;">Bill: {{order.bill|mul:currency_ratio|floatformat:2}}{{currency_symbol}}</span></li>
+          </ul>
       </div>
     {% endfor %} 
   </div>

@@ -70,6 +70,7 @@ def cart(request):
             for product in products:
                 for coupon in product.shop.coupons.all():
                     if coupon_code==coupon.code and coupon.activated:
+                        print(coupon.shop.name)
                         return JsonResponse({
                             'success':True,
                             'discount':coupon.discount,

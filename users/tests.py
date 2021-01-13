@@ -124,15 +124,6 @@ class searchTestCase(TestCase):
         response = c.get(reverse('orders'))
         self.assertEqual(response.status_code, 200)
 
-    def test_discover_shops(self):
-        # access discover shops page
-
-        # log the user in
-        c = Client()
-        c.login(username='testuser', password='12345')
-        response = c.get(reverse('discovershops'))
-        self.assertEqual(response.status_code, 200)
-
     def test_create_transaction(self):
         # Create a shop
         s = Shop.objects.create(name="ssss",description="sdadads",address="awd")
@@ -147,9 +138,10 @@ class searchTestCase(TestCase):
         #login
         c = Client()
         c.login(username='testuser', password='12345')
-        response = c.post(reverse('create_transaction'),data={'{p.id}_quantity':2,'total':p.price*2}) #problem here
-        self.assertEqual(response.status_code, 302)
-
+        response = c.post(reverse('create_transaction'),data={'{p.id}_quantity':2,'total':p.price*2})
+        order=u.orders.all()[0]
+        self.assertRedirects(response, reverse('checkout',args=[order.id]), status_code=302, 
+        target_status_code=200, fetch_redirect_response=True)    
     
     def test_final_check(self):
         # access final check page

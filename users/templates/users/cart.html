@@ -87,6 +87,20 @@
     .new_price{
       visibility: hidden;
     }
+    #checkout_btn{
+      height:40px;
+      width:337px;
+      margin-left:5px;
+      font-weight:bold;
+      color:#BFB367;
+      background-color: #232732;
+      cursor: pointer;
+    }
+    #checkout_btn[disabled],
+    #checkout_btn:disabled{
+      color:#ccc;
+      cursor :default;
+    }
   </style>
 {% endblock %}
 
@@ -136,11 +150,7 @@
       {% for product in products %}
       <input  type="hidden" class="quantity_of_product" name="{{product.id}}_quantity"> 
       {% endfor %}
-      <input type="submit" name="proceed_to_checkout" value="Proceed to checkout"
-      {% if len == 0 %}
-        disabled="true" style="cursor: no-drop; height:40px; width:337px; margin-left:5px; font-weight:bold;"
-      {% endif %}
-      style=" height:40px; width:337px; margin-left:5px; font-weight:bold;">
+      <input type="submit" id="checkout_btn" name="proceed_to_checkout" value="Proceed to checkout" disabled>
       </form>
   </div>
   {% else %}

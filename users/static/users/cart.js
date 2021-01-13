@@ -15,45 +15,48 @@ function total(){
     if (is_valid && (type=='user' || type=='event' ||shopname==shopnames[i].innerHTML))
     {
       total = total + price*(100-discount)/100;
-      neww[i].querySelector('span').innerHTML = price*(100-discount)/100;
+      neww[i].querySelector('span').innerHTML = old[i].querySelector('span').innerHTML*(100-discount)/100;
     }
     else
     {
         total = total + price;
-        neww[i].querySelector('span').innerHTML = price ;
+        neww[i].querySelector('span').innerHTML = old[i].querySelector('span').innerHTML ;
     }
     q_form[i].value = items[i].querySelector('span[class="q"]').innerHTML;
   }
+  for(let i=0;i < lenitems;i++)
+  {
+    if (items[i].querySelector('span[class="q"]').innerHTML!=0)
+    {
+      document.getElementById('checkout_btn').disabled=false;
+      break
+    }
+    if (i==lenitems-1)
+      document.getElementById('checkout_btn').disabled=true;
+  }
   document.querySelector('#t').innerHTML = total.toFixed(2);
   document.getElementById('bill').value = total.toFixed(2);
-  if(is_valid)
-  {
+  if(is_valid){
     document.getElementById('coupon').value=document.getElementById('coupon_code').value;
-    console.log(old);
-    for(let item of old)
+    for(let i=0;i<lenitems;i++)
     {
-      item.style="text-decoration:line-through;"
-    }
-    for(let item of neww)
-    {
-      item.style="visibility:visible;"
+      if(type=='event' || type=='user' || shopname==shopnames[i].innerHTML){
+      old[i].style="text-decoration:line-through;"
+      neww[i].style="visibility:visible;"
+      }
     }
   }
   else{
-    for(let item of old)
+    for(let i=0;i<lenitems;i++)
     {
-      item.style="text-decoration:none;"
-    }
-    for(let item of neww)
-    {
-      item.style="visibility:hidden;"
+      old[i].style="text-decoration:none;"
+      neww[i].style="visibility:hidden;"
     }
   }
 }
 
 function inc(id, stock) {
     id=document.getElementById(id);
-    console.log(id);
     if (id.innerHTML < stock){
       id.innerHTML++;
     }
@@ -115,4 +118,3 @@ coupon_button.addEventListener('click',function () {
         }
       });
 })
-// // // // // 

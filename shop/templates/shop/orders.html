@@ -6,22 +6,15 @@
    {
      margin-left: 40px;
      overflow: hidden;
-    /* position:relative;
-    left:40px;
-    background-color:white;
-    float:left;
-    width:715px; */
    }
 
    .item
    {
     float:left;
     width:700px;
-    /* max-height:200px;
-    position:relative; */
     background-color:white;
     border:5px solid #BFB367;
-    margin:3px;
+    margin:0.9em 3px;
     
    }
    .item a{
@@ -37,6 +30,22 @@
         font-size:17px;
         margin-left: 8.5%;
     }
+    .order_user_info{
+      /* border:2px solid #BFB367; */
+      /* margin:10px; */
+      list-style-type:none;
+    }
+    .order_user_info li span{
+      display:inline-block;
+      margin:0.3em 0;
+    }
+
+    .order_product_info{
+      border:2px #BFB367 solid;
+      list-style-type:none;
+      margin:0.7em;
+      padding:0 1.7em;
+    }
   </style>
 {% endblock %}
 
@@ -48,26 +57,28 @@
   <div class="itemscontainer">  
         
     {% for order in orders %}
-      <div class="item"> 
-          <ol>
-            {% for product in order.products.all %}
+      <div class="item">
+        <ul class="order_user_info">
+          <li><span style="font-size: 1.5rem;">Customer: </span><span style="font-size: 20px;">&nbsp;{{order.user_orders.all.0.first_name}} {{order.user_orders.all.0.last_name}}</span></li>
+          <li><span style="font-size: 1.5rem;">Customer's email: </span><span style="font-size: 20px;">&nbsp;{{order.user_orders.all.0.email}}</span></li>
+          <li><span style="font-size: 1.5rem;">Customer's address: </span><br><span style="font-size: 20px;">&nbsp;{{order.user_orders.all.0.address}}</span></li> 
+        </ul>
+        {% for product in order.products.all %}
+            <ul class="order_product_info">  
             {% if product.product.shop.name == shop.name %}
-              <ul style="border:2px solid #BFB367; margin:10px; list-style-type:none;">
-                <li><a href="{% url 'productpage' product.product.id %}"><h2 style="display:inline;">Product: </h2><span style="font-size:20px;">{{product.product.name}}</span></a></li>
-                <li><h2 style="display:inline;">Quantity: </h2> <span style="font-size: 20px;">{{product.quantity}}</span></li>
+                <li><a href="{% url 'productpage' product.product.id %}"><span style="font-size: 1.5rem;">Product: </span><span style="font-size:20px;">{{product.product.name}}</span></a></li>
+                <li><span style="font-size: 1.5rem;">Quantity: </span> <span style="font-size: 20px;">{{product.quantity}}</span></li>
               {% if order.coupon %}
-                <li> Coupon Used for shop {{order.coupon.shop}} with discount {{order.coupon.discount}}%</li>
+                {% if order.coupon.shop %}
+                  <li><span style="font-size: 1.3rem;">Coupon {{coupon.name}} with discount {{order.coupon.discount}}%</span></li>
+                {% endif %}
               {% endif %}
-                <li><h2 style="display:inline;">Status: </h2><span style="font-size: 20px;">{% if order.is_delivered %}Delivered{% else %}In progress{% endif %}</span></li>
-              </ul>
+        </ul>
               {% endif %}
             {% endfor %}
-          </ol>
-          <!-- <p>Status: {% if order.is_delivered %}
-            Delivered
-          {% endif %}
-          Not delivered
-          </p> -->
+        <ul  style="list-style-type:none;">
+            <li><span style="font-size: 1.5rem;">Status: </span><span style="font-size: 20px;">{% if order.is_delivered %}Delivered{% else %}In progress{% endif %}</span></li>
+        </ul>
       </div>
     {% endfor %} 
   </div>
