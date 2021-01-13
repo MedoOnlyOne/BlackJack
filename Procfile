@@ -1,1 +1,0 @@
-web: gunicorn BlackJack.wsgi
