@@ -78,11 +78,14 @@ header a:hover {
     margin-top: 10%;
     margin-bottom: 5%;
     display:inline;
+    font-size: 1rem;
+    text-transform: none;
 }
 #BlackJack {
     font-size: 40px;
     color: white;
     display:inline;
+    text-transform: none;
 }
 #header{
     display:inline-block;

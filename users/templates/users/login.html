@@ -63,10 +63,6 @@
         padding-right:30px;}
 
 
-      header a:hover {
-      color: white;
-      font-weight: bold;
-      }
 
       h1{
         color:black;
@@ -104,17 +100,12 @@
         margin-bottom:5px;
       }
     
-
-      h1 a:hover{
-        color:#072639;
-        font-weight:bold;
-        
-      }
       
       #BlackJack {
       font-size: 40px;
       color: white;
       display:inline;
+      text-transform: none;
       }
         
       #m9 {  border: 8px solid #BFB367; margin-top:90px; margin-left:130px; text-align:center; color:#232732; position:absolute;}
@@ -125,6 +116,8 @@
         margin-top: 10%;
         margin-bottom: 5%;
         display:inline;
+        font-size: 1rem;
+        text-transform: none;
       }
       </style>
 </head>
@@ -132,8 +125,8 @@
   <header>
     <div class="Container">
         <div id="header">
-          <span id="BlackJack">BlackJack</span>
-          <span id="official">The Official online store </span>
+          <span><a id="BlackJack" href="{% url 'home' %}">BlackJack</a></span>
+          <span><a id="official" href="{% url 'home' %}">The Official online store</a> </span>
         </div>
     </div>
 </header>

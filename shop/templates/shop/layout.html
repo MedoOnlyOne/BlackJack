@@ -109,7 +109,7 @@
             }
         
             #info {   border-right: solid 8px #BFB367 ;
-            border-bottom: solid 8px #BFB367 ;
+                    border-bottom: solid 8px #BFB367 ;
             font-weight:bold;}
         
             #official {
@@ -117,11 +117,14 @@
             margin-top: 10%;
             margin-bottom: 5%;
             display:inline;
+            font-size:1rem;
+            text-transform: none;
             }
             #BlackJack {
             font-size: 40px;
             color: white;
             display:inline;
+            text-transform: none;
             }
         #header{
             display:inline-block;
@@ -133,8 +136,8 @@
         <header>
             <div class="Container">
                 <div id="header">
-                <span id="BlackJack">BlackJack</span>
-                <span id="official">The Official online store </span>
+                    <span><a id="BlackJack" href="{% url 'home' %}">BlackJack</a></span>
+                    <span><a id="official" href="{% url 'home' %}">The Official online store</a> </span>
             </div>
             
         <nav> <ul style="margin-top:12px;"> 

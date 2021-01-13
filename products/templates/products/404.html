@@ -48,13 +48,15 @@
             font-size: 40px;
             color: white;
             display:inline;
+            text-transform:none;
         }
         #official {
             color: #BFB367;
             margin-top: 10%;
             margin-bottom: 5%;
             display:inline;
-            font-size: 16px;
+            font-size: 1rem;
+            text-transform: none;
         }
 
         #header{
@@ -63,24 +65,27 @@
     </style>
 {% endblock%}
 {% block body %}
-    <header>
-        <div class="Container">
-            <div id="header">
-            <span id="BlackJack">BlackJack</span>
-            <span id="official">The Official online store </span>
-        </div>
-        
-        <nav> <ul style="margin-top:12px;"> 
-            {% if user.is_authenticated %}
-            <li> <a href="{% url 'home' %}"> Home </a> </li>
-            <li> <a href="{% url 'userdashboard' %}"> Profile </a></li>
-            <li> <a href="{% url 'contactus' %}"> Contact Us </a></li>
-            <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
-            {% else %}
-            <li> <a href="{% url 'home' %}"> Home </a> </li>
-            <li> <a href="{% url 'login' %}">  Login  </a> </li>
-            {% endif %}
-        </header>
+<header>
+    <div class="Container">
+        <div id="header">
+            <span><a id="BlackJack" href="{% url 'home' %}">BlackJack</a></span>
+            <span><a id="official" href="{% url 'home' %}">The Official online store</a> </span>
+    </div>
+   
+<nav> <ul style="margin-top:12px;"> 
+    {% if user.is_authenticated %}
+        <li> <a href="{% url 'home' %}"> Home </a> </li>
+        <li> <a href="{% url 'userdashboard' %}"> Profile </a></li>
+        <li> <a href="{% url 'contactus' %}"> Contact Us </a></li>
+        <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
+        {% else %}
+        <li> <a href="{% url 'home' %}"> Home </a> </li>
+        <li> <a href="{% url 'signup' %}">SignUp</a></li>
+        <li> <a href="{% url 'login' %}">  Login  </a> </li>
+    {% endif %}
+</ul> </nav>
+    </div>
+</header>
     <div>          
         <p>Oops! This product could not be found!</p>
     </div>

@@ -10,12 +10,7 @@
     background-size: 1550px 760px;
     background:url("../static/users/store.png") no-repeat ;
   }
-  header {
-    background-color:#232732;
-    text-decoration:none;
-    margin-bottom:0%;
-    overflow: hidden;
-  }
+  
 
   h1{
     color:black;
@@ -92,10 +87,6 @@ p{
     background-color: #232732;
     height: 50px;
   }
-  h7 {
-    font-size: 40px;
-    color: white;
-  }
   #info {
     margin-bottom: 2%;
     margin-left: 5%;
@@ -143,21 +134,105 @@ p{
     margin-left: 6%;
     margin-bottom: 3%;
   }
-  h8 {
-    color: #BFB367;
-    margin-top: 10%;
-    margin-bottom: 5%;
+  header{
+  background-color: #232732;
+  color: #ffffff;
+  border-bottom: #BFB367 6px solid;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 1;
+  }
+  
+  header #webname {
+  font-weight: bold;
+  font-size:36pt;
+  color:white;
+  float: left;
+  margin-left: 50px;
+  
+  }
+
+  header .official  {
+  color: #BFB367;
+  font-size: 1rem;
+  font-weight: bold;
+  }
+
+  header #webname h1{ margin:0;}
+
+  header ul{
+  margin:0;
+  padding: 0;
+  }
+
+  header li {
+  display: inline;
+  padding: 0 20px 0 20px;
+  }
+
+  header a{
+  text-decoration: none;
+  color: #BFB367;
+  text-transform: uppercase;
+  font-size:15pt;
+  }
+
+  header nav{float:right;
+  padding-right:30px;}
+
+      
+  header a:hover {
+  color:white;
+  }
+#official {
+  color: #BFB367;
+  margin-top: 10%;
+  margin-bottom: 5%;
+  display:inline;
+  font-size: 1rem;
+  text-transform: none;
+  }
+  #BlackJack {
+  font-size: 40px;
+  color: white;
+  display:inline;
+  text-transform: none;
+
+  }
+  #header{
+    display:inline-block;
   }
   </style>
 </head>
 <body>
   <div>
+    <header>
+      <div class="Container">
+          <div id="header">
+            <span><a id="BlackJack" href="{% url 'home' %}">BlackJack</a></span>
+            <span><a id="official" href="{% url 'home' %}">The Official online store</a> </span>
+      </div>
+      
+  <nav> <ul style="margin-top:12px;"> 
+      {% if user.is_authenticated %}
+      <li> <a href="{% url 'home' %}"> Home </a> </li>
+      <li> <a href="{% url 'userdashboard' %}"> Profile </a></li>
+      <li> <a href="{% url 'contactus' %}"> Contact Us </a></li>
+      <li> <a href="{% url 'logout' %}">  Logout  </a> </li>
+      {% else %}
+      <li><a href="{% url 'home' %}"> Home </a></li>
+      <li> <a href="{% url 'signup' %}">SignUp</a></li>
+      <li> <a href="{% url 'login' %}">  Login  </a> </li>
+      {% endif %}
+  </ul> </nav>
+      </div>
+  </header>
+  </div>
+  <div>
   <form action="{% url 'create_shop' %}" method="POST">
     {% csrf_token %}
-    <div id="header">
-      <h7 id="hhh">BlackJack</h7>
-      <h8>The Official online store </h8>
-   </div>
    <div id="info">
    <p id="signup">Create a shop</p>
    <span id="disc">Once chosen, you won't be able to change it.</span>
