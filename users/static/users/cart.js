@@ -3,7 +3,7 @@ var shopname='';
 var discount=0;
 var type='shop';
 var old = document.getElementsByClassName('old_price');
-var neww = document.getElementsByClassName('new_price')
+var neww = document.getElementsByClassName('new_price');
 function total(){
   var items = document.getElementsByClassName("item");
   var q_form = document.getElementsByClassName("quantity_of_product");
