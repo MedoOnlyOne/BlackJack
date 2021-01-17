@@ -1,0 +1,71 @@
+@media(max-width:950px)
+{
+    header{
+        display: block;
+        height: 50px;
+        .logo-burger{
+            .logo{
+                display: block;
+                position: fixed;
+                width: 56%;
+                left:30%;     
+                .official{
+                    padding: 0;
+                }
+            }
+            .burgers{
+                position: fixed;
+                top:7px;
+            }
+        }
+        nav{
+            visibility: hidden;
+        }
+    }
+    .sidemenu{
+        visibility: hidden;   
+    }
+    .wrapper{
+        &.grey-out{
+            visibility: hidden;
+        }
+    }
+    .shrink{
+        width:100%;
+        margin-left:0;
+    }
+    .mobile-nav{
+        position: fixed;
+        top:55px;
+        left:0;
+        width: 100vw;
+        height: 100vh;
+        opacity: 1;
+        z-index:3;
+        background-color: lighten($accent-color,5%);
+        visibility: hidden;
+        &.open{
+            visibility: visible;
+        }
+        nav{
+            position: fixed;
+            text-align:center;
+            height: 50%;
+            top:15%;
+            left:40%;
+            ul{
+                padding:0;
+                margin:0;
+                li{     
+                    list-style: none;
+                    padding:1em 0.5em;
+                    a{
+                        font-size:1.5rem;
+                        color:$primary-color;
+                        text-decoration:none;
+                    }
+                }
+            }
+        }
+    }
+}
