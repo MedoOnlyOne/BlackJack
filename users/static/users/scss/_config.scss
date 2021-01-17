@@ -1,0 +1,5 @@
+$primary-color:#BFB367;
+$accent-color:#232732;
+@mixin transition {
+    transition: all 0.3s ease-in-out;
+}

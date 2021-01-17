@@ -1,0 +1,172 @@
+header {
+  position: fixed;
+  background-color: #232732;
+  width: 100%;
+  color: #fff;
+  border-bottom: #BFB367 6px solid;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+}
+
+header a {
+  text-decoration: none;
+  color: #BFB367;
+  text-transform: uppercase;
+  font-size: 15pt;
+}
+
+header a:hover {
+  color: white;
+}
+
+header nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 0.7em 0.7em;
+}
+
+header nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+header nav ul li {
+  display: inline;
+  padding: 1rem 1.2rem;
+}
+
+.logo-burger {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.burgers {
+  margin: auto 1em;
+}
+
+.burgers:hover {
+  cursor: pointer;
+}
+
+.burgers .burger {
+  width: 20px;
+  height: 3px;
+  background-color: white;
+  margin: 5px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.burgers .burger.burger-one.clicked {
+  -webkit-transform: rotate(45deg) translate(5px, 8px);
+          transform: rotate(45deg) translate(5px, 8px);
+}
+
+.burgers .burger.burger-two.clicked {
+  opacity: 0;
+}
+
+.burgers .burger.burger-three.clicked {
+  -webkit-transform: rotate(-45deg) translate(3px, -7px);
+          transform: rotate(-45deg) translate(3px, -7px);
+}
+
+#BlackJack {
+  font-size: 40px;
+  color: white;
+  text-transform: none;
+}
+
+#official {
+  color: #BFB367;
+  font-size: 1rem;
+  text-transform: none;
+}
+
+body {
+  margin: 0px;
+  width: 100vw;
+  height: 100vh;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.sidemenu {
+  padding-right: 1.5em;
+  background-color: #232732;
+  border-right: 8px #BFB367 solid;
+  text-align: left;
+  text-decoration: none;
+  position: fixed;
+  z-index: 1;
+  width: 200px;
+  top: 52px;
+  bottom: 0;
+  left: -240px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.sidemenu.shown {
+  -webkit-transform: translate(240px);
+          transform: translate(240px);
+}
+
+.sidemenu .dashboard {
+  color: white;
+  font-size: 1.8rem;
+  margin: 0.5em 0.5em;
+  display: block;
+}
+
+.sidemenu a {
+  text-decoration: none;
+  color: #BFB367;
+  padding: 8px 30px;
+  display: block;
+  font-size: 16pt;
+}
+
+.sidemenu a:hover {
+  color: white;
+}
+
+.sidemenu nav {
+  text-align: left;
+}
+
+.sidemenu nav ul {
+  padding: 0;
+  margin: 0;
+}
+
+.sidemenu nav ul li {
+  list-style: none;
+  padding: 0 0.5em;
+}
+
+main {
+  color: #232732;
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  left: 0;
+  top: 50px;
+  width: 100%;
+}
+
+#upperinfo {
+  text-align: center;
+  border-bottom: solid 8px #BFB367;
+}
+
+#info {
+  font-weight: bold;
+}

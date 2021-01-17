@@ -1,0 +1,75 @@
+@import 'config';
+@import 'header';
+body {
+    margin:0px;
+    width:100vw;
+    height: 100vh;
+    font-family: 'Ubuntu', sans-serif;
+
+}
+
+.sidemenu {
+    padding-right:1.5em;
+    background-color:$accent-color;
+    border-right: 8px  $primary-color solid;
+    text-align:left;
+    text-decoration:none;
+    position: fixed;
+    z-index: 1;
+    width:200px;
+    top: 52px;
+    bottom:0;
+    left:-240px;
+    @include transition;
+    &.shown{
+        transform:translate(240px);
+    }
+    .dashboard{
+        color:white;
+        font-size:1.8rem;
+        margin:0.5em 0.5em;
+        display:block
+    }
+    a{
+        text-decoration: none;
+        color: $primary-color;
+        padding:8px 30px;
+        display:block;
+        font-size:16pt;
+        &:hover{
+            color:white;
+        }
+    }
+    nav{
+        text-align:left;
+        ul{
+            padding:0;
+            margin:0;
+            li{
+                list-style: none;
+                padding:0 0.5em;
+            }
+        }
+    }
+}
+
+main {
+    color:$accent-color;
+    position:fixed;
+    display:flex;
+    flex-direction:column;
+    left:0;
+    top:50px;
+    width: 100%;
+
+}
+
+
+#upperinfo  {
+    text-align:center;
+    border-bottom: solid 8px $primary-color ;
+}
+
+#info {
+    font-weight:bold;
+}

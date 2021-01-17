@@ -162,104 +162,104 @@ def loginview(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
-            userlogins = UserLogin.objects.filter(user=user)
-            timestamps = [login.timestamp for login in userlogins]
-            month = 60*60*24*30
-            week = 60*60*24*7
-            now = datetime.datetime.now(pytz.timezone('Africa/Cairo'))
-            timestamps_this_month = [timestamp for timestamp in timestamps if (now-timestamp).total_seconds()<month]    
-            days_active_in_this_month = set()
-            for timestamp in timestamps_this_month:
-                days_active_in_this_month.add(timestamp.day)
-            if len(days_active_in_this_month)>=7:
-                user_coupon = Coupon.objects.filter(coupon_type='user',name=user.username)
-                if not user_coupon and (now-user.date_joined).total_seconds()>month:
-                    letters = string.ascii_letters
-                    code = ''.join(random.choice(letters) for i in range(5))
-                    user_coupon = Coupon(name=f'{user.username}_coupon',shop=None,coupon_type='user',discount=10,code=code,activated=True)
-                    user_coupon.save()
-                    ##send email to tell user a coupon has  been created for him
-                    subject = 'Awarded User Coupon!'
-                    message = f'''Hi {request.user.first_name} {request.user.last_name}, due to your recent activity, you have been awarded a user coupon with 10% discount!
-                    Use this code: {code} in your cart to get your discount.                    
-                    '''
-                    email_from = settings.EMAIL_HOST_USER 
-                    recipient_list = [request.user.email, ] 
-                    send_mail( subject, message, email_from, recipient_list )
-                else:
-                    if not user_coupon[0].activated:
-                        user_coupon[0].activated=True
-                        user_coupon[0].save()
-                        ## send email to tell user a coupon has been reactivated
-                        subject = 'User Coupon Reactivated!'
-                        message = f'''Hi {request.user.first_name} {request.user.last_name}, due to your recent activity, your user coupon
-                        has been reactivated due to your activity on our site! You can use code {code} in your cart for a 10% discount!                    
-                        '''
-                        email_from = settings.EMAIL_HOST_USER 
-                        recipient_list = [request.user.email, ] 
-                        send_mail( subject, message, email_from, recipient_list )
-            elif len(days_active_in_this_month)<7:
-                user_coupon = Coupon.objects.filter(coupon_type='user',name=user.username)
-                if user_coupon:
-                    if (now - user_coupon[0].created).total_seconds()>week:
-                        user_coupon[0].activated=False
-                        user_coupon[0].save()
-                        ## send email to tell user that coupon is no longer active due to inactivity
-                        subject = 'User coupon deactivated!'
-                        message = f'''Hi {request.user.first_name} {request.user.last_name}, due to your inactivity, your user coupon has been deactivated.
-                        It will be reactivated if you become active again.                                      
-                        '''
-                        email_from = settings.EMAIL_HOST_USER 
-                        recipient_list = [request.user.email, ] 
-                        send_mail( subject, message, email_from, recipient_list )
-            return HttpResponseRedirect(reverse("home"))
-        else:
-            return render(request, "users/login.html", {
-                "message": "Invalid username and/or password."
-            })
-    else:
-        if request.user.is_authenticated:
-            return HttpResponseRedirect(reverse('home'))
-        return render(request, "users/login.html")
+#             userlogins = UserLogin.objects.filter(user=user)
+#             timestamps = [login.timestamp for login in userlogins]
+#             month = 60*60*24*30
+#             week = 60*60*24*7
+#             now = datetime.datetime.now(pytz.timezone('Africa/Cairo'))
+#             timestamps_this_month = [timestamp for timestamp in timestamps if (now-timestamp).total_seconds()<month]    
+#             days_active_in_this_month = set()
+#             for timestamp in timestamps_this_month:
+#                 days_active_in_this_month.add(timestamp.day)
+#             if len(days_active_in_this_month)>=7:
+#                 user_coupon = Coupon.objects.filter(coupon_type='user',name=user.username)
+#                 if not user_coupon and (now-user.date_joined).total_seconds()>month:
+#                     letters = string.ascii_letters
+#                     code = ''.join(random.choice(letters) for i in range(5))
+#                     user_coupon = Coupon(name=f'{user.username}_coupon',shop=None,coupon_type='user',discount=10,code=code,activated=True)
+#                     user_coupon.save()
+#                     ##send email to tell user a coupon has  been created for him
+#                     subject = 'Awarded User Coupon!'
+#                     message = f'''Hi {request.user.first_name} {request.user.last_name}, due to your recent activity, you have been awarded a user coupon with 10% discount!
+#                     Use this code: {code} in your cart to get your discount.                    
+#                     '''
+#                     email_from = settings.EMAIL_HOST_USER 
+#                     recipient_list = [request.user.email, ] 
+#                     send_mail( subject, message, email_from, recipient_list )
+#                 else:
+#                     if not user_coupon[0].activated:
+#                         user_coupon[0].activated=True
+#                         user_coupon[0].save()
+#                         ## send email to tell user a coupon has been reactivated
+#                         subject = 'User Coupon Reactivated!'
+#                         message = f'''Hi {request.user.first_name} {request.user.last_name}, due to your recent activity, your user coupon
+#                         has been reactivated due to your activity on our site! You can use code {code} in your cart for a 10% discount!                    
+#                         '''
+#                         email_from = settings.EMAIL_HOST_USER 
+#                         recipient_list = [request.user.email, ] 
+#                         send_mail( subject, message, email_from, recipient_list )
+#             elif len(days_active_in_this_month)<7:
+#                 user_coupon = Coupon.objects.filter(coupon_type='user',name=user.username)
+#                 if user_coupon:
+#                     if (now - user_coupon[0].created).total_seconds()>week:
+#                         user_coupon[0].activated=False
+#                         user_coupon[0].save()
+#                         ## send email to tell user that coupon is no longer active due to inactivity
+#                         subject = 'User coupon deactivated!'
+#                         message = f'''Hi {request.user.first_name} {request.user.last_name}, due to your inactivity, your user coupon has been deactivated.
+#                         It will be reactivated if you become active again.                                      
+#                         '''
+#                         email_from = settings.EMAIL_HOST_USER 
+#                         recipient_list = [request.user.email, ] 
+#                         send_mail( subject, message, email_from, recipient_list )
+#             return HttpResponseRedirect(reverse("home"))
+#         else:
+#             return render(request, "users/login.html", {
+#                 "message": "Invalid username and/or password."
+#             })
+#     else:
+#         if request.user.is_authenticated:
+#             return HttpResponseRedirect(reverse('home'))
+#         return render(request, "users/login.html")
 
-def loginview2(request):
-    if request.method == "POST":
+# def loginview2(request):
+#     if request.method == "POST":
 
-        # Try to sign user in
-        username = request.POST["username"]
-        password = request.POST["password"]
-        user = authenticate(request, username=username, password=password)
+#         # Try to sign user in
+#         username = request.POST["username"]
+#         password = request.POST["password"]
+#         user = authenticate(request, username=username, password=password)
 
-        # Check if authentication successful
-        if user is not None:
-            login(request, user)
-            userlogins = UserLogin.objects.filter(user=user)
-            timestamps = [login.timestamp for login in userlogins]
-            minute = 60
-            week = 60*60*24*7
-            now = datetime.datetime.now(pytz.timezone('Africa/Cairo'))
-            timestamps_this_minute = [timestamp for timestamp in timestamps if (now-timestamp).total_seconds()<minute]    
-            seconds_active_in_this_minute = set()
-            for timestamp in timestamps_this_minute:
-                seconds_active_in_this_minute.add(timestamp.second)
-            if len(seconds_active_in_this_minute)>=3:
-                user_coupon = Coupon.objects.filter(coupon_type='user',name=user.username)
-                if not user_coupon and (now-user.date_joined).total_seconds()>week:
-                    letters = string.ascii_letters
-                    code = ''.join(random.choice(letters) for i in range(5))
-                    user_coupon = Coupon(name=user.username,shop=None,coupon_type='user',discount=10,code=code,activated=True)
-                    user_coupon.save()
-                    ##send email to tell user a coupon has  been created for him
-                else:
-                    if not user_coupon[0].activated:
-                        user_coupon[0].activated=True
-                        user_coupon[0].save()
-            elif len(seconds_active_in_this_minute)<3:
-                user_coupon = Coupon.objects.filter(coupon_type='user',name=user.username)
-                if user_coupon:
-                    if (now - user_coupon[0].created).total_seconds()>20:
-                        user_coupon[0].activated=False
-                        user_coupon[0].save()
+#         # Check if authentication successful
+#         if user is not None:
+#             login(request, user)
+#             userlogins = UserLogin.objects.filter(user=user)
+#             timestamps = [login.timestamp for login in userlogins]
+#             minute = 60
+#             week = 60*60*24*7
+#             now = datetime.datetime.now(pytz.timezone('Africa/Cairo'))
+#             timestamps_this_minute = [timestamp for timestamp in timestamps if (now-timestamp).total_seconds()<minute]    
+#             seconds_active_in_this_minute = set()
+#             for timestamp in timestamps_this_minute:
+#                 seconds_active_in_this_minute.add(timestamp.second)
+#             if len(seconds_active_in_this_minute)>=3:
+#                 user_coupon = Coupon.objects.filter(coupon_type='user',name=user.username)
+#                 if not user_coupon and (now-user.date_joined).total_seconds()>week:
+#                     letters = string.ascii_letters
+#                     code = ''.join(random.choice(letters) for i in range(5))
+#                     user_coupon = Coupon(name=user.username,shop=None,coupon_type='user',discount=10,code=code,activated=True)
+#                     user_coupon.save()
+#                     ##send email to tell user a coupon has  been created for him
+#                 else:
+#                     if not user_coupon[0].activated:
+#                         user_coupon[0].activated=True
+#                         user_coupon[0].save()
+#             elif len(seconds_active_in_this_minute)<3:
+#                 user_coupon = Coupon.objects.filter(coupon_type='user',name=user.username)
+#                 if user_coupon:
+#                     if (now - user_coupon[0].created).total_seconds()>20:
+#                         user_coupon[0].activated=False
+#                         user_coupon[0].save()
             return HttpResponseRedirect(reverse("userdashboard"))
         else:
             return render(request, "users/login.html", {

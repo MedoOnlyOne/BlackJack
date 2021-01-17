@@ -1,0 +1,74 @@
+
+header{
+    position: fixed;
+    background-color: $accent-color;
+    width: 100%;
+    color: #fff;
+    border-bottom: $primary-color 6px solid;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+    a{
+        text-decoration: none;
+        color: $primary-color;
+        text-transform: uppercase;
+        font-size:15pt;
+        &:hover{
+            color:white;
+        }
+    }
+    nav{
+        position:fixed;
+        top:0;
+        right:0;
+        padding:0.7em 0.7em;
+        ul{
+            margin:0;
+            padding:0;
+            li{
+                display: inline;
+                padding: 1rem 1.2rem;
+            }
+        }
+    }
+    
+}
+.logo-burger{
+    display: flex;
+}
+.burgers{
+    margin:auto 1em;
+    &:hover{
+        cursor: pointer;
+    }
+    .burger{
+        width:20px;
+        height:3px;
+        background-color: white;
+        margin:5px;
+        @include transition;
+        &.burger-one.clicked{
+            transform: rotate(45deg) translate(5px,8px);
+        }
+        &.burger-two.clicked{
+            opacity: 0;
+        }
+        &.burger-three.clicked{
+            transform: rotate(-45deg) translate(3px,-7px);
+        }
+    }
+}
+
+#BlackJack {
+    font-size: 40px;
+    color: white;
+    text-transform: none;
+}
+
+#official {
+    color: $primary-color;
+    font-size:1rem;
+    text-transform: none;
+}
+
+

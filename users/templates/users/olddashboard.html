@@ -1,0 +1,221 @@
+{% extends 'users/layout.html' %}
+
+{% block head %} 
+  <title>Dashboard</title>
+  <style>
+    .buttonsContainer{
+      display:flex;
+      justify-content:space-evenly;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    #info form {display:flex;
+      flex-direction:column;
+      text-align:left;
+      padding-left:15px;
+      padding-right:10px;
+      font-size:14pt;
+    }
+
+
+    #info input,
+    #info select{
+          width :300px;
+          margin-top: 20px;
+          margin-bottom: 5px;
+        }
+      
+    #info form button{
+      font-weight:bold;
+      padding:5px;
+      padding-left: 20px;
+      padding-right:20px;
+      margin-top: 20px;
+      float:right;
+      margin-bottom: 5px; 
+    }
+
+    #ConfirmButton {
+      margin-top:40px; margin-bottom:60px; margin-right:70px;
+      width:120px;
+      height:30px;
+      background-color :#232732;
+      color: #BFB367 ;
+      font-weight:bold;
+    }
+    #ChangePassword {
+      margin-top:40px; margin-bottom:60px;
+      width:162px;
+      height:30px;
+      background-color :#232732;
+      color: #BFB367 ;
+      font-weight:bold;
+    }
+    #Become_a_seller{
+      margin-top:40px; margin-bottom:60px;
+      width:162px;
+      height:30px;
+      background-color :#232732;
+      color: #BFB367 ;
+      font-weight:bold
+    }
+    #ConfirmButton:hover,
+    #ChangePassword:hover,
+    #Become_a_seller:hover,
+    button[type="button"]:hover
+    {
+      cursor: pointer;
+      color: #FFF;
+    }
+
+    .dropbtn {
+      background-color: #4CAF50;
+      color: black;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid black;
+      cursor: pointer;
+    }
+
+    .info-field{
+      padding-left: 0.5em;
+    }
+
+    .dropdown {
+      position: inherit;
+      display: inline-block;
+    }
+    .dropdown-content {
+      display:none;
+      position: absolute;
+      background-color: #232732;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 0;
+    }
+
+    .dropdown-content p {
+      color: white;
+      padding: 7px 5px;
+      text-decoration: none;
+      display: block;
+    }
+
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+      background-color: #3e8e41;
+    }
+
+    .dropdown-content {
+      right: 0;
+    }
+  button[type="button"]{
+    width:140px;
+    background :#232732;
+    color: #BFB367 ;
+    font-weight:bold;
+  }
+  #ChangePassword a,#Become_a_seller a{
+    color:#BFB367 ;
+    text-decoration:none;
+  }
+  #ChangePassword a:hover, #Become_a_seller a:hover{
+    color:#fff ;}
+  </style>
+{% endblock %}
+
+{% block name %}My account{% endblock %}
+
+{% block body %} 
+  <form method="post" action="{% url 'userdashboard' %}">
+    {% csrf_token %}
+    <div class="info-field">
+      First Name :
+      <input type="text" id="first_name" name="first" value="{{first}}" disabled="true" style="margin-left: 115px;">
+      <button type="button" onclick="Enable('first_name')"> Edit </button>
+    </div>     
+    <div class="info-field">
+      Last Name :
+      <input type="text" id="last_name" name="last" value="{{last}}" disabled="true" style="margin-left: 115px;">
+      <button type="button" onclick="Enable('last_name')"> Edit </button>
+    </div> 
+    <div class="info-field">
+      Phone Number :
+      <input type="text" id="code" name="code" value="{{code}}" disabled="true" style="margin-left: 83px; width:50px">
+      <input type="text" id="number" name="num" value="{{num}}" disabled="true" style="margin-left: 5px; width:230px">
+      <button type="button" onclick="Enable('number'); Enable('code')"> Edit </button>
+    </div>  
+    <div class="info-field">
+      Email :
+      <input type="text" id="email" name="email" value="{{email}}" disabled="true" style="margin-left: 155px;">
+      <button type="button" onclick="Enable('email')"> Edit </button>
+    </div>        
+    <div class="info-field">
+      Address :
+      <input type="text" id="address" name="address" value="{{address}}" disabled="true" style="margin-left: 135px;">
+      <button type="button" onclick="Enable('address')"> Edit </button>
+    </div>       
+    <div class="dropdown info-field">
+      Preferred Currency :
+      <select id="currency" name="currency" disabled="true" style="margin-left: 40px;">
+        {% for c in currency_list %}
+          <option value="{{c}}"
+              {% if c == currency %}selected="selected"{% endif %}>
+              {% if c == 'EGP' %}
+              Egyptian Pound
+              {% endif %}
+              {% if c == 'USD' %}
+              US Dollar
+              {% endif %}
+              {% if c == 'EUR' %}
+              Euro
+              {% endif %}
+              {% if c == 'GBP'%}
+              Pound Sterling
+              {% endif %}
+          </option>
+      {% endfor %}
+      </select> 
+      <button type="button" onclick="Enable('currency')"> Edit </button>
+    </div>
+    <div class="info-field">
+      Event Promo Code:
+      <input type="text" value="iOpKe" disabled="true" style="margin-left: 52px;">
+    </div>    
+    <div class="info-field">
+      Account Type:
+      <input type="text" id="acc_type" name="acc_type"{% if is_seller %} value="Buyer and seller" {% else %} value="Buyer" {% endif %} disabled="true" style="margin-left: 95px;">
+    </div>        
+    <div class="buttonsContainer">
+      <!-- <div style="display:inline; float: right;"> -->
+        <button type="button" id="ChangePassword"><a href="{% url 'changepassword' %}">Change Password</a></button>
+      
+      <!-- <div style="display:inline; float: left; margin-left: 350px;"> -->
+        <button type="submit" id="ConfirmButton" onclick="EnableAll()"> Confirm </button>
+        {% if not request.user.is_seller %}
+        <button type="button" id="Become_a_seller"><a href="{% url 'create_shop'%}">Become a seller</a></button>
+        {% endif %}
+      </div>
+  </form>
+{% endblock %}
+
+{% block script %}
+<script>
+  function Enable(input_id) {
+        document.getElementById(input_id).disabled = false;
+     }
+  
+    function EnableAll() {
+      var inputs, i;
+      inputs = document.getElementsByTagName('input');
+      for (i = 0; i < inputs.length; ++i) {
+          inputs[i].disabled = false;
+      }
+  }
+</script>
+{%endblock%}

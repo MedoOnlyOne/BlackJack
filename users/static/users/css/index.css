@@ -1,0 +1,146 @@
+.buttonsContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+#info form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: left;
+  padding-left: 15px;
+  padding-right: 10px;
+  font-size: 14pt;
+}
+
+#info input,
+#info select {
+  width: 300px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+#info form button {
+  font-weight: bold;
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 20px;
+  float: right;
+  margin-bottom: 5px;
+}
+
+#ConfirmButton {
+  margin-top: 40px;
+  margin-bottom: 60px;
+  margin-right: 70px;
+  width: 120px;
+  height: 30px;
+  background-color: #232732;
+  color: #BFB367;
+  font-weight: bold;
+}
+
+#ChangePassword {
+  margin-top: 40px;
+  margin-bottom: 60px;
+  width: 162px;
+  height: 30px;
+  background-color: #232732;
+  color: #BFB367;
+  font-weight: bold;
+}
+
+#Become_a_seller {
+  margin-top: 40px;
+  margin-bottom: 60px;
+  width: 162px;
+  height: 30px;
+  background-color: #232732;
+  color: #BFB367;
+  font-weight: bold;
+}
+
+#ConfirmButton:hover,
+#ChangePassword:hover,
+#Become_a_seller:hover,
+button[type="button"]:hover {
+  cursor: pointer;
+  color: #FFF;
+}
+
+.dropbtn {
+  background-color: #4CAF50;
+  color: black;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.info-field {
+  padding-left: 0.5em;
+}
+
+.dropdown {
+  position: inherit;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #232732;
+  min-width: 160px;
+  -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 0;
+}
+
+.dropdown-content p {
+  color: white;
+  padding: 7px 5px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+.dropdown-content {
+  right: 0;
+}
+
+button[type="button"] {
+  width: 140px;
+  background: #232732;
+  color: #BFB367;
+  font-weight: bold;
+}
+
+#ChangePassword a, #Become_a_seller a {
+  color: #BFB367;
+  text-decoration: none;
+}
+
+#ChangePassword a:hover, #Become_a_seller a:hover {
+  color: #fff;
+}
