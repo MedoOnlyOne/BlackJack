@@ -259,4 +259,7 @@ main.shrink {
     color: #BFB367;
     text-decoration: none;
   }
+  .mobile-nav nav ul li a:hover, .mobile-nav nav ul li a:focus {
+    color: white;
+  }
 }
