@@ -43,6 +43,16 @@ header nav ul li {
   display: flex;
 }
 
+.logo-burger .logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.logo-burger .logo .official {
+  padding-top: 1.4em;
+}
+
 .burgers {
   margin: auto 1em;
 }
@@ -60,20 +70,6 @@ header nav ul li {
   transition: all 0.3s ease-in-out;
 }
 
-.burgers .burger.burger-one.clicked {
-  -webkit-transform: rotate(45deg) translate(5px, 8px);
-          transform: rotate(45deg) translate(5px, 8px);
-}
-
-.burgers .burger.burger-two.clicked {
-  opacity: 0;
-}
-
-.burgers .burger.burger-three.clicked {
-  -webkit-transform: rotate(-45deg) translate(3px, -7px);
-          transform: rotate(-45deg) translate(3px, -7px);
-}
-
 #BlackJack {
   font-size: 40px;
   color: white;
@@ -84,6 +80,10 @@ header nav ul li {
   color: #BFB367;
   font-size: 1rem;
   text-transform: none;
+}
+
+.mobile-nav {
+  visibility: hidden;
 }
 
 body {
@@ -100,7 +100,7 @@ body {
   text-align: left;
   text-decoration: none;
   position: fixed;
-  z-index: 1;
+  z-index: 3;
   width: 200px;
   top: 52px;
   bottom: 0;
@@ -149,7 +149,7 @@ body {
 
 main {
   color: #232732;
-  position: fixed;
+  position: absolute;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -160,6 +160,30 @@ main {
   left: 0;
   top: 50px;
   width: 100%;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+main.shrink {
+  width: calc(100% - 232px);
+  margin-left: 232px;
+}
+
+.wrapper {
+  position: fixed;
+  top: 52px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #333333;
+  opacity: 40%;
+  visibility: hidden;
+  z-index: 2;
+}
+
+.wrapper.grey-out {
+  visibility: visible;
 }
 
 #upperinfo {
@@ -169,4 +193,70 @@ main {
 
 #info {
   font-weight: bold;
+}
+
+@media (max-width: 950px) {
+  header {
+    display: block;
+    height: 50px;
+  }
+  header .logo-burger .logo {
+    position: fixed;
+    width: 56%;
+    left: 40%;
+  }
+  header .logo-burger .logo .official {
+    visibility: hidden;
+  }
+  header .logo-burger .burgers {
+    position: fixed;
+    top: 7px;
+  }
+  header nav {
+    visibility: hidden;
+  }
+  .sidemenu {
+    visibility: hidden;
+  }
+  .wrapper.grey-out {
+    visibility: hidden;
+  }
+  main.shrink {
+    width: 100%;
+    margin-left: 0;
+  }
+  .mobile-nav {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 1;
+    z-index: 3;
+    background-color: #2e3341;
+    visibility: hidden;
+  }
+  .mobile-nav.open {
+    visibility: visible;
+  }
+  .mobile-nav nav {
+    position: fixed;
+    text-align: center;
+    height: 50%;
+    top: 15%;
+    left: 35vw;
+  }
+  .mobile-nav nav ul {
+    padding: 0;
+    margin: 0;
+  }
+  .mobile-nav nav ul li {
+    list-style: none;
+    padding: 1em 0.5em;
+  }
+  .mobile-nav nav ul li a {
+    font-size: 6vw;
+    color: #BFB367;
+    text-decoration: none;
+  }
 }

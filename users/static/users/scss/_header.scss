@@ -35,6 +35,12 @@ header{
 }
 .logo-burger{
     display: flex;
+    .logo{
+        display: flex;
+        .official{
+            padding-top:1.4em;
+        }
+    }
 }
 .burgers{
     margin:auto 1em;
@@ -47,15 +53,6 @@ header{
         background-color: white;
         margin:5px;
         @include transition;
-        &.burger-one.clicked{
-            transform: rotate(45deg) translate(5px,8px);
-        }
-        &.burger-two.clicked{
-            opacity: 0;
-        }
-        &.burger-three.clicked{
-            transform: rotate(-45deg) translate(3px,-7px);
-        }
     }
 }
 
@@ -71,4 +68,6 @@ header{
     text-transform: none;
 }
 
-
+.mobile-nav{
+    visibility: hidden;
+}
