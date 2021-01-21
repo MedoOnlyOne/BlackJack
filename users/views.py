@@ -322,7 +322,6 @@ def SignUp(request):
                 "message": "Username already taken."
             })
         login(request, user)
-        request.session['Last_URL']=request.path
         return HttpResponseRedirect(reverse("home"))
     else:
         if request.user.is_authenticated:
