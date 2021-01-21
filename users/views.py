@@ -14,7 +14,7 @@ from django.conf import settings
 from django.core.mail import send_mail 
 import requests,os
 from users.models import UserLogin
-import datetime,string,random,pytz
+import datetime,string,random,pytz,json
 from decouple import config
 
 currency_symbols={
@@ -134,8 +134,26 @@ def index(request):
         address = request.user.address
         is_seller = request.user.is_seller
 
-
-
+        if 'Last_Login' not in request.session:
+            request.session['Last_Login']=json.dumps(datetime.datetime.now(), indent=4, sort_keys=True, default=str)
+        if (datetime.datetime.now()-datetime.datetime.strptime(request.session['Last_Login'],r'"%Y-%m-%d %H:%M:%S.%f"')).total_seconds()<60:
+            request.session['Last_Login']=json.dumps(datetime.datetime.now(), indent=4, sort_keys=True, default=str)
+            return render(request, 'users/Dashboard.html', {
+            'wishlist': wishlist,
+            'cart': cart,
+            'shop':shop,
+            'first': first_name,
+            'last': last_name,
+            'is_seller':is_seller,
+            'num': num,
+            'code': code,
+            'email': email,
+            'currency':currency,
+            'currency_list': ["EGP","EUR","USD","GBP"],
+            'address': address,
+            'message':'You Just Logged in'
+        })
+        request.session['Last_Login']=json.dumps(datetime.datetime.now(), default=str)
         return render(request, 'users/Dashboard.html', {
             'wishlist': wishlist,
             'cart': cart,
@@ -260,6 +278,8 @@ def loginview(request):
 #                     if (now - user_coupon[0].created).total_seconds()>20:
 #                         user_coupon[0].activated=False
 #                         user_coupon[0].save()
+            if 'Last_URL' in request.session:
+                return HttpResponseRedirect(request.session['Last_URL'])
             return HttpResponseRedirect(reverse("userdashboard"))
         else:
             return render(request, "users/login.html", {
@@ -302,6 +322,7 @@ def SignUp(request):
                 "message": "Username already taken."
             })
         login(request, user)
+        request.session['Last_URL']=request.path
         return HttpResponseRedirect(reverse("home"))
     else:
         if request.user.is_authenticated:
@@ -527,6 +548,7 @@ def home(request):
                     if random_product not in displayed_:
                         displayed_.append(random_product)
         displayed[category[0]]=displayed_
+    request.session['Last_URL']=request.path
     return render(request,'users/Mainpage.html',{
         'displayed':displayed,
         'currency_ratio':get_currency_ratio(request),

@@ -33,12 +33,50 @@ header{
     }
     
 }
-.logo-burger{
+.logo-burger-search{
     display: flex;
     .logo{
         display: flex;
         .official{
             padding-top:1.4em;
+        }
+    }
+    .search-bar{
+        display: flex;
+        width: calc(100% - 30px - 20px - 30px - 352px - 523px);
+        height: 22px;
+        margin-top:11px;
+        margin-left:10px;
+        padding:3px;
+        padding-left: 6px;
+        &.focused{
+            background-color: lighten($accent-color,10%);
+            border:none;
+            outline: 2px solid $primary-color;
+            color:white;
+        }
+        @include transition;
+        .fa{
+            margin-top: 6px;
+            font-size: 0.8rem;
+        }
+        .search-field{
+            width: 95%;
+            margin-left:2px;
+            height: 22px;
+            color:white;
+            font-size: 1rem;
+            font-family: 'Ubuntu', sans-serif;
+            background: transparent;
+            border:none;
+            @include transition;
+            &:focus{
+                // background-color: lighten($accent-color,10%);
+                border:none;
+                outline: none;
+                color:white;
+                //width: 350%;
+            }
         }
     }
 }

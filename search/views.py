@@ -34,6 +34,7 @@ def search(request):
     preferred_currency=get_preffered_currency(request)
     currency_ratio=get_currency_ratio(request)
     url=request.build_absolute_uri()
+    request.session['Last_URL']=url
     if '&page=' in url:
         last=-1
         for index in range(len(url)-1,-1,-1):
@@ -62,7 +63,7 @@ def search(request):
         results=sorted(results,key=lambda item:item.name.lower())
         paginator=Paginator(results,5)
         page_num=request.GET.get('page',1)
-        page_obj=paginator.get_page(page_num)    
+        page_obj=paginator.get_page(page_num)
         return render(request, 'search/searchResults.html',{
             'results': page_obj,
             'currency_ratio':currency_ratio,

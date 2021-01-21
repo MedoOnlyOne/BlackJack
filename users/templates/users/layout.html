@@ -7,6 +7,7 @@
         {% block head %}{% endblock %}
         <link rel="stylesheet" href="../static/users/css/layout.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
     </head>
 
@@ -29,7 +30,7 @@
             </ul> </nav>
         </div>
         <header>
-            <div class="logo-burger">
+            <div class="logo-burger-search">
                 <div class="burgers">
                     <div class="burger burger-one">
 
@@ -44,6 +45,14 @@
                 <div class="logo">
                     <div class="BlackJack"><a id="BlackJack" href="{% url 'home' %}">BlackJack</a></div>
                     <div class="official"><a id="official" href="{% url 'home' %}">The Official online store</a> </div>
+                </div>
+                <div class="search-bar">
+                    <i class="fa fa-search"></i>
+                    <form method="GET" action="{% url 'search' %}">
+                        <input class="search-field" type="text" name="search_name" placeholder="Search">
+                        <input type="hidden" name="sort_by" value="name">
+                        <input type="hidden" name="search_for" value="products">
+                    </form>
                 </div>
             </div>
             
@@ -82,6 +91,7 @@
             </div>
 
             <div id="info">
+                {{message}}
                 {% block body %}
                 {% endblock %}
             </div>

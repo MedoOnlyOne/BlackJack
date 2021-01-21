@@ -120,6 +120,7 @@ def product(request, productid):
             if request.user.is_authenticated:
                 if Review.objects.filter(user=request.user,reviews=product):
                     user_has_review=True
+            request.session['Last_URL']=request.path
             return render(request,'products/product.html',{
             'product': product,
             'rating': rating,

@@ -5,6 +5,8 @@ const burgers=document.getElementsByClassName('burgers')[0];
 const main=document.getElementsByTagName('main')[0];
 const wrapper=document.getElementsByClassName('wrapper')[0];
 const mobile=document.querySelector('.mobile-nav');
+const search_input=document.querySelector('.search-field');
+const search_bar=document.querySelector('.search-bar');
 document.addEventListener('click', function(event){
     if(!sidemenu.contains(event.target) && menu_open && event.target!=burgers && !burgers.contains(event.target)){
         for(let i=0;i<burgers.children.length;i++)
@@ -14,7 +16,6 @@ document.addEventListener('click', function(event){
         sidemenu.classList.remove('shown');
         main.classList.remove('shrink');
         wrapper.classList.remove('grey-out');
-        mobile.classList.remove('open');
         menu_open=false;
     }
 })
@@ -61,4 +62,13 @@ const resizeObserver = new ResizeObserver(entries =>{
   // start observing a DOM node
   resizeObserver.observe(main);
   
+document.addEventListener('click',function(){
+    console.log(document.activeElement);
+    if (search_input===document.activeElement){
+        search_bar.classList.add('focused');
+    }
+    else{
+        search_bar.classList.remove('focused');
+    }
+})
 

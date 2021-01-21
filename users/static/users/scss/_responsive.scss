@@ -1,20 +1,35 @@
-@media(max-width:950px)
+@media(max-width:1028px)
 {
+    body{
+        width: 100vw;
+    }
+    main{
+        width: 100vw;
+    }
     header{
+        width: 100vw;
         display: block;
         height: 50px;
-        .logo-burger{
+        .logo-burger-search{
             .logo{
                 position: fixed;
-                width: 56%;
-                left:40%;
+                width: 56vw;
+                left:calc(22vw + 9px);
+                .BlackJack{
+                    text-align: center;
+                    width: 100%;
+                }
                 .official{
+                    width:0;
                     visibility: hidden;
                 }     
             }
             .burgers{
                 position: fixed;
                 top:7px;
+            }
+            .search-bar{
+                visibility: hidden;
             }
         }
         nav{

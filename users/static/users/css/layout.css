@@ -37,20 +37,65 @@ header nav ul li {
   padding: 1rem 1.2rem;
 }
 
-.logo-burger {
+.logo-burger-search {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.logo-burger .logo {
+.logo-burger-search .logo {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.logo-burger .logo .official {
+.logo-burger-search .logo .official {
   padding-top: 1.4em;
+}
+
+.logo-burger-search .search-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: calc(100% - 30px - 20px - 30px - 352px - 523px);
+  height: 22px;
+  margin-top: 11px;
+  margin-left: 10px;
+  padding: 3px;
+  padding-left: 6px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.logo-burger-search .search-bar.focused {
+  background-color: #383e50;
+  border: none;
+  outline: 2px solid #BFB367;
+  color: white;
+}
+
+.logo-burger-search .search-bar .fa {
+  margin-top: 6px;
+  font-size: 0.8rem;
+}
+
+.logo-burger-search .search-bar .search-field {
+  width: 95%;
+  margin-left: 2px;
+  height: 22px;
+  color: white;
+  font-size: 1rem;
+  font-family: 'Ubuntu', sans-serif;
+  background: transparent;
+  border: none;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.logo-burger-search .search-bar .search-field:focus {
+  border: none;
+  outline: none;
+  color: white;
 }
 
 .burgers {
@@ -195,22 +240,37 @@ main.shrink {
   font-weight: bold;
 }
 
-@media (max-width: 950px) {
+@media (max-width: 1028px) {
+  body {
+    width: 100vw;
+  }
+  main {
+    width: 100vw;
+  }
   header {
+    width: 100vw;
     display: block;
     height: 50px;
   }
-  header .logo-burger .logo {
+  header .logo-burger-search .logo {
     position: fixed;
-    width: 56%;
-    left: 40%;
+    width: 56vw;
+    left: calc(22vw + 9px);
   }
-  header .logo-burger .logo .official {
+  header .logo-burger-search .logo .BlackJack {
+    text-align: center;
+    width: 100%;
+  }
+  header .logo-burger-search .logo .official {
+    width: 0;
     visibility: hidden;
   }
-  header .logo-burger .burgers {
+  header .logo-burger-search .burgers {
     position: fixed;
     top: 7px;
+  }
+  header .logo-burger-search .search-bar {
+    visibility: hidden;
   }
   header nav {
     visibility: hidden;
