@@ -79,8 +79,12 @@ header nav ul li {
   font-size: 0.8rem;
 }
 
-.logo-burger-search .search-bar .search-field {
-  width: 95%;
+.logo-burger-search .search-bar .search-form {
+  width: 100%;
+}
+
+.logo-burger-search .search-bar .search-form .search-field {
+  width: 100%;
   margin-left: 2px;
   height: 22px;
   color: white;
@@ -92,7 +96,7 @@ header nav ul li {
   transition: all 0.3s ease-in-out;
 }
 
-.logo-burger-search .search-bar .search-field:focus {
+.logo-burger-search .search-bar .search-form .search-field:focus {
   border: none;
   outline: none;
   color: white;

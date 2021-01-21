@@ -48,7 +48,7 @@
                 </div>
                 <div class="search-bar">
                     <i class="fa fa-search"></i>
-                    <form method="GET" action="{% url 'search' %}">
+                    <form method="GET" class="search-form" action="{% url 'search' %}">
                         <input class="search-field" type="text" name="search_name" placeholder="Search">
                         <input type="hidden" name="sort_by" value="name">
                         <input type="hidden" name="search_for" value="products">
@@ -91,7 +91,7 @@
             </div>
 
             <div id="info">
-                {{message}}
+                <h1>{{message}}</h1>
                 {% block body %}
                 {% endblock %}
             </div>

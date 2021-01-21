@@ -129,7 +129,7 @@ button[type="button"]:hover {
   right: 0;
 }
 
-button[type="button"] {
+button[type=button] {
   width: 140px;
   background: #232732;
   color: #BFB367;

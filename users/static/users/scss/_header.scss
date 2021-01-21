@@ -60,22 +60,25 @@ header{
             margin-top: 6px;
             font-size: 0.8rem;
         }
-        .search-field{
-            width: 95%;
-            margin-left:2px;
-            height: 22px;
-            color:white;
-            font-size: 1rem;
-            font-family: 'Ubuntu', sans-serif;
-            background: transparent;
-            border:none;
-            @include transition;
-            &:focus{
-                // background-color: lighten($accent-color,10%);
-                border:none;
-                outline: none;
+        .search-form{
+            width:100%;
+            .search-field{
+                width: 100%;
+                margin-left:2px;
+                height: 22px;
                 color:white;
-                //width: 350%;
+                font-size: 1rem;
+                font-family: 'Ubuntu', sans-serif;  
+                background:transparent;
+                border:none;
+                @include transition;
+                &:focus{
+                    // background-color: lighten($accent-color,10%);
+                    border:none;
+                    outline: none;
+                    color:white;
+                    //width: 350%;
+                }
             }
         }
     }
