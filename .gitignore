@@ -3,3 +3,5 @@ config.txt
 **/__pycache__
 pyvenv.cfg
 .Moussa
+bin/
+lib/
