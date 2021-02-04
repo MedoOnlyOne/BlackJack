@@ -2,7 +2,96 @@
 
 {% block head %} 
   <title>Dashboard</title>
-  <link rel="stylesheet" type="text/css" href="../static/users/css/index.css">
- {% endblock %}
+  <link rel="stylesheet" type="text/css" href="../static/users/css/dashboard.css">
+  <style>
+    
+  </style>
+{% endblock %}
 
 {% block name %}My account{% endblock %}
+
+{% block body %} 
+  <form method="post" action="{% url 'userdashboard' %}">
+    {% csrf_token %}
+    <div class="info-field">
+      <div class="info-field-name">First Name:</div>
+      <input type="text" class="form-input" id="first_name" name="first" value="{{first}}" disabled="true">
+      <button type="button" class="form-button" onclick="Enable('first_name')"> Edit </button>
+    </div>     
+    <div class="info-field">
+      <div class="info-field-name">Last Name:</div>
+      <input type="text" class="form-input" id="last_name" name="last" value="{{last}}" disabled="true">
+      <button type="button" class="form-button" onclick="Enable('last_name')"> Edit </button>
+    </div> 
+    <div class="info-field">
+      <div class="info-field-name">Phone Number:</div>
+      <input type="text" class="form-input" id="code" name="code" value="{{code}}" disabled="true">
+      <input type="text" class="form-input" id="number" name="num" value="{{num}}" disabled="true">
+      <button type="button" class="form-button" onclick="Enable('number'); Enable('code')"> Edit </button>
+    </div>  
+    <div class="info-field">
+      <div class="info-field-name">Email:</div>
+      <input type="text" class="form-input" id="email" name="email" value="{{email}}" disabled="true">
+      <button type="button" class="form-button" onclick="Enable('email')"> Edit </button>
+    </div>        
+    <div class="info-field">
+      <div class="info-field-name">Address:</div>
+      <input type="text" class="form-input" id="address" name="address" value="{{address}}" disabled="true">
+      <button type="button" class="form-button" onclick="Enable('address')"> Edit </button>
+    </div>       
+    <div class="dropdown info-field">
+      <div class="info-field-name">Preferred Currency:</div>
+      <select id="currency" name="currency" disabled="true">
+        {% for c in currency_list %}
+          <option value="{{c}}"
+              {% if c == currency %}selected="selected"{% endif %}>
+              {% if c == 'EGP' %}
+              Egyptian Pound
+              {% endif %}
+              {% if c == 'USD' %}
+              US Dollar
+              {% endif %}
+              {% if c == 'EUR' %}
+              Euro
+              {% endif %}
+              {% if c == 'GBP'%}
+              Pound Sterling
+              {% endif %}
+          </option>
+      {% endfor %}
+      </select> 
+      <button type="button" class="form-button" onclick="Enable('currency')"> Edit </button>
+    </div>
+    <div class="info-field">
+      <div class="info-field-name">Event Promo Code:</div>
+      <input type="text" class="form-input" value="iOpKe" disabled="true">
+    </div>    
+    <div class="info-field">
+      <div class="info-field-name">Account Type:</div>
+      <input type="text" class="form-input" id="acc_type" name="acc_type"{% if is_seller %} value="Buyer and seller" {% else %} value="Buyer" {% endif %} disabled="true">
+    </div>        
+    <div class="buttonsContainer">
+      <!-- <div style="display:inline; float: right;"> -->
+        <button type="button" id="ChangePassword"><a href="{% url 'changepassword' %}">Change Password</a></button>
+      
+      <!-- <div style="display:inline; float: left; margin-left: 350px;"> -->
+        <button type="submit" id="ConfirmButton" onclick="EnableAll()"> Confirm </button>
+        {% if not request.user.is_seller %}
+        <button type="button" id="Become_a_seller"><a href="{% url 'create_shop'%}">Become a seller</a></button>
+        {% endif %}
+      </div>
+  </form>
+  <script>
+    function Enable(input_id) {
+          document.getElementById(input_id).disabled = false;
+       }
+    
+      function EnableAll() {
+        var inputs, i;
+        inputs = document.getElementsByTagName('input');
+        for (i = 0; i < inputs.length; ++i) {
+            inputs[i].disabled = false;
+        }
+    }
+  </script>
+{% endblock %}
