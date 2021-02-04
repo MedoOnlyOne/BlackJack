@@ -5,3 +5,5 @@ pyvenv.cfg
 .Moussa
 bin/
 lib/
+/venv
+*.pyc
