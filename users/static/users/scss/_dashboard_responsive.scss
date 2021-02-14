@@ -1,0 +1,46 @@
+@media (max-width:1028px){
+    #info input,
+    #info select{
+        width:150px;
+    }
+}
+
+@media (max-width:577px){
+    .info-field{
+        &-name{
+            font-size:1rem;
+        }
+    }
+    .form-button{
+        top:40px;
+    }
+    #info input,
+    #info select{
+        left:32px;
+        top:41px;
+    }
+    .buttonsContainer{
+        &.not-seller{
+            display:block;
+            margin-top:28px;
+        }
+    }
+    #ConfirmButton{
+        &.not-seller{
+            margin:15px auto;
+            display: block;
+        }
+    }
+    #ChangePassword {
+        &.not-seller{
+            margin:15px auto;
+            display: block;
+        }
+    }
+    #Become_a_seller{
+        &.not-seller{
+            margin:15px auto;
+            display: block;
+        }
+    }
+}

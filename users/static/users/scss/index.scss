@@ -6,7 +6,8 @@
     flex-wrap:wrap;
   }
 
-  #info form {display:flex;
+  #info form {
+    display:flex;
     flex-direction:column;
     text-align:left;
     padding-left:15px;
@@ -17,10 +18,10 @@
 
   #info input,
   #info select{
-        width :300px;
-        margin-top: 20px;
-        margin-bottom: 5px;
-      }
+    width :300px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+  }
     
   #info form button{
     font-weight:bold;
@@ -121,4 +122,5 @@ button[type=button]{
   text-decoration:none;
 }
 #ChangePassword a:hover, #Become_a_seller a:hover{
-  color:#fff ;}
+  color:#fff ;
+}

@@ -1,22 +1,13 @@
 .buttonsContainer {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  width: 100vw;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 #info form {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   text-align: left;
   padding-left: 15px;
   padding-right: 10px;
@@ -45,8 +36,7 @@
 #ConfirmButton {
   margin-top: 40px;
   margin-bottom: 60px;
-  margin-right: 70px;
-  width: 120px;
+  width: 90px;
   height: 30px;
   background-color: #232732;
   color: #BFB367;
@@ -104,13 +94,11 @@ button[type="button"]:hover {
 
 .form-button {
   position: absolute;
-  right: 20px;
-  height: 30px;
+  right: 15px;
+  height: 22px;
   top: 15px;
-}
-
-.dropdown {
-  display: inline-block;
+  width: 20vw;
+  min-width: 60px;
 }
 
 .dropdown-content {
@@ -118,8 +106,7 @@ button[type="button"]:hover {
   position: absolute;
   background-color: #232732;
   min-width: 160px;
-  -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 0;
 }
 
@@ -143,7 +130,8 @@ button[type="button"]:hover {
 }
 
 button[type="button"] {
-  width: 140px;
+  max-width: 140px;
+  width: 10vw;
   background: #232732;
   color: #BFB367;
   font-weight: bold;
@@ -163,4 +151,40 @@ select {
   margin: 0;
   left: 300px;
 }
-/*# sourceMappingURL=dashboard.css.map */
+
+@media (max-width: 1028px) {
+  #info input,
+  #info select {
+    width: 150px;
+  }
+}
+
+@media (max-width: 577px) {
+  .info-field-name {
+    font-size: 1rem;
+  }
+  .form-button {
+    top: 40px;
+  }
+  #info input,
+  #info select {
+    left: 32px;
+    top: 41px;
+  }
+  .buttonsContainer.not-seller {
+    display: block;
+    margin-top: 28px;
+  }
+  #ConfirmButton.not-seller {
+    margin: 15px auto;
+    display: block;
+  }
+  #ChangePassword.not-seller {
+    margin: 15px auto;
+    display: block;
+  }
+  #Become_a_seller.not-seller {
+    margin: 15px auto;
+    display: block;
+  }
+}

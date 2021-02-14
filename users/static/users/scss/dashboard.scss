@@ -1,5 +1,6 @@
 .buttonsContainer{
     display:flex;
+    width:100vw;
     justify-content:space-evenly;
     align-items:center;
     flex-wrap:wrap;
@@ -36,8 +37,7 @@
 #ConfirmButton {
     margin-top:40px;
     margin-bottom:60px;
-    margin-right:70px;
-    width:120px;
+    width:90px;
     height:30px;
     background-color :#232732;
     color: #BFB367 ;
@@ -88,9 +88,11 @@ button[type="button"]:hover{
 }
 .form-button{
     position: absolute;
-    right: 20px;
-    height: 30px;
-    top:15px;
+    right: 15px;
+    height: 22px;
+    top: 15px;
+    width: 20vw;
+    min-width: 60px;
 }
 
 .dropdown-content {
@@ -122,7 +124,8 @@ button[type="button"]:hover{
     right: 0;
 }
 button[type="button"]{
-    width:140px;
+    max-width:140px;
+    width:10vw;
     background :#232732;
     color: #BFB367 ;
     font-weight:bold;
@@ -140,3 +143,5 @@ select{
     margin:0;
     left:300px;
 }
+
+@import 'dashboard_responsive';

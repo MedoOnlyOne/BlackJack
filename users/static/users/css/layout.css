@@ -38,14 +38,10 @@ header nav ul li {
 }
 
 .logo-burger-search {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
 
 .logo-burger-search .logo {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
 
@@ -54,8 +50,6 @@ header nav ul li {
 }
 
 .logo-burger-search .search-bar {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   width: calc(100% - 30px - 20px - 30px - 352px - 523px);
   height: 22px;
@@ -63,7 +57,6 @@ header nav ul li {
   margin-left: 10px;
   padding: 3px;
   padding-left: 6px;
-  -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 
@@ -92,7 +85,6 @@ header nav ul li {
   font-family: 'Ubuntu', sans-serif;
   background: transparent;
   border: none;
-  -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 
@@ -115,7 +107,6 @@ header nav ul li {
   height: 3px;
   background-color: white;
   margin: 5px;
-  -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 
@@ -154,13 +145,11 @@ body {
   top: 52px;
   bottom: 0;
   left: -240px;
-  -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 
 .sidemenu.shown {
-  -webkit-transform: translate(240px);
-          transform: translate(240px);
+  transform: translate(240px);
 }
 
 .sidemenu .dashboard {
@@ -199,17 +188,11 @@ body {
 main {
   color: #232732;
   position: absolute;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   left: 0;
   top: 50px;
   width: 100%;
-  -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 
@@ -327,4 +310,3 @@ main.shrink {
     color: white;
   }
 }
-/*# sourceMappingURL=layout.css.map */
