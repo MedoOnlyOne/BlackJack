@@ -2,10 +2,7 @@
 
 {% block head %} 
   <title>Dashboard</title>
-  <link rel="stylesheet" type="text/css" href="../static/users/css/dashboard.css">
-  <style>
-    
-  </style>
+  <link rel="stylesheet" type="text/css" href="../static/users/css/dashboard.css?{% now "U" %}">
 {% endblock %}
 
 {% block name %}My account{% endblock %}
@@ -16,28 +13,28 @@
     <div class="info-field">
       <div class="info-field-name">First Name:</div>
       <input type="text" class="form-input" id="first_name" name="first" value="{{first}}" disabled="true">
-      <button type="button" class="form-button" onclick="Enable('first_name')"> Edit </button>
+      <button type="button" class="form-button" onclick="enable('first_name')"> Edit </button>
     </div>     
     <div class="info-field">
       <div class="info-field-name">Last Name:</div>
       <input type="text" class="form-input" id="last_name" name="last" value="{{last}}" disabled="true">
-      <button type="button" class="form-button" onclick="Enable('last_name')"> Edit </button>
+      <button type="button" class="form-button" onclick="enable('last_name')"> Edit </button>
     </div> 
     <div class="info-field">
       <div class="info-field-name">Phone Number:</div>
       <input type="text" class="form-input" id="code" name="code" value="{{code}}" disabled="true">
       <input type="text" class="form-input" id="number" name="num" value="{{num}}" disabled="true">
-      <button type="button" class="form-button" onclick="Enable('number'); Enable('code')"> Edit </button>
+      <button type="button" class="form-button" onclick="enable('number'); enable('code')"> Edit </button>
     </div>  
     <div class="info-field">
       <div class="info-field-name">Email:</div>
       <input type="text" class="form-input" id="email" name="email" value="{{email}}" disabled="true">
-      <button type="button" class="form-button" onclick="Enable('email')"> Edit </button>
+      <button type="button" class="form-button" onclick="enable('email')"> Edit </button>
     </div>        
     <div class="info-field">
       <div class="info-field-name">Address:</div>
       <input type="text" class="form-input" id="address" name="address" value="{{address}}" disabled="true">
-      <button type="button" class="form-button" onclick="Enable('address')"> Edit </button>
+      <button type="button" class="form-button" onclick="enable('address')"> Edit </button>
     </div>       
     <div class="info-field">
       <div class="info-field-name">Preferred Currency:</div>
@@ -60,7 +57,7 @@
           </option>
       {% endfor %}
       </select> 
-      <button type="button" class="form-button" onclick="Enable('currency')"> Edit </button>
+      <button type="button" class="form-button" onclick="enable('currency')"> Edit </button>
     </div>
     <div class="info-field">
       <div class="info-field-name">Event Promo Code:</div>
@@ -75,24 +72,11 @@
         <button type="button" id="ChangePassword"><a href="{% url 'changepassword' %}">Change Password</a></button>
       
       <!-- <div style="display:inline; float: left; margin-left: 350px;"> -->
-        <button type="submit" id="ConfirmButton" onclick="EnableAll()"> Confirm </button>
+        <button type="submit" id="ConfirmButton" onclick="enableAll()" disabled> Confirm </button>
         {% if not request.user.is_seller %}
         <button type="button" id="Become_a_seller"><a href="{% url 'create_shop'%}">Become a seller</a></button>
         {% endif %}
       </div>
   </form>
-  <script src="../static/users/js/dashboard.js"></script>
-  <script>
-    function Enable(input_id) {
-          document.getElementById(input_id).disabled = false;
-       }
-    
-      function EnableAll() {
-        var inputs, i;
-        inputs = document.getElementsByTagName('input');
-        for (i = 0; i < inputs.length; ++i) {
-            inputs[i].disabled = false;
-        }
-    }
-  </script>
+  <script src="../static/users/js/dashboard.js"></script>    
 {% endblock %}

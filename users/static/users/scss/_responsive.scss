@@ -53,28 +53,27 @@
     .mobile-nav{
         position: fixed;
         top:56px;
+        bottom:0px;
         left:0;
         width: 100vw;
-        height: 100vh;
         opacity: 1;
         z-index:3;
         background-color: lighten($accent-color,5%);
+        overflow-y: scroll;
         visibility: hidden;
         &.open{
             visibility: visible;
         }
         nav{
-            position: fixed;
             text-align:center;
             height: 50%;
-            top:15%;
-            left:35vw;
+            margin:0 auto;
             ul{
                 padding:0;
                 margin:0;
                 li{     
                     list-style: none;
-                    padding:1em 0.5em;
+                    padding:10px 0.5em;
                     a{
                         font-size:6vw;
                         color:$primary-color;
@@ -82,6 +81,20 @@
                         &:hover,&:focus{
                             color:white;
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (orientation:landscape){
+    .mobile-nav{
+        nav{
+            ul{
+                li{
+                    a{
+                        font-size:8vh;
                     }
                 }
             }

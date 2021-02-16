@@ -158,11 +158,10 @@
     <p style="font-size:2.5rem; text-align:center">You don't have any products in your cart</p>
   </div>
   {% endif %}
+  {% if products %}
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="../static/users/js/cart.js"></script>
+  {% endif %}
+
 {% endblock %}
 
-{% block script%}
-  {% if products %}
-  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-  <script src="../static/users/cart.js"></script>
-  {% endif %}
-{% endblock %}

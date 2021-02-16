@@ -55,7 +55,6 @@ function resize(){
 }
 
 const resizeObserver = new ResizeObserver(entries =>{
-    console.log(entries[0].target.clientHeight);
     resize();
 })
   
@@ -63,7 +62,6 @@ const resizeObserver = new ResizeObserver(entries =>{
   resizeObserver.observe(main);
   
 document.addEventListener('click',function(){
-    console.log(document.activeElement);
     if (search_input===document.activeElement){
         search_bar.classList.add('focused');
     }

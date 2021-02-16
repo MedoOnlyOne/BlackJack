@@ -1,6 +1,6 @@
 .buttonsContainer{
     display:flex;
-    width:100vw;
+    width:100%;
     justify-content:space-evenly;
     align-items:center;
     flex-wrap:wrap;
@@ -64,7 +64,19 @@
 #Become_a_seller:hover,
 button[type="button"]:hover{
     cursor: pointer;
-    color: #FFF;
+    color: white;
+}
+
+#ConfirmButton[disabled],
+#ConfirmButton:disabled{
+    color:#ccc;
+    cursor:default;
+}
+
+#ConfirmButton,
+#ChangePassword,
+#Become_a_seller{
+    max-width: 140px;
 }
 
 .dropbtn {
@@ -124,11 +136,11 @@ button[type="button"]:hover{
     right: 0;
 }
 button[type="button"]{
-    max-width:140px;
+    max-width:85px;
     width:10vw;
     background :#232732;
     color: #BFB367 ;
-    font-weight:bold;
+    font-weight: bold;
 }
 #ChangePassword a,#Become_a_seller a{
     color:#BFB367 ;

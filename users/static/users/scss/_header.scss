@@ -55,7 +55,6 @@ header{
             outline: 2px solid $primary-color;
             color:white;
         }
-        @include transition;
         .fa{
             margin-top: 6px;
             font-size: 0.8rem;
@@ -71,7 +70,6 @@ header{
                 font-family: 'Ubuntu', sans-serif;  
                 background:transparent;
                 border:none;
-                @include transition;
                 &:focus{
                     // background-color: lighten($accent-color,10%);
                     border:none;

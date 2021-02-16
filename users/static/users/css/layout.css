@@ -57,7 +57,6 @@ header nav ul li {
   margin-left: 10px;
   padding: 3px;
   padding-left: 6px;
-  transition: all 0.3s ease-in-out;
 }
 
 .logo-burger-search .search-bar.focused {
@@ -85,7 +84,6 @@ header nav ul li {
   font-family: 'Ubuntu', sans-serif;
   background: transparent;
   border: none;
-  transition: all 0.3s ease-in-out;
 }
 
 .logo-burger-search .search-bar .search-form .search-field:focus {
@@ -127,7 +125,8 @@ header nav ul li {
 }
 
 body {
-  margin: 0px;
+  margin: 0;
+  padding: 0;
   width: 100vw;
   height: 100vh;
   font-family: 'Ubuntu', sans-serif;
@@ -275,23 +274,22 @@ main.shrink {
   .mobile-nav {
     position: fixed;
     top: 56px;
+    bottom: 0px;
     left: 0;
     width: 100vw;
-    height: 100vh;
     opacity: 1;
     z-index: 3;
     background-color: #2e3341;
+    overflow-y: scroll;
     visibility: hidden;
   }
   .mobile-nav.open {
     visibility: visible;
   }
   .mobile-nav nav {
-    position: fixed;
     text-align: center;
     height: 50%;
-    top: 15%;
-    left: 35vw;
+    margin: 0 auto;
   }
   .mobile-nav nav ul {
     padding: 0;
@@ -299,7 +297,7 @@ main.shrink {
   }
   .mobile-nav nav ul li {
     list-style: none;
-    padding: 1em 0.5em;
+    padding: 10px 0.5em;
   }
   .mobile-nav nav ul li a {
     font-size: 6vw;
@@ -308,5 +306,11 @@ main.shrink {
   }
   .mobile-nav nav ul li a:hover, .mobile-nav nav ul li a:focus {
     color: white;
+  }
+}
+
+@media (orientation: landscape) {
+  .mobile-nav nav ul li a {
+    font-size: 8vh;
   }
 }

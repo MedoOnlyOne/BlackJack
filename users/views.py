@@ -16,6 +16,7 @@ import requests,os
 from users.models import UserLogin
 import datetime,string,random,pytz,json
 from decouple import config
+from django.views.decorators.cache import never_cache
 
 currency_symbols={
     'EGP':'EGP',

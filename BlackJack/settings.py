@@ -27,7 +27,7 @@ STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost','192.168.1.39']
 
 SESSION_ENGINE='django.contrib.sessions.backends.file'
 
